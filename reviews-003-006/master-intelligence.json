@@ -1,0 +1,82 @@
+{
+  "batch": "003-006",
+  "strongest_product_signal": {
+    "product": "Geek Bar Pulse Sour Gush",
+    "status": "high-confidence qualitative satisfaction; current 2026 market validation required",
+    "evidence": [
+      "3 actual purchases reported by Laced Up Vapes",
+      "independent 4.5/5 flavor and 5/5 device score",
+      "head-to-head preference over more-potent Foger for all-day use"
+    ]
+  },
+  "products": [
+    {
+      "name": "OXBAR ROVOTA Blueberry",
+      "score": "~71/100",
+      "sweetness": 1,
+      "ice": 0,
+      "job": "natural blueberry / low-sweet / no-ice",
+      "disposition": "corroborate niche"
+    },
+    {
+      "name": "OXBAR ROVOTA VMTO",
+      "score": "~3/100",
+      "job": "dark mixed berry",
+      "disposition": "high caution"
+    },
+    {
+      "name": "Foger Lemon Heads",
+      "ice": 4,
+      "job": "sweet candy lemon",
+      "disposition": "high-priority corroboration"
+    },
+    {
+      "name": "Foger Sour Punch",
+      "score": "72/100",
+      "job": "sour blend",
+      "disposition": "moderate"
+    },
+    {
+      "name": "Geek Bar Pulse Sour Gush",
+      "score": "4.5/5 independent flavor score",
+      "actual_purchases_reported": 3,
+      "job": "daily-driver sour/candy",
+      "disposition": "very high priority current validation"
+    },
+    {
+      "name": "Foger Sour Gush",
+      "score": "86/100",
+      "sourness": 8,
+      "ice": 5,
+      "job": "high-impact maximum-sour",
+      "disposition": "high-priority differentiated candidate"
+    }
+  ],
+  "evidence_hierarchy": [
+    "actual repeat purchase",
+    "actual repeated/full-device use",
+    "frequent reach behavior",
+    "repurchase intention",
+    "direct comparison",
+    "specific sensory evidence",
+    "numeric score",
+    "generic praise"
+  ],
+  "core_dimensions": [
+    "flavor_recognizability",
+    "flavor_cohesion",
+    "sensory_expectation_accuracy",
+    "sweetness",
+    "cooling",
+    "sourness",
+    "flavor_potency",
+    "all_day_usability",
+    "sensory_fatigue_risk",
+    "usage_occasion",
+    "portability",
+    "visual_appeal",
+    "vapor_output",
+    "behavioral_repurchase",
+    "review_stage"
+  ]
+}
