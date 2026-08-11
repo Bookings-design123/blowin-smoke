@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Synthetic Quick Cart — Blowin' Smoke Prototype</title>
+  <link rel="stylesheet" href="../prototype.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="wordmark-text" href="../index.html" aria-label="Blowin' Smoke prototype home">Blowin' Smoke</a>
+      <nav class="primary-nav" aria-label="Primary divisions">
+        <a href="../index.html#thca">THCA</a>
+        <a href="../index.html#vape-nicotine">Vape &amp; Nicotine</a>
+        <a href="../index.html#glass-accessories">Glass &amp; Accessories</a>
+      </nav>
+      <nav class="utility-nav" aria-label="Prototype utilities">
+        <a class="search-link" href="../index.html#search">Search</a>
+        <a href="../index.html#account" aria-label="Account">Account</a>
+        <a href="13-full-cart.html">Cart <span aria-label="synthetic item count">[SYN]</span></a>
+        <button class="menu-button icon-button" type="button" aria-label="Static menu specimen" disabled>☰</button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="prototype-meta" role="note" aria-label="Prototype status">
+    <strong>SYNTHETIC PROTOTYPE — NOT PRODUCTION</strong>
+    <span>Page 12: Quick Cart</span>
+    <span>Static drawer study: confirmation and routing only; never checkout readiness</span>
+  </div>
+
+  <main id="main" class="quick-cart-stage" aria-label="Static quick-cart layer specimen">
+    <aside class="quick-cart-drawer" aria-labelledby="quick-cart-title" aria-describedby="layer-contract">
+      <div class="drawer-head">
+        <div>
+          <p class="eyebrow">Quick Cart · static layer</p>
+          <h1 id="quick-cart-title">Cart updated</h1>
+          <p>Exact-line confirmation with material changes routed to the Full Cart for resolution.</p>
+        </div>
+        <button class="icon-button" type="button" aria-label="Static close-control specimen" disabled>×</button>
+      </div>
+
+      <p id="layer-contract" class="prototype-note">
+        <strong>Focus / layer contract:</strong> In a functional version, opening this modal drawer moves focus to its heading or close control, makes the page behind it inert, supports Escape, and returns focus to the initiating Cart control. This static file demonstrates structure only and does not implement focus trapping.
+      </p>
+
+      <article class="cart-line" aria-labelledby="quick-line-title">
+        <div class="cart-thumb" role="img" aria-label="CSS-only synthetic component thumbnail; not product evidence">
+          <span class="synthetic-object component" aria-hidden="true"></span>
+        </div>
+        <div>
+          <p class="eyebrow">Exact synthetic cart line</p>
+          <h2 id="quick-line-title">Synthetic Replacement Component R-01 With Long Exact Model Context</h2>
+          <p class="line-meta">Division: Vape &amp; Nicotine · Role: Replacement · Variant: [OPTION PLACEHOLDER] · Quantity: [QTY]</p>
+          <p><strong>Exact line ID:</strong> [LINE-ID PLACEHOLDER]</p>
+          <div class="line-controls">
+            <button type="button" disabled>Edit quantity — static specimen</button>
+            <button type="button" disabled>Remove — static specimen</button>
+          </div>
+        </div>
+        <div class="line-price">[CURRENT PRICE]</div>
+      </article>
+
+      <div class="state-stack" aria-label="Immediate line states">
+        <section class="status-panel changed" aria-labelledby="quick-price-title">
+          <strong id="quick-price-title">↕ Price changed</strong>
+          <p>The exact selected line changed from <s>[PREVIOUS PRICE]</s> to <strong>[CURRENT PRICE]</strong>. The real change source, time, and acknowledgment rule are production gates.</p>
+          <dl class="state-anatomy">
+            <div><dt>Scope</dt><dd>Exact line [LINE-ID]</dd></div>
+            <div><dt>Consequence</dt><dd>Review in Full Cart before progression.</dd></div>
+          </dl>
+        </section>
+
+        <section class="status-panel unavailable" aria-labelledby="quick-unavailable-title">
+          <strong id="quick-unavailable-title">Unavailable line specimen — separate fixture state</strong>
+          <p>Synthetic exact line U-02 is unavailable from [INVENTORY SOURCE PLACEHOLDER]. No substitute is inserted; Full Cart must preserve the exact line and recovery choice.</p>
+        </section>
+
+        <section class="status-panel unknown" aria-labelledby="quick-unknown-title">
+          <strong id="quick-unknown-title">? Unknown / Unverified compatibility</strong>
+          <p>No verified relationship is available between Replacement R-01 and the customer's owned platform. Co-presence in the cart is not evidence of compatibility.</p>
+          <dl class="state-anatomy">
+            <div><dt>Known endpoint</dt><dd>Synthetic Replacement R-01</dd></div>
+            <div><dt>Missing endpoint</dt><dd>[OWNED DEVICE / PLATFORM INPUT]</dd></div>
+            <div><dt>Consequence</dt><dd>No compatibility claim and no checkout-readiness claim.</dd></div>
+            <div><dt>Recovery</dt><dd>Resolve with the smallest useful owned-device input in Full Cart.</dd></div>
+          </dl>
+        </section>
+
+        <section class="status-panel warning" aria-labelledby="quick-required-title">
+          <strong id="quick-required-title">! Required component unresolved</strong>
+          <p>The selected line may require [REQUIRED COMPONENT PLACEHOLDER]. No item is silently added and no arbitrary cross-sell is offered.</p>
+          <dl class="state-anatomy">
+            <div><dt>Requirement source</dt><dd>[AUTHORITATIVE RECORD REQUIRED]</dd></div>
+            <div><dt>Recovery</dt><dd>Review exact requirements in Full Cart.</dd></div>
+          </dl>
+        </section>
+      </div>
+
+      <dl class="totals" aria-label="Quick Cart summary placeholders">
+        <div class="total-row"><dt>Items subtotal</dt><dd><strong>[SUBTOTAL PLACEHOLDER]</strong></dd></div>
+        <div class="total-row"><dt>Progression status</dt><dd><strong>Not evaluated here</strong></dd></div>
+      </dl>
+
+      <div class="drawer-actions">
+        <a class="button" href="13-full-cart.html">View Full Cart</a>
+        <a class="button secondary" href="../index.html">Continue browsing</a>
+      </div>
+      <p class="prototype-note"><strong>Boundary:</strong> Quick Cart confirms the exact line and routes material issues. It does not validate the full order, declare checkout readiness, hide blockers, or present promotional recommendations.</p>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <div class="house-frame footer-grid">
+      <section>
+        <h2>Blowin' Smoke</h2>
+        <p>Synthetic Pressure &amp; Proof layer study. Not a live store.</p>
+      </section>
+      <nav aria-label="Footer divisions">
+        <h2>Divisions</h2>
+        <ul>
+          <li><a href="../index.html#thca">THCA</a></li>
+          <li><a href="../index.html#vape-nicotine">Vape &amp; Nicotine</a></li>
+          <li><a href="../index.html#glass-accessories">Glass &amp; Accessories</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Footer cart routes">
+        <h2>Cart</h2>
+        <ul><li><a href="13-full-cart.html">View Full Cart</a></li><li><a href="../index.html">Continue browsing</a></li></ul>
+      </nav>
+      <nav aria-label="Footer guidance">
+        <h2>Guidance</h2>
+        <ul><li><a href="../index.html#learn">Learn</a></li><li><a href="../index.html#support">Support</a></li></ul>
+      </nav>
+      <nav aria-label="Footer prototype links">
+        <h2>Prototype</h2>
+        <ul><li><a href="../index.html">Prototype index</a></li><li><a href="13-full-cart.html">Next page</a></li></ul>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

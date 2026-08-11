@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Synthetic Full Cart Consequence Ledger — Blowin' Smoke Prototype</title>
+  <link rel="stylesheet" href="../prototype.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="wordmark-text" href="../index.html" aria-label="Blowin' Smoke prototype home">Blowin' Smoke</a>
+      <nav class="primary-nav" aria-label="Primary divisions">
+        <a href="../index.html#thca">THCA</a>
+        <a href="../index.html#vape-nicotine">Vape &amp; Nicotine</a>
+        <a href="../index.html#glass-accessories">Glass &amp; Accessories</a>
+      </nav>
+      <nav class="utility-nav" aria-label="Prototype utilities">
+        <a class="search-link" href="../index.html#search">Search</a>
+        <a href="../index.html#account" aria-label="Account">Account</a>
+        <a href="#main" aria-current="page">Cart <span aria-label="synthetic item count">[SYN]</span></a>
+        <button class="menu-button icon-button" type="button" aria-label="Static menu specimen" disabled>☰</button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="prototype-meta" role="note" aria-label="Prototype status">
+    <strong>SYNTHETIC PROTOTYPE — NOT PRODUCTION</strong>
+    <span>Page 13: Full Cart</span>
+    <span>Consequence ledger: simultaneous blockers, placeholder totals, blocked progression</span>
+  </div>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="../index.html">Home</a></li>
+      <li aria-current="page">Full Cart</li>
+    </ol>
+  </nav>
+
+  <main id="main">
+    <section class="decision-frame category-header" aria-labelledby="cart-title">
+      <p class="eyebrow">P0 transaction surface · exact-order revalidation</p>
+      <h1 id="cart-title">Cart</h1>
+      <p class="lead">This synthetic ledger makes every affected line, endpoint, consequence, and recovery visible before any progression claim.</p>
+    </section>
+
+    <section class="data-frame status-panel error" aria-labelledby="order-errors-title">
+      <strong id="order-errors-title">! Order needs attention — progression blocked</strong>
+      <p>Multiple independent issues affect this synthetic order. The eligibility-service failure below is not interpreted as a restriction, and no positive state implies another.</p>
+      <ul>
+        <li><a href="#line-incompatible">Resolve the verified incompatible pair.</a></li>
+        <li><a href="#line-unknown-electronic">Identify the device for unknown electronic compatibility.</a></li>
+        <li><a href="#line-unknown-fit">Resolve unknown physical fit.</a></li>
+        <li><a href="#line-required">Resolve the missing required component.</a></li>
+        <li><a href="#line-restricted">Review the separately evaluated restricted item.</a></li>
+        <li><a href="#line-unavailable">Remove or replace the unavailable item.</a></li>
+        <li><a href="#line-price-changed">Review the changed price.</a></li>
+        <li><a href="#line-eligibility-error">Retry the failed eligibility check; no eligibility conclusion is available.</a></li>
+      </ul>
+    </section>
+
+    <section class="decision-frame cart-layout" aria-label="Synthetic cart lines and order summary">
+      <div>
+        <h2>Items requiring review</h2>
+        <div class="cart-lines">
+        <article class="cart-line" id="line-incompatible" aria-labelledby="line-incompatible-title">
+          <div class="cart-thumb" role="img" aria-label="CSS-only synthetic replacement thumbnail; not product evidence">
+            <span class="synthetic-object component" aria-hidden="true"></span>
+          </div>
+          <div>
+            <p class="eyebrow">Line A · Vape &amp; Nicotine</p>
+            <h3 id="line-incompatible-title">Synthetic Replacement R-01 for Exact Platform Context</h3>
+            <p class="line-meta">Variant: [OPTION-A] · Quantity: [QTY-A] · Line ID: [LINE-A]</p>
+            <section class="status-panel incompatible compact" aria-label="Verified incompatible pair">
+              <strong>× Incompatible</strong>
+              <p>Replacement R-01 is verified incompatible with Synthetic Owned Device D-02.</p>
+              <dl class="state-anatomy">
+                <div><dt>Endpoints</dt><dd>R-01 ↔ D-02</dd></div>
+                <div><dt>Evidence</dt><dd>[VERIFIED RELATIONSHIP SOURCE]</dd></div>
+                <div><dt>Consequence</dt><dd>This pair cannot progress together.</dd></div>
+                <div><dt>Resolution</dt><dd>Remove R-01, change the owned-device context, or choose a verified compatible replacement.</dd></div>
+              </dl>
+            </section>
+            <div class="line-controls"><button type="button" disabled>Change replacement — static</button><button type="button" disabled>Remove line — static</button></div>
+          </div>
+          <div class="line-price">[PRICE-A]</div>
+        </article>
+
+        <article class="cart-line" id="line-unknown-electronic" aria-labelledby="line-unknown-electronic-title">
+          <div class="cart-thumb" role="img" aria-label="CSS-only synthetic electronic component thumbnail; not product evidence"><span class="synthetic-object component" aria-hidden="true"></span></div>
+          <div>
+            <p class="eyebrow">Line H · Vape &amp; Nicotine</p>
+            <h3 id="line-unknown-electronic-title">Synthetic Pod Component P-11 With Missing Owned-Device Revision</h3>
+            <p class="line-meta">Variant: [OPTION-H] · Quantity: [QTY-H] · Line ID: [LINE-H]</p>
+            <section class="status-panel unknown compact" aria-label="Unknown electronic compatibility">
+              <strong>? Unknown / Unverified electronic compatibility</strong>
+              <p>Component P-11 is known; the customer's exact device and revision are not. Similar naming and cart co-presence do not establish compatibility.</p>
+              <dl class="state-anatomy"><div><dt>Known endpoint</dt><dd>Synthetic Pod Component P-11</dd></div><div><dt>Missing endpoint</dt><dd>[OWNED DEVICE + REVISION]</dd></div><div><dt>Consequence</dt><dd>No compatibility or checkout-readiness claim.</dd></div><div><dt>Resolution</dt><dd>Identify the exact owned device before progression.</dd></div></dl>
+            </section>
+            <div class="line-controls"><button type="button" disabled>Identify device — static</button><button type="button" disabled>Remove line — static</button></div>
+          </div>
+          <div class="line-price">[PRICE-H]</div>
+        </article>
+
+        <article class="cart-line" id="line-unknown-fit" aria-labelledby="line-unknown-fit-title">
+          <div class="cart-thumb" role="img" aria-label="CSS-only synthetic glass component thumbnail; not product evidence">
+            <span class="synthetic-object glass" aria-hidden="true"></span>
+          </div>
+          <div>
+            <p class="eyebrow">Line B · Glass &amp; Accessories</p>
+            <h3 id="line-unknown-fit-title">Synthetic Fitted Component F-09 With Owned-Piece Context</h3>
+            <p class="line-meta">Connection: [NOMINAL SIZE] mm · [GENDER / TYPE] · Quantity: [QTY-B] · Line ID: [LINE-B]</p>
+            <section class="status-panel unknown compact" aria-label="Unknown physical fit">
+              <strong>? Unknown / Unverified physical fit</strong>
+              <p>Nominal size is present, but angle and clearance for F-09 ↔ Owned Piece T-09 are missing. Unknown is not treated as fit.</p>
+              <dl class="state-anatomy">
+                <div><dt>Known</dt><dd>[NOMINAL SIZE / TYPE SOURCE]</dd></div>
+                <div><dt>Unknown</dt><dd>[ANGLE] · [CLEARANCE] · [EFFECTIVE LENGTH]</dd></div>
+                <div><dt>Consequence</dt><dd>Fit readiness remains unresolved.</dd></div>
+                <div><dt>Resolution</dt><dd>Supply verified geometry or request a documented pair test.</dd></div>
+              </dl>
+            </section>
+            <div class="line-controls"><button type="button" disabled>Provide fit details — static</button><button type="button" disabled>Remove line — static</button></div>
+          </div>
+          <div class="line-price">[PRICE-B]</div>
+        </article>
+
+        <article class="cart-line" id="line-required" aria-labelledby="line-required-title">
+          <div class="cart-thumb" role="img" aria-label="CSS-only synthetic refillable kit thumbnail; not product evidence">
+            <span class="synthetic-object device" aria-hidden="true"></span>
+          </div>
+          <div>
+            <p class="eyebrow">Line C · Vape &amp; Nicotine</p>
+            <h3 id="line-required-title">Synthetic Refillable Kit K-01</h3>
+            <p class="line-meta">Configuration: [KIT OPTION] · Quantity: [QTY-C] · Line ID: [LINE-C]</p>
+            <section class="status-panel warning compact" aria-label="Missing required component">
+              <strong>! Missing required component</strong>
+              <p>Synthetic Required Component C-01 is not present. Included, Required, Optional, and Replacement roles remain distinct.</p>
+              <dl class="state-anatomy">
+                <div><dt>Requires</dt><dd>Component C-01</dd></div>
+                <div><dt>Evidence</dt><dd>[VERIFIED REQUIREMENT RECORD]</dd></div>
+                <div><dt>Consequence</dt><dd>The kit is not represented as ready for its intended setup.</dd></div>
+                <div><dt>Resolution</dt><dd>Add exact C-01 only after its own price, availability, eligibility, and compatibility are resolved—or remove K-01.</dd></div>
+              </dl>
+            </section>
+            <div class="line-controls"><button type="button" disabled>Review requirement — static</button><button type="button" disabled>Remove line — static</button></div>
+          </div>
+          <div class="line-price">[PRICE-C]</div>
+        </article>
+
+        <article class="cart-line" id="line-restricted" aria-labelledby="line-restricted-title">
+          <div class="cart-thumb" role="img" aria-label="CSS-only synthetic THCA package thumbnail; not product evidence">
+            <span class="synthetic-object" aria-hidden="true"></span>
+          </div>
+          <div>
+            <p class="eyebrow">Line D · THCA</p>
+            <h3 id="line-restricted-title">Synthetic THCA Format T-01</h3>
+            <p class="line-meta">Strain: [STRAIN PLACEHOLDER] · Quantity: [QUANTITY-D] · Line ID: [LINE-D]</p>
+            <section class="status-panel restricted compact" aria-label="Separately evaluated restricted state">
+              <strong>⊘ Restricted — evaluated synthetic scope</strong>
+              <p>An approved eligibility rule would prevent progression for [PRODUCT / DESTINATION / CUSTOMER SCOPE PLACEHOLDER]. This fixture does not state a legal rule.</p>
+              <dl class="state-anatomy">
+                <div><dt>Evaluated scope</dt><dd>[SCOPE PLACEHOLDER]</dd></div>
+                <div><dt>Rule source</dt><dd>[COMPLIANCE-OWNED RULE PLACEHOLDER]</dd></div>
+                <div><dt>Consequence</dt><dd>This exact line is blocked.</dd></div>
+                <div><dt>Resolution</dt><dd>Review the qualified explanation or remove the line.</dd></div>
+              </dl>
+            </section>
+            <div class="line-controls"><button type="button" disabled>Review restriction — static</button><button type="button" disabled>Remove line — static</button></div>
+          </div>
+          <div class="line-price">[PRICE-D]</div>
+        </article>
+
+        <article class="cart-line" id="line-unavailable" aria-labelledby="line-unavailable-title">
+          <div class="cart-thumb" role="img" aria-label="Missing synthetic item media placeholder">[MEDIA MISSING]</div>
+          <div>
+            <p class="eyebrow">Line E · Glass &amp; Accessories</p>
+            <h3 id="line-unavailable-title">Synthetic Complete Piece G-08</h3>
+            <p class="line-meta">Finish: [FINISH-E] · Quantity: [QTY-E] · Line ID: [LINE-E]</p>
+            <section class="status-panel unavailable compact" aria-label="Unavailable item state">
+              <strong>Unavailable</strong>
+              <p>The exact selected object is unavailable according to [INVENTORY SOURCE PLACEHOLDER]. No similar item is silently substituted.</p>
+              <dl class="state-anatomy">
+                <div><dt>Scope</dt><dd>Exact object / variant [LINE-E]</dd></div>
+                <div><dt>Resolution</dt><dd>Remove the line or deliberately review a separately verified alternative.</dd></div>
+              </dl>
+            </section>
+            <section class="status-panel compact" aria-label="Notify-eligible authorization specimen">
+              <strong>✓ Notify authorization recorded — synthetic permission only</strong>
+              <p>[SYNTHETIC CUSTOMER] authorized one notification for exact line E if it returns. This is not a reservation, availability promise, recurring marketing consent, or progression claim.</p>
+            </section>
+            <div class="line-controls"><button type="button" disabled>Review alternatives — static</button><button type="button" disabled>Remove line — static</button></div>
+          </div>
+          <div class="line-price">[PRICE-E]</div>
+        </article>
+
+        <article class="cart-line" id="line-price-changed" aria-labelledby="line-price-title">
+          <div class="cart-thumb" role="img" aria-label="CSS-only synthetic item thumbnail; not product evidence">
+            <span class="synthetic-object component" aria-hidden="true"></span>
+          </div>
+          <div>
+            <p class="eyebrow">Line F · Vape &amp; Nicotine</p>
+            <h3 id="line-price-title">Synthetic Consumable C-20</h3>
+            <p class="line-meta">Option: [OPTION-F] · Quantity: [QTY-F] · Line ID: [LINE-F]</p>
+            <section class="status-panel changed compact" aria-label="Price changed state">
+              <strong>↕ Price changed</strong>
+              <p>Previous <s>[PREVIOUS PRICE-F]</s> · Current <strong>[CURRENT PRICE-F]</strong>. Price basis and acknowledgment rules require authoritative commerce data.</p>
+              <dl class="state-anatomy">
+                <div><dt>Scope</dt><dd>Exact selected line [LINE-F]</dd></div>
+                <div><dt>Consequence</dt><dd>Review before order progression.</dd></div>
+                <div><dt>Source/time</dt><dd>[PRICE SOURCE] · [CHANGE TIME]</dd></div>
+                <div><dt>Resolution</dt><dd>Acknowledge in an authorized flow or remove the line.</dd></div>
+              </dl>
+            </section>
+            <div class="line-controls"><button type="button" disabled>Review changed price — static</button><button type="button" disabled>Remove line — static</button></div>
+          </div>
+          <div class="line-price">[CURRENT PRICE-F]</div>
+        </article>
+
+        <article class="cart-line" id="line-eligibility-error" aria-labelledby="line-eligibility-error-title">
+          <div class="cart-thumb" role="img" aria-label="CSS-only synthetic THCA item thumbnail; not product evidence">
+            <span class="synthetic-object" aria-hidden="true"></span>
+          </div>
+          <div>
+            <p class="eyebrow">Line G · THCA</p>
+            <h3 id="line-eligibility-error-title">Synthetic THCA Format T-02</h3>
+            <p class="line-meta">Strain: [STRAIN-G] · Quantity: [QUANTITY-G] · Line ID: [LINE-G]</p>
+            <section class="status-panel error compact" aria-label="Eligibility service error distinct from restriction">
+              <strong>! Eligibility check failed — no eligibility conclusion</strong>
+              <p>The eligibility service did not return an evaluable result. This operational failure is not Restricted, Eligible, or Unavailable.</p>
+              <dl class="state-anatomy">
+                <div><dt>Attempted scope</dt><dd>[PRODUCT / DESTINATION / CUSTOMER SCOPE]</dd></div>
+                <div><dt>Service state</dt><dd>[ERROR REFERENCE PLACEHOLDER]</dd></div>
+                <div><dt>Consequence</dt><dd>Progression remains blocked because eligibility is unknown.</dd></div>
+                <div><dt>Resolution</dt><dd>Retry the check or use the approved support route with carried context.</dd></div>
+              </dl>
+            </section>
+            <div class="line-controls"><button type="button" disabled>Retry eligibility — static</button><button type="button" disabled>Contact support — static</button><button type="button" disabled>Remove line — static</button></div>
+          </div>
+          <div class="line-price">[PRICE-G]</div>
+        </article>
+        </div>
+      </div>
+
+      <aside class="cart-summary" aria-labelledby="summary-title">
+        <p class="eyebrow">Order summary · placeholder values</p>
+        <h2 id="summary-title">Progression blocked</h2>
+        <p id="progression-reason">Resolve the linked order issues. The order is not represented as eligible, compatible, available, complete, or checkout-ready.</p>
+
+        <dl class="totals">
+          <div class="total-row"><dt>Items subtotal</dt><dd><strong>[SUBTOTAL PLACEHOLDER]</strong></dd></div>
+          <div class="total-row"><dt>Shipping</dt><dd><strong>[NOT CALCULATED]</strong></dd></div>
+          <div class="total-row"><dt>Tax</dt><dd><strong>[NOT CALCULATED]</strong></dd></div>
+          <div class="total-row"><dt>Order total</dt><dd><strong>[TOTAL BLOCKED]</strong></dd></div>
+        </dl>
+
+        <button class="button blocked" type="button" disabled aria-describedby="progression-reason">Resolve issues before progression</button>
+        <div class="state-stack" aria-label="Nearby resolution summary">
+          <section class="status-panel incompatible compact"><strong>Resolve verified conflict</strong><p><a href="#line-incompatible">Change or remove Line A.</a></p></section>
+          <section class="status-panel unknown compact"><strong>Supply missing decisions</strong><p><a href="#line-unknown-electronic">Identify Line H's device</a>, <a href="#line-unknown-fit">resolve Line B fit</a>, and <a href="#line-required">resolve Line C requirement</a>.</p></section>
+          <section class="status-panel restricted compact"><strong>Review separate eligibility states</strong><p><a href="#line-restricted">Line D is Restricted</a>; <a href="#line-eligibility-error">Line G is an Error with no conclusion</a>.</p></section>
+          <section class="status-panel warning compact"><strong>Resolve commerce changes</strong><p><a href="#line-unavailable">Remove or change Line E</a> and <a href="#line-price-changed">review Line F's changed price</a>.</p></section>
+        </div>
+        <a class="button secondary" href="../index.html">Continue browsing</a>
+        <p class="prototype-note">No recommendation, promotion, urgency treatment, or cross-sell appears while blockers remain unresolved.</p>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="house-frame footer-grid">
+      <section>
+        <h2>Blowin' Smoke</h2>
+        <p>Synthetic Pressure &amp; Proof cart study. Not a live store.</p>
+      </section>
+      <nav aria-label="Footer divisions">
+        <h2>Divisions</h2>
+        <ul>
+          <li><a href="../index.html#thca">THCA</a></li>
+          <li><a href="../index.html#vape-nicotine">Vape &amp; Nicotine</a></li>
+          <li><a href="../index.html#glass-accessories">Glass &amp; Accessories</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Footer cart routes">
+        <h2>Cart</h2>
+        <ul><li><a href="#order-errors-title">Issue summary</a></li><li><a href="#summary-title">Order summary</a></li></ul>
+      </nav>
+      <nav aria-label="Footer guidance">
+        <h2>Guidance</h2>
+        <ul><li><a href="../index.html#learn">Learn</a></li><li><a href="../index.html#support">Support</a></li></ul>
+      </nav>
+      <nav aria-label="Footer prototype links">
+        <h2>Prototype</h2>
+        <ul><li><a href="../index.html">Prototype index</a></li><li><a href="12-quick-cart.html">Quick Cart study</a></li></ul>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
