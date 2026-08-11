@@ -1,0 +1,240 @@
+{
+  "document": "Blowin' Smoke — Constructed Signal, Humanized rendering evidence",
+  "status": "static art-direction evidence; non-production",
+  "evaluationDate": "2026-08-11",
+  "implementationAuthorized": false,
+  "evidenceSummary": {
+    "totalPngFiles": 33,
+    "surfaceRenders": 21,
+    "wideSurfaceRenders": 7,
+    "narrowSurfaceRenders": 7,
+    "compactSurfaceRenders": 7,
+    "wideComparisonBoards": 5,
+    "narrowComparisonBoards": 5,
+    "overviewBoards": 2,
+    "allFilesOpenedAndVisuallyInspected": true,
+    "allFilesOpenedAfterLastMaterialChange": true
+  },
+  "captureMethod": {
+    "engine": "in-app browser using local static HTTP delivery",
+    "targetCssViewports": [
+      "1440x900",
+      "390x844",
+      "320x760"
+    ],
+    "fullPageMethod": "Browser viewport frames were normalized and stitched for long documents because the capture service returned a narrower physical bitmap than the requested 1440 CSS-pixel viewport.",
+    "quickCartMethod": "Viewport-contained composite preserving the right-anchored drawer edge and close control.",
+    "renderedFormat": "PNG"
+  },
+  "surfaceOrder": [
+    "01-home",
+    "02-vape-nicotine-division",
+    "03-shared-category",
+    "04-universal-pdp",
+    "05-fitted-component-pdp",
+    "06-quick-cart",
+    "07-full-cart"
+  ],
+  "imageInventory": {
+    "wide": {
+      "base": "screenshots/wide/",
+      "requestedViewport": "1440x900",
+      "files": [
+        "01-home-1440x900.png",
+        "02-vape-nicotine-division-1440x900.png",
+        "03-shared-category-1440x900.png",
+        "04-universal-pdp-1440x900.png",
+        "05-fitted-component-pdp-1440x900.png",
+        "06-quick-cart-1440x900.png",
+        "07-full-cart-1440x900.png"
+      ]
+    },
+    "narrow": {
+      "base": "screenshots/narrow/",
+      "requestedViewport": "390x844",
+      "files": [
+        "01-home-390x844.png",
+        "02-vape-nicotine-division-390x844.png",
+        "03-shared-category-390x844.png",
+        "04-universal-pdp-390x844.png",
+        "05-fitted-component-pdp-390x844.png",
+        "06-quick-cart-390x844.png",
+        "07-full-cart-390x844.png"
+      ]
+    },
+    "compact": {
+      "base": "screenshots/320/",
+      "requestedViewport": "320x760",
+      "files": [
+        "01-home-320x760.png",
+        "02-vape-nicotine-division-320x760.png",
+        "03-shared-category-320x760.png",
+        "04-universal-pdp-320x760.png",
+        "05-fitted-component-pdp-320x760.png",
+        "06-quick-cart-320x760.png",
+        "07-full-cart-320x760.png"
+      ]
+    },
+    "comparisonWide": {
+      "base": "screenshots/comparison/wide/",
+      "files": [
+        "01-home-iter03c-vs-iter04.png",
+        "03-shared-category-iter03c-vs-iter04.png",
+        "04-universal-pdp-iter03c-vs-iter04.png",
+        "05-fitted-component-pdp-iter03c-vs-iter04.png",
+        "07-full-cart-iter03c-vs-iter04.png"
+      ]
+    },
+    "comparisonNarrow": {
+      "base": "screenshots/comparison/narrow/",
+      "files": [
+        "01-home-iter03c-vs-iter04.png",
+        "03-shared-category-iter03c-vs-iter04.png",
+        "04-universal-pdp-iter03c-vs-iter04.png",
+        "05-fitted-component-pdp-iter03c-vs-iter04.png",
+        "07-full-cart-iter03c-vs-iter04.png"
+      ]
+    },
+    "overview": {
+      "base": "screenshots/overview/",
+      "files": [
+        "all-seven-grayscale-board.png",
+        "all-seven-approximately-25-percent-board.png"
+      ]
+    }
+  },
+  "browserMeasurements": {
+    "horizontalOverflow": {
+      "1440x900": {
+        "passes": 7,
+        "failures": 0
+      },
+      "390x844": {
+        "passes": 7,
+        "failures": 0
+      },
+      "320x760": {
+        "passes": 7,
+        "failures": 0
+      },
+      "additionalChecks": {
+        "1024px": "pass after responsive-threshold revision",
+        "901px": "pass after responsive-threshold revision"
+      }
+    },
+    "controlHeightHypothesis": {
+      "keyButtonLikeActions": "at least 44 CSS pixels in all 21 target renders",
+      "quickCartActions": "48 CSS pixels",
+      "limitation": "Inline text links and production interaction states are not proven by this static study."
+    },
+    "typographyActuallyRendered": {
+      "body": {
+        "family": "Arial",
+        "sizePx": 16
+      },
+      "homeH1": {
+        "family": "Arial Black",
+        "wide": "109.44px / 93.024px line-height",
+        "narrow": "58.5px",
+        "compact": "48px"
+      },
+      "divisionH1": {
+        "family": "Arial Black",
+        "wide": "100.8px / 88.704px line-height",
+        "narrow": "58.5px",
+        "compact": "48px"
+      },
+      "categoryPdpAndFullCartH1": {
+        "family": "Arial",
+        "wide": "68px / 66.64px line-height",
+        "narrow": "46.8px",
+        "compact": "38.4px"
+      },
+      "quickCartH1": {
+        "family": "Arial",
+        "wide": "38px / 37.24px line-height",
+        "narrow": "32px",
+        "compact": "32px"
+      }
+    }
+  },
+  "quickCartGeometry": {
+    "1440x900": {
+      "drawer": "top 71; bottom 900; contained",
+      "middleRegion": "482px client height; 873px scroll content",
+      "consequence": "689.218–817",
+      "actions": "817–900",
+      "consequenceBeforeActions": true
+    },
+    "390x844": {
+      "drawer": "top 61; bottom 844; contained",
+      "middleRegion": "355px client height; 992px scroll content",
+      "consequence": "575.218–703",
+      "actions": "703–844",
+      "consequenceBeforeActions": true
+    },
+    "320x760": {
+      "drawer": "top 61; bottom 760; contained",
+      "middleRegion": "218px client height; 1161px scroll content",
+      "consequence": "438.578–619",
+      "actions": "619–760",
+      "consequenceBeforeActions": true
+    }
+  },
+  "contrastRatios": {
+    "inkOnPaper": 15.62,
+    "inkOnWhite": 17.93,
+    "inkSoftOnPaper": 11.30,
+    "mutedOnPaper": 6.35,
+    "whiteOnInk": 17.93,
+    "incompatibleOnWhite": 9.38,
+    "warningOnWhite": 6.88,
+    "unknownOnWhite": 8.04,
+    "restrictedOnWhite": 9.25,
+    "errorOnWhite": 8.56,
+    "focusOnWhite": 5.98,
+    "brandRedOnInk": {
+      "ratio": 4.22,
+      "use": "decorative Home punctuation only; not small text"
+    }
+  },
+  "visualInspection": {
+    "result": "pass",
+    "noBlankOrTruncatedSurface": true,
+    "noBrokenLocalMedia": true,
+    "noUnintendedHorizontalCrop": true,
+    "noRepeatedCaptureSegment": true,
+    "quickCartHeadingAndActionsVisible": true,
+    "comparisonLabelsLegible": true,
+    "constructedSignalAtP0": "Recognizable through exact identity, explicit unknowns, named endpoints, direct and conditional relationships, reason-before-blocked-action ordering, terminal totals, and enabled recovery—not through logo, brand red, campaign copy, decorative smoke, or display-scale type.",
+    "tooSchematicFinding": "Iteration 03 C applied node and path language too broadly; an early Iteration 04 Fitted recovery layout also compressed prose into schematic columns. Both were revised.",
+    "humanizationFinding": "Improved through the Home house moment, job-first division opening, product-led category rows, declared product-media jobs, plain-language PDP verdicts, and more varied editorial pacing.",
+    "posterPressureFinding": "Full controlled influence appears only on Home. Division retains scale, asymmetry, and direct voice without red. Category, P0, cart, error, and support decisions deliberately remove it."
+  },
+  "staticValidation": {
+    "htmlFiles": 8,
+    "localLinksAndFragmentsResolve": true,
+    "oneMainAndOneH1PerSurface": true,
+    "duplicateIds": 0,
+    "brokenAriaReferences": 0,
+    "scripts": 0,
+    "externalUrlsOrAssets": 0,
+    "inlineStyles": 0,
+    "downloadedFonts": 0,
+    "consoleErrorsOrWarnings": 0,
+    "fullCartSyntheticLines": 8,
+    "expandedFullCartLines": 1,
+    "reducedMotionRulePresent": true,
+    "forcedColorsRulePresent": true
+  },
+  "unresolvedGates": [
+    "Production product and brand content truth",
+    "Production typography and token approval",
+    "Interactive drawer focus and scroll behavior",
+    "Assistive-technology, zoom, localization, and real-device testing",
+    "Full production browser and viewport matrix",
+    "All component-state and non-text contrast validation",
+    "Authoritative catalog, relationship, measurement, legal, totals, and checkout rules",
+    "Functional commerce and support implementation"
+  ]
+}
