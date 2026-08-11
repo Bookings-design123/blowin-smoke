@@ -1,0 +1,75 @@
+{
+  "record_id": "YT-DISPOSABLE-002",
+  "source": {
+    "title": "Geek bar pulse x | Top 5",
+    "channel": "Laced Up Vapes",
+    "published": "2026-04-02",
+    "duration": "~4:21",
+    "views_at_capture": 7901,
+    "likes_at_capture": 191,
+    "subscribers_at_capture": 71800,
+    "url": null
+  },
+  "product": {
+    "brand": "Geek Bar",
+    "line": "Pulse X",
+    "flavor": "Strawberry Dragon",
+    "category": "disposable vape",
+    "edition_mentioned": "thermal edition"
+  },
+  "reviewer": {
+    "dragon_fruit_preference": "explicit favorite",
+    "experience": "high-volume disposable reviewer"
+  },
+  "explicit_score": 88.8,
+  "sensory": {
+    "lead": "strawberry",
+    "secondary": "dragon fruit",
+    "estimated_ratio": {
+      "strawberry": 65,
+      "dragon_fruit": 35
+    },
+    "strawberry_style": "candy / fruit-roll-up",
+    "sweetness_estimate_10": 5.5,
+    "finish_persistence": "positive / lingering",
+    "cooling": "unresolved"
+  },
+  "scores": {
+    "flavor_enjoyment": 9,
+    "flavor_accuracy": 8,
+    "flavor_balance": 7,
+    "strawberry_intensity": 9,
+    "dragon_fruit_intensity": 6,
+    "sweetness_balance": 8.5,
+    "finish_persistence": 9,
+    "portability": 6.5,
+    "anticipated_reach_frequency": 9
+  },
+  "key_signals": [
+    "wants more dragon fruit",
+    "moderate sweetness considered well balanced",
+    "pleasant lingering finish",
+    "device described as a little bulky",
+    "expects frequent pocket/hand use",
+    "among reviewer's best recent Pulse X flavors"
+  ],
+  "research_disposition": "high-priority disposable flavor for corroboration",
+  "limitations": [
+    "single reviewer",
+    "dragon-fruit preference bias",
+    "no long-term test",
+    "no price/value test",
+    "no leakage/failure test",
+    "cooling ambiguous"
+  ],
+  "hypotheses": [
+    "H-009",
+    "H-010",
+    "H-011",
+    "H-012",
+    "H-013",
+    "H-014",
+    "H-015",
+    "H-016"
+  ]
+}
