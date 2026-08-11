@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Synthetic Search Results — Blowin' Smoke Prototype</title>
+  <link rel="stylesheet" href="../prototype.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to search results</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="wordmark-text" href="../index.html" aria-label="Blowin' Smoke prototype home">Blowin' Smoke</a>
+      <nav class="primary-nav" aria-label="Primary divisions">
+        <a href="02-thca-division.html">THCA</a>
+        <a href="03-vape-nicotine-division.html">Vape &amp; Nicotine</a>
+        <a href="04-glass-accessories-division.html">Glass &amp; Accessories</a>
+      </nav>
+      <nav class="utility-nav" aria-label="Prototype utilities">
+        <a class="search-link" href="06-search-results.html" aria-current="page">Search</a>
+        <a href="../index.html#account" aria-label="Account">Account</a>
+        <a href="14-full-cart.html">Cart <span aria-label="synthetic item count">[SYN]</span></a>
+        <button class="menu-button icon-button" type="button" aria-label="Static menu specimen" disabled>☰</button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="prototype-meta" role="note" aria-label="Prototype status">
+    <strong>SYNTHETIC PROTOTYPE — NOT PRODUCTION</strong>
+    <span>Page 06: independent search-results family</span>
+    <span>Static specimens only; no query, ranking, eligibility, inventory, or compatibility service runs</span>
+  </div>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol><li><a href="../index.html">Home</a></li><li aria-current="page">Search results</li></ol>
+  </nav>
+
+  <main id="main">
+    <header class="search-stage commerce-frame category-header">
+      <p class="eyebrow">Search · interpretation before ranking</p>
+      <h1>Search the whole house.</h1>
+      <p class="lead">The submitted phrase remains visible while the system distinguishes product identity, category, guidance, support, and unresolved relationship questions.</p>
+
+      <form class="search-form filter-bar" role="search" aria-describedby="search-static-note">
+        <div class="filter-group">
+          <label for="submitted-query"><strong>Submitted query</strong></label>
+          <input class="option selected" id="submitted-query" name="q" value="does P-77 pod fit my Fieldwork D-02?" readonly>
+        </div>
+        <button class="button" type="submit" disabled>Search [STATIC SPECIMEN]</button>
+      </form>
+      <p class="prototype-note" id="search-static-note"><strong>Static behavior:</strong> the input preserves the synthetic submitted phrase. The disabled control does not submit, autocomplete, correct, rank, or store a query.</p>
+    </header>
+
+    <section class="section compact subtle" aria-labelledby="interpretation-title">
+      <div class="data-frame">
+        <div class="section-header">
+          <div><p class="eyebrow">Interpretation record</p><h2 id="interpretation-title">What the search understood—and what it did not</h2></div>
+          <p>Suggestion and ambiguity are declared before results. Neither is silently applied.</p>
+        </div>
+
+        <div class="interpreted-query relationship">
+          <div class="endpoint"><span>Submitted phrase · preserved verbatim</span><strong>“does P-77 pod fit my Fieldwork D-02?”</strong></div>
+          <span class="relationship-arrow" aria-hidden="true">→</span>
+          <div class="endpoint"><span>Interpreted scope · synthetic</span><strong>Vape &amp; Nicotine / replacement relationship / owned-device intent</strong></div>
+        </div>
+
+        <div class="state-stack">
+          <section class="status-panel warning compact" id="corrected-query-specimen" aria-labelledby="correction-title">
+            <strong id="correction-title">△ Suggested correction — not applied</strong>
+            <p>Possible catalog token: <strong>“Platform P-77 pod”</strong>. Results below still represent the original submitted phrase.</p>
+            <a class="recovery-link" href="#result-p77">Review the suggested-token result without changing the query</a>
+          </section>
+          <section class="status-panel unknown compact" aria-labelledby="ambiguity-title">
+            <strong id="ambiguity-title">? Explicit ambiguity — “P-77” has more than one possible role</strong>
+            <p>It may identify a pod family, a platform family, or an incomplete component code. “Fieldwork D-02” does not include an owned-device revision.</p>
+            <div class="button-row">
+              <a class="button secondary recovery-link" href="#result-p77">Inspect P-77 records</a>
+              <a class="button tertiary recovery-link" href="#guidance-result">Learn how to identify a device revision</a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="typed-results-title">
+      <div class="commerce-frame">
+        <div class="section-header">
+          <div><p class="eyebrow">Typed result stream · synthetic</p><h2 id="typed-results-title">Results keep their role and division visible</h2></div>
+          <p>[07 SYNTHETIC RESULTS] demonstrate information types, not live matches, availability, ranking quality, or recommendations.</p>
+        </div>
+
+        <div class="search-results-grid state-stack">
+          <article class="result-row specimen-box" id="result-p77">
+            <span class="specimen-label">Product result · Vape &amp; Nicotine</span>
+            <p class="card-role">Replacement component · SYN-V-REP-P77</p>
+            <h3><a href="10-pod-coil-replacement-pdp.html">[SYNTHETIC PLATFORM P-77 REPLACEMENT POD]</a></h3>
+            <p class="card-facts">Possible token match · relationship to owned device not yet verified</p>
+            <div class="inline-status status-panel unknown compact"><strong>? Compatibility unknown</strong><p>The owned-device revision is incomplete; token similarity is not treated as a fit decision.</p></div>
+            <a class="recovery-link card-action" href="10-pod-coil-replacement-pdp.html">Identify the device before deciding</a>
+          </article>
+
+          <article class="result-row specimen-box">
+            <span class="specimen-label">Product result · Vape &amp; Nicotine</span>
+            <p class="card-role">Refillable device / kit · SYN-V-KIT-D02</p>
+            <h3><a href="09-refillable-device-kit-pdp.html">[SYNTHETIC FIELDWORK D-02 PLATFORM KIT]</a></h3>
+            <p class="card-facts">Device-family identity candidate · revision [NOT PROVIDED]</p>
+            <div class="inline-status status-panel warning compact"><strong>△ Additional component required</strong><p>The represented kit does not establish that P-77 is included or compatible.</p></div>
+            <a class="recovery-link card-action" href="09-refillable-device-kit-pdp.html">Review platform and included-item facts</a>
+          </article>
+
+          <article class="result-row specimen-box">
+            <span class="specimen-label">Product result · THCA</span>
+            <p class="card-role">Batch-scoped product · SYN-T-SEARCH-03</p>
+            <h3><a href="08-thca-pdp.html">[SYNTHETIC THCA RECORD — P77 BATCH TOKEN]</a></h3>
+            <p class="card-facts">Exact text token in a different division · not a pod or device answer</p>
+            <div class="inline-status status-panel warning compact"><strong>△ Proof stale</strong><p>The batch result preserves its THCA type so matching text cannot imply technical relevance.</p></div>
+            <a class="recovery-link card-action" href="08-thca-pdp.html">Inspect the batch-scoped record</a>
+          </article>
+
+          <article class="result-row specimen-box">
+            <span class="specimen-label">Product result · Glass &amp; Accessories</span>
+            <p class="card-role">Fitted component · SYN-G-SEARCH-04</p>
+            <h3><a href="12-fitted-component-pdp.html">[SYNTHETIC MAKER COMPONENT D-02]</a></h3>
+            <p class="card-facts">Maker code collision · physical geometry domain</p>
+            <div class="inline-status status-panel incompatible compact"><strong>× Different relationship domain</strong><p>Shared identifier text does not make a glass component a vape replacement.</p></div>
+            <a class="recovery-link card-action" href="12-fitted-component-pdp.html">Review physical-fit evidence</a>
+          </article>
+
+          <article class="result-row specimen-box">
+            <span class="specimen-label">Category result</span>
+            <p class="card-role">Vape &amp; Nicotine / replacements</p>
+            <h3><a href="05-shared-category.html">[SYNTHETIC PODS, COILS &amp; REPLACEMENT COMPONENTS]</a></h3>
+            <p class="card-facts">Browse by product role while preserving the submitted-query context in this specimen.</p>
+            <div class="inline-status status-panel compact"><strong>Category route available</strong><p>This route narrows discovery; it does not claim a compatible product.</p></div>
+            <a class="recovery-link card-action" href="05-shared-category.html">Browse replacement roles</a>
+          </article>
+
+          <article class="result-row specimen-box" id="guidance-result">
+            <span class="specimen-label">Guidance result</span>
+            <p class="card-role">Owned-device identification</p>
+            <h3><a href="03-vape-nicotine-division.html">How to find a platform, model, and revision before buying a replacement</a></h3>
+            <p class="card-facts">Decision guidance · not product promotion</p>
+            <div class="inline-status status-panel unknown compact"><strong>? Identity still incomplete</strong><p>The guide explains what evidence is needed; it cannot infer the customer’s device.</p></div>
+            <a class="recovery-link card-action" href="03-vape-nicotine-division.html">Open device-identification guidance</a>
+          </article>
+
+          <article class="result-row specimen-box" id="support-result">
+            <span class="specimen-label">Support result</span>
+            <p class="card-role">Compatibility help · synthetic support route</p>
+            <h3><a href="#search-state-suite">Get help identifying an owned device</a></h3>
+            <p class="card-facts">Bring the model label, revision, current pod, and package information when available.</p>
+            <div class="inline-status status-panel compact"><strong>Support route available</strong><p>Human review remains separate from a verified compatibility outcome.</p></div>
+            <a class="recovery-link card-action" href="#search-state-suite">Review the evidence checklist</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section compact subtle" aria-labelledby="decision-title">
+      <div class="decision-frame">
+        <div class="section-header">
+          <div><p class="eyebrow">Priority decision summary</p><h2 id="decision-title">Do not treat this search as a compatibility answer</h2></div>
+          <p>The most consequential unresolved fact appears once, before lower-priority result detail.</p>
+        </div>
+        <section class="decision-summary status-panel unknown" aria-labelledby="unknown-compatibility-title">
+          <strong id="unknown-compatibility-title">? UNKNOWN / UNVERIFIED — owned-device identity is incomplete</strong>
+          <p>A P-77 token candidate exists, but the synthetic record does not establish the exact Fieldwork D-02 platform revision or a verified bidirectional relationship.</p>
+          <dl class="state-anatomy">
+            <div><dt>Known</dt><dd>Submitted phrase and candidate identifiers</dd></div>
+            <div><dt>Missing</dt><dd>Owned-device revision and verified relationship</dd></div>
+            <div><dt>Consequence</dt><dd>No compatible / incompatible conclusion</dd></div>
+            <div><dt>Recovery</dt><dd>Identify the device, then inspect exact relationship evidence</dd></div>
+          </dl>
+          <div class="button-row">
+            <a class="button recovery-link" href="10-pod-coil-replacement-pdp.html">Identify my device</a>
+            <a class="button secondary recovery-link" href="#compatibility-evidence">Inspect search evidence</a>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="section" id="search-state-suite" aria-labelledby="state-suite-title">
+      <div class="data-frame">
+        <div class="section-header">
+          <div><p class="eyebrow">Search recovery specimens</p><h2 id="state-suite-title">Absence, failure, restriction, and missing evidence remain distinct</h2></div>
+          <p>These simultaneous specimens are not one live search session. Each preserves the query and names a truthful next step.</p>
+        </div>
+
+        <div class="state-stack">
+          <section class="status-panel unknown" aria-labelledby="no-results-title">
+            <strong id="no-results-title">No results — constraints exclude every synthetic record</strong>
+            <p>Query “does P-77 pod fit my Fieldwork D-02?” + division [VAPE] + role [GLASS FITTED COMPONENT] returns zero records. This is not a service failure.</p>
+            <a class="recovery-link" href="#submitted-query">Review the preserved query and constraints</a>
+          </section>
+
+          <section class="status-panel error" aria-labelledby="service-error-title">
+            <strong id="service-error-title">Service error — result count is unknown</strong>
+            <p>[SYNTHETIC SEARCH SERVICE] did not return records. Do not display “no results,” remove the query, or fabricate fallback products.</p>
+            <div class="button-row"><button class="button" type="button" disabled>Retry [STATIC SPECIMEN]</button><a class="button secondary recovery-link" href="../index.html">Use preserved division routes</a></div>
+          </section>
+
+          <section class="status-panel restricted" aria-labelledby="restricted-title">
+            <strong id="restricted-title">Restricted result — eligibility is unresolved for destination [SYN-ZONE]</strong>
+            <p>The record identity may remain readable, but the prototype does not expose a purchase action or represent the restriction as generic unavailability.</p>
+            <a class="recovery-link" href="08-thca-pdp.html">Inspect restriction and proof as separate facts</a>
+          </section>
+
+          <section class="status-panel unknown" aria-labelledby="incomplete-title">
+            <strong id="incomplete-title">Unknown compatibility — incomplete owned-device identity</strong>
+            <p>Model family alone cannot establish fit. The recovery asks for revision evidence instead of quietly broadening the match.</p>
+            <a class="recovery-link" href="10-pod-coil-replacement-pdp.html">Identify the exact device</a>
+          </section>
+
+          <article class="specimen-box" aria-labelledby="missing-media-title">
+            <span class="specimen-label">Missing-media result</span>
+            <div class="media-well wide" role="img" aria-label="Synthetic result media missing; no image-based inference">
+              <span class="synthetic-object missing" aria-hidden="true"></span>
+              <span class="media-label">MEDIA MISSING — TEXT IDENTITY RETAINED — NO IMAGE-BASED INFERENCE</span>
+            </div>
+            <h3 id="missing-media-title">[SYNTHETIC P-77 RECORD WITH MEDIA UNAVAILABLE]</h3>
+            <div class="inline-status status-panel unknown compact"><strong>? Media evidence absent</strong><p>Identifier, role, and relationship state remain visible; visual similarity is not substituted.</p></div>
+            <a class="recovery-link card-action" href="07-universal-pdp.html">Open the incomplete product record</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section inverse" id="compatibility-evidence" aria-labelledby="evidence-title">
+      <div class="data-frame full-evidence">
+        <div class="section-header">
+          <div><p class="eyebrow">Full interpretation evidence</p><h2 id="evidence-title">Search provenance stays inspectable</h2></div>
+          <p>This static record documents why the relationship remains unknown; it is not manufacturer data or a compatibility claim.</p>
+        </div>
+        <dl class="data-list">
+          <div class="data-record"><dt>Submitted phrase</dt><dd>does P-77 pod fit my Fieldwork D-02?</dd></div>
+          <div class="data-record"><dt>Submitted intent</dt><dd>Owned device → replacement component</dd></div>
+          <div class="data-record"><dt>Interpreted division</dt><dd>Vape &amp; Nicotine</dd></div>
+          <div class="data-record"><dt>Suggested token</dt><dd>Platform P-77 pod — suggested, not applied</dd></div>
+          <div class="data-record"><dt>Ambiguity</dt><dd>P-77 role; D-02 revision</dd></div>
+          <div class="data-record"><dt>Verified relationship</dt><dd>UNKNOWN / UNVERIFIED</dd></div>
+          <div class="data-record"><dt>Silent assumptions</dt><dd>None represented</dd></div>
+          <div class="data-record"><dt>Preserved context</dt><dd>Original query, interpreted scope, constraints, candidate records</dd></div>
+          <div class="data-record"><dt>Next evidence needed</dt><dd>Exact device platform, model, revision, and authoritative relationship record</dd></div>
+        </dl>
+        <p class="prototype-note"><strong>Evidence discipline:</strong> text matches, similar names, missing media, and incomplete customer identity never become compatibility evidence. UNKNOWN / UNVERIFIED remains explicit until authoritative relationship data exists.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="house-frame footer-grid">
+      <section><h2>Blowin' Smoke</h2><p>Synthetic Pressure &amp; Proof study. Not a live store.</p></section>
+      <nav aria-label="Footer divisions"><h2>Divisions</h2><ul><li><a href="02-thca-division.html">THCA</a></li><li><a href="03-vape-nicotine-division.html">Vape &amp; Nicotine</a></li><li><a href="04-glass-accessories-division.html">Glass &amp; Accessories</a></li></ul></nav>
+      <nav aria-label="Footer search"><h2>Search</h2><ul><li><a href="#submitted-query">Submitted query</a></li><li><a href="#typed-results-title">Typed results</a></li></ul></nav>
+      <nav aria-label="Footer recovery"><h2>Recovery</h2><ul><li><a href="#search-state-suite">State specimens</a></li><li><a href="#compatibility-evidence">Full evidence</a></li></ul></nav>
+      <nav aria-label="Footer prototype links"><h2>Prototype</h2><ul><li><a href="05-shared-category.html">Previous page</a></li><li><a href="07-universal-pdp.html">Next page</a></li><li><a href="../index.html">All pages</a></li></ul></nav>
+    </div>
+  </footer>
+</body>
+</html>
