@@ -1,0 +1,291 @@
+{
+  "record_id": "YT-FLAVOR-001",
+  "title": "Ripe Vapes E-Liquid Review — Customer Preference Analysis",
+  "source": {
+    "platform": "YouTube",
+    "title": "VERY IMPRESSIVE Flavors! Ripe Vapes eLiquid",
+    "channel": "Vape Society Supply",
+    "published_date": "2026-01-27",
+    "captured_date": "2026-08-11",
+    "duration_seconds": 518,
+    "source_url": null,
+    "views_at_capture": 3007,
+    "likes_at_capture": 53,
+    "channel_subscribers_at_capture": 5320,
+    "product_supplied_to_reviewer": true
+  },
+  "classification": {
+    "review_type": "experienced-enthusiast immediate sensory review",
+    "product_category": "bottled freebase/high-VG e-liquid",
+    "device_category": "open-system direct-lung device",
+    "disposable_relevance": "indirect-flavor-only",
+    "evidence_status": "single-source-qualitative-awaiting-corroboration",
+    "reliability_tag": "strong-qualitative-flavor-source-weak-market-validation-source"
+  },
+  "test_conditions": {
+    "bottle_size_ml": 120,
+    "vg_percent": 70,
+    "pg_percent": 30,
+    "available_nicotine_mg": [3, 6, 12],
+    "tested_nicotine_mg": 6,
+    "coil_ohms": 0.3,
+    "power_watts": 45,
+    "airflow": "fully-open",
+    "inhalation_style": "direct-lung"
+  },
+  "products": [
+    {
+      "name": "Coffee Tobacco",
+      "dominant_profile": "dark roasted coffee",
+      "secondary_profile": "mild nutty cigar or pipe-style tobacco",
+      "sweetness": "low",
+      "cooling": "none",
+      "body": "rich",
+      "throat_hit": "positive",
+      "tobacco_style": ["nutty", "cigar", "pipe"],
+      "all_day_signal": "strong-but-unverified",
+      "review_sentiment": "very-positive",
+      "best_fit_customer": "low-sweetness customer who likes coffee and mature aromatic tobacco",
+      "primary_risk": "polarizing dark coffee and tobacco profile",
+      "research_disposition": "highest-priority-for-independent-validation",
+      "tags": [
+        "dark-roast",
+        "low-sweet",
+        "nutty-tobacco",
+        "mild-cigar",
+        "no-ice",
+        "strong-flavor",
+        "throat-hit",
+        "all-day-potential"
+      ]
+    },
+    {
+      "name": "Tobacco Cream",
+      "dominant_profile": "earthy sun-cured-style tobacco",
+      "secondary_profile": "warm sweet cream",
+      "sweetness": "low-to-moderate",
+      "cooling": "none",
+      "body": "medium-rich",
+      "tobacco_style": ["earthy", "natural"],
+      "functional_ingredient": {
+        "ingredient": "cream",
+        "function": ["softens bitterness", "reduces earthiness", "smooths exhale"]
+      },
+      "review_sentiment": "positive",
+      "best_fit_customer": "customer seeking natural tobacco character without straight-tobacco bitterness",
+      "primary_risk": "earthiness may remain too strong for dessert-first customers",
+      "research_disposition": "targeted-niche-candidate",
+      "tags": [
+        "earthy-tobacco",
+        "cream-finish",
+        "natural-tobacco",
+        "smooth",
+        "no-ice",
+        "inhale-exhale-progression"
+      ]
+    },
+    {
+      "name": "VSC",
+      "stated_profile": ["vanilla", "caramel", "hint of salt"],
+      "reviewer_interpretation": "light custard or RY4-adjacent",
+      "sweetness": "balanced",
+      "cooling": "none",
+      "body": "light-to-medium",
+      "smoothness": "high",
+      "naturalness": "positive",
+      "review_sentiment": "very-positive",
+      "best_fit_customer": "dessert customer who likes vanilla and caramel but dislikes syrupy sweetness",
+      "primary_risk": "salt wording may be confused with nicotine-salt formulation",
+      "research_disposition": "strong-crossover-candidate-requiring-confirmation",
+      "tags": [
+        "vanilla-caramel",
+        "light-custard",
+        "natural-tasting",
+        "smooth",
+        "balanced-sweet",
+        "no-ice",
+        "dessert"
+      ]
+    },
+    {
+      "name": "VCT Black",
+      "stated_profile": ["vanilla custard", "tobacco", "almonds", "nuts", "cream"],
+      "dominant_profile": "rich custard with nutty tobacco",
+      "sweetness": "lowest-of-set",
+      "cooling": "none",
+      "body": "robust",
+      "complexity": "high",
+      "flavor_separation": "low-but-cohesive",
+      "finish": "tobacco-forward-exhale",
+      "review_sentiment": "very-positive",
+      "best_fit_customer": "experienced customer seeking low-sweetness, full-bodied, complex tobacco-custard",
+      "primary_risk": "integrated flavor may be perceived as muddy by some customers",
+      "research_disposition": "premium-niche-candidate-validate-before-deep-buy",
+      "tags": [
+        "premium-tobacco",
+        "custard",
+        "nutty",
+        "least-sweet",
+        "robust",
+        "rich",
+        "complex",
+        "tobacco-exhale",
+        "no-ice"
+      ]
+    }
+  ],
+  "customer_priorities": [
+    {
+      "id": "P-001",
+      "theme": "controlled-sweetness",
+      "classification": "must-have",
+      "finding": "The reviewer favors strong flavor without syrupy or candy-level sweetness.",
+      "within_source_support": "strong",
+      "market_confidence": "low-until-corroborated"
+    },
+    {
+      "id": "P-002",
+      "theme": "correct-tobacco-character",
+      "classification": "must-have",
+      "finding": "Nutty, cigar, pipe, coffee, cream, and custard tobacco are preferred over cigarette-like ashiness.",
+      "within_source_support": "strong",
+      "market_confidence": "low-to-medium"
+    },
+    {
+      "id": "P-003",
+      "theme": "smoothness-with-satisfaction",
+      "classification": "must-have",
+      "finding": "Smoothness is valued only when flavor body and throat satisfaction remain intact.",
+      "within_source_support": "strong",
+      "market_confidence": "low-to-medium"
+    },
+    {
+      "id": "P-004",
+      "theme": "all-day-usability",
+      "classification": "repeat-purchase-driver",
+      "finding": "Controlled sweetness and balanced flavor appear to support perceived all-day use.",
+      "within_source_support": "moderate",
+      "market_confidence": "low"
+    },
+    {
+      "id": "P-005",
+      "theme": "category-appropriate-cooling",
+      "classification": "category-fit-requirement",
+      "finding": "The absence of cooling is treated as appropriate for mature tobacco and custard profiles.",
+      "within_source_support": "moderate",
+      "market_confidence": "low"
+    },
+    {
+      "id": "P-006",
+      "theme": "cohesive-complexity",
+      "classification": "premium-delighter",
+      "finding": "Individual notes do not need to remain distinct when the overall blend feels coherent and rich.",
+      "within_source_support": "moderate",
+      "market_confidence": "low"
+    },
+    {
+      "id": "P-007",
+      "theme": "authenticity-and-trust",
+      "classification": "trust-delighter",
+      "finding": "QR authenticity verification and manufacturing transparency reduce purchase anxiety.",
+      "within_source_support": "moderate",
+      "market_confidence": "low"
+    }
+  ],
+  "probable_dealbreakers": [
+    "cigarette-ash or burnt-tobacco character",
+    "unbalanced bitter earthiness",
+    "excessive sweetener",
+    "artificial vanilla or caramel",
+    "hidden cooling",
+    "weak flavor marketed as smooth",
+    "muddy rather than cohesive complexity",
+    "counterfeit or authenticity concerns"
+  ],
+  "recommended_filters": {
+    "tobacco_style": [
+      "natural-earthy",
+      "nutty-cigar",
+      "coffee-tobacco",
+      "cream-tobacco",
+      "custard-dessert-tobacco",
+      "RY4-vanilla-caramel",
+      "premium-complex-tobacco"
+    ],
+    "sweetness": ["dry", "low", "balanced", "sweet", "very-sweet"],
+    "cooling": ["none", "light", "medium", "heavy"],
+    "body": ["light", "medium", "rich", "robust"],
+    "tobacco_intensity": ["background", "mild", "moderate", "forward"],
+    "complexity": ["straightforward", "layered", "connoisseur"],
+    "use_pattern": ["all-day-candidate", "occasional", "after-meal", "dessert"]
+  },
+  "hypotheses": [
+    {
+      "id": "H-001",
+      "statement": "Mature tobacco and dessert customers prioritize controlled sweetness.",
+      "within_review_support": "strong",
+      "current_market_confidence": "low-until-repeated"
+    },
+    {
+      "id": "H-002",
+      "statement": "Nutty, cigar, coffee, cream, and custard notes make tobacco more approachable than cigarette realism.",
+      "within_review_support": "strong",
+      "current_market_confidence": "low-to-medium"
+    },
+    {
+      "id": "H-003",
+      "statement": "Cream and custard reduce rejection risk for earthy tobacco.",
+      "within_review_support": "strong",
+      "current_market_confidence": "low-to-medium"
+    },
+    {
+      "id": "H-004",
+      "statement": "Lower sweetness improves perceived all-day usability.",
+      "within_review_support": "moderate",
+      "current_market_confidence": "low"
+    },
+    {
+      "id": "H-005",
+      "statement": "No-ice positioning is valuable to a tobacco and dessert subsegment.",
+      "within_review_support": "moderate",
+      "current_market_confidence": "low"
+    },
+    {
+      "id": "H-006",
+      "statement": "Customers accept difficult-to-separate notes when the blend feels coherent.",
+      "within_review_support": "moderate",
+      "current_market_confidence": "low"
+    },
+    {
+      "id": "H-007",
+      "statement": "Authenticity verification strengthens confidence in bottled vape products.",
+      "within_review_support": "moderate",
+      "current_market_confidence": "low"
+    },
+    {
+      "id": "H-008",
+      "statement": "The word salt can be confused with nicotine-salt formulation.",
+      "within_review_support": "moderate",
+      "current_market_confidence": "low"
+    }
+  ],
+  "commercial_takeaway": {
+    "segment": "mature low-sweetness no-ice tobacco-dessert customer",
+    "winning_structure": "recognizable tobacco foundation plus smoothing ingredient plus controlled sweetness plus rich body plus coherent finish",
+    "research_priority_order": [
+      "Coffee Tobacco",
+      "VSC",
+      "VCT Black",
+      "Tobacco Cream"
+    ],
+    "stocking_decision": "insufficient-evidence-for-large-order"
+  },
+  "next_validation_requirements": [
+    "independent review confirmation",
+    "long-term use evidence",
+    "customer comment analysis",
+    "price and margin review",
+    "coil-life feedback",
+    "actual demand and repeat-purchase evidence"
+  ]
+}
