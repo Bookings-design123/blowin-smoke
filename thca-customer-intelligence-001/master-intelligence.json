@@ -1,0 +1,102 @@
+{
+  "repository_id": "THCA-CUSTOMER-INTELLIGENCE-001",
+  "sources": [
+    {
+      "id": "THCA-INTEL-001",
+      "speaker": "Erick Khan",
+      "year": 2023,
+      "type": "consumer/reviewer education",
+      "commercial_interest": "product/brand relationship disclosed in transcript",
+      "authority": "customer perception only"
+    },
+    {
+      "id": "THCA-INTEL-002",
+      "speaker": "Bay Smokes founder",
+      "year": 2025,
+      "type": "operator interview",
+      "commercial_interest": "high",
+      "source_lineage": "No Jumper full interview + derivative clip",
+      "independence": "low for Bay Smokes claims"
+    },
+    {
+      "id": "THCA-INTEL-003",
+      "speaker": "Berner",
+      "year": 2026,
+      "type": "traditional-cannabis cultural/industry perspective",
+      "commercial_interest": "industry participant",
+      "authority": "perception/category legitimacy, not legal"
+    },
+    {
+      "id": "THCA-INTEL-004",
+      "speaker": "Bay Smokes founders",
+      "year": 2025,
+      "type": "operator/customer-education interview",
+      "commercial_interest": "high",
+      "independence": "low for Bay Smokes claims"
+    }
+  ],
+  "core_dimensions": [
+    "category_legitimacy",
+    "product_authenticity",
+    "coa_accessibility",
+    "contaminant_confidence",
+    "brand_reputation",
+    "retailer_trust",
+    "freshness",
+    "quality_tier_honesty",
+    "experience_accuracy",
+    "value",
+    "customer_experience_level",
+    "purchase_trigger",
+    "repeat_purchase_driver"
+  ],
+  "segments": [
+    "new/inexperienced",
+    "occasional",
+    "regular/habitual",
+    "high-tolerance",
+    "value buyer",
+    "premium/connoisseur",
+    "culture-driven",
+    "clean/professional-presentation"
+  ],
+  "evidence_hierarchy": [
+    "Blowin Smoke SKU repeat-purchase data",
+    "same-customer repeated SKU purchase",
+    "successful switch/retention",
+    "verified post-use feedback",
+    "full independent review",
+    "multi-source independent consensus",
+    "single independent review",
+    "operator claim",
+    "sponsored influencer claim",
+    "manufacturer description"
+  ],
+  "verification_firewall": [
+    "customer_perception",
+    "reviewer_observation",
+    "operator_claim",
+    "manufacturer_claim",
+    "verified_fact"
+  ],
+  "hypotheses": [
+    "THCA-H001",
+    "THCA-H002",
+    "THCA-H003",
+    "THCA-H004",
+    "THCA-H005",
+    "THCA-H006",
+    "THCA-H007",
+    "THCA-H008",
+    "THCA-H009",
+    "THCA-H010",
+    "THCA-H011",
+    "THCA-H012",
+    "THCA-H013",
+    "THCA-H014",
+    "THCA-H015",
+    "THCA-H016",
+    "THCA-H017",
+    "THCA-H018"
+  ]
+}
