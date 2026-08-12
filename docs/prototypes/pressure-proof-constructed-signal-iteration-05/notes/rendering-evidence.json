@@ -1,0 +1,284 @@
+{
+  "package": "pressure-proof-constructed-signal-iteration-05",
+  "packageStatus": "isolated static non-production design evidence",
+  "gateResult": "CONDITIONAL PASS",
+  "implementationAuthorized": false,
+  "evidenceEngine": "Headless Google Chrome through package-local Playwright capture utility; static validation through Nokogiri and repository inspection",
+  "fileInventory": {
+    "totalFiles": 63,
+    "pngFiles": 40,
+    "htmlFiles": 10,
+    "cssFiles": 1,
+    "fixtureFiles": 1,
+    "markdownFiles": 8,
+    "evidenceUtilityFiles": 2,
+    "thisRecord": 1,
+    "corePngs": 21,
+    "statePngs": 6,
+    "comparisonPngs": 10,
+    "overviewPngs": 3,
+    "rootFiles": ["README.md", "evaluation.md", "index.html"],
+    "fixturePaths": ["fixtures/customer-facing-catalog.json"],
+    "notePaths": [
+      "notes/anti-generic-audit.md",
+      "notes/build-evidence-boards.py",
+      "notes/customer-facing-copy-contract.md",
+      "notes/decision-lock.md",
+      "notes/media-direction.md",
+      "notes/progressive-disclosure.md",
+      "notes/render-evidence.js",
+      "notes/rendering-evidence.json",
+      "notes/typography-audition.md"
+    ],
+    "pagePaths": [
+      "pages/01-home.html",
+      "pages/02-vape-nicotine-division.html",
+      "pages/03-shared-category.html",
+      "pages/04-universal-pdp.html",
+      "pages/05-fitted-component-pdp.html",
+      "pages/06-quick-cart.html",
+      "pages/07-full-cart.html"
+    ],
+    "studyPaths": ["studies/08-mobile-navigation.html", "studies/09-typography-audition.html"],
+    "sharedPaths": ["shared/prototype.css"],
+    "screenshotFolders": {
+      "screenshots/wide": 7,
+      "screenshots/narrow": 7,
+      "screenshots/320": 7,
+      "screenshots/states": 6,
+      "screenshots/comparison/wide": 5,
+      "screenshots/comparison/narrow": 5,
+      "screenshots/overview": 3
+    }
+  },
+  "viewportInventory": {
+    "committedCore": [
+      { "width": 1440, "height": 900, "surfaces": 7 },
+      { "width": 390, "height": 844, "surfaces": 7 },
+      { "width": 320, "height": 760, "surfaces": 7 }
+    ],
+    "measuredAdditional": [
+      { "width": 1024, "height": 900, "surfaces": 7 },
+      { "width": 901, "height": 900, "surfaces": 7 }
+    ],
+    "committedStates": [
+      "compact navigation closed at 390x844",
+      "compact navigation open at 390x844",
+      "compact navigation open at 320x760",
+      "Universal PDP secondary details expanded at 390x844",
+      "Fitted PDP geometry/evidence expanded at 390x844",
+      "Full Cart secondary line expanded at 390x844"
+    ]
+  },
+  "computedTypography": {
+    "candidate": "A — provisional",
+    "environmentBoundary": "Computed results apply only to the capture environment; no font file was downloaded or committed and no production typography approval is granted.",
+    "roles": [
+      { "role": "home-display", "family": "\"Helvetica Neue\", Helvetica, Arial, sans-serif", "weight": "800" },
+      { "role": "division-opening", "family": "\"Helvetica Neue\", Helvetica, Arial, sans-serif", "weight": "800" },
+      { "role": "mixed-case-page-heading", "family": "\"Helvetica Neue\", Helvetica, Arial, sans-serif", "weight": "750" },
+      { "role": "long-product-identity", "family": "\"Helvetica Neue\", Helvetica, Arial, sans-serif", "weight": "750" },
+      { "role": "section-heading", "family": "\"Helvetica Neue\", Helvetica, Arial, sans-serif", "weight": "750" },
+      { "role": "body-paragraph", "family": "\"Helvetica Neue\", Helvetica, Arial, sans-serif", "weight": "400" },
+      { "role": "option-label", "family": "\"Helvetica Neue\", Helvetica, Arial, sans-serif", "weight": "700" },
+      { "role": "price", "family": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace", "weight": "700" },
+      { "role": "specification-value", "family": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace", "weight": "400" },
+      { "role": "error-recovery-microcopy", "family": "\"Helvetica Neue\", Helvetica, Arial, sans-serif", "weight": "400" }
+    ],
+    "captureEnvironmentFontChecks": {
+      "Helvetica Neue": true,
+      "Helvetica": true,
+      "Arial": true,
+      "Trebuchet MS": true,
+      "Georgia": true,
+      "monospace": true
+    }
+  },
+  "coreMeasurements": {
+    "surfaces": [
+      "01-home",
+      "02-vape-nicotine-division",
+      "03-shared-category",
+      "04-universal-pdp",
+      "05-fitted-component-pdp",
+      "06-quick-cart",
+      "07-full-cart"
+    ],
+    "scrollHeightsByViewport": {
+      "1440x900": [4317, 5148, 4951, 2281, 2288, 900, 1921],
+      "390x844": [6736, 6861, 8058, 3747, 3383, 844, 2976],
+      "320x760": [6825, 7229, 8210, 3864, 3475, 760, 3115],
+      "1024x900": [3964, 4332, 5161, 2714, 2562, 900, 1839],
+      "901x900": [3853, 4249, 5007, 2662, 2535, 900, 1815]
+    },
+    "horizontalOverflow": {
+      "result": "PASS",
+      "method": "documentElement.scrollWidth compared with clientWidth",
+      "checkedSurfaceViewportPairs": 35,
+      "mismatches": [],
+      "brokenImages": 0
+    },
+    "headingAndNotice": {
+      "result": "PASS",
+      "oneH1OnEveryCoreSurfaceViewport": true,
+      "oneExactPrototypeNoticeOnEveryCoreSurfaceViewport": true
+    },
+    "controls": {
+      "result": "PASS for the static target-size hypothesis",
+      "minimumMeasuredHeightAcross35SurfaceViewportPairs": 44,
+      "below44": [],
+      "productionTouchOrZoomCertification": false
+    }
+  },
+  "progressiveDisclosure": {
+    "defaultState": {
+      "Universal PDP": "all secondary disclosures closed",
+      "Fitted Component PDP": "all secondary disclosures closed",
+      "Quick Cart": "highest issue and reason visible without disclosure",
+      "Full Cart": "one highest-consequence conflict open; seven secondary lines closed"
+    },
+    "expandedStateHeightsAt390": {
+      "Universal PDP": 4952,
+      "Fitted Component PDP": 4687,
+      "Full Cart": 3149
+    },
+    "defaultHeightComparisonAt390": [
+      { "surface": "Universal PDP", "iteration04": 6042, "iteration05": 3747, "percentChange": -37.98 },
+      { "surface": "Fitted Component PDP", "iteration04": 8441, "iteration05": 3383, "percentChange": -59.92 },
+      { "surface": "Full Cart", "iteration04": 6624, "iteration05": 2976, "percentChange": -55.07 }
+    ],
+    "decisionVisibilityResult": "PASS — identity, selected state, price basis, availability, blocker, reason, recovery, and commerce consequence remain in the default decision path.",
+    "productionBehaviorCertified": false
+  },
+  "compactNavigation": {
+    "result": "PASS for static reachability and geometry",
+    "closed390Captured": true,
+    "open390Captured": true,
+    "open320Captured": true,
+    "alwaysVisible": ["Blowin' Smoke identity", "Search", "Cart", "Menu", "current-page context"],
+    "menuRoutes": ["THCA", "Vape & Nicotine", "Glass & Accessories", "Learn", "Support"],
+    "unreplacedPrimaryRoutes": [],
+    "functionalCertification": false
+  },
+  "quickCartGeometry": {
+    "result": "PASS for static containment and sequence",
+    "measurements": [
+      {
+        "viewport": "1440x900",
+        "drawerY": [72, 899],
+        "middleY": [169, 614.56],
+        "middleClientHeight": 446,
+        "middleScrollHeight": 446,
+        "highestIssueY": [614.56, 817],
+        "actionsY": [817, 899]
+      },
+      {
+        "viewport": "390x844",
+        "drawerY": [62, 844],
+        "middleY": [157, 558.16],
+        "middleClientHeight": 401,
+        "middleScrollHeight": 423,
+        "highestIssueY": [558.16, 774],
+        "actionsY": [774, 844]
+      },
+      {
+        "viewport": "320x760",
+        "drawerY": [62, 760],
+        "middleY": [157, 475.16],
+        "middleClientHeight": 318,
+        "middleScrollHeight": 482,
+        "highestIssueY": [475.16, 691],
+        "actionsY": [691, 760]
+      }
+    ],
+    "consequenceBeforeAction": true,
+    "issueRegionImmediatelyPrecedesActionRegion": true,
+    "actionsVisibleAtAllRequiredViewports": ["View Full Cart", "Continue shopping"],
+    "recommendationsPresent": false,
+    "fullOrderReadinessClaimPresent": false,
+    "focusTrapOrInertBehaviorCertified": false
+  },
+  "contrastCalculations": [
+    { "foreground": "#11110f", "background": "#f3efe7", "ratio": 16.48, "context": "primary ink on warm field" },
+    { "foreground": "#ffffff", "background": "#11110f", "ratio": 18.90, "context": "reversed primary text" },
+    { "foreground": "#ffffff", "background": "#2b2a27", "ratio": 14.35, "context": "notice text" },
+    { "foreground": "#615d56", "background": "#fffdf8", "ratio": 6.44, "context": "muted readable text" },
+    { "foreground": "#625e57", "background": "#d2cdc3", "ratio": 4.07, "context": "disabled control only; not used for enabled or decision-critical text" },
+    { "foreground": "#11110f", "background": "#fffdf8", "ratio": 18.60, "context": "panel text" },
+    { "foreground": "#11110f", "background": "#d8d3ca", "ratio": 12.68, "context": "media-study label" }
+  ],
+  "staticValidation": {
+    "result": "PASS",
+    "htmlFilesValidated": 10,
+    "duplicateIds": [],
+    "brokenLocalLinks": [],
+    "brokenFragments": [],
+    "brokenAriaReferences": [],
+    "missingImageAltAttributes": [],
+    "remoteExternalAssets": [],
+    "localAuthorityAssetReferences": ["../../../brand/assets/blowin-smoke-logo.png — unmodified"],
+    "customerFacingScripts": [],
+    "packageLocalEvidenceUtilities": ["notes/render-evidence.js", "notes/build-evidence-boards.py"],
+    "nestedInteractiveControlsInsideSummary": [],
+    "visibleProhibitedInternalPhrases": [],
+    "homeWhoWantsThatSmokeCount": 1,
+    "fixtureCartLineCount": 8,
+    "consoleErrorsByCustomerFacingSurface": {
+      "01-home": [],
+      "02-vape-nicotine-division": [],
+      "03-shared-category": [],
+      "04-universal-pdp": [],
+      "05-fitted-component-pdp": [],
+      "06-quick-cart": [],
+      "07-full-cart": []
+    },
+    "consoleWarningsByCustomerFacingSurface": {
+      "01-home": [],
+      "02-vape-nicotine-division": [],
+      "03-shared-category": [],
+      "04-universal-pdp": [],
+      "05-fitted-component-pdp": [],
+      "06-quick-cart": [],
+      "07-full-cart": []
+    }
+  },
+  "imageInspection": {
+    "requiredPngs": 40,
+    "openedAfterFinalMaterialChange": 40,
+    "result": "PASS",
+    "findings": {
+      "blankRenders": 0,
+      "corruptedStitching": 0,
+      "repeatedCaptureSegments": 0,
+      "horizontalCrop": 0,
+      "lostNavigation": 0,
+      "clippedText": 0,
+      "brokenLocalMedia": 0,
+      "missingActionRegions": 0,
+      "unreadableComparisonLabels": 0,
+      "layoutCollapses": 0
+    },
+    "correctedBeforeFinalInspection": [
+      "rejected an earlier corrupt full-page capture set and recaptured it",
+      "removed mid-scroll sticky-header artifacts from the three expanded-detail captures",
+      "changed compact-navigation closed evidence to the actual Home header state",
+      "preserved the full Quick Cart drawer in the grayscale overview instead of cover-cropping it",
+      "contained opening-quarter overview crops instead of stretching them"
+    ]
+  },
+  "sourcePreservation": {
+    "authoritySourcesModified": false,
+    "iterations01Through04Modified": false,
+    "logoModified": false,
+    "applicationOrProductionFilesModified": false
+  },
+  "remainingProductionGates": [
+    "approved and rights-cleared production product, operator, environment, connector, package, scale, and context media",
+    "authoritative live catalog, price, inventory, policy, eligibility, relationship, compatibility, fit, and provenance data",
+    "final type licensing, cross-platform fallback behavior, glyph coverage, and production token approval",
+    "functional menu, drawer, disclosure, cart, recovery, state-transition, focus, and announcement behavior",
+    "screen-reader, accessibility API, keyboard, focus trap/return, inert-background, zoom/reflow, localization, and real-device touch testing",
+    "production legal, policy, content, operations, security, performance, analytics, and engineering validation"
+  ],
+  "productionApproval": false
+}
