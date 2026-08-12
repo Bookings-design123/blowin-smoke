@@ -1,0 +1,844 @@
+{
+  "meta": {
+    "fixtureId": "DEMO-CATALOG-ITERATION-05-1",
+    "status": "FICTIONAL_DESIGN_EVALUATION_ONLY",
+    "implementationAuthorized": false,
+    "currency": "USD",
+    "prototypeNotice": "Fictional products, prices, inventory, relationships, and policies for design evaluation only.",
+    "truthBoundary": [
+      "No health or effect claims",
+      "No legal or destination-rule conclusions",
+      "No real compatibility or physical-fit claims",
+      "No real proof, provenance, inventory, shipping, warranty, or performance claims",
+      "Unknown never becomes compatible, eligible, available, or included by omission"
+    ]
+  },
+  "divisions": [
+    {
+      "id": "DEMO-DIV-THCA",
+      "name": "THCA",
+      "customerJob": "Choose a format and quantity, then review the exact proof and purchase state."
+    },
+    {
+      "id": "DEMO-DIV-VAPE",
+      "name": "Vape & Nicotine",
+      "customerJob": "Choose a setup, identify what you own, or replace the exact part."
+    },
+    {
+      "id": "DEMO-DIV-GLASS",
+      "name": "Glass & Accessories",
+      "customerJob": "Shop complete pieces, fitted parts, care, and tools with the measurements that matter."
+    }
+  ],
+  "ownedContexts": [
+    {
+      "id": "DEMO-OWN-VAPE-001",
+      "kind": "OWNED_DEVICE",
+      "productId": "DEMO-VAPE-101",
+      "variantId": "DEMO-VAPE-101-V01",
+      "displayName": "Relay M1 Pocket Device — Device Only / Graphite",
+      "platformEndpointId": "DEMO-END-VAPE-101-PLATFORM",
+      "sourceClass": "CUSTOMER_SUPPLIED_CONTEXT"
+    },
+    {
+      "id": "DEMO-OWN-GLASS-001",
+      "kind": "OWNED_COMPLETE_PIECE",
+      "productId": "DEMO-GLASS-110",
+      "variantId": "DEMO-GLASS-110-VSG",
+      "displayName": "Yardline Compact Water Piece — Smoke Grey",
+      "connectionEndpointId": "DEMO-END-GLASS-110-JOINT",
+      "sourceClass": "CUSTOMER_SUPPLIED_CONTEXT"
+    }
+  ],
+  "products": [
+    {
+      "id": "DEMO-THCA-101",
+      "name": "Block Letter THCA Flower",
+      "divisionId": "DEMO-DIV-THCA",
+      "productType": "FLOWER",
+      "productRole": "CONSUMABLE",
+      "mediaState": "NEUTRAL_STUDY_AVAILABLE",
+      "proofState": "UNKNOWN_UNVERIFIED",
+      "variants": [
+        {
+          "id": "DEMO-THCA-101-V35",
+          "label": "3.5 g",
+          "quantity": 3.5,
+          "unit": "g",
+          "price": 30,
+          "availabilityState": "AVAILABLE"
+        }
+      ]
+    },
+    {
+      "id": "DEMO-THCA-102",
+      "name": "North Block Pre-Roll Pack",
+      "divisionId": "DEMO-DIV-THCA",
+      "productType": "PRE_ROLL",
+      "productRole": "CONSUMABLE",
+      "mediaState": "NEUTRAL_STUDY_AVAILABLE",
+      "proofState": "UNKNOWN_UNVERIFIED",
+      "variants": [
+        {
+          "id": "DEMO-THCA-102-V5",
+          "label": "5 count",
+          "packageQuantity": 5,
+          "price": 24,
+          "availabilityState": "AVAILABLE"
+        }
+      ]
+    },
+    {
+      "id": "DEMO-THCA-103",
+      "name": "Foundry THCA Concentrate",
+      "divisionId": "DEMO-DIV-THCA",
+      "productType": "CONCENTRATE",
+      "productRole": "CONSUMABLE",
+      "mediaState": "NEUTRAL_STUDY_AVAILABLE",
+      "proofState": "UNKNOWN_UNVERIFIED",
+      "variants": [
+        {
+          "id": "DEMO-THCA-103-V1",
+          "label": "1 g",
+          "quantity": 1,
+          "unit": "g",
+          "price": 34,
+          "availabilityState": "AVAILABLE",
+          "eligibilityState": "UNKNOWN_UNVERIFIED"
+        }
+      ]
+    },
+    {
+      "id": "DEMO-VAPE-101",
+      "name": "Relay M1 Pocket Device",
+      "divisionId": "DEMO-DIV-VAPE",
+      "productType": "REFILLABLE_DEVICE",
+      "productRole": "COMPLETE_PRODUCT",
+      "platformId": "DEMO-PLATFORM-RELAY-M1",
+      "platformEndpointId": "DEMO-END-VAPE-101-PLATFORM",
+      "mediaState": "NEUTRAL_STUDY_AVAILABLE",
+      "optionDimension": {
+        "id": "DEMO-OPTION-VAPE-101-PACKAGE",
+        "name": "Package"
+      },
+      "variants": [
+        {
+          "id": "DEMO-VAPE-101-V01",
+          "label": "Device Only / Graphite",
+          "price": 42,
+          "availabilityState": "AVAILABLE",
+          "included": [
+            "Relay M1 Pocket Device × 1",
+            "Charging cable × 1",
+            "Setup card × 1"
+          ],
+          "requiredExternal": [
+            {
+              "productId": "DEMO-VAPE-201",
+              "label": "Relay M1 pod",
+              "reason": "A pod is not included with the Device Only package."
+            }
+          ]
+        },
+        {
+          "id": "DEMO-VAPE-101-V02",
+          "label": "Starter Kit with 0.8 Ω Pod / Graphite",
+          "price": 56,
+          "availabilityState": "AVAILABLE",
+          "included": [
+            "Relay M1 Pocket Device × 1",
+            "Relay M1 0.8 Ω pod × 1",
+            "Charging cable × 1",
+            "Setup card × 1"
+          ],
+          "requiredExternal": []
+        },
+        {
+          "id": "DEMO-VAPE-101-V03",
+          "label": "Starter Kit with Two-Pod Pack / Graphite",
+          "price": 64,
+          "availabilityState": "UNAVAILABLE",
+          "included": [
+            "Relay M1 Pocket Device × 1",
+            "Relay M1 0.8 Ω pods × 2",
+            "Charging cable × 1",
+            "Setup card × 1"
+          ],
+          "requiredExternal": []
+        }
+      ]
+    },
+    {
+      "id": "DEMO-VAPE-201",
+      "name": "Relay M1 Replacement Pod Pack",
+      "divisionId": "DEMO-DIV-VAPE",
+      "productType": "POD",
+      "productRole": "REPLACEMENT",
+      "mediaState": "NEUTRAL_STUDY_AVAILABLE",
+      "variants": [
+        {
+          "id": "DEMO-VAPE-201-V10A",
+          "label": "1.0 Ω / Pack of 2 / Revision A",
+          "price": 12,
+          "availabilityState": "AVAILABLE",
+          "packageQuantity": 2,
+          "endpointId": "DEMO-END-VAPE-201-V10A"
+        },
+        {
+          "id": "DEMO-VAPE-201-V08B",
+          "label": "0.8 Ω / Pack of 2 / Revision B",
+          "price": 12,
+          "availabilityState": "AVAILABLE",
+          "packageQuantity": 2,
+          "endpointId": "DEMO-END-VAPE-201-V08B"
+        },
+        {
+          "id": "DEMO-VAPE-201-V08C",
+          "label": "0.8 Ω / Pack of 2 / Revision C",
+          "price": 12,
+          "availabilityState": "AVAILABLE",
+          "packageQuantity": 2,
+          "endpointId": "DEMO-END-VAPE-201-V08C"
+        }
+      ]
+    },
+    {
+      "id": "DEMO-VAPE-202",
+      "name": "Forge S2 Mesh Coil Pack",
+      "divisionId": "DEMO-DIV-VAPE",
+      "productType": "COIL",
+      "productRole": "REPLACEMENT",
+      "mediaState": "NEUTRAL_STUDY_AVAILABLE",
+      "variants": [
+        {
+          "id": "DEMO-VAPE-202-V06",
+          "label": "0.6 Ω / Pack of 5",
+          "price": 15,
+          "availabilityState": "AVAILABLE",
+          "packageQuantity": 5,
+          "endpointId": "DEMO-END-VAPE-202-V06"
+        }
+      ]
+    },
+    {
+      "id": "DEMO-VAPE-203",
+      "name": "Axis Ceramic Cartridge — Low-Profile Extended-Reach Replacement",
+      "divisionId": "DEMO-DIV-VAPE",
+      "productType": "CARTRIDGE",
+      "productRole": "REPLACEMENT",
+      "mediaState": "NEUTRAL_STUDY_AVAILABLE",
+      "variants": [
+        {
+          "id": "DEMO-VAPE-203-VC",
+          "label": "Revision C",
+          "price": 19,
+          "availabilityState": "AVAILABLE",
+          "endpointId": "DEMO-END-VAPE-203-VC"
+        },
+        {
+          "id": "DEMO-VAPE-203-VD",
+          "label": "Revision D",
+          "price": 21,
+          "availabilityState": "AVAILABLE",
+          "endpointId": "DEMO-END-VAPE-203-VD"
+        }
+      ]
+    },
+    {
+      "id": "DEMO-VAPE-204",
+      "name": "Relay M1 Prefilled Pod Pack",
+      "divisionId": "DEMO-DIV-VAPE",
+      "productType": "PREFILLED_POD",
+      "productRole": "CONSUMABLE",
+      "mediaState": "NEUTRAL_STUDY_AVAILABLE",
+      "variants": [
+        {
+          "id": "DEMO-VAPE-204-VCEDAR",
+          "label": "Cedar / 20 mg/mL / Pack of 2",
+          "price": 14,
+          "availabilityState": "AVAILABLE",
+          "eligibilityState": "RESTRICTED"
+        }
+      ]
+    },
+    {
+      "id": "DEMO-VAPE-205",
+      "name": "Relay M1 Pod Adapter Ring",
+      "divisionId": "DEMO-DIV-VAPE",
+      "productType": "ADAPTER",
+      "productRole": "ACCESSORY",
+      "mediaState": "NEUTRAL_STUDY_AVAILABLE",
+      "variants": [
+        {
+          "id": "DEMO-VAPE-205-VREVC",
+          "label": "Revision C",
+          "price": 8,
+          "availabilityState": "AVAILABLE",
+          "endpointId": "DEMO-END-VAPE-205-VREVC"
+        }
+      ]
+    },
+    {
+      "id": "DEMO-VAPE-206",
+      "name": "Relay M0 Standard Pod Pack",
+      "divisionId": "DEMO-DIV-VAPE",
+      "productType": "POD",
+      "productRole": "REPLACEMENT",
+      "mediaState": "NEUTRAL_STUDY_AVAILABLE",
+      "variants": [
+        {
+          "id": "DEMO-VAPE-206-V10",
+          "label": "1.0 Ω / Pack of 2",
+          "price": 10,
+          "availabilityState": "UNAVAILABLE",
+          "packageQuantity": 2
+        }
+      ]
+    },
+    {
+      "id": "DEMO-VAPE-207",
+      "name": "Relay M1 Braided Charging Cable",
+      "divisionId": "DEMO-DIV-VAPE",
+      "productType": "CHARGING_CABLE",
+      "productRole": "ACCESSORY",
+      "mediaState": "NEUTRAL_STUDY_AVAILABLE",
+      "variants": [{"id":"DEMO-VAPE-207-VUSB","label":"USB-C / 1 m / Charcoal","price":11,"availabilityState":"AVAILABLE"}]
+    },
+    {
+      "id": "DEMO-VAPE-208",
+      "name": "Relay M1 Pocket Sleeve",
+      "divisionId": "DEMO-DIV-VAPE",
+      "productType": "PROTECTIVE_SLEEVE",
+      "productRole": "ACCESSORY",
+      "mediaState": "NEUTRAL_STUDY_AVAILABLE",
+      "variants": [{"id":"DEMO-VAPE-208-VSLATE","label":"Slate / Device access retained","price":16,"availabilityState":"AVAILABLE"}]
+    },
+    {
+      "id": "DEMO-VAPE-301",
+      "name": "Northline Nicotine Pouch Tin",
+      "divisionId": "DEMO-DIV-VAPE",
+      "productType": "NICOTINE_POUCH",
+      "productRole": "CONSUMABLE",
+      "mediaState": "NEUTRAL_STUDY_AVAILABLE",
+      "variants": [
+        {
+          "id": "DEMO-VAPE-301-VMINT",
+          "label": "Mint / 6 mg per pouch / 20 count",
+          "price": 8,
+          "availabilityState": "AVAILABLE",
+          "eligibilityState": "FAILED_RULE_SERVICE"
+        }
+      ]
+    },
+    {
+      "id": "DEMO-GLASS-110",
+      "name": "Yardline Compact Water Piece",
+      "divisionId": "DEMO-DIV-GLASS",
+      "productType": "WATER_PIECE",
+      "productRole": "COMPLETE_PRODUCT",
+      "mediaState": "NEUTRAL_STUDY_AVAILABLE",
+      "variants": [
+        {
+          "id": "DEMO-GLASS-110-VSG",
+          "label": "Smoke Grey / 14 mm Female / 45°",
+          "price": 68,
+          "availabilityState": "AVAILABLE",
+          "included": [
+            "Yardline Compact Water Piece × 1",
+            "14 mm bowl × 1"
+          ],
+          "endpoint": {
+            "id": "DEMO-END-GLASS-110-JOINT",
+            "nominalSize": "14 mm",
+            "genderType": "FEMALE",
+            "angle": "45°",
+            "orientation": "UPWARD"
+          }
+        }
+      ]
+    },
+    {
+      "id": "DEMO-GLASS-214",
+      "name": "Counterweight Reclaim Catcher — Long-Neck 14 / 45°",
+      "divisionId": "DEMO-DIV-GLASS",
+      "productType": "RECLAIM_CATCHER",
+      "productRole": "FITTED_COMPONENT",
+      "mediaState": "NEUTRAL_STUDY_AVAILABLE",
+      "variants": [
+        {
+          "id": "DEMO-GLASS-214-V14F45",
+          "label": "14 mm Female / 45° / Long Neck",
+          "price": 32,
+          "availabilityState": "AVAILABLE",
+          "endpoint": {
+            "id": "DEMO-END-GLASS-214-INLET",
+            "nominalSize": "14 mm",
+            "genderType": "FEMALE",
+            "angle": "45°",
+            "orientation": "DOWNWARD"
+          }
+        }
+      ]
+    },
+    {
+      "id": "DEMO-GLASS-310",
+      "name": "14 mm Male-to-Male Bridge Adapter",
+      "divisionId": "DEMO-DIV-GLASS",
+      "productType": "ADAPTER",
+      "productRole": "FITTED_COMPONENT",
+      "mediaState": "NEUTRAL_STUDY_AVAILABLE",
+      "variants": [
+        {
+          "id": "DEMO-GLASS-310-V14MM",
+          "label": "14 mm Male-to-Male",
+          "price": 9,
+          "availabilityState": "AVAILABLE",
+          "sourceEndpointId": "DEMO-END-GLASS-310-A",
+          "targetEndpointId": "DEMO-END-GLASS-310-B"
+        }
+      ]
+    },
+    {
+      "id": "DEMO-GLASS-320",
+      "name": "Pivot Drop-Down Adapter — 14 / 90°",
+      "divisionId": "DEMO-DIV-GLASS",
+      "productType": "ADAPTER",
+      "productRole": "FITTED_COMPONENT",
+      "mediaState": "NEUTRAL_STUDY_AVAILABLE",
+      "variants": [
+        {
+          "id": "DEMO-GLASS-320-V1490",
+          "label": "14 mm / 90°",
+          "price": 22,
+          "availabilityState": "AVAILABLE",
+          "physicalFitState": "UNKNOWN_UNVERIFIED"
+        }
+      ]
+    },
+    {
+      "id": "DEMO-CARE-401",
+      "name": "Bench Glass Care Set — 16 fl oz + Detail Brush",
+      "divisionId": "DEMO-DIV-GLASS",
+      "productType": "CARE_SET",
+      "productRole": "CARE_PRODUCT",
+      "mediaState": "NEUTRAL_STUDY_AVAILABLE",
+      "variants": [
+        {
+          "id": "DEMO-CARE-401-VSET",
+          "label": "16 fl oz + Detail Brush",
+          "price": 20,
+          "availabilityState": "AVAILABLE",
+          "included": [
+            "Care liquid × 16 fl oz",
+            "Detail brush × 1"
+          ]
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "DEMO-REL-E-001",
+      "kind": "ELECTRONIC_COMPATIBILITY",
+      "sourceEndpointId": "DEMO-END-VAPE-201-V10A",
+      "targetEndpointId": "DEMO-END-VAPE-101-PLATFORM",
+      "state": "COMPATIBLE",
+      "evidenceStatus": "CURRENT",
+      "customerReason": "The exact pod revision is recorded for the selected Relay M1 platform.",
+      "customerRecovery": "Open the exact pod record."
+    },
+    {
+      "id": "DEMO-REL-E-002",
+      "kind": "ELECTRONIC_COMPATIBILITY",
+      "sourceEndpointId": "DEMO-END-VAPE-201-V08B",
+      "targetEndpointId": "DEMO-END-VAPE-101-PLATFORM",
+      "state": "UNKNOWN_UNVERIFIED",
+      "evidenceStatus": "STALE",
+      "customerReason": "The relationship record predates Revision B.",
+      "customerRecovery": "Review the named device and exact pod revision before relying on the match."
+    },
+    {
+      "id": "DEMO-REL-E-005",
+      "kind": "ELECTRONIC_COMPATIBILITY",
+      "sourceEndpointId": "DEMO-END-VAPE-201-V08C",
+      "targetEndpointId": "DEMO-END-VAPE-101-PLATFORM",
+      "state": "COMPATIBLE",
+      "evidenceStatus": "CURRENT",
+      "customerReason": "The exact Revision C pod record is current for the selected Relay M1 platform.",
+      "customerRecovery": "Open the exact Revision C pod record."
+    },
+    {
+      "id": "DEMO-REL-E-003",
+      "kind": "ELECTRONIC_COMPATIBILITY",
+      "sourceEndpointId": "DEMO-END-VAPE-202-V06",
+      "targetEndpointId": "DEMO-END-VAPE-101-PLATFORM",
+      "state": "INCOMPATIBLE",
+      "evidenceStatus": "CURRENT",
+      "customerReason": "The exact coil and selected device use different platform interfaces.",
+      "customerRecovery": "Return to parts recorded for the Relay M1 platform."
+    },
+    {
+      "id": "DEMO-REL-E-004",
+      "kind": "ELECTRONIC_COMPATIBILITY",
+      "sourceEndpointId": "DEMO-END-VAPE-205-VREVC",
+      "targetEndpointId": "DEMO-END-VAPE-101-PLATFORM",
+      "state": "COMPATIBLE",
+      "evidenceStatus": "CURRENT",
+      "customerReason": "The exact adapter revision is recorded for the selected platform.",
+      "customerRecovery": "Review the text record; product media is missing."
+    },
+    {
+      "id": "DEMO-REL-REQ-001",
+      "kind": "REQUIRES",
+      "sourceVariantId": "DEMO-VAPE-101-V01",
+      "targetProductId": "DEMO-VAPE-201",
+      "state": "ADDITIONAL_COMPONENT_REQUIRED",
+      "customerReason": "The Device Only package does not include a pod.",
+      "customerRecovery": "Add an exact supported pod or choose a package that includes one."
+    },
+    {
+      "id": "DEMO-REL-PHYS-001",
+      "kind": "PHYSICAL_FIT",
+      "sourceEndpointId": "DEMO-END-GLASS-214-INLET",
+      "targetEndpointId": "DEMO-END-GLASS-110-JOINT",
+      "state": "INCOMPATIBLE",
+      "evidenceStatus": "CURRENT",
+      "customerReason": "Both exact connection endpoints are female. Matching nominal size does not create a direct connection.",
+      "customerRecovery": "Review the named adapter route and measure assembled clearance."
+    },
+    {
+      "id": "DEMO-REL-PHYS-002",
+      "kind": "PHYSICAL_FIT",
+      "sourceEndpointId": "DEMO-END-GLASS-214-INLET",
+      "intermediaryVariantId": "DEMO-GLASS-310-V14MM",
+      "targetEndpointId": "DEMO-END-GLASS-110-JOINT",
+      "state": "CONDITIONALLY_COMPATIBLE",
+      "evidenceStatus": "CURRENT_WITH_UNRESOLVED_CONDITION",
+      "conditions": [
+        "Use the exact 14 mm male-to-male adapter",
+        "Confirm assembled clearance before purchase"
+      ],
+      "unresolvedFields": [
+        "Available clearance — Measurement not supplied"
+      ],
+      "customerReason": "The adapter resolves the gender conflict only. Final clearance is still unknown.",
+      "customerRecovery": "Measure available clearance or take the exact piece and component IDs to support."
+    }
+  ],
+  "homeCuration": {
+    "id": "DEMO-COL-HOUSE-01",
+    "title": "Picked for three different decisions.",
+    "rationale": "Each selection makes a different purchase question visible.",
+    "items": [
+      {
+        "productId": "DEMO-THCA-101",
+        "variantId": "DEMO-THCA-101-V35",
+        "reason": "Quantity is explicit; exact batch proof still requires review."
+      },
+      {
+        "productId": "DEMO-VAPE-101",
+        "variantId": null,
+        "reason": "Package choice changes contents, price, availability, and required parts."
+      },
+      {
+        "productId": "DEMO-GLASS-110",
+        "variantId": "DEMO-GLASS-110-VSG",
+        "reason": "Scale, connection, and included-part questions stay close to the product."
+      }
+    ]
+  },
+  "category": {
+    "id": "DEMO-CATEGORY-VAPE-PARTS",
+    "name": "Pods, coils & replacement parts",
+    "ownedContextId": "DEMO-OWN-VAPE-001",
+    "results": [
+      {
+        "position": 1,
+        "productId": "DEMO-VAPE-207",
+        "variantId": "DEMO-VAPE-207-VUSB",
+        "state": "AVAILABLE",
+        "reason": "An ordinary available accessory for the named platform.",
+        "action": "Review the device package"
+      },
+      {
+        "position": 2,
+        "productId": "DEMO-VAPE-201",
+        "variantId": "DEMO-VAPE-201-V10A",
+        "state": "COMPATIBLE",
+        "relationshipId": "DEMO-REL-E-001",
+        "reason": "The exact pod revision is recorded for the selected device.",
+        "action": "Find exact pod records"
+      },
+      {
+        "position": 3,
+        "productId": "DEMO-VAPE-201",
+        "variantId": "DEMO-VAPE-201-V08C",
+        "state": "COMPATIBLE",
+        "relationshipId": "DEMO-REL-E-005",
+        "reason": "The exact Revision C pod record is current for the selected device.",
+        "action": "Find exact revision records"
+      },
+      {
+        "position": 4,
+        "productId": "DEMO-VAPE-208",
+        "variantId": "DEMO-VAPE-208-VSLATE",
+        "state": "AVAILABLE",
+        "reason": "An ordinary available protective accessory.",
+        "action": "Review the device context"
+      },
+      {
+        "position": 5,
+        "productId": "DEMO-VAPE-203",
+        "variantId": null,
+        "state": "UNKNOWN_UNVERIFIED",
+        "priceDisplay": "From $19.00",
+        "reason": "Exact revision and owned-device context are not supplied.",
+        "action": "Identify the exact platform"
+      },
+      {
+        "position": 6,
+        "productId": "DEMO-VAPE-204",
+        "variantId": "DEMO-VAPE-204-VCEDAR",
+        "state": "RESTRICTED",
+        "reason": "The current design-evaluation destination result blocks this exact line.",
+        "action": "Get help with this restricted line"
+      },
+      {
+        "position": 7,
+        "productId": "DEMO-VAPE-205",
+        "variantId": "DEMO-VAPE-205-VREVC",
+        "state": "COMPATIBLE",
+        "relationshipId": "DEMO-REL-E-004",
+        "reason": "The exact adapter revision is recorded for the selected platform.",
+        "action": "Review selected owned context"
+      },
+      {
+        "position": 8,
+        "productId": "DEMO-VAPE-202",
+        "variantId": "DEMO-VAPE-202-V06",
+        "state": "INCOMPATIBLE",
+        "relationshipId": "DEMO-REL-E-003",
+        "reason": "The exact coil and selected device use different platform interfaces.",
+        "action": "Identify another device"
+      }
+    ]
+  },
+  "surfaceStates": {
+    "universalPdp": {
+      "productId": "DEMO-VAPE-101",
+      "selectedVariantId": null,
+      "selectedState": "Package not selected",
+      "priceState": "FROM_PRICE",
+      "priceDisplay": "From $42.00",
+      "availabilityState": "SELECTION_REQUIRED",
+      "availabilityDisplay": "Choose a package for current availability.",
+      "primaryBlocker": "SELECTION_REQUIRED",
+      "reason": "Package contents, required parts, exact price, and availability change with the package.",
+      "recovery": "Choose Device Only / Graphite, Starter Kit with 0.8 Ω Pod / Graphite, or Starter Kit with Two-Pod Pack / Graphite.",
+      "action": {
+        "label": "Add to cart unavailable",
+        "enabled": false
+      },
+      "defaultVisible": [
+        "Exact identity",
+        "Missing package selection",
+        "From-price basis",
+        "Availability qualification",
+        "Primary blocker",
+        "Reason",
+        "Recovery",
+        "Disabled commerce action",
+        "Primary media"
+      ],
+      "disclosures": [
+        "What is included",
+        "Specifications and exact IDs",
+        "Source and currentness",
+        "Setup and support"
+      ]
+    },
+    "fittedComponentPdp": {
+      "productId": "DEMO-GLASS-214",
+      "variantId": "DEMO-GLASS-214-V14F45",
+      "ownedContextId": "DEMO-OWN-GLASS-001",
+      "priceDisplay": "$32.00",
+      "availabilityDisplay": "Available in this fixture",
+      "directFitState": "INCOMPATIBLE",
+      "directRelationshipId": "DEMO-REL-PHYS-001",
+      "adapterRouteState": "CONDITIONALLY_COMPATIBLE",
+      "adapterRelationshipId": "DEMO-REL-PHYS-002",
+      "clearanceState": "UNKNOWN_UNVERIFIED",
+      "verdict": "This component does not connect directly to your selected piece.",
+      "reason": "Both exact connection endpoints are female. The 14 mm nominal size matches, but gender/type does not.",
+      "conditionalRoute": "A 14 mm male-to-male adapter resolves the gender conflict only.",
+      "unresolved": "Assembled clearance — Measurement not supplied.",
+      "recovery": "Measure available clearance before relying on the adapter route.",
+      "action": {
+        "label": "Add to cart unavailable",
+        "enabled": false
+      },
+      "defaultVisible": [
+        "Exact component identity",
+        "Exact owned target",
+        "Direct verdict",
+        "Reason",
+        "Conditional adapter route",
+        "Unknown clearance",
+        "Blocked action",
+        "Measurement recovery"
+      ],
+      "disclosures": [
+        "Full geometry",
+        "Evidence and currentness",
+        "Measurement method",
+        "Connector views",
+        "Complete support handoff"
+      ]
+    },
+    "quickCart": {
+      "lineId": "DEMO-CART-LINE-01",
+      "outcome": "LINE_PRESENT_REVIEW_REQUIRED",
+      "event": "EXISTING_LINE_REVALIDATED",
+      "trigger": "OWNED_CONTEXT_CHANGED",
+      "heading": "Cart updated. Existing line needs review.",
+      "lineContext": "Counterweight Reclaim Catcher — Long-Neck 14 / 45° · 14 mm Female / 45° / Long Neck · Qty 1 · $32.00",
+      "highestIssue": "This component does not connect directly to your selected piece.",
+      "reason": "Both exact endpoints are female. Adapter clearance is not supplied.",
+      "actions": [
+        "View Full Cart",
+        "Continue shopping"
+      ],
+      "recommendations": []
+    }
+  },
+  "cart": {
+    "id": "DEMO-CART-001",
+    "status": "REVIEW_REQUIRED",
+    "orderStatement": "Your cart needs review before it can continue.",
+    "highestConflictLineId": "DEMO-CART-LINE-01",
+    "defaultExpandedLineId": "DEMO-CART-LINE-01",
+    "lines": [
+      {
+        "id": "DEMO-CART-LINE-01",
+        "productId": "DEMO-GLASS-214",
+        "variantId": "DEMO-GLASS-214-V14F45",
+        "quantity": 1,
+        "unitPrice": 32,
+        "linePrice": 32,
+        "state": "INCOMPATIBLE",
+        "intervention": "BLOCK",
+        "expandedByDefault": true,
+        "relationshipId": "DEMO-REL-PHYS-001",
+        "ownedContextId": "DEMO-OWN-GLASS-001",
+        "conditionalRelationshipId": "DEMO-REL-PHYS-002",
+        "eventHistory": ["LINE_EXISTED_BEFORE_CURRENT_CONTEXT", "OWNED_CONTEXT_CHANGED", "EXISTING_LINE_REVALIDATED"],
+        "reason": "The selected component inlet and owned-piece joint are both 14 mm female endpoints.",
+        "recovery": "Review the named male-to-male adapter route, then measure assembled clearance."
+      },
+      {
+        "id": "DEMO-CART-LINE-02",
+        "productId": "DEMO-CARE-401",
+        "variantId": "DEMO-CARE-401-VSET",
+        "quantity": 1,
+        "previousUnitPrice": 18,
+        "unitPrice": 20,
+        "linePrice": 20,
+        "state": "PRICE_CHANGED",
+        "intervention": "REQUEST_CUSTOMER_CONFIRMATION",
+        "expandedByDefault": false,
+        "reason": "The price was $18.00 when added; the current fixture price is $20.00.",
+        "recovery": "Review the $2.00 change and keep or remove the line."
+      },
+      {
+        "id": "DEMO-CART-LINE-03",
+        "productId": "DEMO-VAPE-206",
+        "variantId": "DEMO-VAPE-206-V10",
+        "quantity": 2,
+        "unitPrice": 10,
+        "linePrice": 20,
+        "state": "UNAVAILABLE",
+        "intervention": "BLOCK",
+        "expandedByDefault": false,
+        "reason": "The exact Relay M0 1.0 Ω two-pack cannot currently be supplied in this fixture.",
+        "recovery": "Remove the line or keep its exact part number while checking a typed replacement."
+      },
+      {
+        "id": "DEMO-CART-LINE-04",
+        "productId": "DEMO-VAPE-204",
+        "variantId": "DEMO-VAPE-204-VCEDAR",
+        "quantity": 1,
+        "unitPrice": 14,
+        "linePrice": 14,
+        "state": "RESTRICTED",
+        "intervention": "BLOCK",
+        "expandedByDefault": false,
+        "reason": "The current design-evaluation destination result blocks this exact line.",
+        "recovery": "Review destination details or remove the line. Do not treat this as an inventory or service error."
+      },
+      {
+        "id": "DEMO-CART-LINE-05",
+        "productId": "DEMO-VAPE-203",
+        "variantId": "DEMO-VAPE-203-VC",
+        "quantity": 1,
+        "unitPrice": 19,
+        "linePrice": 19,
+        "state": "UNKNOWN_ELECTRONIC_COMPATIBILITY",
+        "intervention": "ROUTE_TO_SUPPORT",
+        "expandedByDefault": false,
+        "reason": "The exact owned-device platform and revision have not been supplied.",
+        "recovery": "Add the device model and revision. Unknown is not compatible."
+      },
+      {
+        "id": "DEMO-CART-LINE-06",
+        "productId": "DEMO-GLASS-320",
+        "variantId": "DEMO-GLASS-320-V1490",
+        "quantity": 1,
+        "unitPrice": 22,
+        "linePrice": 22,
+        "state": "UNKNOWN_PHYSICAL_FIT",
+        "intervention": "ROUTE_TO_SUPPORT",
+        "expandedByDefault": false,
+        "reason": "The owned target’s angle and available clearance are not supplied.",
+        "recovery": "Enter the missing angle and clearance measurements or request fit help."
+      },
+      {
+        "id": "DEMO-CART-LINE-07",
+        "productId": "DEMO-VAPE-101",
+        "variantId": "DEMO-VAPE-101-V01",
+        "quantity": 1,
+        "unitPrice": 42,
+        "linePrice": 42,
+        "state": "ADDITIONAL_COMPONENT_REQUIRED",
+        "intervention": "BLOCK",
+        "expandedByDefault": false,
+        "relationshipId": "DEMO-REL-REQ-001",
+        "reason": "The Device Only package includes no pod, and the unrelated Relay M0 pod in this cart does not satisfy the requirement.",
+        "recovery": "Add an exact supported Relay M1 pod or switch to a package that includes one."
+      },
+      {
+        "id": "DEMO-CART-LINE-08",
+        "productId": "DEMO-VAPE-301",
+        "variantId": "DEMO-VAPE-301-VMINT",
+        "quantity": 1,
+        "unitPrice": 8,
+        "linePrice": 8,
+        "state": "ELIGIBILITY_SERVICE_ERROR",
+        "intervention": "BLOCK",
+        "expandedByDefault": false,
+        "reason": "The eligibility service did not return a result. No eligible or restricted outcome has been established.",
+        "recovery": "Retry the check or carry this exact line to support."
+      }
+    ],
+    "totalBasis": {
+      "itemPriceSum": 177,
+      "display": "$177.00",
+      "explanation": "Current displayed unit prices multiplied by quantity. The sum includes lines that cannot progress and does not establish shipping, tax, eligibility, or checkout readiness."
+    },
+    "progression": {
+      "state": "BLOCKED",
+      "label": "Continue unavailable",
+      "reason": "Known incompatibility and unresolved line states remain.",
+      "primaryRecovery": "Resolve the incompatible line"
+    }
+  }
+}

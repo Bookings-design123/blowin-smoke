@@ -1,0 +1,134 @@
+{
+  "pages": [
+    {
+      "file": "pages/01-home.html",
+      "h1": 1,
+      "notices": 1,
+      "duplicateIds": []
+    },
+    {
+      "file": "pages/02-vape-nicotine-division.html",
+      "h1": 1,
+      "notices": 1,
+      "duplicateIds": []
+    },
+    {
+      "file": "pages/03-shared-category.html",
+      "h1": 1,
+      "notices": 1,
+      "duplicateIds": []
+    },
+    {
+      "file": "pages/04-universal-pdp.html",
+      "h1": 1,
+      "notices": 1,
+      "duplicateIds": []
+    },
+    {
+      "file": "pages/05-fitted-component-pdp.html",
+      "h1": 1,
+      "notices": 1,
+      "duplicateIds": []
+    },
+    {
+      "file": "pages/06-quick-cart.html",
+      "h1": 1,
+      "notices": 1,
+      "duplicateIds": []
+    },
+    {
+      "file": "pages/07-full-cart.html",
+      "h1": 1,
+      "notices": 1,
+      "duplicateIds": []
+    },
+    {
+      "file": "pages/08-thca-division.html",
+      "h1": 1,
+      "notices": 1,
+      "duplicateIds": []
+    },
+    {
+      "file": "pages/09-glass-accessories-division.html",
+      "h1": 1,
+      "notices": 1,
+      "duplicateIds": []
+    },
+    {
+      "file": "pages/10-search.html",
+      "h1": 1,
+      "notices": 1,
+      "duplicateIds": []
+    },
+    {
+      "file": "index.html",
+      "h1": 1,
+      "notices": 1,
+      "duplicateIds": []
+    },
+    {
+      "file": "studies/mobile-navigation.html",
+      "h1": 1,
+      "notices": 1,
+      "duplicateIds": []
+    },
+    {
+      "file": "studies/state-stress-suite.html",
+      "h1": 1,
+      "notices": 1,
+      "duplicateIds": []
+    },
+    {
+      "file": "studies/typography-correction.html",
+      "h1": 1,
+      "notices": 1,
+      "duplicateIds": []
+    }
+  ],
+  "brokenLinks": [],
+  "brokenFragments": [],
+  "brokenAria": [],
+  "currentPageFailures": [],
+  "semanticRouteFailures": [],
+  "external": [],
+  "forbidden": [],
+  "fixtureReferences": {
+    "visibleCount": 25,
+    "unknown": []
+  },
+  "category": {
+    "fixtureCount": 8,
+    "cardCount": 8,
+    "distribution": {
+      "quiet": 5,
+      "caution": 1,
+      "consequence": 2
+    },
+    "actions": {
+      "visible": [
+        "Review the device package",
+        "Find exact pod records",
+        "Find exact revision records",
+        "Review the device context",
+        "Identify the exact platform",
+        "Get help with this restricted line",
+        "Review selected owned context",
+        "Identify another device"
+      ],
+      "fixture": [
+        "Review the device package",
+        "Find exact pod records",
+        "Find exact revision records",
+        "Review the device context",
+        "Identify the exact platform",
+        "Get help with this restricted line",
+        "Review selected owned context",
+        "Identify another device"
+      ]
+    }
+  },
+  "search": {
+    "declaredProductCount": 3,
+    "renderedProductCards": 3
+  }
+}

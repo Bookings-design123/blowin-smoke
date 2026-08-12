@@ -1,0 +1,665 @@
+{
+  "validation": "PASS",
+  "total": 59,
+  "distribution": {
+    "320": 10,
+    "comparison": 10,
+    "narrow": 10,
+    "overview": 8,
+    "states": 11,
+    "wide": 10
+  },
+  "exactDuplicateGroups": [],
+  "violations": [],
+  "files": [
+    {
+      "file": "screenshots/320/01-home-320x760.png",
+      "width": 320,
+      "height": 6543,
+      "sha256": "e34fab69628e7daf821e8da5e03f5d229be3b17b0263e985b20802bfc02f9763",
+      "channelStdDev": [
+        95.342,
+        93.816,
+        91.437
+      ]
+    },
+    {
+      "file": "screenshots/320/02-vape-nicotine-division-320x760.png",
+      "width": 320,
+      "height": 6110,
+      "sha256": "d9ab3740471dcf27e52709acee73fbe55af496497600e6faf273f7f7303cd1e0",
+      "channelStdDev": [
+        103.515,
+        101.725,
+        99.079
+      ]
+    },
+    {
+      "file": "screenshots/320/03-shared-category-320x760.png",
+      "width": 320,
+      "height": 7695,
+      "sha256": "d39a40d37d8592bcae79485e21be055289d69167dc5b8ffc6b4fb5b72b288903",
+      "channelStdDev": [
+        80.21,
+        79.445,
+        78.318
+      ]
+    },
+    {
+      "file": "screenshots/320/04-universal-pdp-320x760.png",
+      "width": 320,
+      "height": 3969,
+      "sha256": "48080eaeea4ebde70e2fc1144220b43b97e107f1b95ef4bebab29e3de9383676",
+      "channelStdDev": [
+        92.305,
+        91.334,
+        89.884
+      ]
+    },
+    {
+      "file": "screenshots/320/05-fitted-component-pdp-320x760.png",
+      "width": 320,
+      "height": 3436,
+      "sha256": "ad451ffb88bdfe2372e47752a2673d5646063ff83a97159bc7a960438b947277",
+      "channelStdDev": [
+        94.766,
+        93.943,
+        92.714
+      ]
+    },
+    {
+      "file": "screenshots/320/06-quick-cart-320x760.png",
+      "width": 320,
+      "height": 760,
+      "sha256": "a908db5d1d1d7c40056269507bd8f072e815bff9ed9cfa94523b38c6840b4733",
+      "channelStdDev": [
+        79.761,
+        79.185,
+        78.274
+      ]
+    },
+    {
+      "file": "screenshots/320/07-full-cart-320x760.png",
+      "width": 320,
+      "height": 3126,
+      "sha256": "ac34a8d2eca1d91260fb72359f808c41d97bc392621fe03e15a877074d782c37",
+      "channelStdDev": [
+        97.391,
+        96.626,
+        95.468
+      ]
+    },
+    {
+      "file": "screenshots/320/08-thca-division-320x760.png",
+      "width": 320,
+      "height": 4510,
+      "sha256": "94f616c31b843e1fdf0b6fac6b6c86dfb38ac114d8542253e84e3b731ef9bee7",
+      "channelStdDev": [
+        82.718,
+        81.068,
+        78.616
+      ]
+    },
+    {
+      "file": "screenshots/320/09-glass-accessories-division-320x760.png",
+      "width": 320,
+      "height": 4489,
+      "sha256": "8ff66e3bfa55238d3167ba5a4359113d2e930cd33918dc969bc9df358b6c847b",
+      "channelStdDev": [
+        82.787,
+        81.2,
+        78.835
+      ]
+    },
+    {
+      "file": "screenshots/320/10-search-320x760.png",
+      "width": 320,
+      "height": 3464,
+      "sha256": "fd2587db7a3b5acad514b8206e23d2a4ed878dd52867155c00b3be7e7efb08cc",
+      "channelStdDev": [
+        90.497,
+        88.971,
+        86.715
+      ]
+    },
+    {
+      "file": "screenshots/comparison/narrow/01-home-iter05-vs-iter05-1.png",
+      "width": 770,
+      "height": 830,
+      "sha256": "81c12c12c0099e5c5272f88ce0ef650afb1e51f39c31dce5fd74189c70639e7b",
+      "channelStdDev": [
+        104.976,
+        103.205,
+        102.128
+      ]
+    },
+    {
+      "file": "screenshots/comparison/narrow/02-vape-nicotine-division-iter05-vs-iter05-1.png",
+      "width": 770,
+      "height": 830,
+      "sha256": "4bfaab8fc8117cd7b219f76cbd21951108a966afb097641e94f6b9db1d47f895",
+      "channelStdDev": [
+        70.461,
+        69.274,
+        67.468
+      ]
+    },
+    {
+      "file": "screenshots/comparison/narrow/03-shared-category-iter05-vs-iter05-1.png",
+      "width": 770,
+      "height": 830,
+      "sha256": "267d8443569c6d9838966fdb0a609263d3bf6fb3499b7479b4acbb83ba5ecdca",
+      "channelStdDev": [
+        75.805,
+        75.296,
+        74.502
+      ]
+    },
+    {
+      "file": "screenshots/comparison/narrow/04-universal-pdp-iter05-vs-iter05-1.png",
+      "width": 770,
+      "height": 830,
+      "sha256": "76e411a29937e0fbdaa47d03e7a1775d57b9d0513c3f367534496a344a8b6826",
+      "channelStdDev": [
+        76.033,
+        75.407,
+        74.47
+      ]
+    },
+    {
+      "file": "screenshots/comparison/narrow/06-quick-cart-iter05-vs-iter05-1.png",
+      "width": 770,
+      "height": 830,
+      "sha256": "7048029300eb7a61edea317f83051338f4f74e63979b308244b01109756c6853",
+      "channelStdDev": [
+        73.796,
+        73.336,
+        72.614
+      ]
+    },
+    {
+      "file": "screenshots/comparison/wide/01-home-iter05-vs-iter05-1.png",
+      "width": 1410,
+      "height": 830,
+      "sha256": "e9521722cbd8b1084886dcecb5c53ab12b90d40a500dcfbaccd19a5b65000991",
+      "channelStdDev": [
+        107.787,
+        106.098,
+        103.692
+      ]
+    },
+    {
+      "file": "screenshots/comparison/wide/02-vape-nicotine-division-iter05-vs-iter05-1.png",
+      "width": 1410,
+      "height": 830,
+      "sha256": "baeeec17becb0bba25dded5a18eafb74d464b8d2f6cf7a52d37519ad4b080391",
+      "channelStdDev": [
+        67.445,
+        66.328,
+        64.62
+      ]
+    },
+    {
+      "file": "screenshots/comparison/wide/03-shared-category-iter05-vs-iter05-1.png",
+      "width": 1410,
+      "height": 830,
+      "sha256": "2fe29f1319a434a2128ee2ec855a8219add78ab3dd607b35fa5511bc41a9fa65",
+      "channelStdDev": [
+        65.211,
+        64.685,
+        63.892
+      ]
+    },
+    {
+      "file": "screenshots/comparison/wide/04-universal-pdp-iter05-vs-iter05-1.png",
+      "width": 1410,
+      "height": 830,
+      "sha256": "e89fcd4ad8a293880d5608c14661a3678e7279f2020044c6c98ff65382fccbcc",
+      "channelStdDev": [
+        64.776,
+        64.354,
+        63.74
+      ]
+    },
+    {
+      "file": "screenshots/comparison/wide/06-quick-cart-iter05-vs-iter05-1.png",
+      "width": 1410,
+      "height": 830,
+      "sha256": "bbf93d61b2d32a37ec79bd3acd9aaf3aae3f73c670129d57045d8de47b763db4",
+      "channelStdDev": [
+        60.67,
+        59.873,
+        58.787
+      ]
+    },
+    {
+      "file": "screenshots/narrow/01-home-390x844.png",
+      "width": 390,
+      "height": 6369,
+      "sha256": "a82db0ce6a79eb653cc11a169b88e4d2a6bbec9c7b0ee060f62a6710a83d2f42",
+      "channelStdDev": [
+        95.801,
+        94.312,
+        91.933
+      ]
+    },
+    {
+      "file": "screenshots/narrow/02-vape-nicotine-division-390x844.png",
+      "width": 390,
+      "height": 5827,
+      "sha256": "77417a2e4faac4aad6dfca40b0b508c929e4a360caa04c5a179af2b2a5a96f93",
+      "channelStdDev": [
+        104.162,
+        102.352,
+        99.675
+      ]
+    },
+    {
+      "file": "screenshots/narrow/03-shared-category-390x844.png",
+      "width": 390,
+      "height": 7575,
+      "sha256": "c7d9d39bfb7aee3012a5e0db101c7acbbe038a36ade2b785299acee27884780f",
+      "channelStdDev": [
+        80.22,
+        79.446,
+        78.306
+      ]
+    },
+    {
+      "file": "screenshots/narrow/04-universal-pdp-390x844.png",
+      "width": 390,
+      "height": 3782,
+      "sha256": "d38bc58a16121d2ec46e6b13d5b3fb017a9e6bcae88af99f96306f1b5089c26b",
+      "channelStdDev": [
+        93.813,
+        92.809,
+        91.311
+      ]
+    },
+    {
+      "file": "screenshots/narrow/05-fitted-component-pdp-390x844.png",
+      "width": 390,
+      "height": 3315,
+      "sha256": "ebf0fa4f40c0d0751cc252a1ed3e43975eec85b0920fa7784c7d7a246913abe7",
+      "channelStdDev": [
+        94.61,
+        93.783,
+        92.546
+      ]
+    },
+    {
+      "file": "screenshots/narrow/06-quick-cart-390x844.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "aa6734f9f42e4e68626ba09b84a74e5ece60fcb218aed7897206884278489dde",
+      "channelStdDev": [
+        76.351,
+        75.822,
+        74.98
+      ]
+    },
+    {
+      "file": "screenshots/narrow/07-full-cart-390x844.png",
+      "width": 390,
+      "height": 2993,
+      "sha256": "2a925c182691a4b4d68227726b1826bde73eabfc9aa30bae5b2f94f796601a15",
+      "channelStdDev": [
+        98.519,
+        97.739,
+        96.559
+      ]
+    },
+    {
+      "file": "screenshots/narrow/08-thca-division-390x844.png",
+      "width": 390,
+      "height": 4497,
+      "sha256": "c1d17e90aa7a1d00bfadc3adad05b1d0a52fa360b501de29afafbc712c982f39",
+      "channelStdDev": [
+        82.947,
+        81.287,
+        78.816
+      ]
+    },
+    {
+      "file": "screenshots/narrow/09-glass-accessories-division-390x844.png",
+      "width": 390,
+      "height": 4430,
+      "sha256": "afc599c19d056b344310c62755695cc4e0d541d1a9786438671b7cd3645cd23c",
+      "channelStdDev": [
+        83.189,
+        81.585,
+        79.195
+      ]
+    },
+    {
+      "file": "screenshots/narrow/10-search-390x844.png",
+      "width": 390,
+      "height": 3432,
+      "sha256": "6b1a5a35027f6441fac040898fd38d98fbbbe268dbc15e239131890239aec632",
+      "channelStdDev": [
+        90.824,
+        89.286,
+        87.01
+      ]
+    },
+    {
+      "file": "screenshots/overview/all-ten-default-openings.png",
+      "width": 1570,
+      "height": 790,
+      "sha256": "3fc1f16f9963c4ff6494f9f7c66b3143a36ca25683e8d2a67af626ed1a1c1634",
+      "channelStdDev": [
+        77.695,
+        76.769,
+        75.345
+      ]
+    },
+    {
+      "file": "screenshots/overview/all-ten-grayscale-openings.png",
+      "width": 1570,
+      "height": 790,
+      "sha256": "5c6214921fc4bb7779bb529ecbef4d66696d81a406a73c5a1e7499928acb25c0",
+      "channelStdDev": [
+        76.901,
+        76.769,
+        76.998
+      ]
+    },
+    {
+      "file": "screenshots/overview/category-assortment-balance.png",
+      "width": 960,
+      "height": 890,
+      "sha256": "7b43c0ee9ea0712d23c21e745a9f6df3fc56df3dda6f13214cf79e2affe89e1a",
+      "channelStdDev": [
+        52.402,
+        51.653,
+        50.535
+      ]
+    },
+    {
+      "file": "screenshots/overview/home-anti-generic-comparison.png",
+      "width": 1360,
+      "height": 490,
+      "sha256": "66785682b1fcdee9082556939f48944981c73b35d5a6644d4d45ebc61061ad2d",
+      "channelStdDev": [
+        99.548,
+        98.207,
+        96.315
+      ]
+    },
+    {
+      "file": "screenshots/overview/home-anti-generic-narrow.png",
+      "width": 1080,
+      "height": 590,
+      "sha256": "1003008bf4c0a9cb3c03aa59e5c17e8bef5f0a445294e07d5521d19d3f09b5fb",
+      "channelStdDev": [
+        100.435,
+        98.853,
+        97.673
+      ]
+    },
+    {
+      "file": "screenshots/overview/pdp-cart-continuity.png",
+      "width": 1300,
+      "height": 830,
+      "sha256": "c8bdd52ca598a804e9e953da417a5ddff7caeb8585b45aa9d437324ebbe8264d",
+      "channelStdDev": [
+        69.36,
+        68.578,
+        67.432
+      ]
+    },
+    {
+      "file": "screenshots/overview/route-destination-map.png",
+      "width": 1300,
+      "height": 490,
+      "sha256": "764b3c34bafe0f4a154457247ac571b406397243a5458fe7ff7be17489870e0b",
+      "channelStdDev": [
+        67.657,
+        66.556,
+        64.912
+      ]
+    },
+    {
+      "file": "screenshots/overview/typography-candidate-comparison.png",
+      "width": 1020,
+      "height": 790,
+      "sha256": "b82d7fbb6d9a320b0221cfd5209dc0913c50852bacf89f88a8047763f08f1a99",
+      "channelStdDev": [
+        58.318,
+        57.508,
+        56.264
+      ]
+    },
+    {
+      "file": "screenshots/states/fitted-pdp-expanded-390x844.png",
+      "width": 390,
+      "height": 4618,
+      "sha256": "a903f2f0a0e1366d238e6a6ec7168e558b44915a6b656d392c6b8a5e58f795df",
+      "channelStdDev": [
+        86.126,
+        85.397,
+        84.311
+      ]
+    },
+    {
+      "file": "screenshots/states/full-cart-secondary-expanded-390x844.png",
+      "width": 390,
+      "height": 3166,
+      "sha256": "ac51c332b0b8a7a50b11085cf3d8752b169360010b86da2d202916f4e9e36f53",
+      "channelStdDev": [
+        96.781,
+        96.015,
+        94.857
+      ]
+    },
+    {
+      "file": "screenshots/states/home-opening-1440x900.png",
+      "width": 1440,
+      "height": 780,
+      "sha256": "a59c4b62bdeecc3ac8766c3f491d5147c143a72459fb991938021b6ff573c465",
+      "channelStdDev": [
+        99.477,
+        97.324,
+        96.7
+      ]
+    },
+    {
+      "file": "screenshots/states/home-opening-390x844.png",
+      "width": 390,
+      "height": 932,
+      "sha256": "01eb9e8031d11e7a431fd6ec105b77830430d4fa4a1efadaf55fae8c8334e433",
+      "channelStdDev": [
+        111.367,
+        109.755,
+        108.941
+      ]
+    },
+    {
+      "file": "screenshots/states/mobile-navigation-closed-390x844.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "25ad96264cb2f9dc6eb742887c5f9cd7db07227b5972dd81a39580476f371370",
+      "channelStdDev": [
+        106.212,
+        104.378,
+        103.927
+      ]
+    },
+    {
+      "file": "screenshots/states/mobile-navigation-open-320x760.png",
+      "width": 320,
+      "height": 760,
+      "sha256": "12f78574b58fe562ad48f03e91ed20bc3a0c3b7eb1615ba8aed983d2aae85a6c",
+      "channelStdDev": [
+        114.485,
+        113.817,
+        112.655
+      ]
+    },
+    {
+      "file": "screenshots/states/mobile-navigation-open-390x844.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "cb13ec2b987fe870680df85193ba31f17b44a36243daeb80d1c830a2dcb777df",
+      "channelStdDev": [
+        114.411,
+        113.843,
+        112.688
+      ]
+    },
+    {
+      "file": "screenshots/states/typography-correction-1440x900.png",
+      "width": 1440,
+      "height": 1614,
+      "sha256": "91e2fa2dacbacde9ed37de5486e508397ad23ac0c080f00ceae759d5b934f6dd",
+      "channelStdDev": [
+        60.342,
+        59.605,
+        58.487
+      ]
+    },
+    {
+      "file": "screenshots/states/universal-pdp-expanded-390x844.png",
+      "width": 390,
+      "height": 4987,
+      "sha256": "0a96d80061ba264b92f8d265e652c3fe96dc91891d7a943cdd5fcf4e305d39bc",
+      "channelStdDev": [
+        85.87,
+        84.828,
+        83.27
+      ]
+    },
+    {
+      "file": "screenshots/states/whole-house-search-1440x900.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "140fc639b42381a81110591db5df1586cde32bf08c2677f2989b8cab1b910819",
+      "channelStdDev": [
+        60.636,
+        60.133,
+        59.353
+      ]
+    },
+    {
+      "file": "screenshots/states/whole-house-search-390x844.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "c3bfc2e441f6db1591f6e52562a095b0a0868672813109624b4c788cbfb8a91d",
+      "channelStdDev": [
+        81.453,
+        80.664,
+        79.452
+      ]
+    },
+    {
+      "file": "screenshots/wide/01-home-1440x900.png",
+      "width": 1440,
+      "height": 4270,
+      "sha256": "1073ca6c6b75962ff4adaa9fcc485071169cd2bae2f45a0679641ffe6c1364e5",
+      "channelStdDev": [
+        95.939,
+        94.514,
+        92.15
+      ]
+    },
+    {
+      "file": "screenshots/wide/02-vape-nicotine-division-1440x900.png",
+      "width": 1440,
+      "height": 4127,
+      "sha256": "ffbad8c38ff2d4c04c5523df9a6d9261ff375c5991d2dcc9c69641694e12449d",
+      "channelStdDev": [
+        100.715,
+        98.976,
+        96.385
+      ]
+    },
+    {
+      "file": "screenshots/wide/03-shared-category-1440x900.png",
+      "width": 1440,
+      "height": 4474,
+      "sha256": "eadbd058309150b95c4b42ed27df81665ffbda73b61d577c9907f3a5e7c64133",
+      "channelStdDev": [
+        73.176,
+        72.444,
+        71.382
+      ]
+    },
+    {
+      "file": "screenshots/wide/04-universal-pdp-1440x900.png",
+      "width": 1440,
+      "height": 2236,
+      "sha256": "4e1221af6a3b6851f8f8888284f49e59fe8a659df56c0e09517057970f68fff4",
+      "channelStdDev": [
+        87.362,
+        86.475,
+        85.149
+      ]
+    },
+    {
+      "file": "screenshots/wide/05-fitted-component-pdp-1440x900.png",
+      "width": 1440,
+      "height": 2122,
+      "sha256": "b6334d2b7f99b51eebf9b9af5f17c17f3c58d39159ab49b4f4241a4e620c06ac",
+      "channelStdDev": [
+        85.374,
+        84.69,
+        83.657
+      ]
+    },
+    {
+      "file": "screenshots/wide/06-quick-cart-1440x900.png",
+      "width": 1440,
+      "height": 900,
+      "sha256": "e4dde2783ac33eb37144f17f3f8e63787fa05fbc222f1507804691963a68f807",
+      "channelStdDev": [
+        53.944,
+        53.638,
+        53.232
+      ]
+    },
+    {
+      "file": "screenshots/wide/07-full-cart-1440x900.png",
+      "width": 1440,
+      "height": 1921,
+      "sha256": "4368606b977c4dfb4d9b5dc579f2a03ced4a514b6fd2ffe330f46f259986a060",
+      "channelStdDev": [
+        88.02,
+        87.327,
+        86.268
+      ]
+    },
+    {
+      "file": "screenshots/wide/08-thca-division-1440x900.png",
+      "width": 1440,
+      "height": 2807,
+      "sha256": "9dc29ddc665124608a365c71e0e84824af689f0f8cd4bc2bd1e7547019d11bc8",
+      "channelStdDev": [
+        76.076,
+        74.575,
+        72.343
+      ]
+    },
+    {
+      "file": "screenshots/wide/09-glass-accessories-division-1440x900.png",
+      "width": 1440,
+      "height": 2824,
+      "sha256": "fafe060b6ea0945d3e17434031aad57e0cd423a2d812edc12e317d6f310a5758",
+      "channelStdDev": [
+        75.548,
+        74.118,
+        71.988
+      ]
+    },
+    {
+      "file": "screenshots/wide/10-search-1440x900.png",
+      "width": 1440,
+      "height": 1964,
+      "sha256": "558979559c3a4b7348b05666f2059d1fee0a27216abbb0eeab123aeb83ba1529",
+      "channelStdDev": [
+        83.836,
+        82.576,
+        80.722
+      ]
+    }
+  ]
+}

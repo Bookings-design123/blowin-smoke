@@ -1,0 +1,2030 @@
+{
+  "engine": "Headless Google Chrome via Playwright",
+  "package": "pressure-proof-constructed-signal-iteration-05-1",
+  "capturedAt": "2026-08-12T13:59:27.547Z",
+  "core": [
+    {
+      "surface": "01-home",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "scrollHeight": 4270,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 3,
+        "minimumHeight": 49,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "600",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "02-vape-nicotine-division",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "scrollHeight": 4127,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 3,
+        "minimumHeight": 49,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "03-shared-category",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "scrollHeight": 4474,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 8,
+        "minimumHeight": 46,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "04-universal-pdp",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "scrollHeight": 2236,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 9,
+        "minimumHeight": 46,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [
+        "none"
+      ],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "05-fitted-component-pdp",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "scrollHeight": 2122,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 8,
+        "minimumHeight": 49,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [
+        "none"
+      ],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "06-quick-cart",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "scrollHeight": 900,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 5,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "07-full-cart",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "scrollHeight": 1921,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 1,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 17,
+        "minimumHeight": 49,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [
+        "none",
+        "none",
+        "none"
+      ],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "08-thca-division",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "scrollHeight": 2807,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 2,
+        "minimumHeight": 49,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "09-glass-accessories-division",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "scrollHeight": 2824,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 2,
+        "minimumHeight": 49,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "10-search",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "scrollHeight": 1964,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 2,
+        "minimumHeight": 48,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "01-home",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 6369,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 4,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "600",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "02-vape-nicotine-division",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 5827,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 4,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "03-shared-category",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 7575,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 9,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "04-universal-pdp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 3782,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 10,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [
+        "none"
+      ],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "05-fitted-component-pdp",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 3315,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 9,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [
+        "none"
+      ],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "06-quick-cart",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 844,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 6,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "07-full-cart",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 2993,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 1,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 18,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [
+        "none",
+        "none",
+        "none"
+      ],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "08-thca-division",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 4497,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 3,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "09-glass-accessories-division",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 4430,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 3,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "10-search",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 3432,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 3,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "01-home",
+      "viewport": {
+        "width": 320,
+        "height": 760
+      },
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "scrollHeight": 6543,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 4,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "600",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "02-vape-nicotine-division",
+      "viewport": {
+        "width": 320,
+        "height": 760
+      },
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "scrollHeight": 6110,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 4,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "03-shared-category",
+      "viewport": {
+        "width": 320,
+        "height": 760
+      },
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "scrollHeight": 7695,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 9,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "04-universal-pdp",
+      "viewport": {
+        "width": 320,
+        "height": 760
+      },
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "scrollHeight": 3969,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 10,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [
+        "none"
+      ],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "05-fitted-component-pdp",
+      "viewport": {
+        "width": 320,
+        "height": 760
+      },
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "scrollHeight": 3436,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 9,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [
+        "none"
+      ],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "06-quick-cart",
+      "viewport": {
+        "width": 320,
+        "height": 760
+      },
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "scrollHeight": 760,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 6,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "07-full-cart",
+      "viewport": {
+        "width": 320,
+        "height": 760
+      },
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "scrollHeight": 3126,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 1,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 18,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [
+        "none",
+        "none",
+        "none"
+      ],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "08-thca-division",
+      "viewport": {
+        "width": 320,
+        "height": 760
+      },
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "scrollHeight": 4510,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 3,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "09-glass-accessories-division",
+      "viewport": {
+        "width": 320,
+        "height": 760
+      },
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "scrollHeight": 4489,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 3,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "10-search",
+      "viewport": {
+        "width": 320,
+        "height": 760
+      },
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "scrollHeight": 3464,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 3,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    }
+  ],
+  "intermediate": [
+    {
+      "surface": "01-home",
+      "viewport": {
+        "width": 1024,
+        "height": 900
+      },
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "scrollHeight": 3943,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 4,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "600",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "02-vape-nicotine-division",
+      "viewport": {
+        "width": 1024,
+        "height": 900
+      },
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "scrollHeight": 3673,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 4,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "03-shared-category",
+      "viewport": {
+        "width": 1024,
+        "height": 900
+      },
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "scrollHeight": 4453,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 9,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "04-universal-pdp",
+      "viewport": {
+        "width": 1024,
+        "height": 900
+      },
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "scrollHeight": 2740,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 10,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [
+        "none"
+      ],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "05-fitted-component-pdp",
+      "viewport": {
+        "width": 1024,
+        "height": 900
+      },
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "scrollHeight": 2497,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 9,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [
+        "none"
+      ],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "06-quick-cart",
+      "viewport": {
+        "width": 1024,
+        "height": 900
+      },
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "scrollHeight": 900,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 6,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "07-full-cart",
+      "viewport": {
+        "width": 1024,
+        "height": 900
+      },
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "scrollHeight": 1839,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 1,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 18,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [
+        "none",
+        "none",
+        "none"
+      ],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "08-thca-division",
+      "viewport": {
+        "width": 1024,
+        "height": 900
+      },
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "scrollHeight": 2415,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 3,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "09-glass-accessories-division",
+      "viewport": {
+        "width": 1024,
+        "height": 900
+      },
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "scrollHeight": 2489,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 3,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "10-search",
+      "viewport": {
+        "width": 1024,
+        "height": 900
+      },
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "scrollHeight": 1865,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 3,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "01-home",
+      "viewport": {
+        "width": 901,
+        "height": 900
+      },
+      "scrollWidth": 901,
+      "clientWidth": 901,
+      "scrollHeight": 3853,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 4,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "600",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "02-vape-nicotine-division",
+      "viewport": {
+        "width": 901,
+        "height": 900
+      },
+      "scrollWidth": 901,
+      "clientWidth": 901,
+      "scrollHeight": 3631,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 4,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "03-shared-category",
+      "viewport": {
+        "width": 901,
+        "height": 900
+      },
+      "scrollWidth": 901,
+      "clientWidth": 901,
+      "scrollHeight": 4366,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 9,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "04-universal-pdp",
+      "viewport": {
+        "width": 901,
+        "height": 900
+      },
+      "scrollWidth": 901,
+      "clientWidth": 901,
+      "scrollHeight": 2688,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 10,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [
+        "none"
+      ],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "05-fitted-component-pdp",
+      "viewport": {
+        "width": 901,
+        "height": 900
+      },
+      "scrollWidth": 901,
+      "clientWidth": 901,
+      "scrollHeight": 2495,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 9,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [
+        "none"
+      ],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "06-quick-cart",
+      "viewport": {
+        "width": 901,
+        "height": 900
+      },
+      "scrollWidth": 901,
+      "clientWidth": 901,
+      "scrollHeight": 900,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 6,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "07-full-cart",
+      "viewport": {
+        "width": 901,
+        "height": 900
+      },
+      "scrollWidth": 901,
+      "clientWidth": 901,
+      "scrollHeight": 1815,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 1,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 18,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [
+        "none",
+        "none",
+        "none"
+      ],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "08-thca-division",
+      "viewport": {
+        "width": 901,
+        "height": 900
+      },
+      "scrollWidth": 901,
+      "clientWidth": 901,
+      "scrollHeight": 2329,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 3,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "09-glass-accessories-division",
+      "viewport": {
+        "width": 901,
+        "height": 900
+      },
+      "scrollWidth": 901,
+      "clientWidth": 901,
+      "scrollHeight": 2488,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 3,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "surface": "10-search",
+      "viewport": {
+        "width": 901,
+        "height": 900
+      },
+      "scrollWidth": 901,
+      "clientWidth": 901,
+      "scrollHeight": 1835,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 3,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    }
+  ],
+  "states": [
+    {
+      "state": "mobile-navigation-closed",
+      "clipSelector": null,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 6369,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 4,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "600",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "state": "mobile-navigation-open",
+      "clipSelector": null,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 6369,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 1,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 4,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "600",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "state": "mobile-navigation-open",
+      "clipSelector": null,
+      "viewport": {
+        "width": 320,
+        "height": 760
+      },
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "scrollHeight": 6543,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 1,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 4,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "600",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "state": "universal-pdp-expanded",
+      "clipSelector": null,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 4987,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 4,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 10,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [
+        "none"
+      ],
+      "searchVisibleNamed": true
+    },
+    {
+      "state": "fitted-pdp-expanded",
+      "clipSelector": null,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 4618,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 5,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 9,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [
+        "none"
+      ],
+      "searchVisibleNamed": true
+    },
+    {
+      "state": "full-cart-secondary-expanded",
+      "clipSelector": null,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 3166,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 2,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 18,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [
+        "none",
+        "none",
+        "none"
+      ],
+      "searchVisibleNamed": true
+    },
+    {
+      "state": "home-opening",
+      "clipSelector": ".home-opening",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "scrollHeight": 4270,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 3,
+        "minimumHeight": 49,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "600",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "state": "home-opening",
+      "clipSelector": ".home-opening",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 6369,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 4,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "600",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "state": "whole-house-search",
+      "clipSelector": null,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "scrollHeight": 1964,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 2,
+        "minimumHeight": 48,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    },
+    {
+      "state": "whole-house-search",
+      "clipSelector": null,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "scrollHeight": 3432,
+      "h1Count": 1,
+      "noticeCount": 1,
+      "duplicateIds": [],
+      "brokenAria": [],
+      "defaultOpenDetails": 0,
+      "externalScripts": 0,
+      "externalAssets": 0,
+      "controls": {
+        "count": 3,
+        "minimumHeight": 44,
+        "below44": []
+      },
+      "weights": [
+        "400",
+        "700",
+        "800"
+      ],
+      "disabledDecorations": [],
+      "searchVisibleNamed": true
+    }
+  ],
+  "semantic": [
+    {
+      "surface": "01-home",
+      "globalChecks": {
+        "thca": true,
+        "glass": true,
+        "search": true
+      },
+      "current": [
+        "01-home.html"
+      ]
+    },
+    {
+      "surface": "02-vape-nicotine-division",
+      "globalChecks": {
+        "thca": true,
+        "glass": true,
+        "search": true
+      },
+      "current": [
+        "02-vape-nicotine-division.html",
+        "02-vape-nicotine-division.html",
+        "02-vape-nicotine-division.html"
+      ]
+    },
+    {
+      "surface": "03-shared-category",
+      "globalChecks": {
+        "thca": true,
+        "glass": true,
+        "search": true
+      },
+      "current": []
+    },
+    {
+      "surface": "04-universal-pdp",
+      "globalChecks": {
+        "thca": true,
+        "glass": true,
+        "search": true
+      },
+      "current": []
+    },
+    {
+      "surface": "05-fitted-component-pdp",
+      "globalChecks": {
+        "thca": true,
+        "glass": true,
+        "search": true
+      },
+      "current": []
+    },
+    {
+      "surface": "06-quick-cart",
+      "globalChecks": {
+        "thca": true,
+        "glass": true,
+        "search": true
+      },
+      "current": []
+    },
+    {
+      "surface": "07-full-cart",
+      "globalChecks": {
+        "thca": true,
+        "glass": true,
+        "search": true
+      },
+      "current": [
+        "07-full-cart.html"
+      ]
+    },
+    {
+      "surface": "08-thca-division",
+      "globalChecks": {
+        "thca": true,
+        "glass": true,
+        "search": true
+      },
+      "current": [
+        "08-thca-division.html",
+        "08-thca-division.html"
+      ]
+    },
+    {
+      "surface": "09-glass-accessories-division",
+      "globalChecks": {
+        "thca": true,
+        "glass": true,
+        "search": true
+      },
+      "current": [
+        "09-glass-accessories-division.html",
+        "09-glass-accessories-division.html"
+      ]
+    },
+    {
+      "surface": "10-search",
+      "globalChecks": {
+        "thca": true,
+        "glass": true,
+        "search": true
+      },
+      "current": [
+        "10-search.html"
+      ]
+    }
+  ],
+  "console": [],
+  "typography": [
+    {
+      "candidate": "archivo",
+      "declared": "Archivo, Arial Narrow, Arial, sans-serif",
+      "roles": [
+        {
+          "role": "home-display",
+          "computedFamily": "Archivo, Arial, \"Helvetica Neue\", sans-serif",
+          "computedWeight": "800",
+          "declaredWeight": "800"
+        },
+        {
+          "role": "home-body",
+          "computedFamily": "Archivo, Arial, \"Helvetica Neue\", sans-serif",
+          "computedWeight": "400",
+          "declaredWeight": "400"
+        }
+      ]
+    },
+    {
+      "candidate": "helvetica",
+      "declared": "Helvetica Neue, Helvetica, Arial, sans-serif",
+      "roles": [
+        {
+          "role": "home-display",
+          "computedFamily": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
+          "computedWeight": "800",
+          "declaredWeight": "800"
+        },
+        {
+          "role": "home-body",
+          "computedFamily": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
+          "computedWeight": "400",
+          "declaredWeight": "400"
+        }
+      ]
+    },
+    {
+      "candidate": "archivo",
+      "declared": null,
+      "roles": [
+        {
+          "role": "product-identity",
+          "computedFamily": "Archivo, Arial, \"Helvetica Neue\", sans-serif",
+          "computedWeight": "700",
+          "declaredWeight": "700"
+        },
+        {
+          "role": "option-label",
+          "computedFamily": "Archivo, Arial, \"Helvetica Neue\", sans-serif",
+          "computedWeight": "700",
+          "declaredWeight": "700"
+        },
+        {
+          "role": "price",
+          "computedFamily": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
+          "computedWeight": "700",
+          "declaredWeight": "700"
+        },
+        {
+          "role": "recovery",
+          "computedFamily": "Archivo, Arial, \"Helvetica Neue\", sans-serif",
+          "computedWeight": "400",
+          "declaredWeight": "400"
+        }
+      ]
+    },
+    {
+      "candidate": "helvetica",
+      "declared": null,
+      "roles": [
+        {
+          "role": "product-identity",
+          "computedFamily": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
+          "computedWeight": "700",
+          "declaredWeight": "700"
+        },
+        {
+          "role": "option-label",
+          "computedFamily": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
+          "computedWeight": "700",
+          "declaredWeight": "700"
+        },
+        {
+          "role": "price",
+          "computedFamily": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
+          "computedWeight": "700",
+          "declaredWeight": "700"
+        },
+        {
+          "role": "recovery",
+          "computedFamily": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
+          "computedWeight": "400",
+          "declaredWeight": "400"
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "pass": true,
+    "violations": []
+  }
+}
