@@ -1,59 +1,62 @@
 # Blowin' Smoke — Launch Scope Candidate
 
-**Status:** Proposed boundary for owner review  
-**Authority:** Scope recommendation only; unresolved business and compliance policy is not decided here
+**Status:** Proposed MVP boundary using settled owner direction  
+**Authority:** Scope recommendation only; unresolved business, operations, compliance, and provider decisions remain open
 
 ## Boundary principle
 
-The MVP should be the smallest truthful, purchasable expression of **one house with three expert divisions**. `MVP REQUIRED` means the capability is required if the intended storefront launches; it does not mean its real data or policy is currently ready. A product family is instantiated only when an approved catalog contains that role. Empty divisions, synthetic merchandise, and unsupported claims must not be published to simulate completeness.
+The MVP is the smallest truthful, purchasable expression of one house with three expert divisions. THCA, Vape & Nicotine, and Glass & Accessories are all intended for launch. The launch date may move until each division has an authoritative, supportable assortment; no empty division, synthetic merchandise, or unsupported claim may be published to simulate completeness.
 
-The owner must decide whether public launch requires all three divisions at once or whether the launch date moves until each division has an authoritative, supportable assortment. This document does not quietly redefine the three-division promise.
+## Settled operating direction
+
+- Ship nationwide only where the exact customer, product, destination, and fulfillment method are legally eligible.
+- Offer local pickup only in York, Pennsylvania.
+- Offer local delivery only in York, Pennsylvania.
+- Purchase and hold owned inventory; dropshipping is not the default operating model.
+- Require age verification.
+- No supplier account, physical inventory, payment processor, age-verification provider, or final support model currently exists.
 
 ## 1. MVP REQUIRED
 
-| Feature | Why required for MVP | Repository support | Decision remaining with owner | Technical or operational dependency |
-|---|---|---|---|---|
-| Home | Establishes the independent house and orients customers to the three divisions without becoming a catalog dump. | `docs/constitution/01-brand-philosophy.md`; `docs/system/02-information-architecture-page-system.md`; `docs/system/04-page-by-page-architecture-specifications.md` | Final approved proposition, editorial content, and whether all divisions launch simultaneously | Approved content, production brand assets, real division availability |
-| Three division landings | Each domain needs its own customer jobs and evidence vocabulary while remaining one house. | `docs/system/01-master-design-commerce-system.md`; `docs/system/02-information-architecture-page-system.md` | Actual launch assortment and public availability per division | Approved catalog, taxonomy ownership, production media |
-| Category pages | Durable browse and comparison are necessary once a role has enough actual assortment; empty or thin routes are prohibited. | `docs/system/02-information-architecture-page-system.md`; `docs/system/04-page-by-page-architecture-specifications.md` | Exact categories, depth, filters, sort, and merchandising order | Normalized catalog coverage, search/index source, current price and availability |
-| Search | Supports known-item, need, education, and exact replacement discovery across one house. | `docs/system/01-master-design-commerce-system.md`; `docs/system/02-information-architecture-page-system.md` | Ranking ownership, aliases, zero-result recovery, and launch query scope | Search index, taxonomy, product and education records, verified relationships |
-| Universal PDP shell | Every sellable item needs exact identity, selected state, price basis, availability, blockers, recovery, and action. | `docs/system/03-data-model-catalog-schema.md`; `docs/system/04-page-by-page-architecture-specifications.md` | Final purchase-method and action policies | Real products, variants, media, price, inventory, eligibility, policy |
-| Specialized PDPs for stocked roles | THCA proof/eligibility, vape lifecycle/compatibility, and glass measurements/fit cannot be flattened into generic descriptions. | `docs/system/01-master-design-commerce-system.md`; `docs/system/04-page-by-page-architecture-specifications.md` | Which product families actually launch | Role-specific authoritative data and approved content |
-| Quick cart and full cart | Quick Cart confirms; Full Cart revalidates exact lines and resolves consequential issues before checkout. | `docs/system/01-master-design-commerce-system.md`; `docs/system/02-information-architecture-page-system.md`; `docs/system/06-high-fidelity-page-design-specifications.md` | Reservation, quantity, change-acknowledgment, and progression policies | Live variant, price, stock, eligibility, proof, compatibility/fit, and purchase-method services |
-| Payments | A commerce launch cannot complete orders without an approved lawful payment path. | `docs/system/01-master-design-commerce-system.md`; `docs/system/03-data-model-catalog-schema.md` | Provider, accepted methods, authorization/capture/refund/dispute model, restricted-product support | Merchant approval, finance ownership, payment and fraud services, refund integration |
-| Shipping and fulfillment | Customers need truthful eligibility, cost, method, and delivery expectations; THCA, nicotine, batteries, and fragile goods may need distinct handling. | `docs/system/01-master-design-commerce-system.md`; `docs/system/02-information-architecture-page-system.md` | Carriers, service areas, processing promises, packaging, restricted-product and fragile workflows | Inventory/fulfillment system, destination rules, rates, carrier integrations, order status |
-| Taxes | Accurate checkout totals and reporting are required; no tax rule is invented here. | `docs/system/06-high-fidelity-page-design-specifications.md` | Tax owner, nexus/treatment decisions, presentation, exemptions, provider | Qualified finance/tax input and tax calculation/reporting service |
-| Age qualification | Age is a separate governed input and cannot be inferred from destination or product state. | `docs/system/01-master-design-commerce-system.md`; `docs/system/03-data-model-catalog-schema.md` | Minimum age, verification method, retry/failure, privacy, retention, and product scope | Qualified compliance rules, privacy-safe qualification service, failure handling |
-| Destination and product eligibility | Availability must not imply eligibility. Unknown or service failure must not silently allow purchase. | `docs/system/01-master-design-commerce-system.md`; `docs/system/03-data-model-catalog-schema.md` | Jurisdictions, product/format/quantity restrictions, warnings, exceptions, effective dates | Versioned rule source, address context, service health state, cart and checkout enforcement |
-| THCA proof when THCA is stocked | Product/batch applicability and currentness are material purchase inputs; a generic “lab tested” statement is insufficient. | `docs/system/03-data-model-catalog-schema.md`; `docs/research/bay-smokes/04-research-closure-thca-commerce-decision.md` | Required tests, currency interval, claim language, archive/access rules | Real COAs, labs, batches, mappings, rights, review owner, accessible document service |
-| Electronic compatibility when material | A legitimate part can still be unusable with the customer's device; unknown cannot become compatible. | `docs/system/03-data-model-catalog-schema.md`; `docs/research/vapordna/03-research-closure-compatibility-decision.md` | Validation method, review interval, coverage threshold, support escalation | Manufacturer records or documented validation, exact endpoint variants, relationship service |
-| Physical fit when material | Joint size alone does not establish fit; gender/type, angle, length, orientation, clearance, tolerance, and intermediaries may matter. | `docs/system/03-data-model-catalog-schema.md`; `docs/research/smoke-cartel/03-research-closure-physical-compatibility-decision.md` | Measurement standard, tolerances, test authority, coverage threshold | Maker/manufacturer data, receiving measurements, pair tests, fit relationship service |
-| Customer support | Unknowns, proof, compatibility, fit, damage, order, and policy issues need context-preserving human recovery. | `docs/system/01-master-design-commerce-system.md`; `docs/system/02-information-architecture-page-system.md` | Channels, hours, response commitments, case authority, warranty/returns authority | Staff, case system, consented context transfer, attachments, correction workflow |
-| Policy, privacy, returns, and damage content | Canonical, current terms are necessary at the point of consequence; competitor terms and prototype copy have no authority. | `docs/system/02-information-architecture-page-system.md`; `docs/system/03-data-model-catalog-schema.md` | Actual policies, effective dates, responsible owners, exceptions, rights and retention | Qualified policy review, content ownership, versioning, support/RMA workflow |
+| Feature | Why required | Settled direction | Remaining dependency |
+|---|---|---|---|
+| Home | Orients customers to one house and three divisions | All three divisions are intended for launch | Approved proposition, real division availability, brand and editorial assets |
+| Three division landings | Each domain needs its own customer jobs and evidence vocabulary | THCA, Vape & Nicotine, and Glass & Accessories are peers | Authoritative assortment, taxonomy ownership, production media |
+| Category pages and Search | Support browse, known-item, need, education, and replacement discovery | Whole-house discovery remains required | Catalog/index source, ranking, aliases, filters, sort, recovery |
+| Universal and specialized PDPs | Exact identity, options, price, availability, eligibility, proof/fit, and action must stay synchronized | Role-specific product truth remains required | Real products, variants, media, proof, relationships, policies |
+| Quick Cart and Full Cart | Quick Cart confirms/routes; Full Cart revalidates composed order state | Existing page responsibilities are settled | Live variant, price, inventory, eligibility, proof, relationship, and fulfillment services |
+| Payments | Required to complete lawful orders | No processor selected | Merchant feasibility, underwriting, methods, capture/refund/dispute/fraud lifecycle |
+| Taxes | Required for accurate totals and reporting | No provider or rule set selected | Qualified tax decision, nexus/treatment, calculation/reporting requirements |
+| Age qualification and eligibility | Availability cannot imply eligibility | Age verification is required; nationwide shipping is only where eligible | Provider, qualified rules, privacy, failure behavior, versioning, enforcement |
+| Owned-inventory operations | Purchase-and-hold inventory requires exact stock truth | Inventory will be owned | Receiving, SKU/variant quantities, reservations, allocation, quarantine, corrections, restock |
+| Shipping, York pickup, and York delivery | Fulfillment method changes eligibility, cost, allocation, and customer expectations | Modes and geographic boundaries are settled | Carriers, rates, service levels, delivery radius, release/verification procedures, packaging |
+| THCA proof | Exact product/variant/batch evidence is material when THCA is stocked | THCA division is intended for launch | Real COAs, batch mapping, currentness rule, rights, claims review |
+| Electronic compatibility | Exact parts can be legitimate but unusable | Vape replacement lifecycle is part of the house | Manufacturer/supplier records, exact endpoints, validation, update ownership |
+| Physical fit | Nominal size alone cannot establish usability | Fitted Glass & Accessories roles are intended | Measurements, tolerances, pair tests, receiving method, fit evidence |
+| Customer support and policies | Unknowns, damage, orders, returns, and corrections require human recovery | Final model is not selected | Channels, hours, staffing, case system, authority, original policies, escalation |
+| Privacy and consent | Qualification, support, account, notifications, and analytics create data obligations | No final policy exists | Qualified data inventory, purposes, processors, retention, access/deletion, consent |
 
 ## 2. MVP CONDITIONAL
 
-| Feature | Why conditional | Repository support | Decision remaining with owner | Dependency / condition for inclusion |
-|---|---|---|---|---|
-| Account | Order retrieval and consent control are valuable, but speculative profiles and personalization are not required to place a truthful order. | `docs/system/02-information-architecture-page-system.md` | Guest checkout, required identity, initial account depth, retention and deletion | Identity platform, privacy policy, order service, support workflow; preserve order confirmation/retrieval even if full account defers |
-| Dedicated compatibility/fit resolver | Inline state is required for applicable products; a separate resolver earns MVP scope only if verified relationship coverage and support capacity are sufficient. | `docs/system/02-information-architecture-page-system.md` | Coverage threshold, inputs, launch surface, escalation ownership | Normalized endpoint corpus, validation workflow, search integration, support |
-| Notifications | Exact-variant restock notification may help recovery, but only with explicit purpose, consent, channel, expiry, and unsubscribe behavior. | `docs/system/01-master-design-commerce-system.md`; `docs/system/08-static-visual-prototype-iteration-evaluation.md` | Launch channel, authorization, contact use, frequency, expiry | Consent ledger, communication provider, inventory events, error/deduplication handling |
-| Bounded promotions | A simple truthful promotion may launch if its basis, dates, scope, precedence, and owner are approved; promotions are not needed to prove commerce. | `docs/system/01-master-design-commerce-system.md`; `docs/system/03-data-model-catalog-schema.md` | Whether any launch promotion exists and its terms | Price source, promotion tooling, finance/merchandising approval, cart revalidation |
-| Explicit kits or bundles | Include only when exact members, quantities, separate requirements, price basis, availability, and compatibility/fit are verified. | `docs/system/03-data-model-catalog-schema.md` | Whether an approved kit/bundle belongs in launch assortment | Bundle identity, line/member inventory, relationship validation, fulfillment and returns policy |
-| Reviews | Can launch only with a source, verification, moderation, rights, privacy, contextual schema, and operations capacity; facts remain primary. | `docs/system/01-master-design-commerce-system.md`; `docs/system/04-page-by-page-architecture-specifications.md` | Launch value, source, moderation standard, incentives, retention | Review platform/source, moderation, consent/privacy, product/variant context |
+| Feature | Condition |
+|---|---|
+| Full customer account | Include only when identity, privacy, retention, and support value justify it; guest/order retrieval may be sufficient initially |
+| Dedicated compatibility/fit resolver | Include only when verified relationship coverage and support capacity are adequate |
+| Restock notifications | Include only with exact-variant scope, purpose-specific consent, expiry, unsubscribe, and inventory events |
+| Bounded promotions | Include only after price authority, terms, dates, stacking, and cart revalidation exist |
+| Explicit kits or bundles | Include only when exact members, requirements, price basis, availability, and relationships are verified |
+| Reviews | Include only with a lawful source, verification, moderation, rights, privacy, and operations capacity |
 
 ## 3. DEFER UNTIL AFTER LAUNCH
 
-| Feature | Why deferred | Repository support | Owner decision later | Future dependency |
-|---|---|---|---|---|
-| Memberships / loyalty | Terms, economics, identity, consent, service load, and customer value are absent; competitor programs are not a requirement. | `docs/system/01-master-design-commerce-system.md`; `docs/system/03-data-model-catalog-schema.md` | Value exchange, eligibility, benefits, expiry, data use | Stable account, order, promotion, privacy, and support systems |
-| Subscriptions | Recurring restricted-product commerce adds eligibility, payment, inventory, substitution, notification, cancellation, and replenishment risk before the core is proven. | `docs/system/01-master-design-commerce-system.md` | Eligible roles, cadence, cancellation, substitution, failed-payment policy | Mature catalog, repeat-purchase evidence, recurring payments, live eligibility/inventory, consent |
-| Saved device or glass-piece profiles | Useful only after relationship accuracy, privacy, correction, and customer value are proven. | `docs/system/01-master-design-commerce-system.md`; `docs/system/02-information-architecture-page-system.md` | Whether persistent ownership context is justified | Account/consent, verified relationships, edit/delete controls, support |
-| Personalized discovery and automated matching | The repository requires a safe non-personalized baseline and authoritative inputs before automated confidence. | `docs/system/01-master-design-commerce-system.md` | Customer value, risk tolerance, measurement, explainability | First-party data, privacy approval, mature catalog/relationships, evaluation |
-| Dynamic bundles and proactive replenishment | These amplify errors if price, stock, fit, lifecycle, or eligibility truth is immature. | `docs/system/01-master-design-commerce-system.md`; `docs/system/03-data-model-catalog-schema.md` | Business case and guardrails | Mature relationship graph, lifecycle data, live commerce state, consent |
+- Memberships and loyalty
+- Subscriptions
+- Persistent owned-device or owned-glass profiles
+- Personalized discovery and automated matching
+- Dynamic bundles and proactive replenishment
 
 ## Proposed MVP boundary
 
-The practical MVP is a **one-house, three-division, search-to-PDP-to-cart-to-order system** with role-specific truth, current commerce state, point-of-decision eligibility/proof/fit, canonical policy, and human recovery. It excludes memberships, subscriptions, persistent owned-product profiles, personalization, automated matching, and dynamic bundles. Reviews, notifications, promotions, explicit bundles, a full account, and dedicated fit resolvers enter only when their authoritative inputs and operating owners exist.
+A one-house, three-division, search-to-PDP-to-cart-to-order system with role-specific product truth, owned-stock availability, nationwide-where-eligible shipping, York pickup, York local delivery, point-of-decision eligibility/proof/fit, canonical policies, and human recovery.
 
-This boundary cannot be approved for production until a real launch catalog and the blocking commerce, operations, compliance, privacy, and systems-of-record decisions are supplied.
+Vendor-neutral technical architecture may define those contracts now. Final provider selection, production coding, catalog population, checkout activation, and launch remain blocked.

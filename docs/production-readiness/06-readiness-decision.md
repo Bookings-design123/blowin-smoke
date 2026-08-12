@@ -2,86 +2,110 @@
 
 ## Decision
 
-# NOT READY FOR TECHNICAL ARCHITECTURE
+# CONDITIONALLY READY FOR VENDOR-NEUTRAL TECHNICAL ARCHITECTURE
 
-This decision concerns the next production specification phase only. It does not reopen design research, alter the closed static architecture, or authorize implementation.
+This decision authorizes only the next specification phase described below. It does not authorize final provider selection, production implementation, deployment, catalog population, checkout activation, or launch.
 
-## Decision rationale
+## Readiness classifications
 
-Blowin' Smoke has a strong governing foundation: brand philosophy, page responsibilities, product-role schemas, state precedence, provenance, proof, compatibility, fit, accessibility, cart behavior, and uncertainty handling are already specified. What is absent is the authoritative truth that a production architecture must connect, govern, refresh, and enforce.
+| Phase | Status |
+|---|---|
+| Brand, commerce, information, data, and page architecture | Complete as governing specifications |
+| Static customer-facing architecture | Closed |
+| Operating-model direction | Partially settled |
+| Vendor-neutral technical architecture | **Conditionally ready** |
+| Final commerce platform and provider selection | **Not ready** |
+| Production coding | **Not authorized** |
+| Launch | **Not ready** |
 
-The repository contains no approved cross-division catalog, stable SKU/variant records, supplier authorization, current price or inventory sources, real COA/batch mappings, verified electronic relationships, verified physical measurements/fit records, production product media, current operating policies, qualified eligibility rules, payment/tax decisions, or named systems of record. Eight Vape & Nicotine customer-intelligence leads are useful for intake testing, but none is a production catalog record, and no supported THCA or Glass candidate set exists.
+## Why vendor-neutral architecture may proceed
 
-Selecting platforms, service boundaries, integrations, identity/payment flows, eligibility enforcement, fulfillment, proof storage, relationship validation, or data refresh behavior now would encode guesses about architecture-shaping requirements.
+The repository and owner decisions are sufficient to define stable boundaries without pretending the missing suppliers, products, providers, policies, or rules are known. The next phase may specify:
+
+- system boundaries and responsibilities;
+- canonical contracts for product, variant, price, inventory, media, proof, compatibility, physical fit, eligibility, cart, order, fulfillment, support, privacy, and audit;
+- systems-of-record interfaces and ownership requirements;
+- state and event models;
+- receiving, reservation, shipping allocation, York pickup allocation, York delivery allocation, quarantine, correction, and restock events;
+- provenance, staleness, refresh, outage, retry, invalidation, and correction behavior;
+- provider-selection criteria and architecture decision records;
+- explicit vendor extension points and replaceable adapters;
+- failure-safe behavior when authoritative inputs are missing or unavailable.
+
+The architecture must remain provider-neutral and must not encode unverified laws, policies, products, prices, inventory, compatibility, fit, proof, or service promises.
+
+## Scope that remains prohibited
+
+The next phase may not:
+
+- select the final commerce platform;
+- select or integrate payment, age-verification, tax, carrier, eligibility, support, analytics, or inventory providers;
+- write production application code;
+- create live integrations or deployment infrastructure;
+- populate a real catalog;
+- activate search, account, cart, checkout, payments, notifications, or analytics;
+- make legal/compliance conclusions;
+- authorize launch.
+
+## Settled owner direction
+
+- Launch intent includes THCA, Vape & Nicotine, and Glass & Accessories.
+- Fulfillment includes nationwide shipping wherever eligible, York-only pickup, and York-only local delivery.
+- Inventory will be purchased and held by Blowin' Smoke; dropshipping is not the default.
+- No supplier accounts or physical inventory currently exist.
+- Age verification is required.
+- No payment processor or age-verification provider is selected.
+- Competitor policies will be benchmarked, but Blowin' Smoke will need original approved policies.
+- The owner believes a master logo file exists outside the repository; it remains unlocated and uninspected.
 
 ## Strongest verified inputs
 
-1. `docs/constitution/01-brand-philosophy.md` supplies a clear decision test: independence, substance, respect, cultural credibility, discovery, and performance.
-2. `docs/system/01-master-design-commerce-system.md` through `04-page-by-page-architecture-specifications.md` govern the one-house/three-division model, product roles, page jobs, state precedence, proof, compatibility, fit, cart, and support boundaries.
-3. `docs/system/05-visual-design-system.md`, `06-high-fidelity-page-design-specifications.md`, and the closed Iteration 05.1 package establish a coherent customer-facing design direction with explicit provisional and blocked states.
-4. The VaporDNA and Smoke Cartel closure decisions establish domain problems and authoritative-source discipline while reserving the solution for Blowin' Smoke.
-5. Customer intelligence identifies eight bounded Vape & Nicotine leads and explicitly states the sourcing, economics, compliance, availability, version, replacement, and support gates that remain.
+1. The governing system defines the one-house/three-division model, product roles, state precedence, provenance, proof, compatibility, fit, cart, support, and uncertainty boundaries.
+2. Iteration 05.1 closes the static customer-facing architecture.
+3. Owner decisions establish the intended launch divisions, fulfillment modes, owned-inventory model, and age-verification requirement.
+4. Customer intelligence supplies eight bounded Vape & Nicotine sourcing leads.
+5. Domain research defines the evidence problems for THCA proof, vape compatibility, and glass physical fit.
 
-## Most important missing inputs
+## Highest-priority blockers
 
-1. An owner-approved, supplier-supported pilot catalog across intended launch divisions, with exact product, variant/SKU, contents, specifications, and role.
-2. Named systems of record and owners for catalog, price, inventory, fulfillment, proof, compatibility/fit, policies, media, support, and corrections.
-3. Qualified age, destination, product-restriction, warning, proof-currentness, privacy, consent, and retention decisions.
-4. Payment/merchant feasibility, tax ownership, price/promotion authority, refund behavior, and checkout progression rules.
-5. Shipping, restricted-product fulfillment, returns/warranty, fragile damage, support staffing/authority, and service commitments.
-6. Rights-cleared production identity, typography, product media, editorial media, and exact asset-to-product assignments.
+1. No approved cross-division pilot catalog or supplier-backed SKU/variant truth.
+2. No wholesale/distributor accounts, costs, minimums, authenticity records, or inventory.
+3. No feasible approved merchant/payment path.
+4. No qualified, versioned age/destination/product/proof rule set or selected verification provider.
+5. No production product media, rights package, real COA mapping, compatibility corpus, or physical-fit corpus.
+6. No final shipping, York pickup/delivery, returns/damage, support, privacy, tax, or data-governance procedures.
 
-## Minimum decisions needed before technical architecture
+## Decisions that may remain open during vendor-neutral architecture
 
-The following must be recorded before a production technical-architecture phase starts:
+- Final vendor names and integration protocols.
+- Final assortment breadth beyond the pilot.
+- Exact category/filter/merchandising detail.
+- Full compatibility and fit coverage beyond the pilot, provided Unknown remains explicit.
+- Reviews, memberships, subscriptions, profiles, personalization, automated matching, dynamic bundles, and nonessential analytics, because they remain deferred or conditional.
 
-| Minimum decision | Required output |
-|---|---|
-| Launch and pilot catalog authority | Owner-approved cross-division pilot records, exact variants/SKUs, supplier/manufacturer sources, and explicit division launch boundary |
-| Systems-of-record ownership | Named owner and source for catalog, price, inventory, fulfillment, proof, relationships, policies, media, support and corrections |
-| Compliance rule boundary | Qualified scope for age, destination, product restrictions/warnings, proof currentness and failure behavior, with effective/version ownership |
-| Commerce/finance boundary | Feasible payment/merchant path, tax authority/service requirement, price/promotion source, refund lifecycle and checkout constraints |
-| Operations/support boundary | Fulfillment/shipping, returns/warranty, fragile damage, unavailable-product, support channels/staffing/authority and update responsibilities |
-| Privacy/data boundary | Purpose, consent, retention, processor, identity, support-attachment, notification and analytics rules sufficient to constrain service selection |
+## Media and typography
 
-These are not requests for finished legal prose or final UI copy. They are the smallest accountable decisions needed to avoid designing production services around unsupported assumptions.
-
-## Decisions that may remain open during architecture
-
-- Final assortment breadth beyond the approved representative pilot.
-- Exact category count, filter order, merchandising cadence, and campaign calendar.
-- Reviews, memberships, subscriptions, persistent owned-product profiles, personalization, automated matching, and dynamic bundles, because they should remain excluded or conditional.
-- Exact production motion timing, final division accents, and non-semantic visual tuning.
-- Final long-term analytics dashboards and optimization targets, provided deployment remains off until privacy approval.
-- Full compatibility/fit coverage beyond the approved pilot, provided unknown remains explicit and affected purchase paths are not falsely enabled.
-- Final promotional creative, provided no promotion is implemented without approved price basis and terms.
-
-## Media and typography audition
-
-**A combined real-media and typography audition cannot begin.** The repository contains no production product/editorial media and no documented product-media rights. Archivo remains a provisional typography direction with no committed font binary or license record. Typography testing may continue only as provisional internal evaluation; a real audition requires rights-cleared representative media for the intended product families plus authorized font builds and license evidence.
+A production real-media audition remains blocked by the absence of rights-cleared representative assets. Typography may continue only as provisional internal evaluation until approved builds and licensing exist. The owner-reported logo master should be located and inspected before final brand delivery.
 
 ## Production coding
 
-**Production coding may not begin.** The current repository authorizes governing specifications and static design evidence only. No production component, catalog service, search service, eligibility service, checkout, account, support case, inventory, payment, analytics, or application integration is authorized by this gate.
+**Production coding may not begin.**
 
-## Five highest-priority blockers
+## Exact recommended next business task
 
-1. No authoritative cross-division pilot catalog or supplier-backed SKU/variant truth.
-2. No qualified, versioned age/destination/product-restriction/proof rule set.
-3. No commerce/finance authority for payment feasibility, taxes, price/promotion, refunds, and checkout constraints.
-4. No operations systems or approved rules for inventory, fulfillment/shipping, returns/warranty, fragile damage, unavailable items, and support.
-5. No named systems of record/data owners, privacy/consent/retention rules, or production media/rights package.
+# Supplier, Merchant, Compliance, and Pilot Catalog Feasibility Intake
 
-## Exact recommended next task
+Resolve, in this order:
 
-### Launch Authority & Systems-of-Record Intake
+1. distributor/wholesale account options and approval requirements;
+2. payment and merchant-account feasibility for the intended product mix;
+3. exact pilot products across all three divisions;
+4. supplier/manufacturer product data, costs, minimums, package contents, and authenticity;
+5. COAs and batch mapping for THCA;
+6. compatibility data for exact vape ecosystems;
+7. measurements and fit validation for Glass & Accessories;
+8. product media and commercial rights;
+9. age, destination, shipping, York pickup, York delivery, returns/damage, tax, privacy, and support requirements;
+10. named systems of record and accountable owners.
 
-Run one owner-led evidence intake—not more competitor research and not a build—to produce:
-
-1. an approved representative catalog across the intended launch divisions using `02-representative-catalog-candidates.json` only as a field/gap test;
-2. supplier/manufacturer/package, COA/batch, compatibility, measurement/fit, media and rights evidence for those exact records;
-3. a named RACI and system-of-record map for every blocking data class;
-4. qualified decision records for eligibility/proof/privacy and finance/payment/tax;
-5. operating decision records for inventory, fulfillment, shipping, returns/damage, support and correction/update responsibility.
-
-Re-run this readiness gate after those records are committed. Only a new explicit readiness decision may authorize the technical-architecture phase; only a later separate authorization may permit production implementation.
+Vendor-neutral technical architecture may proceed in parallel. Provider-specific commitment and production implementation may not.

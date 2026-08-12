@@ -1,59 +1,62 @@
 # Blowin' Smoke — Operations and Compliance Gates
 
-**Purpose:** Separate existing system requirements from actual Blowin' Smoke policy and unresolved authority  
-**Legal boundary:** This is not legal advice and makes no legal conclusion
+**Purpose:** Separate settled owner direction from unresolved procedures, qualified rules, and technical dependencies  
+**Legal boundary:** This document makes no legal conclusion
 
-## Evidence classification
+## Classification
 
 | Classification | Meaning |
 |---|---|
-| Existing governing system decision | The repository defines required states, data boundaries, precedence, ownership concepts, or interface behavior. It is not an operating or legal policy. |
-| Research observation | Competitor or customer evidence establishes a problem or pattern only. It has no authority to set Blowin' Smoke terms. |
-| Unresolved business/operations decision | The owner or accountable operating function must choose a service commitment, workflow, tool, or commercial rule. |
-| Unresolved compliance decision | A qualified authority must supply current rules, warnings, restrictions, privacy, or proof requirements. |
-| Technical implementation dependency | A service, system of record, workflow, integration, or failure state needed after the authoritative decision exists. |
+| Settled owner direction | The owner has chosen the business direction for this phase |
+| Unresolved business procedure | Operations must define the workflow or commitment |
+| Unresolved compliance decision | A qualified source must define current rules and scope |
+| Technical dependency | A system, service, data source, or integration required after authority exists |
+| Research observation | Competitor/customer evidence identifies a problem only |
 
-## Current policy finding
+## Owner-decision register
 
-No current Blowin' Smoke shipping, returns, damaged-item, warranty, fulfillment, support, payment, tax, privacy, terms, age, destination, or product-restriction policy exists in the repository. `docs/constitution/07-compliance.md` is an empty placeholder. The completed `docs/system/` documents govern how truth and uncertainty must be represented; they do not supply the missing policy.
-
-Prototype copy is also non-authoritative. `docs/prototypes/pressure-proof-constructed-signal-iteration-05-1/notes/customer-facing-copy-contract.md` explicitly labels products, prices, inventory, relationships, and policies as fictional design-evaluation material.
+| Area | Settled owner direction | Unresolved procedure or rule | Technical dependency |
+|---|---|---|---|
+| Launch model | All three divisions are intended for launch | Each division needs a supportable assortment before public launch | Catalog and route availability by division |
+| Shipping | Nationwide wherever the exact transaction is eligible | Jurisdictions, products, carriers, services, rates, packaging, timelines | Eligibility, rate/service lookup, routing, tracking |
+| Local pickup | York, Pennsylvania only | Location, hours, verification, release, failed pickup | Pickup inventory allocation and order state |
+| Local delivery | York, Pennsylvania only | Radius, schedule, fee, routing, verification, exceptions | Delivery-zone and routing service |
+| Inventory | Purchase and hold owned stock | Receiving, reservations, allocation, quarantine, counts, corrections | Inventory system of record and events |
+| Suppliers | No accounts or inventory currently exist | Supplier selection, account approval, costs, minimums, authenticity | Catalog intake and supplier data interfaces |
+| Payment | No processor selected | Merchant feasibility, underwriting, methods, fraud/refund/dispute rules | Payment provider integration after approval |
+| Shipping/returns strategy | Benchmark competitors and write original policies | Exact commitments, exceptions, warranty, damage, RMA | Policy store, support/RMA, refund integration |
+| Age verification | Required | Provider, rule scope, timing, retry/failure, privacy, retention | Qualification service and audit trail |
+| Support | No final model selected | Channels, hours, staffing, service levels, authority, escalation | Case system and context transfer |
+| Brand master | Owner believes a master exists externally | Locate, inspect, verify rights and suitability | Asset pipeline after approval |
 
 ## Gate register
 
-| Decision area | Existing policy? | Existing governing system decision / research observation | Unresolved authoritative decision | Smallest authoritative source | Technical implementation dependency | Gate effect |
-|---|---|---|---|---|---|---|
-| Age qualification | No | Age is separate from destination/product eligibility; `Eligible`, `Ineligible`, `Unknown`, and service failure remain distinct in `docs/system/01-master-design-commerce-system.md` and `docs/system/03-data-model-catalog-schema.md`. Competitor age gates are research observations only. | Minimum age, products/surfaces covered, verification method, retry/failure, session, privacy and retention | Qualified compliance/legal decision with effective date and owner | Privacy-conscious qualification service, versioned rules, failure path distinct from ineligibility | `BLOCKED` for architecture selection and launch |
-| Destination eligibility | No | Versioned eligibility interface and fail-closed unknown behavior are governed in `docs/system/03-data-model-catalog-schema.md`. | Jurisdictions, destination inputs, exceptions, product/format/quantity interaction and service-outage consequence | Qualified compliance rule set | Address/destination evaluation, effective/version history, cart/checkout enforcement, outage handling | `BLOCKED` |
-| Product restrictions and warnings | No | Product-specific eligibility is separate from stock and destination in `docs/system/01-master-design-commerce-system.md`. | Exact restricted roles/variants, warnings, quantities, purchase methods and recovery | Qualified current compliance source tied to exact product scope | Product-rule mapping, message source, precedence, audit and revalidation | `BLOCKED` |
-| Proof currentness | No | Current/Stale/Missing/Not Supplied/Unmatched/Superseded and applicability are modeled in `docs/system/03-data-model-catalog-schema.md`. Bay Smokes research establishes the customer problem only. | Required evidence, acceptable document/source, currency interval, claims review, archive/access behavior | Qualified compliance/proof owner plus actual COA corpus | Document/version store, batch mapping, currentness evaluator, accessible viewer, refresh/invalidation | `BLOCKED` for THCA |
-| Shipping | No | Canonical policy placement and ownership exist in `docs/system/02-information-architecture-page-system.md`; competitor promises are research only. | Service area, carriers, methods, costs, thresholds, processing/delivery promises and exceptions | Operations-approved shipping policy and carrier capability matrix | Rate/service lookup, address validation, order status, current estimates, policy version | `BLOCKED` |
-| Returns and warranty | No | Support/policy architecture is governed; competitor windows and conditions must not be copied. | Return window, condition, exclusions, exchange/refund method, warranty, fees and authority | Operations and qualified policy approval | RMA/case workflow, order/line linkage, refund integration, evidence and audit | `BLOCKED` |
-| Damaged or fragile items | No | Smoke Cartel research/closure establishes that fragile products create distinct support states; no competitor workflow is adopted. | Packaging standard, receiving inspection, arrival-evidence window, damage/defect/missing-part distinctions, replacement/refund authority | Operations/support policy and validation procedure | Attachment intake, package/order context, disposition, replacement/RMA, audit trail | `BLOCKED` for Glass launch |
-| Nicotine fulfillment | No | Vape lifecycle and eligibility needs are governed, not actual carrier/handling rules. | Eligible products/destinations, carrier/service, packaging, delivery verification, battery constraints, handling and processing | Qualified compliance plus fulfillment/carrier decisions | Order routing, product flags, carrier services, exception handling, tracking | `BLOCKED` |
-| THCA fulfillment | No | THCA fulfillment is a governed operations fact in `docs/system/03-data-model-catalog-schema.md`; competitor discreet-shipping claims have no authority. | Eligible products/destinations, packaging, carrier/service, delivery verification, storage/handling and processing | Qualified compliance plus operations/fulfillment decision | Order routing, batch inventory, carrier service, proof/eligibility revalidation | `BLOCKED` |
-| Customer-support escalation | No operating policy | Context bundle, correction discipline, and human escalation are governed by `docs/system/01-master-design-commerce-system.md` and `docs/system/02-information-architecture-page-system.md`. | Channels, hours, service levels, staffing, case authority, warranty/returns authority and escalation path | Support operating model and RACI | Case system, consented context transfer, attachments, references/status, role-based corrections | `BLOCKED` |
-| Price changes | No | Effective price records and prior/current price handling are modeled in `docs/system/03-data-model-catalog-schema.md`; Full Cart must expose consequential change. | System of record, update authority, compare-at/promotion basis, acknowledgment and checkout consequence | Finance/commerce decision and price-source contract | Atomic variant repricing, audit history, cart/checkout revalidation, acknowledgment | `BLOCKED` |
-| Unavailable products | No | Controlled availability states and honest recovery are governed in `docs/system/01-master-design-commerce-system.md` and `docs/system/03-data-model-catalog-schema.md`. | Reservation, backorder/preorder, lead time, restock dates, substitutions, quantity limits and sold-out recovery | Inventory/operations policy and source contract | Live inventory, concurrency/reservation, outage state, verified alternatives only | `BLOCKED` |
-| Notification authorization | No | Exact-variant recovery and consent separation are requirements; competitor notification behavior is not determinable policy. | Channel, purpose, authorization, frequency, expiry, unsubscribe, contact use and service owner | Privacy/marketing/operations decision | Consent ledger, provider, exact variant scope, inventory events, dedupe/error handling | `BLOCKED`; may defer |
-| Cart revalidation | No operating policy | State precedence and block/warn/confirm/support modes are governed in `docs/system/01-master-design-commerce-system.md`; Quick Cart and Full Cart roles are fixed. | Reservation, price acknowledgment, quantity, fulfillment, retry/idempotency, progression and purchase-method rules | Commerce, operations and compliance decision set | Live price, stock, eligibility, proof and relationship services; composed readiness and audit | `BLOCKED` |
-| Payments | No | Purchase-method state exists conceptually; provider/merchant feasibility is absent. | Provider, methods, restricted-product acceptance, authorization/capture, fraud, dispute and refund lifecycle | Finance/commerce owner plus merchant/provider approval | Payment/fraud services, tokenization, error/idempotency, refund/RMA integration | `BLOCKED` |
-| Taxes | No | Totals may display only as authorized in `docs/system/06-high-fidelity-page-design-specifications.md`. | Tax treatment, coverage/nexus, provider, exemptions, presentation and failure behavior | Qualified finance/tax decision | Calculation/reporting service, address/product mapping, checkout/order audit | `BLOCKED` |
-| Privacy and consent | No | Data minimization, granular/revocable marketing consent, and public/private/temporary boundaries are governed in `docs/system/01-master-design-commerce-system.md` and `docs/system/03-data-model-catalog-schema.md`. | Collection/use, lawful authority, retention, access/deletion, processors, sensitive contexts, support attachments and identity linkage | Qualified privacy/legal/security decision | Consent/retention/deletion/access services, processor controls, audit and data minimization | `BLOCKED` |
-| Analytics | No | Decision-quality questions are governed in `docs/system/01-master-design-commerce-system.md`; tracking scope is not. | Approved purposes, provider, consent, identity, retention, event minimum and success baseline | Product analytics plus privacy approval | Consent-aware event contract, aggregation, retention and deletion | May remain deferred during architecture; `BLOCKED` for deployment |
-| Promotions | No | Transparent price grammar and bounded merchandising labels are governed; competitor discount systems are research only. | Whether a promotion exists, eligible items, basis, dates, stacking, limits, ownership and correction | Merchandising/finance decision | Price/promotion source, precedence, cart revalidation, audit | Optional; `BLOCKED` if included |
-| Memberships and subscriptions | No | Classified as future/experimental in `docs/system/01-master-design-commerce-system.md`. | Value exchange, eligibility, terms, economics, identity, consent, cancellation, substitution and support | Owner, finance, privacy, operations and compliance decisions | Mature account/order/price/inventory/eligibility/payment/support systems | Defer; does not block core launch when excluded |
-| Record ownership | Conceptual only | Canonical ownership, provenance and authorized verification are modeled in `docs/system/01-master-design-commerce-system.md`, `docs/system/02-information-architecture-page-system.md`, and `docs/system/03-data-model-catalog-schema.md`. | Named RACI, systems of record, approval permissions and escalation | Owner-approved data governance record | RBAC, source mapping, approvals, audit and correction propagation | `BLOCKED` for production architecture |
-| Data-update responsibility | Conceptual only | Corrections, versioning, staleness and invalidation behavior are modeled in `docs/system/03-data-model-catalog-schema.md`. | Review intervals, refresh SLAs, event triggers, correction owners and dependent-system invalidation | Named domain owners and source contracts | Version history, event/staleness jobs, cache/index/cart invalidation and alerts | `BLOCKED` for production architecture |
+| Decision area | Settled direction | Unresolved authoritative decision | Smallest authoritative source | Technical dependency | Gate effect |
+|---|---|---|---|---|---|
+| Age qualification | Verification required | Exact age/product/surface scope, provider, failure, privacy, retention | Qualified compliance/privacy decision | Versioned qualification service | Blocks provider selection, implementation, launch |
+| Destination/product eligibility | Ship only where eligible | Jurisdictions, product/format/quantity interactions, exceptions, outage behavior | Qualified current rule set | Address/product evaluation and cart enforcement | Blocks provider selection, implementation, launch |
+| THCA proof currentness | Exact-scope proof required when THCA is sold | Required tests, currentness, claims, archive/access, rights | Qualified proof/compliance owner plus real COAs | Document store, batch mapping, currentness evaluator | Blocks THCA implementation/launch |
+| Shipping | Nationwide-where-eligible model decided | Carriers, services, rates, thresholds, processing/delivery promises | Operations-approved carrier/service matrix | Rates, labels, routing, tracking, policy version | Blocks implementation/launch |
+| York pickup | York-only decided | Location, hours, release and verification | Operations decision record | Pickup allocation and order state | Blocks implementation/launch |
+| York delivery | York-only decided | Radius, service levels, fees, verification, exceptions | Operations decision record | Zone/routing and delivery state | Blocks implementation/launch |
+| Returns/warranty | Competitor benchmarking strategy decided | Original windows, conditions, exclusions, refunds, warranty | Owner-approved operations/policy matrix | RMA/case/refund workflow | Blocks implementation/launch |
+| Fragile damage | Separate workflow required | Packaging, evidence window, defect/damage/missing-part distinctions | Operations/support procedure | Attachment intake, disposition, replacement/refund | Blocks affected Glass launch |
+| Inventory | Owned-stock model decided | Receiving, reservations, allocations, quantity limits, outage/correction | Inventory operating contract | Inventory system and event stream | Blocks provider selection, implementation, launch |
+| Price changes | Truthful prior/current handling required | Source, authority, acknowledgment, checkout consequence | Finance/commerce decision | Price history and cart revalidation | Blocks implementation/launch |
+| Payments | No provider selected | Merchant acceptance, methods, capture/refund/dispute/fraud | Merchant/provider approval | Tokenization, idempotency, refund integration | Blocks implementation/launch |
+| Taxes | No provider/rule selected | Treatment, coverage, presentation, reporting, failure | Qualified finance/tax decision | Tax calculation/reporting | Blocks implementation/launch |
+| Privacy/consent | No final policy | Purpose, collection, processors, retention, access/deletion, sensitive contexts | Qualified privacy/security decision | Consent, retention, deletion, access, audit | Blocks provider selection, implementation, launch |
+| Support escalation | No final support model | Channels, hours, staffing, authority, warranty/returns escalation | Support operating model | Case system and RBAC | Blocks implementation/launch |
+| Notifications | Optional | Channel, purpose, consent, frequency, expiry, unsubscribe | Privacy/marketing/operations decision | Consent ledger and inventory events | May defer |
+| Analytics | Optional | Minimum questions, consent, provider, retention | Product/privacy decision | Consent-aware event contract | May defer |
+| Promotions | Optional | Basis, terms, dates, stacking, limits | Merchandising/finance decision | Promotion source and cart revalidation | Defer unless approved |
+| Memberships/subscriptions | Deferred | Future economics, terms, consent, cancellation, substitution | Owner/finance/privacy/operations/compliance | Mature account/order/payment/inventory systems | Does not block core launch when excluded |
+| Record ownership/updates | Canonical ownership is required | Named owners, systems of record, refresh intervals, correction authority | Owner-approved governance map | RBAC, versioning, invalidation, audit | Architecture can define interfaces; provider selection and implementation remain blocked |
 
-## Research observations that must remain research
+## Research boundary
 
-- Competitor age gates, shipping thresholds, return windows, loyalty mechanics, notification flows, and support promises are not Blowin' Smoke policies.
-- Customer testimony may establish a decision problem or candidate lead; it does not establish current formulation, safety, specification, eligibility, availability, or claim truth.
-- VaporDNA established the compatibility problem; Blowin' Smoke owns the original solution in `docs/research/vapordna/03-research-closure-compatibility-decision.md`.
-- Smoke Cartel established the physical-data and fragile-item problem; Blowin' Smoke owns the original solution in `docs/research/smoke-cartel/03-research-closure-physical-compatibility-decision.md`.
-- Bay Smokes established THCA confidence and proof problems; it did not supply Blowin' Smoke product proof or policy.
+Competitor age gates, shipping thresholds, returns, loyalty, notifications, and support promises are benchmarks only. Customer testimony may support a decision problem or sourcing lead; it cannot establish current product truth, eligibility, inventory, or policy.
 
 ## Gate conclusion
 
-The repository contains an unusually complete model of required states and responsible uncertainty, but almost none of the accountable rules or operating sources that would drive them. Technical architecture must not select services or define production flows by guessing those inputs.
+The owner has supplied enough operating direction for vendor-neutral architecture to model fulfillment modes, owned inventory, qualification, policy, support, and service boundaries. Qualified rules, procedures, systems of record, and providers still block provider-specific architecture, implementation, and launch.

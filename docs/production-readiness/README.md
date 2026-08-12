@@ -1,92 +1,90 @@
 # Blowin' Smoke — Production Readiness Phase 1
 
 **Gate:** Launch Catalog, Media, and Data  
-**Evidence cutoff:** repository state at `origin/main` commit `967d9a1d422f017c42b8784c82b3147cd1aa2dda` before this package  
-**Decision:** **NOT READY FOR TECHNICAL ARCHITECTURE**  
-**Implementation authorization:** Not granted
+**Evidence cutoff:** repository state before this correction at `91d9b34465470642de38949abaa577e76a97e788`  
+**Decision:** **CONDITIONALLY READY FOR VENDOR-NEUTRAL TECHNICAL ARCHITECTURE**  
+**Final platform/provider selection:** Not ready  
+**Production implementation:** Not authorized  
+**Launch:** Not ready
 
 ## Purpose
 
-This package tests whether the repository contains enough authoritative product, media, policy, operational, and compliance information to begin a production technical-architecture phase. It proposes a bounded MVP and a representative pilot set; it does not approve an assortment, purchase order, catalog import, legal position, platform, or implementation.
+This package determines what the repository and the owner have established strongly enough to support the next specification phase. It does not approve an assortment, purchase order, supplier, policy, platform, integration, legal conclusion, or production build.
 
-The closed customer-facing architecture remains at `docs/prototypes/pressure-proof-constructed-signal-iteration-05-1/`. That package is design evidence only and was not used as product, price, inventory, relationship, policy, or operational truth.
+The closed customer-facing architecture remains at `docs/prototypes/pressure-proof-constructed-signal-iteration-05-1/`. That package is design evidence only and is not product, price, inventory, relationship, policy, or operational truth.
+
+## Authoritative owner decisions
+
+| Area | Settled direction | Remaining gate |
+|---|---|---|
+| Launch divisions | THCA, Vape & Nicotine, and Glass & Accessories are all intended for launch | Each division still needs an authoritative, supportable assortment before public launch |
+| Nationwide shipping | Ship wherever the exact customer, product, destination, and fulfillment method are legally eligible | Product/jurisdiction rules, carriers, services, rates, packaging, and procedures |
+| Local pickup | York, Pennsylvania only | Exact location, hours, release procedure, verification, and inventory allocation |
+| Local delivery | York, Pennsylvania only | Delivery radius, service levels, fees, routing, verification, and exceptions |
+| Inventory model | Purchase and hold owned inventory; dropshipping is not the default model | No inventory has been purchased and no inventory system of record exists |
+| Supplier status | No wholesale/distributor accounts currently exist | Supplier selection, account approval, catalogs, costs, minimums, authenticity, and product data |
+| Brand source | Owner believes an original/master logo file exists outside the repository | Location, format, rights, construction, and production suitability are unverified |
+| Payments | No processor selected | Merchant feasibility and underwriting remain blocked |
+| Shipping/returns strategy | Benchmark established competitor standards, then write original Blowin' Smoke policies | Exact commitments, operational feasibility, and qualified review |
+| Age verification | Required | Provider, rule scope, timing, failure behavior, privacy, retention, and ownership |
+| Customer support | No final support model selected | Channels, hours, staffing, service levels, case authority, and escalation |
 
 ## Evidence boundary
 
-The audit used only repository evidence, principally:
-
-- `docs/constitution/01-brand-philosophy.md`
-- `docs/system/01-master-design-commerce-system.md`
-- `docs/system/02-information-architecture-page-system.md`
-- `docs/system/03-data-model-catalog-schema.md`
-- `docs/system/04-page-by-page-architecture-specifications.md`
-- `docs/system/05-visual-design-system.md`
-- `docs/system/06-high-fidelity-page-design-specifications.md`
-- `docs/system/08-static-visual-prototype-iteration-evaluation.md`
-- `docs/brand/assets/README.md`
-- `docs/brand/assets/blowin-smoke-logo.png`
-- `research/customer-intelligence/INSIGHT-BANK.md`
-- `research/customer-intelligence/RESEARCH-COVERAGE-LEDGER.md`
-- product-specific records under `research/customer-intelligence/`, `reviews-003-006/`, and `thca-customer-intelligence-001/`
-- final research intelligence and closure decisions under `docs/research/`
-
-The repository does not contain the requested `docs/customer-research/`, `docs/customer-intelligence/`, or `docs/insight-bank/` directories. Customer-intelligence evidence instead exists under the root-level `research/customer-intelligence/` tree and related root research packages.
-
-Competitor captures, external image URLs, customer-review testimony, filenames, prototype fixtures, and prototype screenshots were treated as research evidence only. Under `docs/system/03-data-model-catalog-schema.md`, they cannot establish catalog identity, specifications, price, inventory, proof, compatibility, fit, contents, eligibility, policy, or media rights.
+The audit uses repository evidence under `docs/constitution/`, `docs/system/`, `docs/research/`, `docs/brand/`, `research/customer-intelligence/`, `reviews-003-006/`, and related research packages. Competitor captures, external URLs, customer testimony, filenames, prototype fixtures, and screenshots remain research evidence only.
 
 ## Status vocabulary
 
-| Status | Meaning in this package |
+| Status | Meaning |
 |---|---|
-| `VERIFIED` | A clear repository source establishes the stated fact within its scope. |
-| `PARTIAL` | Relevant evidence exists, but it is incomplete or not authoritative enough for production use. |
-| `MISSING` | The repository contains no adequate evidence for the required field or artifact. |
-| `BLOCKED` | Resolution requires an accountable owner, supplier, operations, compliance, finance, rights holder, or other authoritative source. |
-
-`VERIFIED` never means generally true; it means verified only to the scope supported by the cited repository source.
+| `VERIFIED` | A clear repository source or explicit owner decision establishes the statement within its named scope |
+| `PARTIAL` | Relevant evidence or a settled direction exists, but production authority is incomplete |
+| `MISSING` | No adequate evidence or artifact exists |
+| `BLOCKED` | Resolution requires an accountable owner or authoritative external source |
 
 ## Readiness snapshot
 
-| Audit area | Result |
+| Area | Result |
 |---|---|
-| Representative product records | 8 customer-intelligence leads; all `PARTIAL`; all in Vape & Nicotine |
+| Operating-model direction | `PARTIAL`: key owner decisions are settled; procedures and providers remain blocked |
+| Representative product records | 8 research leads, all `PARTIAL`, all currently in Vape & Nicotine |
 | Candidate confidence counts | `VERIFIED 0` · `PARTIAL 8` · `MISSING 0` · `BLOCKED 0` |
-| Missing candidate jobs | All four requested THCA jobs; exact vape replacement component; nicotine pouch; all four requested Glass & Accessories jobs |
+| Candidate field-status counts | `VERIFIED 0` · `PARTIAL 54` · `MISSING 37` · `BLOCKED 37` |
+| Blocked role-intake templates | 10 across THCA, Vape & Nicotine, and Glass & Accessories |
 | Authoritative Blowin' Smoke SKUs | `MISSING` |
-| Price and inventory truth | `BLOCKED` by commerce, finance, and operations sources |
-| Product media | `MISSING`; no local production product or editorial photographs |
-| Brand assets | One actual brand-reference PNG is present but the production identity package and rights record are incomplete |
-| Typography | Provisional direction exists; production font assets, license, build, and testing are unresolved |
-| Current Blowin' Smoke operating/compliance policies | `MISSING` as repository artifacts and `BLOCKED` by accountable owners |
-| Consolidated gap register | `VERIFIED 0` · `PARTIAL 3` · `MISSING 1` · `BLOCKED 15` across 19 rows |
+| Price and inventory truth | `BLOCKED` |
+| Product media | `MISSING` |
+| Brand assets | Repository PNG is `PARTIAL`; owner-reported external master is `PARTIAL` and uninspected |
+| Payment and age-verification providers | `BLOCKED` |
+| Exact operating/compliance policies | `BLOCKED` |
+| Vendor-neutral technical architecture | **Conditionally ready** |
+| Final platform/provider selection | **Not ready** |
+| Production coding | **Not authorized** |
+| Launch | **Not ready** |
 
 ## Strongest verified inputs
 
-- Article I establishes the governing identity, respect, independence, and anti-manipulation tests.
-- The master system, IA, data model, and page contracts define stable product roles, state precedence, provenance, uncertainty, proof, electronic compatibility, physical fit, cart revalidation, and page responsibilities.
-- The final static prototype establishes a closed customer-facing architecture and an explicit non-production boundary.
-- Customer intelligence supplies eight named Vape & Nicotine leads that are useful for intake testing, while explicitly withholding stocking authority.
-- Domain research establishes the customer problems for THCA proof, vape compatibility and lifecycle, and glass measurements/fit without claiming competitor implementations as Blowin' Smoke truth.
+- Article I and the completed system documents define the one-house/three-division model, product roles, state precedence, provenance, proof, compatibility, physical fit, cart revalidation, and responsible uncertainty.
+- Iteration 05.1 closes the static customer-facing architecture without authorizing implementation.
+- Owner decisions establish the intended three-division launch, purchase-and-hold inventory, fulfillment modes, age-verification requirement, and current provider/supplier status.
+- Customer intelligence supplies eight named Vape & Nicotine sourcing leads while withholding stocking authority.
+- Domain research defines the customer problems and evidence discipline for THCA proof, vape lifecycle/compatibility, and glass measurements/fit.
 
-## Material evidence limitations
+## Material limitations
 
-1. There is no approved Blowin' Smoke catalog, supplier record, SKU/variant set, price source, inventory source, COA/batch corpus, compatibility corpus, physical measurement set, or production product-media set.
-2. No THCA SKU clears the repository's product-level Litmus Test, and no non-competitor Glass & Accessories product candidate exists.
-3. `research/customer-intelligence/INSIGHT-BANK.md` ends mid-entry in its final summary list. Its intact detailed sections and the complete `research/customer-intelligence/RESEARCH-COVERAGE-LEDGER.md` support the selected candidate dispositions, but the truncated summary is not treated as a complete ledger.
-4. `docs/constitution/02-design-philosophy.md` through `08-technical-philosophy.md` are empty placeholders. Applicable authority is therefore taken from Article I and the completed `docs/system/` specifications, not inferred from those placeholders.
-5. No policy found in competitor research or prototype copy is adopted as a Blowin' Smoke commitment.
+There is no approved cross-division catalog, supplier-backed SKU/variant set, wholesale cost source, inventory source, real COA/batch mapping, verified compatibility corpus, verified physical-fit corpus, production product-media set, approved processor, or final operating/compliance policy.
 
 ## Package map
 
 | File | Role |
 |---|---|
-| `01-launch-scope-candidate.md` | Proposed MVP boundary with owner decisions and dependencies |
-| `02-representative-catalog-candidates.json` | Eight evidence-bounded pilot intake records plus explicit category absences |
-| `03-media-and-brand-asset-manifest.md` | Repository-local brand, media, typography, rights, and supply audit |
-| `04-data-gap-register.md` | Consolidated launch-data and decision gaps |
-| `05-operations-and-compliance-gates.md` | Policy, operations, compliance, and technical-dependency distinctions |
-| `06-readiness-decision.md` | Gate outcome, minimum inputs, and exact next task |
+| `01-launch-scope-candidate.md` | MVP boundary incorporating settled owner direction |
+| `02-representative-catalog-candidates.json` | Eight research leads plus ten blocked cross-division intake templates |
+| `03-media-and-brand-asset-manifest.md` | Repository assets and owner-reported external master status |
+| `04-data-gap-register.md` | Consolidated gaps with settled direction separated from blocked detail |
+| `05-operations-and-compliance-gates.md` | Owner decisions, operating procedures, compliance rules, and technical dependencies |
+| `06-readiness-decision.md` | Allowed architecture scope, prohibited commitments, blockers, and next task |
 
 ## Governing conclusion
 
-The repository is ready to conduct an owner-led authority and systems-of-record intake. It is not ready to select or specify production integrations around catalog, checkout, eligibility, fulfillment, proof, fit, or customer data. Production coding remains unauthorized.
+Blowin' Smoke is conditionally ready to specify vendor-neutral system boundaries, canonical contracts, state/event models, systems-of-record responsibilities, failure behavior, and provider-selection criteria. It is not ready to select final providers, write production code, activate commerce, or launch.
