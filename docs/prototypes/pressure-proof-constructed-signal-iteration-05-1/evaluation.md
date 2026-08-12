@@ -2,7 +2,11 @@
 
 **Decision:** CONDITIONAL PASS for static customer-facing direction  
 **Evidence basis:** final rendered and inspected PNGs, source validation, computed browser metrics, route audit, fixture audit, and cross-surface continuity record  
-**Implementation authorization:** Not granted
+**Static architecture status:** CLOSED after route-semantics closeout
+
+**Production status:** NOT APPROVED
+
+**Implementation authorization:** NOT GRANTED
 
 ## Required evaluation
 
@@ -13,7 +17,7 @@
 | 3 | Does the opening remain recognizably Blowin' Smoke without repeated red or smoke graphics? | **CONDITIONAL PASS** | One narrow witness rule, one unmodified editorial logo, the house proposition, route order, and a bounded abstract counter study carry the static identity. No decorative smoke system exists. Approved production media must make the intended human-judgment role legible. |
 | 4 | Does every division link reach the division it names? | **PASS** | Global, compact, Home, footer, and house-level division labels resolve to `08-thca-division.html`, `02-vape-nicotine-division.html`, and `09-glass-accessories-division.html`. |
 | 5 | Does global Search reach whole-house Search? | **PASS** | Every global Search label resolves to `10-search.html`; the category field is explicitly “Search within Relay M1 parts.” |
-| 6 | Does Vape preserve “I want / I own / I need” while removing repeated explanation? | **CONDITIONAL PASS** | The customer-job entrance remains first. Lifecycle, identification, and support are combined; one owned relationship witness remains; taxonomy retains six roles. Identity/revision guidance still recurs at distinct decision stages and needs production content testing. A separate lifecycle media study is not claimed as proven. |
+| 6 | Does Vape preserve “I want / I own / I need” while removing repeated explanation? | **CONDITIONAL PASS** | The customer-job entrance remains first. Lifecycle, identification, and support are combined; one owned relationship witness remains; taxonomy retains five product-role routes plus one explicitly named Whole-house Search utility. Identity/revision guidance still recurs at distinct decision stages and needs production content testing. A separate lifecycle media study is not claimed as proven. |
 | 7 | What was the measured Vape 390-height change? | **PASS** | 6,861 px → 5,827 px: −1,034 px, or −15.07%, within the requested 10–18% target. |
 | 8 | Does the category feel like merchandise rather than a defect ledger? | **PASS** | Five quiet records lead ordinary browsing; only three records receive consequential treatment. Excess stale, unavailable, missing-media, and service-error cases moved to the stress study. |
 | 9 | What is the category distribution? | **PASS** | 5 resolved/quiet, 1 caution, 2 blockers; 8 total. |
@@ -27,7 +31,7 @@
 | 17 | Does compact navigation retain all primary routes and correct destinations? | **PASS** | At 390 and 320 it retains house identity, current context, Search, Cart, Menu, THCA, Vape & Nicotine, Glass & Accessories, Learn, and Support. |
 | 18 | Are semantic states distinct without depending on color? | **PASS** | Known, Unknown/Unverified, Incompatible, Restricted, Unavailable, Changed, Stale, and Error use explicit text, reason, consequence, and recovery. |
 | 19 | What remains unproven? | **CONDITIONAL BOUNDARY** | Production media, real catalog truth, actual font files/platform coverage, live services, implemented interaction, focus behavior, assistive-technology output, eligibility, fit/compatibility logic, inventory, checkout, and legal behavior. |
-| 20 | Is the static direction ready to close? | **CONDITIONAL PASS** | The static architecture can close: no enumerated stop condition remains after the final source, render, responsive, semantic, fixture, and visual-inspection pass. Production approval remains blocked on real media, real data, implemented interaction, and accessibility validation. |
+| 20 | Is the static direction ready to close? | **CONDITIONAL PASS** | Static architecture is CLOSED after the route-semantics closeout: no enumerated static stop condition remains after the final source, targeted render, responsive, semantic, fixture, and visual-inspection pass. Production approval remains blocked on real media, real catalog data, live interaction, accessibility testing, typography packaging, compatibility, fit, eligibility, inventory, and checkout. |
 
 ## Evidence summary
 
@@ -39,7 +43,7 @@
 | I05 versus I05.1 comparisons | **PASS — 10 boards** |
 | Overview evidence | **PASS — 8 boards** |
 | Final PNG count | **59** |
-| Every PNG opened after final material change | **PASS — 59-file SHA-256 inspection ledger** |
+| Changed PNGs opened after route closeout | **PASS — 9 affected PNGs reopened; all 59 integrity-checked and hashed** |
 | PNG integrity and exact uniqueness | **PASS — zero decoder/dimension failures and zero exact duplicates** |
 | One `h1` and notice per customer page | **PASS** |
 | Links, fragments, IDs, ARIA | **PASS — zero failures** |
@@ -66,4 +70,8 @@ The direction still requires real, properly sourced media and a production typog
 
 **CONDITIONAL PASS.** Iteration 05.1 closes the required static architecture correction gate. It may serve as the customer-facing prototype direction for subsequent separately authorized content, media, interaction, accessibility, data, and engineering work. It is not a production approval.
 
-**Implementation remains unauthorized.**
+**STATIC ARCHITECTURE: CLOSED after route-semantics closeout.**
+
+**PRODUCTION STATUS: NOT APPROVED.**
+
+**IMPLEMENTATION AUTHORIZATION: NOT GRANTED.**

@@ -4,8 +4,11 @@
 
 **Package status:** Complete isolated static design evidence  
 **Gate decision:** CONDITIONAL PASS for static customer-facing direction  
-**Production status:** Non-production  
-**Implementation authorization:** **Not granted**
+**Static architecture status:** CLOSED after route-semantics closeout
+
+**Production status:** **NOT APPROVED**
+
+**Implementation authorization:** **NOT GRANTED**
 
 ## Purpose
 
@@ -56,7 +59,8 @@ The work follows the repository Constitution and system documents, especially:
 ## Material corrections
 
 - Every global THCA, Vape & Nicotine, and Glass & Accessories label reaches its named division.
-- Global Search reaches a whole-house Search page; category Search is explicitly local to Relay M1 parts.
+- Global Search and the explicitly named Vape taxonomy utility reach `10-search.html#house-search`; category Search remains explicitly local to Relay M1 parts.
+- The THCA taxonomy names edible-format record, proof, and eligibility guidance without promising an unrepresented edible merchandise shelf.
 - Home keeps one bounded near-black field while showing all three division routes in the opening decision sequence at wide and compact widths.
 - The red dot is replaced by a narrow witness rule; the unmodified logo remains editorial rather than interface decoration.
 - Vape retains “I want / I own / I need” while combining lifecycle, identification, and support repetition. Structured lifecycle guidance is present; a separate platform-lifecycle media study remains unproven and production-gated.
@@ -91,7 +95,7 @@ At 390 pixels:
 | Quick Cart | 844 px | 844 px | Fixed-view containment preserved |
 | Full Cart | 2,976 px | 2,993 px | Eight lines retained; one issue open |
 
-The three new route-truth pages measure 4,497 px (THCA), 4,430 px (Glass & Accessories), and 3,432 px (Search) at 390.
+The three new route-truth pages measure 4,518 px (THCA), 4,430 px (Glass & Accessories), and 3,432 px (Search) at 390.
 
 ## Evidence inventory
 
@@ -102,7 +106,7 @@ The final package contains **59 PNGs**:
 - 10 Iteration 05 versus 05.1 comparison boards;
 - 8 overview boards, including color/grayscale openings, wide and narrow anti-generic Home, route map, assortment balance, typography, and cross-surface continuity.
 
-All ten pages were also measured at 1024 and 901 pixels. `notes/rendering-evidence.json` records the exact geometry and computed results. `notes/image-integrity.json` records decodability, dimensions, hashes, distribution, and exact-duplicate checks. `notes/visual-inspection.json` records the final 59-file manual inspection set. Every final PNG was opened after the last material change; no blank, duplicate, clipped, stale, broken-media, overflow, or unreadable image remains.
+All ten pages were also measured at 1024 and 901 pixels. `notes/rendering-evidence.json` records the original full-package geometry plus the targeted route-semantics rerun. `notes/image-integrity.json` records decodability, dimensions, hashes, distribution, and exact-duplicate checks. `notes/visual-inspection.json` records the final 59-file evidence set: the nine route-dependent PNGs were reopened after this closeout, while unchanged images retain their prior inspection and received refreshed integrity and hash checks. No blank, duplicate, clipped, stale, broken-media, overflow, or unreadable image remains.
 
 ## Validation result
 
@@ -127,6 +131,6 @@ Static evidence cannot prove real catalog truth, production typography availabil
 
 ## Governing conclusion
 
-Iteration 05.1 receives a conditional pass for the static correction gate. It closes the material semantic-route, retail-balance, cross-surface continuity, typography-weight, disabled-state, and compact-navigation defects while materially reducing the Home anti-generic risk. Real media, real catalog truth, implemented interaction, and production accessibility remain explicit approval gates.
+Iteration 05.1 receives a conditional pass for the static correction gate. Static architecture is CLOSED after the route-semantics closeout. It closes the material semantic-route, retail-balance, cross-surface continuity, typography-weight, disabled-state, and compact-navigation defects while materially reducing the Home anti-generic risk. Real media, real catalog truth, live interaction, accessibility testing, typography packaging, compatibility, fit, eligibility, inventory, and checkout remain explicit production approval gates.
 
-**Implementation remains unauthorized.**
+**Production is NOT APPROVED. Implementation authorization is NOT GRANTED.**

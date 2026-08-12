@@ -1,8 +1,8 @@
 {
   "status": "PASS",
-  "inspectedAt": "2026-08-12T14:07:03.326Z",
-  "method": "Individual manual visual inspection through the local image viewer after the definitive render, plus SHA-256 and PNG-header recording.",
-  "scope": "All final core, state, comparison, and overview PNGs.",
+  "inspectedAt": "2026-08-12T17:51:02.925Z",
+  "method": "Individual manual inspection of the nine route-semantics-dependent PNGs, with the prior inspection retained for unchanged images; SHA-256 and PNG headers refreshed across the complete final set.",
+  "scope": "Nine changed PNGs manually inspected; all 59 final PNGs integrity-checked and hashed.",
   "total": 59,
   "distribution": {
     "320": 10,
@@ -19,13 +19,13 @@
       "width": 320,
       "height": 6543,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/320/02-vape-nicotine-division-320x760.png",
-      "sha256": "d9ab3740471dcf27e52709acee73fbe55af496497600e6faf273f7f7303cd1e0",
+      "sha256": "db6a219bb9e4d784b7588147f1d97d2aeb17a55e57d3c345769baabedf2ac257",
       "width": 320,
-      "height": 6110,
+      "height": 6131,
       "result": "PASS",
       "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
     },
@@ -35,7 +35,7 @@
       "width": 320,
       "height": 7695,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/320/04-universal-pdp-320x760.png",
@@ -43,7 +43,7 @@
       "width": 320,
       "height": 3969,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/320/05-fitted-component-pdp-320x760.png",
@@ -51,7 +51,7 @@
       "width": 320,
       "height": 3436,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/320/06-quick-cart-320x760.png",
@@ -59,7 +59,7 @@
       "width": 320,
       "height": 760,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/320/07-full-cart-320x760.png",
@@ -67,13 +67,13 @@
       "width": 320,
       "height": 3126,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/320/08-thca-division-320x760.png",
-      "sha256": "94f616c31b843e1fdf0b6fac6b6c86dfb38ac114d8542253e84e3b731ef9bee7",
+      "sha256": "97fa644995a59e59a4a633372705d2dc1df03ac05cc1f6d430156d26cca524f1",
       "width": 320,
-      "height": 4510,
+      "height": 4531,
       "result": "PASS",
       "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
     },
@@ -83,7 +83,7 @@
       "width": 320,
       "height": 4489,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/320/10-search-320x760.png",
@@ -91,7 +91,7 @@
       "width": 320,
       "height": 3464,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/comparison/narrow/01-home-iter05-vs-iter05-1.png",
@@ -99,7 +99,7 @@
       "width": 770,
       "height": 830,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/comparison/narrow/02-vape-nicotine-division-iter05-vs-iter05-1.png",
@@ -107,7 +107,7 @@
       "width": 770,
       "height": 830,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/comparison/narrow/03-shared-category-iter05-vs-iter05-1.png",
@@ -115,7 +115,7 @@
       "width": 770,
       "height": 830,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/comparison/narrow/04-universal-pdp-iter05-vs-iter05-1.png",
@@ -123,7 +123,7 @@
       "width": 770,
       "height": 830,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/comparison/narrow/06-quick-cart-iter05-vs-iter05-1.png",
@@ -131,7 +131,7 @@
       "width": 770,
       "height": 830,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/comparison/wide/01-home-iter05-vs-iter05-1.png",
@@ -139,7 +139,7 @@
       "width": 1410,
       "height": 830,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/comparison/wide/02-vape-nicotine-division-iter05-vs-iter05-1.png",
@@ -147,7 +147,7 @@
       "width": 1410,
       "height": 830,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/comparison/wide/03-shared-category-iter05-vs-iter05-1.png",
@@ -155,7 +155,7 @@
       "width": 1410,
       "height": 830,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/comparison/wide/04-universal-pdp-iter05-vs-iter05-1.png",
@@ -163,7 +163,7 @@
       "width": 1410,
       "height": 830,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/comparison/wide/06-quick-cart-iter05-vs-iter05-1.png",
@@ -171,7 +171,7 @@
       "width": 1410,
       "height": 830,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/narrow/01-home-390x844.png",
@@ -179,11 +179,11 @@
       "width": 390,
       "height": 6369,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/narrow/02-vape-nicotine-division-390x844.png",
-      "sha256": "77417a2e4faac4aad6dfca40b0b508c929e4a360caa04c5a179af2b2a5a96f93",
+      "sha256": "dd08c1dbc19b7c9ad843668db1985ef0d49cc0e66a8ef27aa6659fb35bd3af3f",
       "width": 390,
       "height": 5827,
       "result": "PASS",
@@ -195,7 +195,7 @@
       "width": 390,
       "height": 7575,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/narrow/04-universal-pdp-390x844.png",
@@ -203,7 +203,7 @@
       "width": 390,
       "height": 3782,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/narrow/05-fitted-component-pdp-390x844.png",
@@ -211,7 +211,7 @@
       "width": 390,
       "height": 3315,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/narrow/06-quick-cart-390x844.png",
@@ -219,7 +219,7 @@
       "width": 390,
       "height": 844,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/narrow/07-full-cart-390x844.png",
@@ -227,13 +227,13 @@
       "width": 390,
       "height": 2993,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/narrow/08-thca-division-390x844.png",
-      "sha256": "c1d17e90aa7a1d00bfadc3adad05b1d0a52fa360b501de29afafbc712c982f39",
+      "sha256": "949da1b1e1cd104a6f845598e09b3ed11c55d613d0bc69f1abe28949756f1937",
       "width": 390,
-      "height": 4497,
+      "height": 4518,
       "result": "PASS",
       "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
     },
@@ -243,7 +243,7 @@
       "width": 390,
       "height": 4430,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/narrow/10-search-390x844.png",
@@ -251,11 +251,11 @@
       "width": 390,
       "height": 3432,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/overview/all-ten-default-openings.png",
-      "sha256": "3fc1f16f9963c4ff6494f9f7c66b3143a36ca25683e8d2a67af626ed1a1c1634",
+      "sha256": "229bfa0b73609372f949879a85bc0e2f6ca9046f27b97552d53ac8bfe2eeae6a",
       "width": 1570,
       "height": 790,
       "result": "PASS",
@@ -263,7 +263,7 @@
     },
     {
       "file": "screenshots/overview/all-ten-grayscale-openings.png",
-      "sha256": "5c6214921fc4bb7779bb529ecbef4d66696d81a406a73c5a1e7499928acb25c0",
+      "sha256": "d49cdbf2d4c6ac73e164331221dc425bffb38c47383a7b0ce182c59202bef41a",
       "width": 1570,
       "height": 790,
       "result": "PASS",
@@ -275,7 +275,7 @@
       "width": 960,
       "height": 890,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/overview/home-anti-generic-comparison.png",
@@ -283,7 +283,7 @@
       "width": 1360,
       "height": 490,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/overview/home-anti-generic-narrow.png",
@@ -291,7 +291,7 @@
       "width": 1080,
       "height": 590,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/overview/pdp-cart-continuity.png",
@@ -299,11 +299,11 @@
       "width": 1300,
       "height": 830,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/overview/route-destination-map.png",
-      "sha256": "764b3c34bafe0f4a154457247ac571b406397243a5458fe7ff7be17489870e0b",
+      "sha256": "54d96d689a31c5539a4e2fa074cad25c8df97d9be26dd332a538e1455bf29af9",
       "width": 1300,
       "height": 490,
       "result": "PASS",
@@ -315,7 +315,7 @@
       "width": 1020,
       "height": 790,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/states/fitted-pdp-expanded-390x844.png",
@@ -323,7 +323,7 @@
       "width": 390,
       "height": 4618,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/states/full-cart-secondary-expanded-390x844.png",
@@ -331,7 +331,7 @@
       "width": 390,
       "height": 3166,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/states/home-opening-1440x900.png",
@@ -339,7 +339,7 @@
       "width": 1440,
       "height": 780,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/states/home-opening-390x844.png",
@@ -347,7 +347,7 @@
       "width": 390,
       "height": 932,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/states/mobile-navigation-closed-390x844.png",
@@ -355,7 +355,7 @@
       "width": 390,
       "height": 844,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/states/mobile-navigation-open-320x760.png",
@@ -363,7 +363,7 @@
       "width": 320,
       "height": 760,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/states/mobile-navigation-open-390x844.png",
@@ -371,7 +371,7 @@
       "width": 390,
       "height": 844,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/states/typography-correction-1440x900.png",
@@ -379,7 +379,7 @@
       "width": 1440,
       "height": 1614,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/states/universal-pdp-expanded-390x844.png",
@@ -387,7 +387,7 @@
       "width": 390,
       "height": 4987,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/states/whole-house-search-1440x900.png",
@@ -395,7 +395,7 @@
       "width": 1440,
       "height": 900,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/states/whole-house-search-390x844.png",
@@ -403,7 +403,7 @@
       "width": 390,
       "height": 844,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/wide/01-home-1440x900.png",
@@ -411,11 +411,11 @@
       "width": 1440,
       "height": 4270,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/wide/02-vape-nicotine-division-1440x900.png",
-      "sha256": "ffbad8c38ff2d4c04c5523df9a6d9261ff375c5991d2dcc9c69641694e12449d",
+      "sha256": "ce2ea5ec65bd8e88f297f222b9876f0419c65ddb5345ec01a86bee8e03484473",
       "width": 1440,
       "height": 4127,
       "result": "PASS",
@@ -427,7 +427,7 @@
       "width": 1440,
       "height": 4474,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/wide/04-universal-pdp-1440x900.png",
@@ -435,7 +435,7 @@
       "width": 1440,
       "height": 2236,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/wide/05-fitted-component-pdp-1440x900.png",
@@ -443,7 +443,7 @@
       "width": 1440,
       "height": 2122,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/wide/06-quick-cart-1440x900.png",
@@ -451,7 +451,7 @@
       "width": 1440,
       "height": 900,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/wide/07-full-cart-1440x900.png",
@@ -459,11 +459,11 @@
       "width": 1440,
       "height": 1921,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/wide/08-thca-division-1440x900.png",
-      "sha256": "9dc29ddc665124608a365c71e0e84824af689f0f8cd4bc2bd1e7547019d11bc8",
+      "sha256": "719fee5535f13dfcc6c25257408f180dc69b59a45545da5d160355d6bbb74ff2",
       "width": 1440,
       "height": 2807,
       "result": "PASS",
@@ -475,7 +475,7 @@
       "width": 1440,
       "height": 2824,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     },
     {
       "file": "screenshots/wide/10-search-1440x900.png",
@@ -483,7 +483,7 @@
       "width": 1440,
       "height": 1964,
       "result": "PASS",
-      "inspection": "Opened individually after the final material source change; checked for blank, corrupt, clipped, stale, broken-media, overflow, and unreadable output."
+      "inspection": "Unchanged image retained from the prior 59-file manual inspection; PNG signature, dimensions, and SHA-256 refreshed after the targeted route-semantics closeout."
     }
   ]
 }

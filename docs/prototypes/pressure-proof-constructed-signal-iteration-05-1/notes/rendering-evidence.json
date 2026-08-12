@@ -522,7 +522,7 @@
       },
       "scrollWidth": 390,
       "clientWidth": 390,
-      "scrollHeight": 4497,
+      "scrollHeight": 4518,
       "h1Count": 1,
       "noticeCount": 1,
       "duplicateIds": [],
@@ -639,7 +639,7 @@
       },
       "scrollWidth": 320,
       "clientWidth": 320,
-      "scrollHeight": 6110,
+      "scrollHeight": 6131,
       "h1Count": 1,
       "noticeCount": 1,
       "duplicateIds": [],
@@ -821,7 +821,7 @@
       },
       "scrollWidth": 320,
       "clientWidth": 320,
-      "scrollHeight": 4510,
+      "scrollHeight": 4531,
       "h1Count": 1,
       "noticeCount": 1,
       "duplicateIds": [],
@@ -2025,6 +2025,203 @@
   ],
   "validation": {
     "pass": true,
+    "violations": []
+  },
+  "routeSemanticsCloseout": {
+    "scope": "Targeted rerender and runtime validation of Vape and THCA taxonomy surfaces only; all other evidence records retain the original full-package capture timestamp.",
+    "capturedAt": "2026-08-12T17:47:37.617Z",
+    "core": [
+      {
+        "surface": "02-vape-nicotine-division",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "targetFound": true,
+        "targetHref": "10-search.html#house-search",
+        "expectedHref": "10-search.html#house-search",
+        "targetRect": {
+          "left": 60,
+          "right": 720,
+          "width": 660,
+          "height": 100
+        },
+        "targetFits": true,
+        "h1Count": 1,
+        "noticeCount": 1,
+        "duplicateIds": [],
+        "brokenAria": [],
+        "weights": [
+          "400",
+          "700",
+          "800"
+        ],
+        "globalSearchValid": true
+      },
+      {
+        "surface": "08-thca-division",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "scrollWidth": 1440,
+        "clientWidth": 1440,
+        "targetFound": true,
+        "targetHref": "#proof-guidance",
+        "expectedHref": "#proof-guidance",
+        "targetRect": {
+          "left": 720,
+          "right": 1360,
+          "width": 640,
+          "height": 100
+        },
+        "targetFits": true,
+        "h1Count": 1,
+        "noticeCount": 1,
+        "duplicateIds": [],
+        "brokenAria": [],
+        "weights": [
+          "400",
+          "700",
+          "800"
+        ],
+        "globalSearchValid": true
+      },
+      {
+        "surface": "02-vape-nicotine-division",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "targetFound": true,
+        "targetHref": "10-search.html#house-search",
+        "expectedHref": "10-search.html#house-search",
+        "targetRect": {
+          "left": 14,
+          "right": 376,
+          "width": 362,
+          "height": 100
+        },
+        "targetFits": true,
+        "h1Count": 1,
+        "noticeCount": 1,
+        "duplicateIds": [],
+        "brokenAria": [],
+        "weights": [
+          "400",
+          "700",
+          "800"
+        ],
+        "globalSearchValid": true
+      },
+      {
+        "surface": "08-thca-division",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "targetFound": true,
+        "targetHref": "#proof-guidance",
+        "expectedHref": "#proof-guidance",
+        "targetRect": {
+          "left": 28,
+          "right": 362,
+          "width": 334,
+          "height": 121
+        },
+        "targetFits": true,
+        "h1Count": 1,
+        "noticeCount": 1,
+        "duplicateIds": [],
+        "brokenAria": [],
+        "weights": [
+          "400",
+          "700",
+          "800"
+        ],
+        "globalSearchValid": true
+      },
+      {
+        "surface": "02-vape-nicotine-division",
+        "viewport": {
+          "width": 320,
+          "height": 760
+        },
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "targetFound": true,
+        "targetHref": "10-search.html#house-search",
+        "expectedHref": "10-search.html#house-search",
+        "targetRect": {
+          "left": 14,
+          "right": 306,
+          "width": 292,
+          "height": 121
+        },
+        "targetFits": true,
+        "h1Count": 1,
+        "noticeCount": 1,
+        "duplicateIds": [],
+        "brokenAria": [],
+        "weights": [
+          "400",
+          "700",
+          "800"
+        ],
+        "globalSearchValid": true
+      },
+      {
+        "surface": "08-thca-division",
+        "viewport": {
+          "width": 320,
+          "height": 760
+        },
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "targetFound": true,
+        "targetHref": "#proof-guidance",
+        "expectedHref": "#proof-guidance",
+        "targetRect": {
+          "left": 28,
+          "right": 292,
+          "width": 264,
+          "height": 121
+        },
+        "targetFits": true,
+        "h1Count": 1,
+        "noticeCount": 1,
+        "duplicateIds": [],
+        "brokenAria": [],
+        "weights": [
+          "400",
+          "700",
+          "800"
+        ],
+        "globalSearchValid": true
+      }
+    ],
+    "fragments": {
+      "houseSearch": {
+        "hash": "#house-search",
+        "exists": true,
+        "label": "Search all three divisions"
+      },
+      "proofGuidance": {
+        "hash": "#proof-guidance",
+        "exists": true,
+        "heading": "Current proof is scoped. Eligibility is another question."
+      }
+    },
+    "unchangedRoutes": {
+      "categorySearchLabel": "Search within Relay M1 parts",
+      "globalSearchHref": "10-search.html"
+    },
     "violations": []
   }
 }

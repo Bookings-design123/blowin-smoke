@@ -43,7 +43,7 @@ This audit covers every visible link and CTA. Repeated global links are grouped 
 | Relationship | Review identification guidance | Identification/lifecycle | `#identify-device` | Keep the identity through the lifecycle. | PASS |
 | Taxonomy | Devices | Device-start route | `#i-want` | A complete starting setup | PASS |
 | Taxonomy | Pods & cartridges / Coils & parts / Consumables / Accessories | Parts discovery | `03-shared-category.html#results` | Identity first. Consequence where it matters. | PASS |
-| Taxonomy | Disposables / Start a whole-house search | Whole-house Search utility | `10-search.html` | Results for “Relay M1 pod” | PASS |
+| Taxonomy | Whole-house Search / Search products across all three divisions | Whole-house Search utility | `10-search.html#house-search` | Search all three divisions | PASS |
 | Identification | Browse with owned context | Owned-context category | `03-shared-category.html#owned-context` | Relay M1 Refillable Device | PASS |
 | Identification | Get identification help | House Support | `01-home.html#support` | Keep the exact question with you. | PASS |
 
@@ -83,10 +83,9 @@ This audit covers every visible link and CTA. Repeated global links are grouped 
 | Full Cart | Open whole-house Search | Search utility; exact Relay M0 name remains in preceding copy | `10-search.html` | Results for “Relay M1 pod” | PASS |
 | Full Cart | Open device identification / package / measurement / Support result | Named recovery destinations | respective exact fragments | respective named headings | PASS |
 | THCA taxonomy/products | Flower, Pre-rolls, Concentrates, exact record guidance | THCA shelf/proof guidance | `#thca-products`, `#proof-guidance` | Balanced products before proof claims. / Current proof is scoped. | PASS |
-| THCA taxonomy | Edibles / Review record requirements | Proof/eligibility requirements, not nonexistent inventory | `#proof-guidance` | Current proof is scoped. Eligibility is another question. | PASS |
+| THCA taxonomy | Edible requirements / Review record, proof, and eligibility requirements | Edible-format record, proof, and eligibility guidance | `#proof-guidance` | Current proof is scoped. Eligibility is another question. | PASS |
 | Glass taxonomy/products | Complete pieces, fitted parts, care, fit guidance | Relevant shelf or guidance | `#glass-products`, `#care-guidance`, `#measure-guide` | Named matching sections | PASS |
 | Search products | Open exact product / revision | Exact card fragments | `03-shared-category.html#product-v10a`, `#product-v08c` | Exact matching product cards | PASS |
 | Search result types | Category / Guidance / Relationship / Support | Corresponding category or guidance surface | named files/fragments | matching destination content | PASS |
 
 `aria-current="page"` is used only when the link resolves to the actual current page in customer-facing pages and the matching Full Cart study specimen. Parent-division context is expressed through visible current-location text, not a false page claim.
-

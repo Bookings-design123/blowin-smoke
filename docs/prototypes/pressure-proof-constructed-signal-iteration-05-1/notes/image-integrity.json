@@ -26,12 +26,12 @@
     {
       "file": "screenshots/320/02-vape-nicotine-division-320x760.png",
       "width": 320,
-      "height": 6110,
-      "sha256": "d9ab3740471dcf27e52709acee73fbe55af496497600e6faf273f7f7303cd1e0",
+      "height": 6131,
+      "sha256": "db6a219bb9e4d784b7588147f1d97d2aeb17a55e57d3c345769baabedf2ac257",
       "channelStdDev": [
-        103.515,
-        101.725,
-        99.079
+        103.44,
+        101.651,
+        99.007
       ]
     },
     {
@@ -92,12 +92,12 @@
     {
       "file": "screenshots/320/08-thca-division-320x760.png",
       "width": 320,
-      "height": 4510,
-      "sha256": "94f616c31b843e1fdf0b6fac6b6c86dfb38ac114d8542253e84e3b731ef9bee7",
+      "height": 4531,
+      "sha256": "97fa644995a59e59a4a633372705d2dc1df03ac05cc1f6d430156d26cca524f1",
       "channelStdDev": [
-        82.718,
-        81.068,
-        78.616
+        82.648,
+        80.998,
+        78.544
       ]
     },
     {
@@ -247,11 +247,11 @@
       "file": "screenshots/narrow/02-vape-nicotine-division-390x844.png",
       "width": 390,
       "height": 5827,
-      "sha256": "77417a2e4faac4aad6dfca40b0b508c929e4a360caa04c5a179af2b2a5a96f93",
+      "sha256": "dd08c1dbc19b7c9ad843668db1985ef0d49cc0e66a8ef27aa6659fb35bd3af3f",
       "channelStdDev": [
-        104.162,
-        102.352,
-        99.675
+        104.173,
+        102.363,
+        99.686
       ]
     },
     {
@@ -312,12 +312,12 @@
     {
       "file": "screenshots/narrow/08-thca-division-390x844.png",
       "width": 390,
-      "height": 4497,
-      "sha256": "c1d17e90aa7a1d00bfadc3adad05b1d0a52fa360b501de29afafbc712c982f39",
+      "height": 4518,
+      "sha256": "949da1b1e1cd104a6f845598e09b3ed11c55d613d0bc69f1abe28949756f1937",
       "channelStdDev": [
-        82.947,
-        81.287,
-        78.816
+        82.861,
+        81.2,
+        78.729
       ]
     },
     {
@@ -346,22 +346,22 @@
       "file": "screenshots/overview/all-ten-default-openings.png",
       "width": 1570,
       "height": 790,
-      "sha256": "3fc1f16f9963c4ff6494f9f7c66b3143a36ca25683e8d2a67af626ed1a1c1634",
+      "sha256": "229bfa0b73609372f949879a85bc0e2f6ca9046f27b97552d53ac8bfe2eeae6a",
       "channelStdDev": [
-        77.695,
-        76.769,
-        75.345
+        77.696,
+        76.771,
+        75.347
       ]
     },
     {
       "file": "screenshots/overview/all-ten-grayscale-openings.png",
       "width": 1570,
       "height": 790,
-      "sha256": "5c6214921fc4bb7779bb529ecbef4d66696d81a406a73c5a1e7499928acb25c0",
+      "sha256": "d49cdbf2d4c6ac73e164331221dc425bffb38c47383a7b0ce182c59202bef41a",
       "channelStdDev": [
-        76.901,
-        76.769,
-        76.998
+        76.903,
+        76.771,
+        77.0
       ]
     },
     {
@@ -412,11 +412,11 @@
       "file": "screenshots/overview/route-destination-map.png",
       "width": 1300,
       "height": 490,
-      "sha256": "764b3c34bafe0f4a154457247ac571b406397243a5458fe7ff7be17489870e0b",
+      "sha256": "54d96d689a31c5539a4e2fa074cad25c8df97d9be26dd332a538e1455bf29af9",
       "channelStdDev": [
-        67.657,
-        66.556,
-        64.912
+        67.669,
+        66.568,
+        64.925
       ]
     },
     {
@@ -566,11 +566,11 @@
       "file": "screenshots/wide/02-vape-nicotine-division-1440x900.png",
       "width": 1440,
       "height": 4127,
-      "sha256": "ffbad8c38ff2d4c04c5523df9a6d9261ff375c5991d2dcc9c69641694e12449d",
+      "sha256": "ce2ea5ec65bd8e88f297f222b9876f0419c65ddb5345ec01a86bee8e03484473",
       "channelStdDev": [
-        100.715,
-        98.976,
-        96.385
+        100.722,
+        98.982,
+        96.391
       ]
     },
     {
@@ -632,11 +632,11 @@
       "file": "screenshots/wide/08-thca-division-1440x900.png",
       "width": 1440,
       "height": 2807,
-      "sha256": "9dc29ddc665124608a365c71e0e84824af689f0f8cd4bc2bd1e7547019d11bc8",
+      "sha256": "719fee5535f13dfcc6c25257408f180dc69b59a45545da5d160355d6bbb74ff2",
       "channelStdDev": [
-        76.076,
-        74.575,
-        72.343
+        76.117,
+        74.615,
+        72.383
       ]
     },
     {
