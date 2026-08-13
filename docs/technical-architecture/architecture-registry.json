@@ -1,0 +1,1785 @@
+{
+  "packageVersion": "1.0",
+  "sourceCommit": "469e8ce128c6adf8764dcb356bc6a609f98bbaee",
+  "documentationOnly": true,
+  "ownerDecisions": [
+    {
+      "id": "launch_divisions",
+      "decision": "THCA, Vape & Nicotine, and Glass & Accessories all intended for launch as one house"
+    },
+    {
+      "id": "fulfillment_modes",
+      "decision": "Nationwide eligible shipping; York Pennsylvania pickup only; York Pennsylvania local delivery only"
+    },
+    {
+      "id": "owned_inventory",
+      "decision": "Purchase and hold owned inventory; dropshipping not default; no stock or inventory system yet"
+    },
+    {
+      "id": "supply_status",
+      "decision": "No supplier accounts, authoritative supplier catalog, launch assortment, or purchase order"
+    },
+    {
+      "id": "age_verification",
+      "decision": "Required; provider, scope, timing, failure, privacy, retention and responsibility unresolved"
+    },
+    {
+      "id": "payments",
+      "decision": "No processor selected; merchant feasibility and underwriting unresolved"
+    },
+    {
+      "id": "shipping_returns",
+      "decision": "Original approved operationally feasible policies required; competitor policies not adopted"
+    },
+    {
+      "id": "brand_assets",
+      "decision": "Owner-reported external master remains unlocated/uninspected and does not block logical architecture"
+    },
+    {
+      "id": "customer_support",
+      "decision": "Channels, staffing, hours, service level, case system and escalation authority unresolved"
+    }
+  ],
+  "domains": [
+    {
+      "id": "product_catalog",
+      "responsibility": "Approved product identity, division, type, role and publication",
+      "canonicalRecords": [
+        "product",
+        "product_publication"
+      ],
+      "systemOfRecordStatus": "NOT_SELECTED",
+      "writeAuthority": "Catalog owner",
+      "readConsumers": [
+        "variant_option",
+        "search_projection",
+        "media_rights",
+        "cart",
+        "support"
+      ],
+      "inboundEvents": [
+        "Correction Published"
+      ],
+      "outboundEvents": [
+        "Catalog Record Approved"
+      ],
+      "adapterDependencies": [
+        "catalog_pim"
+      ],
+      "unresolvedGates": [
+        "Supplier accounts and authoritative catalog"
+      ]
+    },
+    {
+      "id": "variant_option",
+      "responsibility": "Sellable variants, option dimensions, values and valid combinations",
+      "canonicalRecords": [
+        "variant",
+        "option"
+      ],
+      "systemOfRecordStatus": "NOT_SELECTED",
+      "writeAuthority": "Catalog owner",
+      "readConsumers": [
+        "price_promotion",
+        "inventory_receiving",
+        "search_projection",
+        "cart",
+        "order"
+      ],
+      "inboundEvents": [
+        "Catalog Record Approved",
+        "Correction Published"
+      ],
+      "outboundEvents": [
+        "Variant Changed"
+      ],
+      "adapterDependencies": [
+        "catalog_pim"
+      ],
+      "unresolvedGates": [
+        "Actual SKU, revision and option records"
+      ]
+    },
+    {
+      "id": "price_promotion",
+      "responsibility": "Effective prices, bases and promotion rules",
+      "canonicalRecords": [
+        "price",
+        "promotion"
+      ],
+      "systemOfRecordStatus": "NOT_SELECTED",
+      "writeAuthority": "Finance/commerce owner",
+      "readConsumers": [
+        "search_projection",
+        "cart",
+        "order",
+        "tax_boundary"
+      ],
+      "inboundEvents": [
+        "Variant Changed",
+        "Correction Published"
+      ],
+      "outboundEvents": [
+        "Price Changed"
+      ],
+      "adapterDependencies": [
+        "commerce_platform"
+      ],
+      "unresolvedGates": [
+        "Price authority and promotion policy"
+      ]
+    },
+    {
+      "id": "inventory_receiving",
+      "responsibility": "Owned receipts, positions, reservations, quarantine, damage and corrections",
+      "canonicalRecords": [
+        "inventory_position",
+        "inventory_reservation",
+        "receipt"
+      ],
+      "systemOfRecordStatus": "NOT_SELECTED",
+      "writeAuthority": "Inventory/receiving owner",
+      "readConsumers": [
+        "storefront",
+        "cart",
+        "order",
+        "fulfillment",
+        "support"
+      ],
+      "inboundEvents": [
+        "Variant Changed",
+        "Order Submitted"
+      ],
+      "outboundEvents": [
+        "Inventory Received",
+        "Inventory Reserved",
+        "Inventory Released",
+        "Inventory Corrected",
+        "Inventory Quarantined",
+        "Inventory Restocked"
+      ],
+      "adapterDependencies": [
+        "owned_inventory"
+      ],
+      "unresolvedGates": [
+        "Inventory system, procedures and physical stock"
+      ]
+    },
+    {
+      "id": "media_rights",
+      "responsibility": "Media metadata, rights and exact subject assignments",
+      "canonicalRecords": [
+        "media_assignment",
+        "rights_record"
+      ],
+      "systemOfRecordStatus": "NOT_SELECTED",
+      "writeAuthority": "Media/rights owner",
+      "readConsumers": [
+        "storefront",
+        "search_projection",
+        "support"
+      ],
+      "inboundEvents": [
+        "Catalog Record Approved",
+        "Correction Published"
+      ],
+      "outboundEvents": [
+        "Media Assigned",
+        "Media Invalidated"
+      ],
+      "adapterDependencies": [
+        "media_document_storage"
+      ],
+      "unresolvedGates": [
+        "Production assets and usage rights"
+      ]
+    },
+    {
+      "id": "thca_proof",
+      "responsibility": "Proof documents, versions, exact applicability and currentness",
+      "canonicalRecords": [
+        "proof_document",
+        "proof_applicability"
+      ],
+      "systemOfRecordStatus": "NOT_SELECTED",
+      "writeAuthority": "Proof/compliance owner",
+      "readConsumers": [
+        "storefront",
+        "cart",
+        "order",
+        "support"
+      ],
+      "inboundEvents": [
+        "Catalog Record Approved",
+        "Variant Changed",
+        "Correction Published"
+      ],
+      "outboundEvents": [
+        "Proof Linked",
+        "Proof Became Stale",
+        "Proof Unmatched"
+      ],
+      "adapterDependencies": [
+        "media_document_storage"
+      ],
+      "unresolvedGates": [
+        "Real COAs, batches, rights and currentness rules"
+      ]
+    },
+    {
+      "id": "electronic_compatibility",
+      "responsibility": "Evidence-backed electronic endpoint relationships",
+      "canonicalRecords": [
+        "compatibility_relationship"
+      ],
+      "systemOfRecordStatus": "NOT_SELECTED",
+      "writeAuthority": "Technical compatibility verifier",
+      "readConsumers": [
+        "search_projection",
+        "storefront",
+        "cart",
+        "support"
+      ],
+      "inboundEvents": [
+        "Variant Changed",
+        "Correction Published"
+      ],
+      "outboundEvents": [
+        "Compatibility Verified",
+        "Compatibility Invalidated"
+      ],
+      "adapterDependencies": [],
+      "unresolvedGates": [
+        "Manufacturer or documented validation corpus"
+      ]
+    },
+    {
+      "id": "physical_fit",
+      "responsibility": "Evidence-backed physical geometry and pair-fit relationships",
+      "canonicalRecords": [
+        "physical_fit_relationship"
+      ],
+      "systemOfRecordStatus": "NOT_SELECTED",
+      "writeAuthority": "Receiving/product validation owner",
+      "readConsumers": [
+        "search_projection",
+        "storefront",
+        "cart",
+        "support"
+      ],
+      "inboundEvents": [
+        "Variant Changed",
+        "Correction Published"
+      ],
+      "outboundEvents": [
+        "Physical Fit Verified",
+        "Physical Fit Invalidated"
+      ],
+      "adapterDependencies": [],
+      "unresolvedGates": [
+        "Measurement procedures, records and pair tests"
+      ]
+    },
+    {
+      "id": "age_qualification",
+      "responsibility": "Minimized age qualification result and audit reference",
+      "canonicalRecords": [
+        "eligibility_evaluation:age"
+      ],
+      "systemOfRecordStatus": "NOT_SELECTED",
+      "writeAuthority": "Qualified compliance owner",
+      "readConsumers": [
+        "eligibility",
+        "cart",
+        "order"
+      ],
+      "inboundEvents": [
+        "Correction Published"
+      ],
+      "outboundEvents": [
+        "Eligibility Evaluated",
+        "Eligibility Evaluation Failed"
+      ],
+      "adapterDependencies": [
+        "age_verification"
+      ],
+      "unresolvedGates": [
+        "Rule scope, provider, privacy, retention and operations"
+      ]
+    },
+    {
+      "id": "eligibility",
+      "responsibility": "Exact destination/product/variant/fulfillment evaluations",
+      "canonicalRecords": [
+        "eligibility_evaluation:destination_product"
+      ],
+      "systemOfRecordStatus": "NOT_SELECTED",
+      "writeAuthority": "Qualified compliance owner",
+      "readConsumers": [
+        "storefront",
+        "cart",
+        "order",
+        "fulfillment",
+        "support"
+      ],
+      "inboundEvents": [
+        "Eligibility Evaluated",
+        "Fulfillment Method Selected",
+        "Cart Revalidated",
+        "Correction Published"
+      ],
+      "outboundEvents": [
+        "Eligibility Evaluated",
+        "Eligibility Evaluation Failed"
+      ],
+      "adapterDependencies": [
+        "eligibility_rule_evaluation"
+      ],
+      "unresolvedGates": [
+        "Qualified versioned rules and service"
+      ]
+    },
+    {
+      "id": "search_projection",
+      "responsibility": "Rebuildable whole-house search and discovery projections",
+      "canonicalRecords": [
+        "search_document",
+        "query_projection"
+      ],
+      "systemOfRecordStatus": "PROJECTION_ONLY",
+      "writeAuthority": "Projection builder",
+      "readConsumers": [
+        "storefront",
+        "support"
+      ],
+      "inboundEvents": [
+        "Catalog Record Approved",
+        "Variant Changed",
+        "Price Changed",
+        "Inventory Restocked",
+        "Media Assigned",
+        "Media Invalidated",
+        "Proof Linked",
+        "Proof Became Stale",
+        "Compatibility Verified",
+        "Compatibility Invalidated",
+        "Physical Fit Verified",
+        "Physical Fit Invalidated",
+        "Correction Published"
+      ],
+      "outboundEvents": [],
+      "adapterDependencies": [
+        "search"
+      ],
+      "unresolvedGates": [
+        "Search provider, ranking and coverage"
+      ]
+    },
+    {
+      "id": "cart",
+      "responsibility": "Cart lines, acknowledgments and composed readiness",
+      "canonicalRecords": [
+        "cart",
+        "cart_line"
+      ],
+      "systemOfRecordStatus": "NOT_SELECTED",
+      "writeAuthority": "Customer commands and cart orchestrator",
+      "readConsumers": [
+        "storefront",
+        "order",
+        "support"
+      ],
+      "inboundEvents": [
+        "Price Changed",
+        "Inventory Corrected",
+        "Eligibility Evaluated",
+        "Eligibility Evaluation Failed",
+        "Proof Became Stale",
+        "Compatibility Invalidated",
+        "Physical Fit Invalidated",
+        "Correction Published"
+      ],
+      "outboundEvents": [
+        "Cart Revalidated",
+        "Cart Line Blocked"
+      ],
+      "adapterDependencies": [
+        "commerce_platform"
+      ],
+      "unresolvedGates": [
+        "Session, retention and operational rules"
+      ]
+    },
+    {
+      "id": "order",
+      "responsibility": "Submitted orders, immutable line snapshots and lifecycle",
+      "canonicalRecords": [
+        "order",
+        "order_line"
+      ],
+      "systemOfRecordStatus": "NOT_SELECTED",
+      "writeAuthority": "Order orchestrator",
+      "readConsumers": [
+        "account",
+        "payment_boundary",
+        "fulfillment",
+        "support",
+        "audit"
+      ],
+      "inboundEvents": [
+        "Cart Revalidated",
+        "Payment Authorized",
+        "Payment Failed",
+        "Payment Captured",
+        "Payment Refunded",
+        "Fulfillment Method Selected"
+      ],
+      "outboundEvents": [
+        "Order Submitted"
+      ],
+      "adapterDependencies": [
+        "commerce_platform"
+      ],
+      "unresolvedGates": [
+        "Merchant, policy and identity decisions"
+      ]
+    },
+    {
+      "id": "fulfillment",
+      "responsibility": "Mode selection, allocation and shipping/pickup/delivery workflows",
+      "canonicalRecords": [
+        "fulfillment_selection",
+        "shipment",
+        "pickup",
+        "local_delivery"
+      ],
+      "systemOfRecordStatus": "NOT_SELECTED",
+      "writeAuthority": "Fulfillment operations",
+      "readConsumers": [
+        "order",
+        "account",
+        "support"
+      ],
+      "inboundEvents": [
+        "Order Submitted",
+        "Inventory Reserved",
+        "Eligibility Evaluated"
+      ],
+      "outboundEvents": [
+        "Fulfillment Method Selected",
+        "Shipment Created",
+        "Pickup Ready",
+        "Local Delivery Scheduled"
+      ],
+      "adapterDependencies": [
+        "carrier_shipping",
+        "york_pickup",
+        "york_delivery"
+      ],
+      "unresolvedGates": [
+        "Carriers and original mode procedures"
+      ]
+    },
+    {
+      "id": "payment_boundary",
+      "responsibility": "Minimized payment attempt and outcome references",
+      "canonicalRecords": [
+        "payment_outcome"
+      ],
+      "systemOfRecordStatus": "NOT_SELECTED",
+      "writeAuthority": "Finance/payment orchestrator",
+      "readConsumers": [
+        "order",
+        "support",
+        "audit"
+      ],
+      "inboundEvents": [
+        "Order Submitted"
+      ],
+      "outboundEvents": [
+        "Payment Authorized",
+        "Payment Failed",
+        "Payment Captured",
+        "Payment Refunded"
+      ],
+      "adapterDependencies": [
+        "payment_merchant"
+      ],
+      "unresolvedGates": [
+        "Merchant underwriting and processor"
+      ]
+    },
+    {
+      "id": "tax_boundary",
+      "responsibility": "Tax quote/commit outcome references",
+      "canonicalRecords": [
+        "tax_outcome"
+      ],
+      "systemOfRecordStatus": "NOT_SELECTED",
+      "writeAuthority": "Finance/tax owner",
+      "readConsumers": [
+        "cart",
+        "order",
+        "audit"
+      ],
+      "inboundEvents": [
+        "Cart Revalidated",
+        "Order Submitted"
+      ],
+      "outboundEvents": [],
+      "adapterDependencies": [
+        "tax"
+      ],
+      "unresolvedGates": [
+        "Qualified tax treatment and provider"
+      ]
+    },
+    {
+      "id": "identity_consent",
+      "responsibility": "Customer identity linkage and purpose-bound consent",
+      "canonicalRecords": [
+        "customer_reference",
+        "consent_record"
+      ],
+      "systemOfRecordStatus": "NOT_SELECTED",
+      "writeAuthority": "Customer and privacy-authorized operations",
+      "readConsumers": [
+        "cart",
+        "order",
+        "support",
+        "notifications",
+        "analytics"
+      ],
+      "inboundEvents": [
+        "Support Case Context Created",
+        "Correction Published"
+      ],
+      "outboundEvents": [
+        "Correction Published"
+      ],
+      "adapterDependencies": [
+        "customer_identity",
+        "consent"
+      ],
+      "unresolvedGates": [
+        "Privacy, retention, identity and consent providers"
+      ]
+    },
+    {
+      "id": "support",
+      "responsibility": "Cases and consented context bundles",
+      "canonicalRecords": [
+        "support_case",
+        "support_context_bundle"
+      ],
+      "systemOfRecordStatus": "NOT_SELECTED",
+      "writeAuthority": "Customer and authorized support staff",
+      "readConsumers": [
+        "account",
+        "operations",
+        "audit"
+      ],
+      "inboundEvents": [
+        "Support Case Context Created",
+        "Correction Published"
+      ],
+      "outboundEvents": [
+        "Support Case Context Created"
+      ],
+      "adapterDependencies": [
+        "customer_support"
+      ],
+      "unresolvedGates": [
+        "Channels, staffing, system and authority"
+      ]
+    },
+    {
+      "id": "policy_content",
+      "responsibility": "Approved effective policy and education content",
+      "canonicalRecords": [
+        "policy_record",
+        "content_record"
+      ],
+      "systemOfRecordStatus": "NOT_SELECTED",
+      "writeAuthority": "Qualified policy/operations/content owners",
+      "readConsumers": [
+        "storefront",
+        "cart",
+        "order",
+        "support"
+      ],
+      "inboundEvents": [
+        "Correction Published"
+      ],
+      "outboundEvents": [
+        "Correction Published"
+      ],
+      "adapterDependencies": [],
+      "unresolvedGates": [
+        "Original approved policies"
+      ]
+    },
+    {
+      "id": "audit_corrections",
+      "responsibility": "Immutable audit, provenance and correction propagation",
+      "canonicalRecords": [
+        "audit_record",
+        "correction_record"
+      ],
+      "systemOfRecordStatus": "NOT_SELECTED",
+      "writeAuthority": "Authorized domain owners and auditors",
+      "readConsumers": [
+        "all_domains"
+      ],
+      "inboundEvents": [
+        "all_canonical_events"
+      ],
+      "outboundEvents": [
+        "Correction Published"
+      ],
+      "adapterDependencies": [
+        "analytics_observability"
+      ],
+      "unresolvedGates": [
+        "Retention, roles and tooling"
+      ]
+    }
+  ],
+  "canonicalContracts": [
+    {
+      "id": "product",
+      "owningDomain": "Product and Catalog",
+      "stableIdentifierRequired": true,
+      "versionRequired": true,
+      "sourceAndEffectiveTimeRequired": true,
+      "verificationStatusRequired": true,
+      "staleUnknownBehavior": "Explicit; never omitted or converted to success",
+      "auditContextRequired": true
+    },
+    {
+      "id": "variant",
+      "owningDomain": "Variant and Option",
+      "stableIdentifierRequired": true,
+      "versionRequired": true,
+      "sourceAndEffectiveTimeRequired": true,
+      "verificationStatusRequired": true,
+      "staleUnknownBehavior": "Explicit; never omitted or converted to success",
+      "auditContextRequired": true
+    },
+    {
+      "id": "option",
+      "owningDomain": "Variant and Option",
+      "stableIdentifierRequired": true,
+      "versionRequired": true,
+      "sourceAndEffectiveTimeRequired": true,
+      "verificationStatusRequired": true,
+      "staleUnknownBehavior": "Explicit; never omitted or converted to success",
+      "auditContextRequired": true
+    },
+    {
+      "id": "price",
+      "owningDomain": "Price and Promotion",
+      "stableIdentifierRequired": true,
+      "versionRequired": true,
+      "sourceAndEffectiveTimeRequired": true,
+      "verificationStatusRequired": true,
+      "staleUnknownBehavior": "Explicit; never omitted or converted to success",
+      "auditContextRequired": true
+    },
+    {
+      "id": "inventory_position",
+      "owningDomain": "Inventory and Receiving",
+      "stableIdentifierRequired": true,
+      "versionRequired": true,
+      "sourceAndEffectiveTimeRequired": true,
+      "verificationStatusRequired": true,
+      "staleUnknownBehavior": "Explicit; never omitted or converted to success",
+      "auditContextRequired": true
+    },
+    {
+      "id": "inventory_reservation",
+      "owningDomain": "Inventory and Receiving",
+      "stableIdentifierRequired": true,
+      "versionRequired": true,
+      "sourceAndEffectiveTimeRequired": true,
+      "verificationStatusRequired": true,
+      "staleUnknownBehavior": "Explicit; never omitted or converted to success",
+      "auditContextRequired": true
+    },
+    {
+      "id": "media_assignment",
+      "owningDomain": "Media and Rights",
+      "stableIdentifierRequired": true,
+      "versionRequired": true,
+      "sourceAndEffectiveTimeRequired": true,
+      "verificationStatusRequired": true,
+      "staleUnknownBehavior": "Explicit; never omitted or converted to success",
+      "auditContextRequired": true
+    },
+    {
+      "id": "proof_document_applicability",
+      "owningDomain": "THCA Proof",
+      "stableIdentifierRequired": true,
+      "versionRequired": true,
+      "sourceAndEffectiveTimeRequired": true,
+      "verificationStatusRequired": true,
+      "staleUnknownBehavior": "Explicit; never omitted or converted to success",
+      "auditContextRequired": true
+    },
+    {
+      "id": "compatibility_relationship",
+      "owningDomain": "Electronic Compatibility",
+      "stableIdentifierRequired": true,
+      "versionRequired": true,
+      "sourceAndEffectiveTimeRequired": true,
+      "verificationStatusRequired": true,
+      "staleUnknownBehavior": "Explicit; never omitted or converted to success",
+      "auditContextRequired": true
+    },
+    {
+      "id": "physical_fit_relationship",
+      "owningDomain": "Physical Fit",
+      "stableIdentifierRequired": true,
+      "versionRequired": true,
+      "sourceAndEffectiveTimeRequired": true,
+      "verificationStatusRequired": true,
+      "staleUnknownBehavior": "Explicit; never omitted or converted to success",
+      "auditContextRequired": true
+    },
+    {
+      "id": "eligibility_evaluation",
+      "owningDomain": "Age Qualification / Destination and Product Eligibility by scope",
+      "stableIdentifierRequired": true,
+      "versionRequired": true,
+      "sourceAndEffectiveTimeRequired": true,
+      "verificationStatusRequired": true,
+      "staleUnknownBehavior": "Explicit; never omitted or converted to success",
+      "auditContextRequired": true
+    },
+    {
+      "id": "cart",
+      "owningDomain": "Cart",
+      "stableIdentifierRequired": true,
+      "versionRequired": true,
+      "sourceAndEffectiveTimeRequired": true,
+      "verificationStatusRequired": true,
+      "staleUnknownBehavior": "Explicit; never omitted or converted to success",
+      "auditContextRequired": true
+    },
+    {
+      "id": "cart_line",
+      "owningDomain": "Cart",
+      "stableIdentifierRequired": true,
+      "versionRequired": true,
+      "sourceAndEffectiveTimeRequired": true,
+      "verificationStatusRequired": true,
+      "staleUnknownBehavior": "Explicit; never omitted or converted to success",
+      "auditContextRequired": true
+    },
+    {
+      "id": "order",
+      "owningDomain": "Order",
+      "stableIdentifierRequired": true,
+      "versionRequired": true,
+      "sourceAndEffectiveTimeRequired": true,
+      "verificationStatusRequired": true,
+      "staleUnknownBehavior": "Explicit; never omitted or converted to success",
+      "auditContextRequired": true
+    },
+    {
+      "id": "order_line",
+      "owningDomain": "Order",
+      "stableIdentifierRequired": true,
+      "versionRequired": true,
+      "sourceAndEffectiveTimeRequired": true,
+      "verificationStatusRequired": true,
+      "staleUnknownBehavior": "Explicit; never omitted or converted to success",
+      "auditContextRequired": true
+    },
+    {
+      "id": "fulfillment_selection",
+      "owningDomain": "Fulfillment",
+      "stableIdentifierRequired": true,
+      "versionRequired": true,
+      "sourceAndEffectiveTimeRequired": true,
+      "verificationStatusRequired": true,
+      "staleUnknownBehavior": "Explicit; never omitted or converted to success",
+      "auditContextRequired": true
+    },
+    {
+      "id": "shipment",
+      "owningDomain": "Fulfillment",
+      "stableIdentifierRequired": true,
+      "versionRequired": true,
+      "sourceAndEffectiveTimeRequired": true,
+      "verificationStatusRequired": true,
+      "staleUnknownBehavior": "Explicit; never omitted or converted to success",
+      "auditContextRequired": true
+    },
+    {
+      "id": "pickup",
+      "owningDomain": "Fulfillment",
+      "stableIdentifierRequired": true,
+      "versionRequired": true,
+      "sourceAndEffectiveTimeRequired": true,
+      "verificationStatusRequired": true,
+      "staleUnknownBehavior": "Explicit; never omitted or converted to success",
+      "auditContextRequired": true
+    },
+    {
+      "id": "local_delivery",
+      "owningDomain": "Fulfillment",
+      "stableIdentifierRequired": true,
+      "versionRequired": true,
+      "sourceAndEffectiveTimeRequired": true,
+      "verificationStatusRequired": true,
+      "staleUnknownBehavior": "Explicit; never omitted or converted to success",
+      "auditContextRequired": true
+    },
+    {
+      "id": "support_context_bundle",
+      "owningDomain": "Customer Support",
+      "stableIdentifierRequired": true,
+      "versionRequired": true,
+      "sourceAndEffectiveTimeRequired": true,
+      "verificationStatusRequired": true,
+      "staleUnknownBehavior": "Explicit; never omitted or converted to success",
+      "auditContextRequired": true
+    },
+    {
+      "id": "consent_record",
+      "owningDomain": "Customer Identity and Consent",
+      "stableIdentifierRequired": true,
+      "versionRequired": true,
+      "sourceAndEffectiveTimeRequired": true,
+      "verificationStatusRequired": true,
+      "staleUnknownBehavior": "Explicit; never omitted or converted to success",
+      "auditContextRequired": true
+    },
+    {
+      "id": "audit_correction_record",
+      "owningDomain": "Audit, Provenance, and Corrections",
+      "stableIdentifierRequired": true,
+      "versionRequired": true,
+      "sourceAndEffectiveTimeRequired": true,
+      "verificationStatusRequired": true,
+      "staleUnknownBehavior": "Explicit; never omitted or converted to success",
+      "auditContextRequired": true
+    }
+  ],
+  "events": [
+    {
+      "name": "Catalog Record Approved",
+      "producer": "product_catalog",
+      "consumers": [
+        "variant_option",
+        "search_projection",
+        "media_rights"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_PRODUCT",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Variant Changed",
+      "producer": "variant_option",
+      "consumers": [
+        "price_promotion",
+        "inventory_receiving",
+        "search_projection",
+        "cart",
+        "thca_proof",
+        "electronic_compatibility",
+        "physical_fit"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_VARIANT",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Price Changed",
+      "producer": "price_promotion",
+      "consumers": [
+        "search_projection",
+        "cart",
+        "order"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_VARIANT_PRICE",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Inventory Received",
+      "producer": "inventory_receiving",
+      "consumers": [
+        "search_projection",
+        "fulfillment",
+        "audit_corrections"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_POSITION",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Inventory Reserved",
+      "producer": "inventory_receiving",
+      "consumers": [
+        "cart",
+        "order",
+        "fulfillment"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_RESERVATION_AND_POSITION",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Inventory Released",
+      "producer": "inventory_receiving",
+      "consumers": [
+        "cart",
+        "order",
+        "fulfillment"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_RESERVATION",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Inventory Corrected",
+      "producer": "inventory_receiving",
+      "consumers": [
+        "search_projection",
+        "cart",
+        "order",
+        "fulfillment",
+        "audit_corrections"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_POSITION",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Inventory Quarantined",
+      "producer": "inventory_receiving",
+      "consumers": [
+        "search_projection",
+        "cart",
+        "fulfillment",
+        "support"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_POSITION",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Inventory Restocked",
+      "producer": "inventory_receiving",
+      "consumers": [
+        "search_projection",
+        "cart",
+        "notifications"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_POSITION",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Media Assigned",
+      "producer": "media_rights",
+      "consumers": [
+        "search_projection",
+        "storefront",
+        "support"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_ASSIGNMENT",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Media Invalidated",
+      "producer": "media_rights",
+      "consumers": [
+        "search_projection",
+        "storefront",
+        "support"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_ASSIGNMENT",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Proof Linked",
+      "producer": "thca_proof",
+      "consumers": [
+        "search_projection",
+        "storefront",
+        "cart",
+        "order",
+        "support"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_APPLICABILITY",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Proof Became Stale",
+      "producer": "thca_proof",
+      "consumers": [
+        "storefront",
+        "cart",
+        "order",
+        "support"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_APPLICABILITY",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Proof Unmatched",
+      "producer": "thca_proof",
+      "consumers": [
+        "storefront",
+        "cart",
+        "support"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_DOCUMENT",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Compatibility Verified",
+      "producer": "electronic_compatibility",
+      "consumers": [
+        "search_projection",
+        "storefront",
+        "cart",
+        "support"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_RELATIONSHIP",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Compatibility Invalidated",
+      "producer": "electronic_compatibility",
+      "consumers": [
+        "search_projection",
+        "storefront",
+        "cart",
+        "support"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_RELATIONSHIP",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Physical Fit Verified",
+      "producer": "physical_fit",
+      "consumers": [
+        "search_projection",
+        "storefront",
+        "cart",
+        "support"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_RELATIONSHIP",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Physical Fit Invalidated",
+      "producer": "physical_fit",
+      "consumers": [
+        "search_projection",
+        "storefront",
+        "cart",
+        "support"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_RELATIONSHIP",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Eligibility Evaluated",
+      "producer": "age_qualification_or_eligibility",
+      "consumers": [
+        "cart",
+        "order",
+        "fulfillment",
+        "audit_corrections"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_EVALUATION_CONTEXT",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Eligibility Evaluation Failed",
+      "producer": "age_qualification_or_eligibility",
+      "consumers": [
+        "cart",
+        "order",
+        "support",
+        "operations"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_ATTEMPT",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Cart Revalidated",
+      "producer": "cart",
+      "consumers": [
+        "storefront",
+        "order",
+        "support",
+        "audit_corrections"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_CART",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Cart Line Blocked",
+      "producer": "cart",
+      "consumers": [
+        "storefront",
+        "support",
+        "audit_corrections"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_CART_LINE",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Order Submitted",
+      "producer": "order",
+      "consumers": [
+        "payment_boundary",
+        "inventory_receiving",
+        "tax_boundary",
+        "fulfillment",
+        "support"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_ORDER",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Payment Authorized",
+      "producer": "payment_boundary",
+      "consumers": [
+        "order",
+        "inventory_receiving",
+        "fulfillment",
+        "audit_corrections"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_PAYMENT_ATTEMPT",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Payment Failed",
+      "producer": "payment_boundary",
+      "consumers": [
+        "order",
+        "cart",
+        "support"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_PAYMENT_ATTEMPT",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Payment Captured",
+      "producer": "payment_boundary",
+      "consumers": [
+        "order",
+        "fulfillment",
+        "audit_corrections"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_PAYMENT_ATTEMPT",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Payment Refunded",
+      "producer": "payment_boundary",
+      "consumers": [
+        "order",
+        "support",
+        "audit_corrections"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_REFUND",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Fulfillment Method Selected",
+      "producer": "fulfillment",
+      "consumers": [
+        "eligibility",
+        "inventory_receiving",
+        "tax_boundary",
+        "order"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_SELECTION",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Shipment Created",
+      "producer": "fulfillment",
+      "consumers": [
+        "order",
+        "identity_consent",
+        "support"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_SHIPMENT",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Pickup Ready",
+      "producer": "fulfillment",
+      "consumers": [
+        "order",
+        "identity_consent",
+        "support",
+        "notifications"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_PICKUP",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Local Delivery Scheduled",
+      "producer": "fulfillment",
+      "consumers": [
+        "order",
+        "identity_consent",
+        "support",
+        "notifications"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_DELIVERY",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Support Case Context Created",
+      "producer": "support",
+      "consumers": [
+        "identity_consent",
+        "operations",
+        "audit_corrections"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_CASE",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    },
+    {
+      "name": "Correction Published",
+      "producer": "audit_corrections",
+      "consumers": [
+        "all_affected_consumers"
+      ],
+      "idempotencyRequired": true,
+      "orderingRequirement": "PER_TARGET_RECORD",
+      "failurePolicy": "Retry with durable audit; never fabricate success; revalidate or suppress affected high-risk state"
+    }
+  ],
+  "stateMachines": [
+    {
+      "id": "purchase_readiness",
+      "orderedStates": [
+        "age qualification",
+        "destination eligibility",
+        "product-specific eligibility",
+        "selected-variant availability",
+        "required-option completeness",
+        "compatibility",
+        "required components",
+        "material proof requirements",
+        "price resolution",
+        "purchase-method completeness",
+        "CTA/progression readiness"
+      ],
+      "derivedResult": true
+    },
+    {
+      "id": "inventory_reservation",
+      "states": [
+        "REQUESTED",
+        "RESERVED",
+        "COMMITTED",
+        "RELEASED",
+        "FAILED",
+        "EXPIRED"
+      ],
+      "durationPolicy": "OPEN"
+    },
+    {
+      "id": "cart",
+      "states": [
+        "ACTIVE",
+        "REVALIDATING",
+        "READY",
+        "ACTION_REQUIRED",
+        "BLOCKED",
+        "UNKNOWN",
+        "SERVICE_ERROR",
+        "SUBMISSION_PENDING",
+        "SUBMITTED",
+        "ABANDONED"
+      ]
+    },
+    {
+      "id": "order",
+      "states": [
+        "SUBMISSION_PENDING",
+        "SUBMITTED",
+        "PAYMENT_PENDING",
+        "PAYMENT_AUTHORIZED",
+        "PAYMENT_FAILED",
+        "PAYMENT_OUTCOME_UNKNOWN",
+        "ACCEPTED",
+        "FULFILLMENT_IN_PROGRESS",
+        "COMPLETED"
+      ]
+    },
+    {
+      "id": "fulfillment",
+      "states": [
+        "UNSELECTED",
+        "MODE_SELECTED",
+        "ELIGIBILITY_ALLOCATION_PENDING",
+        "READY_FOR_HANDOFF",
+        "IN_PROGRESS",
+        "COMPLETED",
+        "FAILED",
+        "EXCEPTION"
+      ]
+    },
+    {
+      "id": "proof",
+      "states": [
+        "MISSING",
+        "NOT_SUPPLIED",
+        "UNMATCHED",
+        "CURRENT",
+        "STALE",
+        "SUPERSEDED",
+        "INVALIDATED",
+        "ARCHIVED"
+      ]
+    },
+    {
+      "id": "compatibility_fit",
+      "states": [
+        "COMPATIBLE",
+        "INCOMPATIBLE",
+        "CONDITIONALLY_COMPATIBLE",
+        "UNIVERSAL_BOUNDED",
+        "UNKNOWN_UNVERIFIED",
+        "NOT_APPLICABLE",
+        "INVALIDATED"
+      ]
+    },
+    {
+      "id": "eligibility",
+      "states": [
+        "NOT_EVALUATED",
+        "EVALUATING",
+        "ELIGIBLE",
+        "INELIGIBLE",
+        "UNKNOWN",
+        "SERVICE_ERROR"
+      ]
+    }
+  ],
+  "fulfillmentModes": [
+    {
+      "id": "nationwide_eligible_shipping",
+      "scope": "Where exact customer, product, destination and method are eligible",
+      "universalEligibility": false
+    },
+    {
+      "id": "york_pa_pickup",
+      "scope": "York, Pennsylvania only"
+    },
+    {
+      "id": "york_pa_local_delivery",
+      "scope": "York, Pennsylvania only"
+    }
+  ],
+  "adapters": [
+    {
+      "capability": "commerce_platform",
+      "selectionStatus": "NOT_SELECTED",
+      "requiredInputs": [
+        "approved catalog",
+        "cart/order commands"
+      ],
+      "requiredOutputs": [
+        "external references",
+        "commerce outcomes"
+      ],
+      "sensitiveData": [
+        "customer",
+        "order"
+      ],
+      "failMode": "Preserve canonical context and block affected action",
+      "portabilityRequirement": "Documented complete export, stable canonical mappings, and tested provider replacement"
+    },
+    {
+      "capability": "payment_merchant",
+      "selectionStatus": "NOT_SELECTED",
+      "requiredInputs": [
+        "order",
+        "payment attempt",
+        "amount/currency"
+      ],
+      "requiredOutputs": [
+        "authorized/failed/captured/refunded/unknown"
+      ],
+      "sensitiveData": [
+        "payment",
+        "customer",
+        "order"
+      ],
+      "failMode": "Unknown outcome blocks retry charge pending reconciliation",
+      "portabilityRequirement": "Documented complete export, stable canonical mappings, and tested provider replacement"
+    },
+    {
+      "capability": "age_verification",
+      "selectionStatus": "NOT_SELECTED",
+      "requiredInputs": [
+        "minimal qualification context",
+        "rule scope"
+      ],
+      "requiredOutputs": [
+        "qualification result/reference/version or error"
+      ],
+      "sensitiveData": [
+        "identity",
+        "age evidence"
+      ],
+      "failMode": "Service Error/Unknown; never infer qualification",
+      "portabilityRequirement": "Documented complete export, stable canonical mappings, and tested provider replacement"
+    },
+    {
+      "capability": "eligibility_rule_evaluation",
+      "selectionStatus": "NOT_SELECTED",
+      "requiredInputs": [
+        "age result",
+        "destination",
+        "exact product/variant",
+        "fulfillment method",
+        "rule version"
+      ],
+      "requiredOutputs": [
+        "eligible/ineligible/unknown/error"
+      ],
+      "sensitiveData": [
+        "destination",
+        "regulated commerce"
+      ],
+      "failMode": "No default allowed; preserve context",
+      "portabilityRequirement": "Documented complete export, stable canonical mappings, and tested provider replacement"
+    },
+    {
+      "capability": "tax",
+      "selectionStatus": "NOT_SELECTED",
+      "requiredInputs": [
+        "address",
+        "product",
+        "price",
+        "fulfillment",
+        "order"
+      ],
+      "requiredOutputs": [
+        "quote/commit/refund tax outcome"
+      ],
+      "sensitiveData": [
+        "address",
+        "transaction"
+      ],
+      "failMode": "Block final total when material",
+      "portabilityRequirement": "Documented complete export, stable canonical mappings, and tested provider replacement"
+    },
+    {
+      "capability": "carrier_shipping",
+      "selectionStatus": "NOT_SELECTED",
+      "requiredInputs": [
+        "eligible shipment",
+        "package",
+        "address"
+      ],
+      "requiredOutputs": [
+        "services/rates/label/status/error"
+      ],
+      "sensitiveData": [
+        "address",
+        "contact",
+        "order"
+      ],
+      "failMode": "No invented rate or promise",
+      "portabilityRequirement": "Documented complete export, stable canonical mappings, and tested provider replacement"
+    },
+    {
+      "capability": "york_pickup",
+      "selectionStatus": "NOT_SELECTED",
+      "requiredInputs": [
+        "eligible pickup",
+        "location",
+        "allocation",
+        "order"
+      ],
+      "requiredOutputs": [
+        "accepted/ready/released/exception"
+      ],
+      "sensitiveData": [
+        "identity",
+        "contact",
+        "order"
+      ],
+      "failMode": "Preserve order; no false Ready",
+      "portabilityRequirement": "Documented complete export, stable canonical mappings, and tested provider replacement"
+    },
+    {
+      "capability": "york_delivery",
+      "selectionStatus": "NOT_SELECTED",
+      "requiredInputs": [
+        "eligible York delivery",
+        "address",
+        "allocation",
+        "order"
+      ],
+      "requiredOutputs": [
+        "zone/schedule/handoff/status"
+      ],
+      "sensitiveData": [
+        "address",
+        "contact",
+        "order"
+      ],
+      "failMode": "Delivery service error distinct from product ineligibility",
+      "portabilityRequirement": "Documented complete export, stable canonical mappings, and tested provider replacement"
+    },
+    {
+      "capability": "catalog_pim",
+      "selectionStatus": "NOT_SELECTED",
+      "requiredInputs": [
+        "supplier/maker source records",
+        "governed intake"
+      ],
+      "requiredOutputs": [
+        "mapped draft/approved data"
+      ],
+      "sensitiveData": [
+        "supplier commercial"
+      ],
+      "failMode": "Never auto-publish or overwrite approval",
+      "portabilityRequirement": "Documented complete export, stable canonical mappings, and tested provider replacement"
+    },
+    {
+      "capability": "owned_inventory",
+      "selectionStatus": "NOT_SELECTED",
+      "requiredInputs": [
+        "receipts",
+        "variants",
+        "locations",
+        "reservations",
+        "corrections"
+      ],
+      "requiredOutputs": [
+        "positions",
+        "outcomes",
+        "events"
+      ],
+      "sensitiveData": [
+        "commercial",
+        "operational"
+      ],
+      "failMode": "Return current conflict; no assumed stock",
+      "portabilityRequirement": "Documented complete export, stable canonical mappings, and tested provider replacement"
+    },
+    {
+      "capability": "search",
+      "selectionStatus": "NOT_SELECTED",
+      "requiredInputs": [
+        "approved projection documents",
+        "query",
+        "scope"
+      ],
+      "requiredOutputs": [
+        "typed results",
+        "rationale refs",
+        "health"
+      ],
+      "sensitiveData": [
+        "queries"
+      ],
+      "failMode": "Browse/support recovery; no inferred relationship",
+      "portabilityRequirement": "Documented complete export, stable canonical mappings, and tested provider replacement"
+    },
+    {
+      "capability": "media_document_storage",
+      "selectionStatus": "NOT_SELECTED",
+      "requiredInputs": [
+        "approved bytes",
+        "metadata",
+        "rights/access command"
+      ],
+      "requiredOutputs": [
+        "immutable object/version/access outcome"
+      ],
+      "sensitiveData": [
+        "rights",
+        "proof documents"
+      ],
+      "failMode": "Text fallback; access error distinct from Missing",
+      "portabilityRequirement": "Documented complete export, stable canonical mappings, and tested provider replacement"
+    },
+    {
+      "capability": "customer_identity",
+      "selectionStatus": "NOT_SELECTED",
+      "requiredInputs": [
+        "sign-in/account command"
+      ],
+      "requiredOutputs": [
+        "subject/session/reference/outcome"
+      ],
+      "sensitiveData": [
+        "PII",
+        "credentials"
+      ],
+      "failMode": "Protect data and offer safe re-auth",
+      "portabilityRequirement": "Documented complete export, stable canonical mappings, and tested provider replacement"
+    },
+    {
+      "capability": "consent",
+      "selectionStatus": "NOT_SELECTED",
+      "requiredInputs": [
+        "subject",
+        "purpose",
+        "scope",
+        "policy version"
+      ],
+      "requiredOutputs": [
+        "granted/denied/revoked/error"
+      ],
+      "sensitiveData": [
+        "PII",
+        "preferences"
+      ],
+      "failMode": "Absence/error means no consent",
+      "portabilityRequirement": "Documented complete export, stable canonical mappings, and tested provider replacement"
+    },
+    {
+      "capability": "customer_support",
+      "selectionStatus": "NOT_SELECTED",
+      "requiredInputs": [
+        "context bundle",
+        "case command",
+        "attachments"
+      ],
+      "requiredOutputs": [
+        "case/reference/status/error"
+      ],
+      "sensitiveData": [
+        "PII",
+        "orders",
+        "attachments"
+      ],
+      "failMode": "Preserve safe draft and idempotent retry",
+      "portabilityRequirement": "Documented complete export, stable canonical mappings, and tested provider replacement"
+    },
+    {
+      "capability": "notifications",
+      "selectionStatus": "NOT_SELECTED",
+      "requiredInputs": [
+        "authorized consent",
+        "exact event/template/contact"
+      ],
+      "requiredOutputs": [
+        "accepted/delivered/failed/unsubscribed"
+      ],
+      "sensitiveData": [
+        "contact",
+        "preferences"
+      ],
+      "failMode": "Commerce not dependent on marketing delivery",
+      "portabilityRequirement": "Documented complete export, stable canonical mappings, and tested provider replacement"
+    },
+    {
+      "capability": "analytics_observability",
+      "selectionStatus": "NOT_SELECTED",
+      "requiredInputs": [
+        "minimized events",
+        "metrics",
+        "traces",
+        "logs"
+      ],
+      "requiredOutputs": [
+        "aggregates",
+        "alerts",
+        "diagnostic refs"
+      ],
+      "sensitiveData": [
+        "redacted or pseudonymous only"
+      ],
+      "failMode": "Analytics outage non-blocking; critical telemetry durable",
+      "portabilityRequirement": "Documented complete export, stable canonical mappings, and tested provider replacement"
+    }
+  ],
+  "architectureDecisions": [
+    {
+      "id": "ADR-01",
+      "decision": "Modular monolith with bounded modules, transactional outbox, read projections and logical isolation",
+      "status": "PROVISIONALLY_ACCEPTED"
+    },
+    {
+      "id": "ADR-02",
+      "decision": "Blowin' Smoke canonical ownership and stable identifiers; provider IDs are aliases",
+      "status": "ACCEPTED"
+    },
+    {
+      "id": "ADR-03",
+      "decision": "Replaceable versioned provider-adapter boundaries",
+      "status": "ACCEPTED"
+    },
+    {
+      "id": "ADR-04",
+      "decision": "Transactional outbox and idempotent correction propagation",
+      "status": "PROVISIONALLY_ACCEPTED"
+    },
+    {
+      "id": "ADR-05",
+      "decision": "Fail-safe exact-order composed purchase readiness",
+      "status": "ACCEPTED"
+    },
+    {
+      "id": "ADR-06",
+      "decision": "Owned inventory with separate nationwide eligible shipping, York pickup and York delivery",
+      "status": "ACCEPTED"
+    }
+  ],
+  "unresolvedGates": [
+    "Supplier, distributor and authoritative cross-division pilot catalog feasibility",
+    "Merchant underwriting and payment feasibility",
+    "Qualified age, destination, product, proof, privacy and retention rules",
+    "Tax authority and calculation requirements",
+    "Inventory system, receiving, reservation and correction procedures",
+    "Original shipping, pickup, local delivery, returns, damage, warranty and support procedures",
+    "Real product media and rights, COAs/batches, compatibility evidence and physical measurements/fit tests",
+    "Final provider/platform selection and quantitative SLOs",
+    "Separate production implementation authorization",
+    "Separate launch readiness approval"
+  ],
+  "readinessClassifications": {
+    "vendorNeutralArchitectureSpecification": "COMPLETE",
+    "supplierPilotCatalogFeasibility": "NOT_RESOLVED",
+    "finalPlatformProviderSelection": "NOT_AUTHORIZED",
+    "productionImplementation": "NOT_AUTHORIZED",
+    "launch": "NOT_READY"
+  }
+}
