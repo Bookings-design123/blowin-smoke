@@ -1,42 +1,146 @@
 {
   "schemaVersion": "1.0",
-  "packageVersion": "1.0",
+  "packageVersion": "1.1",
   "packageId": "SEC-02",
   "packageName": "Blowin' Smoke Security, Privacy, Cryptography, Onion, and Private Wholesale Feasibility and Assurance Gate",
   "assessmentDate": "2026-08-14",
-  "sourceCommit": "9f898f382a086c5f1b6ac5503c827f8a6dc5336b",
+  "sourceCommit": "d54e2569b1961c51c24f01ef64a75ec135ba2043",
   "documentationOnly": true,
   "productionImplementationAuthorized": false,
   "productionStackSelected": false,
   "authority": {
     "governingBaseline": "docs/security-architecture/",
     "baselinePackageId": "SEC-01",
-    "baselineDisposition": "PRESERVED_UNLESS_A_TECHNICAL_CONTRADICTION_IS_EXPLICITLY_RECORDED",
+    "baselineDisposition": "PRESERVED_EXCEPT_EXPLICIT_NARROW_SUPERSESSION_OF_SEC_01_BROWSER_CLIENT_SELECTION_FOR_PROTECTED_PRIVATE_WHOLESALE",
+    "sec01Supersession": {
+      "scope": "PROTECTED_PRIVATE_WHOLESALE_CLIENT_SELECTION_ONLY",
+      "browserE2eeDisposition": "RESEARCH_ONLY_CONDITIONAL_FEASIBILITY_ZERO_PROTECTED_PAYLOAD",
+      "protectedPlaintextRequirement": "FUTURE_SIGNED_APPROVED_CLIENT_PASSING_HARD_FAIL_CLOSED_RELEASE_GATE",
+      "preserved": "SEC_01_CRYPTOGRAPHIC_ENDPOINT_LIFECYCLE_RECOVERY_DECLASSIFICATION_CANONICAL_OWNERSHIP_AND_ONION_REQUIREMENTS",
+      "annotatedEntryPoints": [
+        "docs/security-architecture/README.md",
+        "docs/security-architecture/04-private-wholesale-e2ee-architecture.md",
+        "docs/security-architecture/security-registry.json"
+      ]
+    },
     "parentArchitectures": [
       "docs/technical-architecture/",
       "docs/delivery-network/"
     ],
     "sourceBoundary": {
-      "suppliedBriefLines": 715,
-      "suppliedBriefBytes": 21783,
-      "endsWithPartialText": "EXPIRES_VIEW_AT = FIRST",
-      "truncationPoint": "MID_EXPIRES_VIEW_AT_FORMULA",
-      "rule": "NO_ABSENT_TAIL_TEXT_IS_TREATED_AS_AN_OWNER_DECISION",
-      "manifestBasis": "SURVIVING_OWNER_REQUIREMENTS_ONLY"
+      "originalBrief": {
+        "lines": 715,
+        "bytes": 21783,
+        "endsWithPartialText": "EXPIRES_VIEW_AT = FIRST",
+        "truncationPoint": "MID_EXPIRES_VIEW_AT_FORMULA",
+        "rule": "NO_ABSENT_TAIL_TEXT_WAS_TREATED_AS_AN_OWNER_DECISION_IN_VERSION_1_0"
+      },
+      "correctionBrief": {
+        "lines": 1040,
+        "bytes": 30028,
+        "complete": true,
+        "governingCorrection": "PRIVATE_WHOLESALE_PROTECTED_CONTENT_IS_A_HARD_FAIL_CLOSED_RELEASE_GATE",
+        "manifestBasis": "FIRST_VIEW_AT_WITH_EXPIRES_VIEW_AT_PLUS_5_MINUTES_AND_DISPUTE_BEGIN_BY_PLUS_30_MINUTES_CONFIRMED"
+      }
     }
   },
   "status": {
     "feasibilityGate": "COMPLETE_FOR_CURRENT_EVIDENCE_PHASE",
     "ordinaryBrowserRetail": "PASS_FEASIBILITY_IMPLEMENTATION_NOT_VERIFIED",
-    "browserServerBlindWholesaleMessaging": "CONDITIONAL_NO_IMPLEMENTATION_SELECTED",
-    "pwaAsSecurityBoundary": "FAIL",
-    "signedNativeWholesaleClient": "CONDITIONAL_FUTURE_OPTION",
+    "browserServerBlindWholesaleMessaging": "CONDITIONAL_CRYPTOGRAPHIC_FEASIBILITY_NO_IMPLEMENTATION_SELECTED",
+    "browserProtectedWholesaleClient": "REJECTED_FOR_PROTECTED_WHOLESALE",
+    "pwaAsSecurityBoundary": "FAIL_REJECTED_FOR_PROTECTED_WHOLESALE",
+    "privateWholesaleProtectedContent": "HARD_RELEASE_GATE_CONDITIONAL_NOT_YET_VERIFIED",
+    "signedNativeWholesaleClient": "REQUIRED_FOR_PROTECTED_WHOLESALE_NO_CLIENT_APPROVED",
+    "nativeAndroidWholesaleClient": "CONDITIONAL_CANDIDATE",
+    "nativeIosIpadosWholesaleClient": "REJECTED_FOR_PROTECTED_WHOLESALE",
+    "nativeWindowsWholesaleClient": "CONDITIONAL_CANDIDATE",
+    "nativeMacosWholesaleClient": "REJECTED_FOR_PROTECTED_WHOLESALE",
+    "managedAndroidWholesaleClient": "CONDITIONAL_CANDIDATE_SEPARATE_ENTERPRISE_CASE",
+    "managedAppleWholesaleClient": "CONDITIONAL_CANDIDATE_SEPARATE_ENTERPRISE_CASE",
+    "managedWindowsWholesaleClient": "CONDITIONAL_CANDIDATE_SEPARATE_ENTERPRISE_CASE",
     "universalCapturePrevention": "FAIL",
     "manifestAccessExpiration": "CONDITIONAL_NOT_DELETION",
     "optionalOnionEntrance": "CONDITIONAL_OPERATIONS_AND_TESTING_REQUIRED",
     "providerPlatformLibrarySelection": "NOT_AUTHORIZED",
     "productionImplementation": "NOT_AUTHORIZED",
     "launchReadiness": "NOT_ESTABLISHED"
+  },
+  "protectedContentMode": {
+    "releaseGate": true,
+    "productionApprovedClients": [],
+    "approvedCandidates": [],
+    "conditionalCandidates": [
+      "ANDROID_NATIVE_12_PLUS_PROVISIONAL",
+      "WINDOWS_NATIVE_10_2004_PLUS_PROVISIONAL",
+      "MANAGED_ANDROID_ENDPOINT",
+      "MANAGED_IOS_IPADOS_ENDPOINT",
+      "MANAGED_MACOS_ENDPOINT",
+      "MANAGED_WINDOWS_ENDPOINT"
+    ],
+    "rejectedClients": [
+      "DESKTOP_CHROMIUM_BROWSER",
+      "DESKTOP_SAFARI_BROWSER",
+      "DESKTOP_FIREFOX_BROWSER",
+      "MOBILE_CHROMIUM_BROWSER",
+      "MOBILE_SAFARI_BROWSER",
+      "MOBILE_FIREFOX_BROWSER",
+      "DESKTOP_PWA",
+      "MOBILE_PWA",
+      "IOS_IPADOS_NATIVE_UNMANAGED",
+      "MACOS_NATIVE_UNMANAGED",
+      "ANDROID_NATIVE_11_AND_LOWER",
+      "WINDOWS_NATIVE_PRE_10_2004_OR_UNSUPPORTED_EDITION",
+      "TOR_BROWSER_FOR_PROTECTED_WHOLESALE",
+      "ALL_UNLISTED_UNSUPPORTED_OR_UNVERIFIED_CLIENTS"
+    ],
+    "requiredContentControls": [
+      "COPY",
+      "CUT",
+      "FORWARD_SHARE",
+      "DOWNLOAD",
+      "SAVE",
+      "OPEN_ORIGINAL",
+      "PRINT",
+      "DRAG_DROP",
+      "EXPORT",
+      "DURABLE_ASSET_URL",
+      "UNPROTECTED_OFFLINE_CACHE",
+      "BULK_ENUMERATION",
+      "UNAUTHORIZED_API_RETRIEVAL"
+    ],
+    "capturePropertiesEvaluatedSeparately": [
+      "SCREENSHOT",
+      "SCREEN_RECORDING",
+      "DISPLAY_MIRRORING",
+      "NON_SECURE_DISPLAY",
+      "CAPTURE_DETECTION",
+      "CAPTURE_REDACTION_OR_EXCLUSION"
+    ],
+    "controlVocabulary": {
+      "enforcement": ["OS_ENFORCED", "APPLICATION_ENFORCED", "NOT_ENFORCEABLE"],
+      "assurance": ["GUARANTEED", "BEST_EFFORT", "NOT_YET_VERIFIED", "NOT_POSSIBLE"],
+      "verification": ["DOCUMENTED_PLATFORM_BOUNDARY", "NOT_YET_VERIFIED_IN_BLOWIN_SMOKE"]
+    },
+    "failClosed": {
+      "required": true,
+      "unknownOrStaleState": "DENY",
+      "unsupportedClientMayReceive": "GENERIC_APPROVED_CLIENT_GUIDANCE_ONLY",
+      "unsupportedClientMustNotReceive": [
+        "WHOLESALE_MENU",
+        "WHOLESALE_PRICES",
+        "INVENTORY",
+        "PROTECTED_MEDIA",
+        "PRIVATE_MESSAGES",
+        "NEGOTIATION_HISTORY",
+        "PRIVATE_MANIFEST",
+        "PRIVATE_OBJECT_IDENTIFIERS_OR_PRELOADS"
+      ],
+      "selfAssertedUserAgentUrlParameterOrBooleanSufficient": false
+    },
+    "secondCameraPrevention": "FAIL_NOT_POSSIBLE",
+    "watermarkRole": "DEFENSE_IN_DEPTH_DETERRENCE_AND_LIMITED_ATTRIBUTION_NOT_RELEASE_GATE_SUBSTITUTE",
+    "governingDocument": "docs/security-assurance/private-wholesale-protected-content-assurance.md"
   },
   "assuranceEvidenceStatus": {
     "operationalClaimsAuthorized": false,
@@ -57,6 +161,21 @@
       "ATTRIBUTION": "MAY_CONNECT_A_LEAK_TO_AN_ACCOUNT_OR_SESSION_SUBJECT_TO_EVIDENTIARY_LIMITS",
       "NOT_YET_VERIFIED": "FEASIBILITY_ASSESSED_BUT_NO_IMPLEMENTATION_OR_TEST_EVIDENCE_SUPPORTS_AN_OPERATIONAL_ASSURANCE_CLAIM",
       "NOT_POSSIBLE": "THE PRODUCT_LACKS_AUTHORITY_TO_ENFORCE_THE PROPERTY_IN_THE_STATED_ENVIRONMENT"
+    },
+    "enforcement": {
+      "OS_ENFORCED": "THE_SUPPORTED_OPERATING_SYSTEM_ENFORCES_THE_NAMED_CONTROL_INSIDE_THE_EXACT_DECLARED_PATH",
+      "APPLICATION_ENFORCED": "THE_SIGNED_CLIENT_OR_SERVICE_OWNS_AND_DENIES_THE_NAMED_COMMAND_OR_DELIVERY_PATH",
+      "NOT_ENFORCEABLE": "NO_QUALIFYING_SUPPORTED_TARGET_CONTROLLED_MECHANISM_WAS_VERIFIED_FOR_THE_PROPERTY"
+    },
+    "verification": {
+      "DOCUMENTED_PLATFORM_BOUNDARY": "AUTHORITATIVE_PLATFORM_OR_PRODUCT_EVIDENCE_ESTABLISHES_THE_ASSESSED_BOUNDARY_BUT_NOT_A_BLOWIN_SMOKE_IMPLEMENTATION",
+      "NOT_YET_VERIFIED_IN_BLOWIN_SMOKE": "NO_BLOWIN_SMOKE_BUILD_AND_TEST_EVIDENCE_ESTABLISHES_THE_OPERATIONAL_PROPERTY"
+    },
+    "clientDisposition": {
+      "APPROVED_CANDIDATE": "SUFFICIENT_EVIDENCE_TO_ENTER_FINAL_APPROVAL_REVIEW_NOT_PRODUCTION_APPROVAL",
+      "CONDITIONAL_CANDIDATE": "PLAUSIBLE_SUPPORTED_PATH_WITH_MANDATORY_PROOFS_STILL_OPEN",
+      "REJECTED_FOR_PROTECTED_WHOLESALE": "CURRENT_CLIENT_CLASS_CANNOT_MEET_THE_HARD_GATE_AND_MUST_RECEIVE_NO_PROTECTED_CONTENT",
+      "IRREDUCIBLE_RESIDUAL": "PROPERTY_IS_OUTSIDE_SOFTWARE_AUTHORITY_AND_MUST_BE_EXPLICITLY_DISCLOSED"
     }
   },
   "findings": [
@@ -115,15 +234,15 @@
     {
       "id": "F-05",
       "requirement": "OPEN_INQUIRY_SELECTIVELY_SHARED_OR_ADVERTISED_PRIVATE_LINK_AND_ACCOUNT_GATED_NONINDEXED_ROOM",
-      "status": "PASS",
+      "status": "CONDITIONAL",
       "assurance": "NOT_YET_VERIFIED",
       "evidence": ["SEC-01_ACCESS_CONTROL"],
-      "reasoning": "A selectively shared or advertised link can support if-you-know-you-know discovery or inquiry, but it is never room authority and must reveal no private inventory or pricing without an approved account and current grant.",
-      "residualRisk": "LINK_SHARING_ACCOUNT_ABUSE_INDEXING_MISTAKES_AND_INSIDER_ACCESS",
-      "prerequisites": ["DENY_BY_DEFAULT_OBJECT_AUTHORIZATION", "NO_PUBLIC_ENUMERATION", "ABUSE_CONTROLS"],
-      "uxConsequence": "INQUIRY_REMAINS_OPEN_WITH_OR_WITHOUT_THE_LINK_WHILE_ROOM_ENTRY_REQUIRES_ACCOUNT_AND_GRANT",
-      "implementationImplication": "TREAT_THE_LINK_AS_DISCOVERY_ONLY_AND_NEVER_AS_DATA_OR_ROOM_AUTHORITY",
-      "ownerDecision": "DEFINE_QUALIFICATION_APPROVAL_SUSPENSION_APPEAL_AND_LINK_ADVERTISING_OPERATIONS"
+      "reasoning": "A selectively shared or advertised link can support public inquiry and approved-client onboarding, but actual room entry additionally requires a signed approved client, trusted endpoint, supported capture-control and integrity state, current grants, and freshness; the link itself is never authority.",
+      "residualRisk": "LINK_SHARING_ACCOUNT_ABUSE_INDEXING_MISTAKES_CLIENT_SPOOFING_STALE_INTEGRITY_AND_INSIDER_ACCESS",
+      "prerequisites": ["AUTHENTICATED_APPROVED_ACCOUNT", "CURRENT_ROOM_AND_RESOURCE_GRANT", "SIGNED_APPROVED_CLIENT", "SUPPORTED_CAPTURE_CONTROL_AND_INTEGRITY_STATE", "TRUSTED_ENDPOINT", "FAIL_CLOSED_OBJECT_AUTHORIZATION", "NO_PUBLIC_ENUMERATION", "ABUSE_CONTROLS"],
+      "uxConsequence": "INQUIRY_REMAINS_OPEN_WHILE_ONLY_REQUESTS_PASSING_THE_COMPLETE_PROTECTED_CLIENT_GATE_ENTER",
+      "implementationImplication": "TREAT_THE_LINK_AS_DISCOVERY_ONLY_AND_RETURN_GENERIC_ONBOARDING_WITH_ZERO_PROTECTED_PAYLOAD_TO_UNSUPPORTED_CLIENTS",
+      "ownerDecision": "DEFINE_QUALIFICATION_APPROVAL_SUSPENSION_APPEAL_LINK_ADVERTISING_AND_APPROVED_CLIENT_OPERATIONS"
     },
     {
       "id": "F-06",
@@ -157,11 +276,11 @@
       "status": "CONDITIONAL",
       "assurance": "BEST_EFFORT",
       "evidence": ["SEC-01_CANONICAL_OWNERS", "RFC_9111", "MEDIA_DECISION"],
-      "reasoning": "Restricted server-authorized delivery can present current evidence-backed records, but media cannot be made uncopyable.",
-      "residualRisk": "STALE_FACTS_PROVIDER_ACCESS_CAPTURE_WATERMARK_REMOVAL_AND_BANDWIDTH",
-      "prerequisites": ["CANONICAL_PROVENANCE", "OBJECT_AUTHORIZATION", "SHORT_ACCESS", "ACCESSIBLE_ALTERNATIVES", "LEAK_RESPONSE"],
-      "uxConsequence": "RICH_ADAPTIVE_INSPECTION_WITH_VISIBLE_SESSION_MARKING_AND_LOW_DATA_ALTERNATIVE",
-      "implementationImplication": "USE_HYBRID_MEDIA_AND_NO_INDEPENDENT_WHOLESALE_TRUTH_STORE",
+      "reasoning": "Restricted server-authorized delivery can present current evidence-backed records only to an approved protected client; ordinary supported capture and extraction paths must be blocked while external-camera and privileged or compromised endpoint limits remain.",
+      "residualRisk": "STALE_FACTS_PROVIDER_ACCESS_PRIVILEGED_OR_COMPROMISED_CAPTURE_EXTERNAL_CAMERA_WATERMARK_REMOVAL_AND_BANDWIDTH",
+      "prerequisites": ["SIGNED_APPROVED_CLIENT", "SUPPORTED_CAPTURE_CONTROL_STATE", "FAIL_CLOSED_CLIENT_VERIFICATION", "CANONICAL_PROVENANCE", "OBJECT_AUTHORIZATION", "SHORT_ACCESS", "ACCESSIBLE_ALTERNATIVES", "LEAK_RESPONSE"],
+      "uxConsequence": "UNSUPPORTED_CLIENTS_RECEIVE_NO_PRIVATE_CATALOG_AND_APPROVED_CLIENTS_RECEIVE_PROTECTED_ADAPTIVE_INSPECTION",
+      "implementationImplication": "USE_HYBRID_MEDIA_NO_BROWSER_FALLBACK_AND_NO_INDEPENDENT_WHOLESALE_TRUTH_STORE",
       "ownerDecision": "APPROVE_MEDIA_PIPELINE_PROFILE_AUTHORITY_WATERMARK_DISCLOSURE_AND_PROVIDER_BOUNDARY"
     },
     {
@@ -169,12 +288,12 @@
       "requirement": "TRUE_SERVER_BLIND_E2EE_FOR_MESSAGES_AND_APPROVED_ATTACHMENTS",
       "status": "CONDITIONAL",
       "assurance": "NOT_YET_VERIFIED",
-      "evidence": ["SIGNAL_PROTOCOL_SPECIFICATIONS", "MATRIX_RUST_CRYPTO", "RFC_9420", "RFC_9750"],
-      "reasoning": "Published protocol families demonstrate endpoint E2EE, but no Blowin' Smoke implementation has been selected or reviewed.",
-      "residualRisk": "MALICIOUS_WEB_CODE_ENDPOINT_COMPROMISE_METADATA_DIRECTORY_EQUIVOCATION_AND_MIGRATION",
-      "prerequisites": ["SUPPORTED_IMPLEMENTATION", "EXACT_PROTOCOL_PROFILE", "INDEPENDENT_CRYPTO_AND_APP_REVIEW", "DEVICE_LIFECYCLE", "TEST_VECTORS", "INCIDENT_AND_MIGRATION_PLAN"],
-      "uxConsequence": "DEVICE_VERIFICATION_KEY_CHANGE_AND_BLOCKED_STATES_ARE_REQUIRED",
-      "implementationImplication": "INTERMEDIARY_STORES_CIPHERTEXT_AND_MINIMIZED_METADATA_WITHOUT_CONTENT_KEY_ESCROW",
+      "evidence": ["SIGNAL_PROTOCOLS", "MATRIX_JS_SDK", "RFC_9420", "RFC_9750"],
+      "reasoning": "Published protocol families demonstrate endpoint E2EE and browser capability remains research evidence, but protected messages and approved attachments may be delivered and decrypted only through an approved signed client; no Blowin' Smoke implementation has been selected or reviewed.",
+      "residualRisk": "BROWSER_CODE_SUBSTITUTION_IN_RESEARCH_ONLY_E2EE_SIGNED_CLIENT_SUPPLY_CHAIN_ENDPOINT_COMPROMISE_METADATA_DIRECTORY_EQUIVOCATION_AND_MIGRATION",
+      "prerequisites": ["APPROVED_PROTECTED_CLIENT", "SUPPORTED_IMPLEMENTATION", "EXACT_PROTOCOL_PROFILE", "INDEPENDENT_CRYPTO_AND_APP_REVIEW", "DEVICE_LIFECYCLE", "TEST_VECTORS", "SIGNED_RELEASE_INTEGRITY", "INCIDENT_AND_MIGRATION_PLAN", "NO_BROWSER_FALLBACK"],
+      "uxConsequence": "DEVICE_VERIFICATION_KEY_CHANGE_AND_BLOCKED_STATES_ARE_REQUIRED_AND_UNSUPPORTED_CLIENTS_RECEIVE_NO_MESSAGE_PLAINTEXT",
+      "implementationImplication": "INTERMEDIARY_STORES_CIPHERTEXT_AND_MINIMIZED_METADATA_WITHOUT_CONTENT_KEY_ESCROW_AND_PROTECTED_MESSAGES_ARE_DECRYPTED_ONLY_AT_AUTHORIZED_APPROVED_ENDPOINTS",
       "ownerDecision": "SELECT_OR_REJECT_A_CANDIDATE_ONLY_AT_THE_NEXT_PROOF_GATE"
     },
     {
@@ -184,18 +303,18 @@
       "assurance": "NOT_YET_VERIFIED",
       "evidence": ["SEC-01_E2EE_BOUNDARY", "E2EE_CANDIDATE_EVIDENCE"],
       "reasoning": "Server blindness is feasible when content keys remain endpoint-held and no readable escrow or silent recipient addition exists.",
-      "residualRisk": "TARGETED_WEB_CODE_DIRECTORY_MANIPULATION_AND_AUTHORIZED_ENDPOINT_EXPORT",
-      "prerequisites": ["AUDITABLE_DEVICE_DIRECTORY", "KEY_CHANGE_WARNING", "ENDPOINT_AUTHORIZATION", "PLAINTEXT_EXCLUSION_TESTS"],
-      "uxConsequence": "DISCLOSE_AUTHORIZED_PARTICIPANT_COPYING_AND_METADATA_VISIBILITY",
-      "implementationImplication": "SEPARATE_AUTHENTICATION_ENDPOINT_KEYS_ROUTING_AND_DECLASSIFICATION",
-      "ownerDecision": "SET_VERIFICATION_STRENGTH_AND_ACCEPTED_WEB_DELIVERY_RISK"
+      "residualRisk": "DIRECTORY_MANIPULATION_SIGNED_CLIENT_SUPPLY_CHAIN_COMPROMISE_PRIVILEGED_OR_COMPROMISED_ENDPOINT_EXTRACTION_TRANSCRIPTION_AND_EXTERNAL_CAMERA",
+      "prerequisites": ["AUDITABLE_DEVICE_DIRECTORY", "KEY_CHANGE_WARNING", "APPROVED_PROTECTED_CLIENT_AUTHORIZATION", "CONSTRAINED_SIGNED_RELEASE", "PLAINTEXT_EXCLUSION_TESTS"],
+      "uxConsequence": "AUTHORIZED_PARTICIPANTS_CAN_READ_ORDINARY_SUPPORTED_COPY_EXPORT_AND_CAPTURE_PATHS_ARE_BLOCKED_AND_METADATA_ENDPOINT_AND_CAMERA_LIMITS_ARE_DISCLOSED",
+      "implementationImplication": "SEPARATE_AUTHENTICATION_ENDPOINT_KEYS_ROUTING_SIGNED_CLIENT_RELEASE_AND_DELIBERATE_DECLASSIFICATION",
+      "ownerDecision": "SET_VERIFICATION_STRENGTH_AND_APPROVED_SIGNED_CLIENT_PROFILE_WITH_NO_BROWSER_EXCEPTION_FOR_PROTECTED_CONTENT"
     },
     {
       "id": "F-11",
       "requirement": "AUTHENTICATED_SETUP_KEY_EVOLUTION_REPLAY_OUT_OF_ORDER_FORWARD_SECRECY_AND_MULTI_DEVICE",
       "status": "CONDITIONAL",
       "assurance": "NOT_YET_VERIFIED",
-      "evidence": ["SIGNAL_PQXDH", "SIGNAL_DOUBLE_RATCHET", "SIGNAL_SESAME", "RFC_9420"],
+      "evidence": ["SIGNAL_PROTOCOLS", "RFC_9420"],
       "reasoning": "Mature designs establish these properties; primitives or partial reimplementations do not.",
       "residualRisk": "WRONG_DEVICE_MAPPING_ROLLBACK_REPLAY_STATE_LOSS_AND_PROTOCOL_BUGS",
       "prerequisites": ["CANDIDATE_STATE_MACHINE", "AUTHENTICATED_DEVICE_RECORDS", "TEST_VECTORS", "CONCURRENCY_AND_MIGRATION_TESTS"],
@@ -208,7 +327,7 @@
       "requirement": "EXISTING_TRUSTED_DEVICE_EXPLICITLY_AUTHORIZES_NEW_DEVICE",
       "status": "PASS",
       "assurance": "NOT_YET_VERIFIED",
-      "evidence": ["MATRIX_CROSS_SIGNING", "INTERACTIVE_DEVICE_VERIFICATION"],
+      "evidence": ["MATRIX_E2EE_DEVICE_MODEL"],
       "reasoning": "An authenticated trusted endpoint can approve and sign a new endpoint binding.",
       "residualRisk": "COMPROMISED_TRUSTED_DEVICE_QR_INTERCEPTION_INATTENTIVE_APPROVAL_AND_REVOCATION_RACE",
       "prerequisites": ["FRESH_NONCES", "HUMAN_READABLE_DEVICE_CONTEXT", "TWO_ENDPOINT_CONFIRMATION", "NOTIFICATION", "REVOCATION"],
@@ -273,12 +392,12 @@
       "requirement": "CONVERSATIONS_DISAPPEAR_FROM_ACTIVE_UX_AFTER_RELATED_ORDER_IS_PLACED_AND_DELIVERED",
       "status": "CONDITIONAL",
       "assurance": "BEST_EFFORT",
-      "evidence": ["SEC-01_LIFECYCLE_SEPARATION", "CLEAR_SITE_DATA"],
+      "evidence": ["SEC-01_LIFECYCLE_SEPARATION", "W3C_CLEAR_SITE_DATA"],
       "reasoning": "Controlled UI, ciphertext, key, metadata, attachment, notification, backup, and canonical-record lifecycles can be distinct; external copies remain outside control.",
-      "residualRisk": "OFFLINE_ENDPOINTS_SCREENSHOTS_EXPORTS_NOTIFICATIONS_BACKUPS_HOLDS_AND_STAFF_NOTES",
+      "residualRisk": "OFFLINE_OR_COMPROMISED_ENDPOINTS_PRIVILEGED_OR_UNSUPPORTED_PRIOR_OUTPUT_NOTIFICATIONS_BACKUPS_HOLDS_STAFF_NOTES_TRANSCRIPTION_AND_EXTERNAL_CAMERAS",
       "prerequisites": ["AUTHORITATIVE_ORDER_LINK", "PER_COPY_RETENTION", "ENDPOINT_ACKNOWLEDGEMENT", "BACKUP_EXPIRY", "VISIBLE_FAILURE"],
       "uxConsequence": "CONVERSATION_LEAVES_NORMAL_NAVIGATION_WITH_HONEST_COPY_BOUNDARIES",
-      "implementationImplication": "EMIT_EXPIRY_FROM_AUTHORITATIVE_ORDER_AND_FULFILLMENT_STATE",
+      "implementationImplication": "EMIT_EXPIRY_FROM_AUTHORITATIVE_ORDER_AND_FULFILLMENT_STATE_AND_TRACK_DELIBERATE_DECLASSIFICATION_SEPARATELY",
       "ownerDecision": "APPROVE_SCHEDULES_HOLDS_REOPEN_PROCESS_AND_CUSTOMER_WORDING"
     },
     {
@@ -296,50 +415,54 @@
     },
     {
       "id": "F-19",
-      "requirement": "BROWSER_SCREENSHOT_PREVENTION",
+      "requirement": "BROWSER_SCREENSHOT_AND_RECORDING_PREVENTION_FOR_PROTECTED_WHOLESALE",
       "status": "FAIL",
       "assurance": "NOT_POSSIBLE",
-      "evidence": ["W3C_SCREEN_CAPTURE_API", "WEB_PLATFORM_BOUNDARY"],
-      "reasoning": "A web page has no general pre-capture veto over operating-system, browser, or user screenshots.",
-      "residualRisk": "FULL_FIDELITY_CAPTURE_AND_SHARING",
+      "enforcement": "NOT_ENFORCEABLE",
+      "evidence": ["W3C_SCREEN_CAPTURE", "CHROME_DEVTOOLS_DEVICE_MODE", "FIREFOX_SCREENSHOTS", "APPLE_MACOS_SCREENSHOT", "APPLE_IPHONE_SCREENSHOT"],
+      "reasoning": "No qualifying supported target-controlled pre-capture veto was verified for the assessed browser and operating-system screenshot or recording paths.",
+      "residualRisk": "FULL_FIDELITY_CAPTURE_CLIENT_INSPECTION_AND_SHARING",
       "prerequisites": [],
-      "uxConsequence": "VISIBLE_WATERMARK_AND_RESTRICTED_UI_WITHOUT_PREVENTION_CLAIM",
-      "implementationImplication": "CLASSIFY_CSS_AND_JAVASCRIPT_RESTRICTIONS_AS_DETERRENCE_ONLY",
-      "ownerDecision": "ACCEPT_RISK_OR_OFFER_HIGHER_ASSURANCE_CLIENT_FOR_SELECTED_CONTENT"
+      "uxConsequence": "PUBLIC_RETAIL_AND_GENERIC_APPROVED_CLIENT_HANDOFF_ONLY_NO_PROTECTED_WHOLESALE_CONTENT",
+      "implementationImplication": "REJECT_ALL_DESKTOP_AND_MOBILE_BROWSERS_FOR_PROTECTED_WHOLESALE_AND_CLASSIFY_WEB_RESTRICTIONS_AS_BEST_EFFORT",
+      "ownerDecision": "FAIL_CLOSED_NO_RESIDUAL_RISK_ACCEPTANCE_EXCEPTION"
     },
     {
       "id": "F-20",
       "requirement": "PWA_SCREENSHOT_OR_RECORDING_PREVENTION",
       "status": "FAIL",
       "assurance": "NOT_POSSIBLE",
-      "evidence": ["W3C_APP_MANIFEST", "W3C_SERVICE_WORKERS"],
+      "enforcement": "NOT_ENFORCEABLE",
+      "evidence": ["W3C_APP_MANIFEST", "W3C_SERVICE_WORKERS", "W3C_PWA_SCREENSHOT_PROPOSAL"],
       "reasoning": "Installability and service workers do not grant native secure-display authority.",
       "residualRisk": "BROWSER_CAPTURE_PLUS_PERSISTENT_PRIVATE_CACHE_IF_MISDESIGNED",
       "prerequisites": ["PROHIBIT_PRIVATE_OFFLINE_CACHE"],
-      "uxConsequence": "PWA_CONVENIENCE_IS_NOT_A_CAPTURE_ASSURANCE_SIGNAL",
-      "implementationImplication": "DO_NOT_STORE_PRIVATE_MANIFESTS_OR_4K_MEDIA_OFFLINE",
-      "ownerDecision": "DECIDE_IF_PWA_CONVENIENCE_JUSTIFIES_CACHE_AND_UPDATE_SURFACE"
+      "uxConsequence": "PWA_MAY_PACKAGE_NONPROTECTED_FUNCTIONS_ONLY",
+      "implementationImplication": "REJECT_DESKTOP_AND_MOBILE_PWA_FOR_PROTECTED_WHOLESALE_AND_NEVER_CACHE_PRIVATE_CONTENT",
+      "ownerDecision": "INSTALLABILITY_DOES_NOT_CREATE_AN_EXCEPTION_TO_THE_GATE"
     },
     {
       "id": "F-21",
-      "requirement": "NATIVE_SCREENSHOT_OR_RECORDING_DETERRENCE",
+      "requirement": "NATIVE_PROTECTED_CONTENT_CAPTURE_ENFORCEMENT",
       "status": "CONDITIONAL",
-      "assurance": "BEST_EFFORT",
-      "evidence": ["ANDROID_FLAG_SECURE", "ANDROID_SCREENSHOT_DETECTION", "APPLE_CAPTURE_STATE", "WINDOWS_DISPLAY_AFFINITY"],
-      "reasoning": "Native platforms expose partial secure-display, detection, or redaction controls with documented coverage limits.",
+      "assurance": "NOT_YET_VERIFIED",
+      "enforcementSummary": "PLATFORM_SPECIFIC_OS_ENFORCED_APPLICATION_ENFORCED_BEST_EFFORT_OR_NOT_ENFORCEABLE",
+      "evidence": ["ANDROID_SECURE_DISPLAY", "ANDROID_SCREENSHOT_DETECTION", "ANDROID_SCREEN_RECORDING_CALLBACK", "APPLE_CAPTURE_STATE", "APPLE_SCREENSHOT_NOTIFICATION", "APPLE_SCREEN_SHARE_PROTECTION", "WINDOWS_DISPLAY_AFFINITY", "WINDOWS_DXGI_SWAP_CHAIN_FLAGS", "APPLE_MACOS_WINDOW_SHARING_TYPE"],
+      "reasoning": "Android supplies OS-enforced secure-window exclusion on supported implementations; Windows excludes named public capture paths with documented non-DRM limits; iOS screenshot notification is after capture; macOS lacks a verified current target-app veto.",
       "residualRisk": "OS_VERSION_GAPS_ROOT_OR_JAILBREAK_OVERLAYS_INSTRUMENTATION_AND_EXTERNAL_CAMERA",
-      "prerequisites": ["PER_PLATFORM_TESTS", "SUPPORTED_VERSION_POLICY", "FAIL_SAFE_REDACTION", "ACCESSIBILITY", "SIGNED_RELEASES"],
-      "uxConsequence": "CONTENT_MAY_BLANK_OR_WARN_ON_SOME_SUPPORTED_DEVICES_ONLY",
-      "implementationImplication": "REPORT_PLATFORM_SPECIFIC_ASSURANCE_NOT_ONE_UNIVERSAL_CAPTURE_STATE",
-      "ownerDecision": "DECIDE_FRICTION_AND_WHETHER_NATIVE_IS_OPTIONAL_FOR_SELECTED_CONTENT"
+      "prerequisites": ["EXACT_PLATFORM_DEVICE_VERSION_FRAMEWORK_TESTS", "SIGNED_RELEASE", "REQUEST_BOUND_INTEGRITY_OR_ATTESTATION_WHERE_REQUIRED", "COMPLETE_PROTECTED_WINDOW_COVERAGE", "FAIL_CLOSED_ADMISSION", "ACCESSIBILITY", "INDEPENDENT_REVIEW"],
+      "uxConsequence": "ONLY_A_PASSING_APPROVED_CLIENT_MAY_REVEAL_PROTECTED_CONTENT",
+      "implementationImplication": "ANDROID_AND_WINDOWS_ARE_CONDITIONAL_CANDIDATES_IOS_IPADOS_AND_MACOS_ARE_REJECTED_NO_CLIENT_IS_APPROVED",
+      "ownerDecision": "APPROVE_ONLY_AFTER_PRODUCT_PROOF_NOT_PLATFORM_DOCUMENTATION_ALONE"
     },
     {
       "id": "F-22",
       "requirement": "MANAGED_DEVICE_CAPTURE_DISABLE",
       "status": "CONDITIONAL",
-      "assurance": "BEST_EFFORT",
-      "evidence": ["ANDROID_DEVICE_POLICY", "APPLE_MDM"],
-      "reasoning": "Enterprise device policy can restrict capture on enrolled devices but Blowin' Smoke does not normally control customer BYOD.",
+      "assurance": "NOT_YET_VERIFIED",
+      "enforcementSummary": "OS_ENFORCED_OR_BEST_EFFORT_IN_EXACT_PLATFORM_SPECIFIC_ENROLLED_POLICY_BOUNDARY",
+      "evidence": ["ANDROID_DEVICE_POLICY", "APPLE_DEVICE_MANAGEMENT_RESTRICTIONS", "WINDOWS_EXPERIENCE_POLICY"],
+      "reasoning": "Platform-specific enterprise policy can restrict capture on enrolled Android, Apple, and Windows devices within different documented scopes, but Blowin' Smoke does not normally control customer BYOD and no uniform managed-client guarantee exists.",
       "residualRisk": "ADMINISTRATOR_TRUST_UNMANAGED_ENDPOINTS_CAMERA_AND_COMPROMISE",
       "prerequisites": ["MANAGED_ENROLLMENT", "DEVICE_POLICY_AUTHORITY"],
       "uxConsequence": "MATERIAL_SETUP_AND_DEVICE_CONTROL_BURDEN",
@@ -351,7 +474,8 @@
       "requirement": "SECOND_CAMERA_PREVENTION",
       "status": "FAIL",
       "assurance": "NOT_POSSIBLE",
-      "evidence": ["WINDOWS_DISPLAY_AFFINITY_LIMITATION", "PHYSICAL_ENDPOINT_BOUNDARY"],
+      "enforcement": "NOT_ENFORCEABLE",
+      "evidence": ["WINDOWS_DISPLAY_AFFINITY", "TELEGRAM_SCREENSHOT_AND_CAMERA_LIMITS"],
       "reasoning": "No browser, PWA, native, DRM, MDM, or display-affinity control can stop a viewer-controlled external camera.",
       "residualRisk": "REPHOTOGRAPHY_AND_MANUAL_TRANSCRIPTION",
       "prerequisites": [],
@@ -363,14 +487,15 @@
       "id": "F-24",
       "requirement": "PRIVATE_4K_MEDIA_ACCESS_CONTROL",
       "status": "CONDITIONAL",
-      "assurance": "BEST_EFFORT",
-      "evidence": ["RFC_9111", "W3C_ENCRYPTED_MEDIA", "MEDIA_DECISION"],
-      "reasoning": "Authenticated segmented streaming and short authorization can limit unauthorized retrieval, but an authorized client receives renderable content.",
-      "residualRisk": "SEGMENT_OR_KEY_CAPTURE_SCREEN_CAMERA_BEARER_LEAK_PROVIDER_ACCESS_AND_CREDENTIAL_SHARING",
-      "prerequisites": ["OBJECT_AUTHORIZATION", "PROTECTED_ORIGIN", "SHORT_SESSION_BOUND_GRANTS", "CACHE_CONTROLS", "ADAPTIVE_STREAMING", "WATERMARK_AND_AUDIT"],
-      "uxConsequence": "HIGH_RESOLUTION_VIEWING_WITHOUT_DOWNLOAD_UI_PLUS_LOW_BANDWIDTH_AND_ACCESSIBLE_ALTERNATIVES",
-      "implementationImplication": "CATALOG_MEDIA_IS_RESTRICTED_SERVER_DECRYPTABLE_CONTENT_NOT_E2EE",
-      "ownerDecision": "APPROVE_HYBRID_CLASSIFICATION_AND_PROVIDER_EXPOSURE_AFTER_THREAT_REVIEW"
+      "assurance": "NOT_YET_VERIFIED",
+      "enforcementSummary": "APPLICATION_AND_PLATFORM_CONTROLS",
+      "evidence": ["RFC_9111", "W3C_ENCRYPTED_MEDIA", "ANDROID_SECURE_DISPLAY", "WINDOWS_DISPLAY_AFFINITY"],
+      "reasoning": "Authenticated segmented streaming, short authorization, revocation, and an approved protected client can limit unauthorized retrieval and block ordinary supported capture and extraction paths, while an authorized endpoint still receives renderable content.",
+      "residualRisk": "SEGMENT_OR_KEY_CAPTURE_BY_COMPROMISED_ENDPOINT_UNSUPPORTED_OR_PRIVILEGED_CAPTURE_EXTERNAL_CAMERA_BEARER_LEAK_PROVIDER_ACCESS_AND_CREDENTIAL_SHARING",
+      "prerequisites": ["SIGNED_APPROVED_PROTECTED_CLIENT", "SUPPORTED_CAPTURE_CONTROL_STATE", "FAIL_CLOSED_CLIENT_AND_ENDPOINT_VERIFICATION", "OBJECT_AUTHORIZATION", "PROTECTED_ORIGIN", "SHORT_SESSION_BOUND_GRANTS", "CACHE_CONTROLS", "ADAPTIVE_STREAMING", "WATERMARK_AND_AUDIT"],
+      "uxConsequence": "HIGH_RESOLUTION_VIEWING_ONLY_IN_APPROVED_CLIENT_WITH_LOW_BANDWIDTH_AND_ACCESSIBLE_PROTECTED_ALTERNATIVES",
+      "implementationImplication": "CATALOG_MEDIA_IS_RESTRICTED_SERVER_DECRYPTABLE_CONTENT_NOT_E2EE_AND_BROWSER_FALLBACK_IS_PROHIBITED",
+      "ownerDecision": "APPROVE_CLIENT_HYBRID_PIPELINE_AND_PROVIDER_EXPOSURE_ONLY_AFTER_CAPTURE_AND_THREAT_PROOF"
     },
     {
       "id": "F-25",
@@ -391,11 +516,11 @@
       "status": "CONDITIONAL",
       "assurance": "BEST_EFFORT",
       "evidence": ["RFC_9111", "W3C_CLEAR_SITE_DATA"],
-      "reasoning": "The server can atomically set first view and deny later requests, but cannot remotely erase already rendered output.",
-      "residualRisk": "ENDPOINT_COPY_CLOCK_CONFUSION_TAB_FREEZE_ACCESSIBILITY_OUTPUT_AND_PARTIAL_FETCH",
-      "prerequisites": ["EXPLICIT_AUTHENTICATED_REVEAL", "IMMUTABLE_SERVER_CLOCK", "ONLINE_ONLY_NO_STORE", "NO_SERVICE_WORKER_CACHE", "FAIL_CLOSED_EXPIRY"],
-      "uxConsequence": "VISIBLE_TIMER_AND_REDACTION_WITH_REOPEN_DENIED_AFTER_EXPIRY",
-      "implementationImplication": "MODEL_ACCESS_LEASE_NOT_DELETION_OR_RECALL",
+      "reasoning": "The server can atomically set first view and deny later requests, while browsers receive no protected manifest; an offline, frozen, modified, or compromised approved client cannot be guaranteed to erase prior output.",
+      "residualRisk": "ENDPOINT_REMNANTS_CLOCK_CONFUSION_APP_FREEZE_ACCESSIBILITY_OUTPUT_PRIVILEGED_OR_UNSUPPORTED_CAPTURE_PARTIAL_FETCH_AND_EXTERNAL_CAMERA",
+      "prerequisites": ["SIGNED_APPROVED_CLIENT", "SUPPORTED_CAPTURE_CONTROL_AND_INTEGRITY_STATE", "CURRENT_TRUSTED_ENDPOINT_ACCOUNT_ROOM_AND_RESOURCE_GRANT", "EXPLICIT_AUTHENTICATED_REVEAL", "IMMUTABLE_SERVER_CLOCK", "ONLINE_ONLY_NO_PERSISTENT_CACHE", "FAIL_CLOSED_EXPIRY", "BROWSER_ZERO_PROTECTED_RESPONSE_NEGATIVE_TEST"],
+      "uxConsequence": "VISIBLE_TIMER_ACTIVE_PROTECTED_VIEW_REMOVAL_AND_ALL_LATER_FULL_REQUESTS_DENIED",
+      "implementationImplication": "MODEL_ACCESS_LEASE_NOT_DELETION_OR_RECALL_AND_TEST_APPROVED_CLIENT_LIFECYCLE_SEPARATELY_FROM_BROWSER_NEGATIVE_PROOF",
       "ownerDecision": "RESOLVE_ACCESSIBILITY_ACCOMMODATION_AND_CONTROLLED_REISSUE_POLICY"
     },
     {
@@ -413,15 +538,15 @@
     },
     {
       "id": "F-28",
-      "requirement": "GUARANTEED_DISAPPEARANCE_FROM_TAB_CACHE_MEMORY_PRINT_ACCESSIBILITY_SCREENSHOT_OR_CAMERA_AT_FIVE_MINUTES",
+      "requirement": "GUARANTEED_DISAPPEARANCE_FROM_EVERY_ACTIVE_VIEW_CACHE_MEMORY_ASSISTIVE_OUTPUT_PRIVILEGED_OR_UNSUPPORTED_OUTPUT_COMPROMISED_ENDPOINT_TRANSCRIPTION_OR_CAMERA_AT_FIVE_MINUTES",
       "status": "FAIL",
       "assurance": "NOT_POSSIBLE",
-      "evidence": ["RFC_9111", "W3C_CLEAR_SITE_DATA", "PLATFORM_CAPTURE_LIMITS"],
+      "evidence": ["RFC_9111", "W3C_CLEAR_SITE_DATA", "ANDROID_SECURE_DISPLAY", "WINDOWS_DISPLAY_AFFINITY", "TELEGRAM_SCREENSHOT_AND_CAMERA_LIMITS"],
       "reasoning": "Server denial cannot control every client storage, output, capture, or external-camera path.",
       "residualRisk": "PERSISTENT_COPIES_AND_ACCESSIBILITY_CONFLICT",
       "prerequisites": [],
       "uxConsequence": "DISTINGUISH_ACCESS_EXPIRY_FROM_COPY_DESTRUCTION",
-      "implementationImplication": "FAIL_CLOSED_ON_NEXT_REQUEST_AND_REDACT_CONTROLLED_UI_BEST_EFFORT",
+      "implementationImplication": "FAIL_CLOSED_ON_LATER_REQUEST_REMOVE_ACTIVE_PROTECTED_VIEW_AND_NEVER_EMIT_A_UNIVERSAL_DELETION_EVENT",
       "ownerDecision": "NO_OWNER_DECISION_CAN_CREATE_THE_MISSING_PLATFORM_AUTHORITY"
     },
     {
@@ -429,7 +554,7 @@
       "requirement": "OPTIONAL_ONION_SERVICE_TO_SAME_CANONICAL_COMMERCE_SYSTEM",
       "status": "CONDITIONAL",
       "assurance": "BEST_EFFORT",
-      "evidence": ["TOR_ONION_PROTOCOL_OVERVIEW", "TOR_OPERATIONS_GUIDANCE", "SEC-01_CANONICAL_OWNERSHIP"],
+      "evidence": ["TOR_ONION_PROTOCOL", "TOR_ONION_OPERATIONS", "SEC-01_CANONICAL_OWNERSHIP"],
       "reasoning": "The Tor v3 protocol mechanism can front an application, but the product entrance remains conditional on origin and resource isolation, canonical parity, key custody, session semantics, operations, and qualified review.",
       "residualRisk": "KEY_LOSS_DENIAL_OF_SERVICE_CORRELATION_IDENTITY_PAYMENT_DELIVERY_DISCLOSURE_AND_MALICIOUS_RESOURCES",
       "prerequisites": ["ISOLATED_GATEWAY", "PROTECTED_ONION_IDENTITY_KEY", "ORIGIN_LEAK_AND_PARITY_TESTS", "INCIDENT_AND_RUNBOOK_CAPACITY"],
@@ -442,7 +567,7 @@
       "requirement": "ONION_ORIGIN_ISOLATION_AND_PRIVACY_PRESERVING_RESOURCE_GRAPH",
       "status": "CONDITIONAL",
       "assurance": "BEST_EFFORT",
-      "evidence": ["TOR_ONION_PROTOCOL_OVERVIEW", "TOR_OPERATIONS_GUIDANCE"],
+      "evidence": ["TOR_ONION_PROTOCOL", "TOR_ONION_OPERATIONS"],
       "reasoning": "Tor supports isolated Onion routing, but resources, redirects, errors, telemetry, DNS, and operators can still reveal or correlate the origin.",
       "residualRisk": "THIRD_PARTY_CORRELATION_MISCONFIGURATION_UPSTREAM_LOGS_ACCOUNT_CORRELATION_AND_KEY_COMPROMISE",
       "prerequisites": ["ORIGIN_LEAK_TESTS", "SAME_ONION_OR_SELF_HOSTED_RESOURCES", "SEPARATE_VHOST_AND_SESSION", "NO_UNREVIEWED_THIRD_PARTY_BROWSER_CALLS"],
@@ -455,7 +580,7 @@
       "requirement": "PUBLIC_AND_ONION_SESSION_RELATIONSHIP",
       "status": "CONDITIONAL",
       "assurance": "BEST_EFFORT",
-      "evidence": ["WEB_ORIGIN_SECURITY_MODEL", "TOR_PRIVACY_BOUNDARY"],
+      "evidence": ["OWASP_ASVS", "TOR_PRIVACY_BOUNDARY"],
       "reasoning": "Separate origin state and explicit reauthentication reduce silent linkage, while signing into the same account necessarily creates account correlation.",
       "residualRisk": "TOKEN_LEAK_SESSION_FIXATION_CROSS_ORIGIN_CONFUSION_AND_CORRELATION",
       "prerequisites": ["NO_TOKEN_IN_URL", "SEPARATE_COOKIE_AND_CSRF_NAMESPACES", "SESSION_ROTATION", "EXPLICIT_TRANSITION_WARNING"],
@@ -527,13 +652,27 @@
       "uxConsequence": "DISPLAY_UNAVAILABLE_OR_UNKNOWN_INSTEAD_OF_PERSUASIVE_GUESSES",
       "implementationImplication": "WHOLESALE_READ_MODEL_CONSUMES_ONLY_CANONICAL_EVIDENCE_BACKED_FIELDS",
       "ownerDecision": "ASSIGN_CONTENT_APPROVAL_AND_PROOF_EXPIRY_RULES"
+    },
+    {
+      "id": "F-37",
+      "requirement": "PRIVATE_WHOLESALE_PROTECTED_CONTENT_HARD_FAIL_CLOSED_RELEASE_GATE",
+      "status": "CONDITIONAL",
+      "assurance": "NOT_YET_VERIFIED",
+      "enforcementSummary": "PLATFORM_AND_APPLICATION_CONTROLS_REQUIRED",
+      "evidence": ["ANDROID_SECURE_DISPLAY", "WINDOWS_DISPLAY_AFFINITY", "TELEGRAM_CONTENT_PROTECTION", "W3C_SCREEN_CAPTURE"],
+      "reasoning": "A signed native client can combine platform capture exclusion, app-owned extraction controls, protected object authorization, trusted endpoints, and short access; no Blowin' Smoke client has passed the complete matrix.",
+      "residualRisk": "CLIENT_SPOOFING_STALE_INTEGRITY_UNSUPPORTED_VERSION_INCOMPLETE_WINDOW_COVERAGE_POLICY_REMOVAL_ACCESSIBILITY_CONFLICT_COMPROMISED_ENDPOINT_AND_EXTERNAL_CAMERA",
+      "prerequisites": ["SIGNED_CLIENT", "EXACT_SUPPORTED_MATRIX", "SERVER_VERIFIED_CAPABILITY_AND_INTEGRITY", "TRUSTED_ENDPOINT", "FAIL_CLOSED_OBJECT_AUTHORIZATION", "ACCESSIBILITY", "ADVERSARIAL_AND_INDEPENDENT_REVIEW"],
+      "uxConsequence": "UNSUPPORTED_CLIENT_GETS_GENERIC_APPROVED_CLIENT_GUIDANCE_AND_ZERO_PROTECTED_WHOLESALE_DATA",
+      "implementationImplication": "CLIENT_BUILD_PLATFORM_CONTROL_ENDPOINT_ACCOUNT_ROOM_RESOURCE_AND_FRESHNESS_BECOME_AUTHORIZATION_PREREQUISITES",
+      "ownerDecision": "NO_PRODUCTION_APPROVAL_UNTIL_A_CANDIDATE_PASSES_EVERY_GATE"
     }
   ],
   "approaches": [
     {
       "id": "A",
       "name": "BROWSER_FIRST_E2EE_WHOLESALE_ROOM",
-      "disposition": "CONDITIONAL_PREFERRED_FEASIBILITY_DIRECTION_NOT_STACK_SELECTION",
+      "disposition": "CONDITIONAL_E2EE_FEASIBILITY_BUT_REJECTED_FOR_PROTECTED_WHOLESALE_DELIVERY",
       "scores": {
         "customerFriction": "LOW",
         "trueE2eePotential": "HIGH_CONDITIONAL",
@@ -544,7 +683,7 @@
         "historyRecovery": "LOW_WITHOUT_PROSPECTIVE_ENDPOINT_CONTROLLED_BACKUP",
         "captureResistance": "LOW",
         "recordingResistance": "LOW",
-        "privateMedia": "HIGH_WITH_HYBRID_SERVER_AUTHORIZED_DELIVERY",
+        "privateMedia": "REJECTED_FOR_PROTECTED_WHOLESALE_DESPITE_SERVER_AUTHORIZATION_FEASIBILITY",
         "offlineSafety": "MEDIUM_IF_PRIVATE_OFFLINE_CACHE_PROHIBITED",
         "updateIntegrity": "MEDIUM_WITH_RESIDUAL_TARGETED_CODE_SUBSTITUTION",
         "onionCompatibility": "HIGH_CONDITIONAL",
@@ -559,7 +698,7 @@
     {
       "id": "B",
       "name": "INSTALLABLE_PWA_HARDENED_BOUNDARY",
-      "disposition": "FAIL_AS_MATERIAL_SECURITY_BOUNDARY_OPTIONAL_AS_CONVENIENCE_ONLY",
+      "disposition": "REJECTED_FOR_PROTECTED_WHOLESALE_OPTIONAL_NONPROTECTED_PACKAGING_ONLY",
       "scores": {
         "customerFriction": "LOW_MEDIUM",
         "trueE2eePotential": "HIGH_CONDITIONAL_SAME_AS_WEB",
@@ -570,7 +709,7 @@
         "historyRecovery": "LOW_WITHOUT_PROSPECTIVE_ENDPOINT_CONTROLLED_BACKUP",
         "captureResistance": "LOW",
         "recordingResistance": "LOW",
-        "privateMedia": "MEDIUM_WITH_OFFLINE_CACHE_RISK",
+        "privateMedia": "REJECTED_FOR_PROTECTED_WHOLESALE_WITH_ADDITIONAL_OFFLINE_CACHE_RISK",
         "offlineSafety": "LOW_UNLESS_PRIVATE_CACHE_IS_EXPLICITLY_PROHIBITED",
         "updateIntegrity": "MEDIUM_WITH_WEB_DELIVERY_AND_SERVICE_WORKER_RISK",
         "onionCompatibility": "MEDIUM_CONDITIONAL",
@@ -585,7 +724,7 @@
     {
       "id": "C",
       "name": "DEDICATED_SIGNED_NATIVE_WHOLESALE_CLIENT",
-      "disposition": "CONDITIONAL_FUTURE_HIGHER_ASSURANCE_TIER_NOT_GENERAL_REQUIREMENT",
+      "disposition": "REQUIRED_ARCHITECTURE_CLASS_FOR_PROTECTED_WHOLESALE_ANDROID_AND_WINDOWS_CONDITIONAL_IOS_IPADOS_AND_MACOS_REJECTED_NO_CLIENT_APPROVED",
       "scores": {
         "customerFriction": "HIGH",
         "trueE2eePotential": "HIGH_CONDITIONAL",
@@ -594,8 +733,8 @@
         "trustedDeviceAndMultiDevice": "HIGH_CONDITIONAL",
         "accountRecovery": "HIGH_CONDITIONAL",
         "historyRecovery": "LOW_WITHOUT_PROSPECTIVE_ENDPOINT_CONTROLLED_BACKUP",
-        "captureResistance": "MEDIUM_BEST_EFFORT",
-        "recordingResistance": "MEDIUM_BEST_EFFORT",
+        "captureResistance": "PLATFORM_SPECIFIC_ANDROID_OS_ENFORCEMENT_WINDOWS_CONDITIONAL_IOS_AND_MACOS_FAIL",
+        "recordingResistance": "PLATFORM_SPECIFIC_CONDITIONAL_NOT_YET_VERIFIED",
         "privateMedia": "HIGH_CONDITIONAL",
         "offlineSafety": "MEDIUM_HIGH_WITH_EXPLICIT_DESIGN",
         "updateIntegrity": "HIGHER_WITH_SIGNED_RELEASES",
@@ -613,6 +752,7 @@
     {
       "id": "MATRIX_RUST_CRYPTO_BROWSER_PATH",
       "status": "CONDITIONAL_EVALUATION_CANDIDATE",
+      "protectedWholesaleClientDisposition": "REJECTED_FOR_PROTECTED_WHOLESALE",
       "maintenanceEvidence": "MATRIX_JS_SDK_V42_1_0_RELEASED_2026_08_04_AND_USES_WASM_RUST_MATRIX_SDK_CRYPTO_WITH_BROWSER_AND_INDEXEDDB_SUPPORT",
       "reviewEvidence": "VODOZEMAC_PUBLIC_AUDIT_EXISTS; MATRIX_CONFIRMED_2026_ALL_ZERO_X25519_OUTPUT_ACCEPTANCE_WHILE_DISPUTING_CONFIDENTIALITY_IMPACT; CONTRIBUTORY_BEHAVIOR_CHECK_RELEASED_IN_VODOZEMAC_0_10_0",
       "limitations": ["NO_BLOWIN_SMOKE_REVIEW", "WEB_CODE_SUBSTITUTION_RISK", "INDEXEDDB_CONCURRENCY_WARNING", "CANDIDATE_SHIPPED_DEPENDENCY_NOT_YET_PROVEN_TO_INCLUDE_VODOZEMAC_0_10_0_OR_LATER", "CURRENT_SECURITY_ADVISORY_CLOSURE_REVIEW_REQUIRED"],
@@ -645,10 +785,19 @@
     {
       "id": "SIGNAL_LIBSIGNAL_GENERAL_BROWSER_USE",
       "status": "FAIL_FOR_GENERAL_BROWSER_USE",
+      "nativeExternalUseStatus": "BLOCKED_UNSUPPORTED_BY_MAINTAINER_PENDING_A_SUPPORTED_PRODUCT_AND_QUALIFIED_LICENSE_REVIEW",
       "maintenanceEvidence": "OFFICIAL_PROJECT_IS_CURRENT",
       "reviewEvidence": "SIGNAL_PUBLISHED_PROTOCOL_SPECIFICATIONS",
       "limitations": ["OUTSIDE_USE_EXPLICITLY_UNSUPPORTED", "TYPESCRIPT_PACKAGE_USES_NATIVE_NODE_BRIDGE", "APIS_MAY_CHANGE"],
       "selection": "REJECTED_FOR_BROWSER_CANDIDACY_NOT_A_PROTOCOL_PROPERTY_REJECTION"
+    },
+    {
+      "id": "LEGACY_LIBSIGNAL_PROTOCOL_JAVASCRIPT",
+      "status": "FAIL",
+      "maintenanceEvidence": "ARCHIVED_AND_UNMAINTAINED",
+      "reviewEvidence": "HISTORICAL_ONLY",
+      "limitations": ["ARCHIVED", "UNMAINTAINED", "NOT_A_CURRENT_SUPPORTED_IMPLEMENTATION"],
+      "selection": "REJECTED"
     },
     {
       "id": "LEGACY_MATRIX_LIBOLM",
@@ -668,15 +817,25 @@
     }
   ],
   "capturePlatformOutcomes": [
-    {"platform": "DESKTOP_BROWSER", "screenshot": "FAIL", "screenshotAssurance": "NOT_POSSIBLE", "screenRecording": "FAIL", "screenRecordingAssurance": "NOT_POSSIBLE", "honestControl": "DETERRENCE_AND_ATTRIBUTION_ONLY"},
-    {"platform": "MOBILE_BROWSER", "screenshot": "FAIL", "screenshotAssurance": "NOT_POSSIBLE", "screenRecording": "FAIL", "screenRecordingAssurance": "NOT_POSSIBLE", "honestControl": "DETERRENCE_AND_ATTRIBUTION_ONLY"},
-    {"platform": "PWA", "screenshot": "FAIL", "screenshotAssurance": "NOT_POSSIBLE", "screenRecording": "FAIL", "screenRecordingAssurance": "NOT_POSSIBLE", "honestControl": "NO_PRIVATE_OFFLINE_CACHE_PLUS_DETERRENCE"},
-    {"platform": "ANDROID_NATIVE", "screenshot": "CONDITIONAL", "screenshotAssurance": "BEST_EFFORT", "screenRecording": "CONDITIONAL", "screenRecordingAssurance": "BEST_EFFORT", "honestControl": "FLAG_SECURE_DETECTION_REDACTION_AND_SUPPORTED_DEVICE_TESTS"},
-    {"platform": "IOS_NATIVE", "screenshot": "FAIL_PREVENTION_DETECTION_AFTER_EVENT_ONLY", "screenshotAssurance": "NOT_POSSIBLE", "screenRecording": "CONDITIONAL", "screenRecordingAssurance": "BEST_EFFORT", "honestControl": "CAPTURE_STATE_DETECTION_AND_REDACTION"},
-    {"platform": "WINDOWS_NATIVE", "screenshot": "CONDITIONAL", "screenshotAssurance": "BEST_EFFORT", "screenRecording": "CONDITIONAL", "screenRecordingAssurance": "BEST_EFFORT", "honestControl": "DISPLAY_AFFINITY_WITH_DOCUMENTED_NON_DRM_LIMITS"},
-    {"platform": "MACOS_NATIVE", "screenshot": "FAIL", "screenshotAssurance": "NOT_POSSIBLE", "screenRecording": "FAIL", "screenRecordingAssurance": "NOT_POSSIBLE", "honestControl": "NO_VERIFIED_CURRENT_TARGET_APPLICATION_VETO_IN_PUBLIC_APIS"},
-    {"platform": "MANAGED_ENDPOINT", "screenshot": "CONDITIONAL", "screenshotAssurance": "BEST_EFFORT", "screenRecording": "CONDITIONAL", "screenRecordingAssurance": "BEST_EFFORT", "honestControl": "DEVICE_POLICY_ONLY_WHERE_ENROLLMENT_AND_ADMIN_AUTHORITY_EXIST"},
-    {"platform": "EXTERNAL_SECOND_CAMERA", "screenshot": "FAIL", "screenshotAssurance": "NOT_POSSIBLE", "screenRecording": "FAIL", "screenRecordingAssurance": "NOT_POSSIBLE", "honestControl": "LEAST_EXPOSURE_DETERRENCE_AND_POSSIBLE_ATTRIBUTION"}
+    {"platform": "DESKTOP_CHROMIUM_BROWSER", "screenshot": {"feasibility": "FAIL", "enforcement": "NOT_ENFORCEABLE", "assurance": "NOT_POSSIBLE", "verification": "DOCUMENTED_PLATFORM_BOUNDARY"}, "screenRecording": {"feasibility": "FAIL", "enforcement": "NOT_ENFORCEABLE", "assurance": "NOT_POSSIBLE", "verification": "DOCUMENTED_PLATFORM_BOUNDARY"}, "clientDisposition": "REJECTED_FOR_PROTECTED_WHOLESALE", "qualification": "PUBLIC_RETAIL_AND_GENERIC_APPROVED_CLIENT_HANDOFF_ONLY"},
+    {"platform": "DESKTOP_SAFARI_BROWSER", "screenshot": {"feasibility": "FAIL", "enforcement": "NOT_ENFORCEABLE", "assurance": "NOT_POSSIBLE", "verification": "DOCUMENTED_PLATFORM_BOUNDARY"}, "screenRecording": {"feasibility": "FAIL", "enforcement": "NOT_ENFORCEABLE", "assurance": "NOT_POSSIBLE", "verification": "DOCUMENTED_PLATFORM_BOUNDARY"}, "clientDisposition": "REJECTED_FOR_PROTECTED_WHOLESALE", "qualification": "PUBLIC_RETAIL_AND_GENERIC_APPROVED_CLIENT_HANDOFF_ONLY"},
+    {"platform": "DESKTOP_FIREFOX_BROWSER", "screenshot": {"feasibility": "FAIL", "enforcement": "NOT_ENFORCEABLE", "assurance": "NOT_POSSIBLE", "verification": "DOCUMENTED_PLATFORM_BOUNDARY"}, "screenRecording": {"feasibility": "FAIL", "enforcement": "NOT_ENFORCEABLE", "assurance": "NOT_POSSIBLE", "verification": "DOCUMENTED_PLATFORM_BOUNDARY"}, "clientDisposition": "REJECTED_FOR_PROTECTED_WHOLESALE", "qualification": "PUBLIC_RETAIL_AND_GENERIC_APPROVED_CLIENT_HANDOFF_ONLY"},
+    {"platform": "MOBILE_CHROMIUM_BROWSER", "screenshot": {"feasibility": "FAIL", "enforcement": "NOT_ENFORCEABLE", "assurance": "NOT_POSSIBLE", "verification": "DOCUMENTED_PLATFORM_BOUNDARY"}, "screenRecording": {"feasibility": "FAIL", "enforcement": "NOT_ENFORCEABLE", "assurance": "NOT_POSSIBLE", "verification": "DOCUMENTED_PLATFORM_BOUNDARY"}, "clientDisposition": "REJECTED_FOR_PROTECTED_WHOLESALE", "qualification": "PUBLIC_RETAIL_AND_GENERIC_APPROVED_CLIENT_HANDOFF_ONLY"},
+    {"platform": "MOBILE_SAFARI_BROWSER", "screenshot": {"feasibility": "FAIL", "enforcement": "NOT_ENFORCEABLE", "assurance": "NOT_POSSIBLE", "verification": "DOCUMENTED_PLATFORM_BOUNDARY"}, "screenRecording": {"feasibility": "FAIL", "enforcement": "NOT_ENFORCEABLE", "assurance": "NOT_POSSIBLE", "verification": "DOCUMENTED_PLATFORM_BOUNDARY"}, "clientDisposition": "REJECTED_FOR_PROTECTED_WHOLESALE", "qualification": "PUBLIC_RETAIL_AND_GENERIC_APPROVED_CLIENT_HANDOFF_ONLY"},
+    {"platform": "MOBILE_FIREFOX_BROWSER", "screenshot": {"feasibility": "FAIL", "enforcement": "NOT_ENFORCEABLE", "assurance": "NOT_POSSIBLE", "verification": "DOCUMENTED_PLATFORM_BOUNDARY"}, "screenRecording": {"feasibility": "FAIL", "enforcement": "NOT_ENFORCEABLE", "assurance": "NOT_POSSIBLE", "verification": "DOCUMENTED_PLATFORM_BOUNDARY"}, "clientDisposition": "REJECTED_FOR_PROTECTED_WHOLESALE", "qualification": "PUBLIC_RETAIL_AND_GENERIC_APPROVED_CLIENT_HANDOFF_ONLY"},
+    {"platform": "DESKTOP_PWA", "screenshot": {"feasibility": "FAIL", "enforcement": "NOT_ENFORCEABLE", "assurance": "NOT_POSSIBLE", "verification": "DOCUMENTED_PLATFORM_BOUNDARY"}, "screenRecording": {"feasibility": "FAIL", "enforcement": "NOT_ENFORCEABLE", "assurance": "NOT_POSSIBLE", "verification": "DOCUMENTED_PLATFORM_BOUNDARY"}, "clientDisposition": "REJECTED_FOR_PROTECTED_WHOLESALE", "qualification": "NONPROTECTED_PACKAGING_ONLY_NO_PRIVATE_OFFLINE_CACHE"},
+    {"platform": "MOBILE_PWA", "screenshot": {"feasibility": "FAIL", "enforcement": "NOT_ENFORCEABLE", "assurance": "NOT_POSSIBLE", "verification": "DOCUMENTED_PLATFORM_BOUNDARY"}, "screenRecording": {"feasibility": "FAIL", "enforcement": "NOT_ENFORCEABLE", "assurance": "NOT_POSSIBLE", "verification": "DOCUMENTED_PLATFORM_BOUNDARY"}, "clientDisposition": "REJECTED_FOR_PROTECTED_WHOLESALE", "qualification": "NONPROTECTED_PACKAGING_ONLY_NO_PRIVATE_OFFLINE_CACHE"},
+    {"platform": "ANDROID_NATIVE_12_PLUS_PROVISIONAL", "screenshot": {"feasibility": "CONDITIONAL", "enforcement": "OS_ENFORCED", "assurance": "NOT_YET_VERIFIED", "verification": "NOT_YET_VERIFIED_IN_BLOWIN_SMOKE"}, "screenRecording": {"feasibility": "CONDITIONAL", "enforcement": "OS_ENFORCED", "assurance": "BEST_EFFORT", "verification": "NOT_YET_VERIFIED_IN_BLOWIN_SMOKE", "qualification": "SUPPORTED_NON_SECURE_VIRTUAL_DISPLAY_PATHS_ONLY"}, "clientDisposition": "CONDITIONAL_CANDIDATE", "qualification": "FLAG_SECURE_COMPLETE_WINDOW_COVERAGE_INTEGRITY_GATING_AND_DEVICE_OEM_TESTS"},
+    {"platform": "ANDROID_NATIVE_11_AND_LOWER", "screenshot": {"feasibility": "FAIL", "enforcement": "OS_ENFORCED", "assurance": "BEST_EFFORT", "verification": "DOCUMENTED_PLATFORM_BOUNDARY", "qualification": "OFFICIAL_GUIDANCE_DOCUMENTS_APPROXIMATELY_70_PERCENT_RELIABILITY"}, "screenRecording": {"feasibility": "FAIL", "enforcement": "OS_ENFORCED", "assurance": "BEST_EFFORT", "verification": "DOCUMENTED_PLATFORM_BOUNDARY"}, "clientDisposition": "REJECTED_FOR_PROTECTED_WHOLESALE", "qualification": "UNSUPPORTED_VERSION"},
+    {"platform": "IOS_IPADOS_NATIVE_UNMANAGED", "screenshot": {"feasibility": "FAIL", "enforcement": "NOT_ENFORCEABLE", "assurance": "NOT_POSSIBLE", "verification": "DOCUMENTED_PLATFORM_BOUNDARY", "qualification": "NOTIFICATION_OCCURS_AFTER_CAPTURE"}, "screenRecording": {"feasibility": "CONDITIONAL", "enforcement": "APPLICATION_ENFORCED", "assurance": "BEST_EFFORT", "verification": "DOCUMENTED_PLATFORM_BOUNDARY", "qualification": "ACTIVE_CAPTURE_DETECTION_AND_REDACTION_NOT_GENERAL_PREVENTION"}, "clientDisposition": "REJECTED_FOR_PROTECTED_WHOLESALE", "qualification": "SCREENSHOT_HARD_GATE_FAILS"},
+    {"platform": "WINDOWS_NATIVE_10_2004_PLUS_PROVISIONAL", "screenshot": {"feasibility": "CONDITIONAL", "enforcement": "OS_ENFORCED", "assurance": "BEST_EFFORT", "verification": "NOT_YET_VERIFIED_IN_BLOWIN_SMOKE", "qualification": "PUBLIC_CAPTURE_PATH_SCOPE_NOT_DRM"}, "screenRecording": {"feasibility": "CONDITIONAL", "enforcement": "OS_ENFORCED", "assurance": "BEST_EFFORT", "verification": "NOT_YET_VERIFIED_IN_BLOWIN_SMOKE", "qualification": "PUBLIC_CAPTURE_PATH_SCOPE_NOT_DRM"}, "clientDisposition": "CONDITIONAL_CANDIDATE", "qualification": "EXACT_FRAMEWORK_WINDOW_OS_AND_TOOL_TESTS_REQUIRED"},
+    {"platform": "WINDOWS_NATIVE_PRE_10_2004_OR_UNSUPPORTED_EDITION", "screenshot": {"feasibility": "FAIL", "enforcement": "NOT_ENFORCEABLE", "assurance": "NOT_POSSIBLE", "verification": "DOCUMENTED_PLATFORM_BOUNDARY"}, "screenRecording": {"feasibility": "FAIL", "enforcement": "NOT_ENFORCEABLE", "assurance": "NOT_POSSIBLE", "verification": "DOCUMENTED_PLATFORM_BOUNDARY"}, "clientDisposition": "REJECTED_FOR_PROTECTED_WHOLESALE", "qualification": "UNSUPPORTED_VERSION_OR_EDITION"},
+    {"platform": "MACOS_NATIVE_UNMANAGED", "screenshot": {"feasibility": "FAIL", "enforcement": "NOT_ENFORCEABLE", "assurance": "NOT_POSSIBLE", "verification": "DOCUMENTED_PLATFORM_BOUNDARY"}, "screenRecording": {"feasibility": "FAIL", "enforcement": "NOT_ENFORCEABLE", "assurance": "NOT_POSSIBLE", "verification": "DOCUMENTED_PLATFORM_BOUNDARY"}, "clientDisposition": "REJECTED_FOR_PROTECTED_WHOLESALE", "qualification": "NO_QUALIFYING_CURRENT_TARGET_APPLICATION_VETO_VERIFIED_IN_PUBLIC_APIS"},
+    {"platform": "MANAGED_ANDROID_ENDPOINT", "screenshot": {"feasibility": "CONDITIONAL", "enforcement": "OS_ENFORCED", "assurance": "NOT_YET_VERIFIED", "verification": "NOT_YET_VERIFIED_IN_BLOWIN_SMOKE"}, "screenRecording": {"feasibility": "CONDITIONAL", "enforcement": "OS_ENFORCED", "assurance": "BEST_EFFORT", "verification": "NOT_YET_VERIFIED_IN_BLOWIN_SMOKE", "qualification": "EXACT_ENROLLED_POLICY_AND_OUTPUT_SCOPE"}, "clientDisposition": "CONDITIONAL_CANDIDATE", "qualification": "SEPARATE_ENTERPRISE_CASE"},
+    {"platform": "MANAGED_IOS_IPADOS_ENDPOINT", "screenshot": {"feasibility": "CONDITIONAL", "enforcement": "OS_ENFORCED", "assurance": "NOT_YET_VERIFIED", "verification": "NOT_YET_VERIFIED_IN_BLOWIN_SMOKE"}, "screenRecording": {"feasibility": "CONDITIONAL", "enforcement": "OS_ENFORCED", "assurance": "NOT_YET_VERIFIED", "verification": "NOT_YET_VERIFIED_IN_BLOWIN_SMOKE"}, "clientDisposition": "CONDITIONAL_CANDIDATE", "qualification": "EXACT_PAYLOAD_SUPPORTED_PLATFORM_VERSION_AND_ENROLLMENT_SEPARATE_ENTERPRISE_CASE"},
+    {"platform": "MANAGED_MACOS_ENDPOINT", "screenshot": {"feasibility": "CONDITIONAL", "enforcement": "OS_ENFORCED", "assurance": "NOT_YET_VERIFIED", "verification": "NOT_YET_VERIFIED_IN_BLOWIN_SMOKE"}, "screenRecording": {"feasibility": "CONDITIONAL", "enforcement": "OS_ENFORCED", "assurance": "NOT_YET_VERIFIED", "verification": "NOT_YET_VERIFIED_IN_BLOWIN_SMOKE"}, "clientDisposition": "CONDITIONAL_CANDIDATE", "qualification": "EXACT_PAYLOAD_SUPPORTED_PLATFORM_VERSION_AND_ENROLLMENT_SEPARATE_ENTERPRISE_CASE"},
+    {"platform": "MANAGED_WINDOWS_ENDPOINT", "screenshot": {"feasibility": "CONDITIONAL", "enforcement": "OS_ENFORCED", "assurance": "BEST_EFFORT", "verification": "NOT_YET_VERIFIED_IN_BLOWIN_SMOKE", "qualification": "EXACT_EXPERIENCE_CSP_EDITION_AND_VERSION_SCOPE"}, "screenRecording": {"feasibility": "CONDITIONAL", "enforcement": "OS_ENFORCED", "assurance": "BEST_EFFORT", "verification": "NOT_YET_VERIFIED_IN_BLOWIN_SMOKE", "qualification": "ALLOW_SCREEN_RECORDER_IS_NARROWER_BY_VERSION_AND_TOOL"}, "clientDisposition": "CONDITIONAL_CANDIDATE", "qualification": "SEPARATE_ENTERPRISE_CASE_EXACT_TOOL_AND_BYPASS_TESTS_REQUIRED"},
+    {"platform": "EXTERNAL_SECOND_CAMERA", "screenshot": {"feasibility": "FAIL", "enforcement": "NOT_ENFORCEABLE", "assurance": "NOT_POSSIBLE", "verification": "DOCUMENTED_PLATFORM_BOUNDARY"}, "screenRecording": {"feasibility": "FAIL", "enforcement": "NOT_ENFORCEABLE", "assurance": "NOT_POSSIBLE", "verification": "DOCUMENTED_PLATFORM_BOUNDARY"}, "clientDisposition": "IRREDUCIBLE_RESIDUAL", "qualification": "LEAST_EXPOSURE_WATERMARK_DETERRENCE_AND_POSSIBLE_ATTRIBUTION"}
   ],
   "mediaDecision": {
     "id": "HYBRID",
@@ -686,6 +845,9 @@
     "catalogInventoryPricesProfilesProofPhotosAndVideo": "RESTRICTED_SERVER_AUTHORIZED_SERVER_DECRYPTABLE",
     "reasoning": "Catalog media requires current revocation, merchandising, streaming, controlled delivery, and provider-aware operations; E2EE remains appropriate for designated conversation content.",
     "requiredControls": [
+      "SIGNED_APPROVED_PROTECTED_CLIENT",
+      "SUPPORTED_PLATFORM_CAPTURE_CONTROL_STATE",
+      "FAIL_CLOSED_CLIENT_AND_ENDPOINT_VERIFICATION",
       "OBJECT_LEVEL_AUTHORIZATION",
       "NO_PUBLIC_ENUMERATION",
       "SHORT_SESSION_BOUND_MEDIA_GRANTS",
@@ -705,8 +867,14 @@
     "expiresViewAt": "EXPIRES_VIEW_AT_EQUALS_FIRST_VIEW_AT_PLUS_5_MINUTES",
     "disputeBeginBy": "FIRST_VIEW_AT_PLUS_30_MINUTES",
     "clocksIndependent": true,
-    "viewAfterExpiry": "DENY_NEW_OR_REPEATED_MANIFEST_MEDIA_AND_KEY_REQUESTS",
-    "activeClientAfterExpiry": "BEST_EFFORT_REDACT_AND_REVALIDATE_ON_VISIBILITY_OR_RECONNECT",
+    "viewAfterExpiry": "DENY_NEW_OR_REPEATED_FULL_MANIFEST_MEDIA_RANGE_SEGMENT_KEY_AND_ACCESSIBLE_ALTERNATIVE_REQUESTS",
+    "activeClientAfterExpiry": "REMOVE_FULL_PROTECTED_MANIFEST_AND_CLEAR_CONTROLLED_TRANSIENT_STATE",
+    "minimalReferenceUntilDisputeDeadline": {
+      "enabled": true,
+      "allowed": ["MANIFEST_VERSION_REFERENCE", "PROTECTED_LINE_REFERENCE", "MINIMUM_LINE_IDENTITY_AND_QUANTITY", "DISPUTE_DEADLINE", "DISPUTE_RECEIPT_STATE", "STRUCTURED_REASON_AND_BEGIN_DISPUTE_ACTION", "ACCESSIBLE_SUPPORT_ROUTE"],
+      "prohibited": ["FULL_PHOTOS", "VIDEO", "PROOFS", "PRIVATE_UNIT_PRICES", "PRIVATE_TOTALS", "BROADER_INVENTORY", "NEGOTIATION_HISTORY", "FULL_MANIFEST"],
+      "expiresAt": "DISPUTE_BEGIN_BY"
+    },
     "offline": "NOT_SUPPORTED_FOR_MANIFEST_REVEAL",
     "cache": ["CACHE_CONTROL_NO_STORE", "NO_SERVICE_WORKER_CACHE", "NO_PREFETCH", "NO_PLAINTEXT_NOTIFICATION", "NO_PRINT_OR_DOWNLOAD_UI"],
     "disputeInitiation": "IDEMPOTENT_SERVER_ACCEPTED_ACTION_WRITES_RECEIPT_IF_DISPUTE_OPENED_AT_IS_ON_OR_BEFORE_DISPUTE_BEGIN_BY",
@@ -722,15 +890,43 @@
     "safeIfVerified": [
       {
         "claim": "END_TO_END_ENCRYPTED_WHOLESALE_MESSAGING",
-        "conditions": ["EXACT_SCOPE_IS_MESSAGES_AND_APPROVED_ATTACHMENTS", "SUPPORTED_REVIEWED_IMPLEMENTATION", "ENDPOINT_ONLY_CONTENT_KEYS", "DEVICE_MEMBERSHIP_AND_KEY_CHANGE_TESTS", "NO_PLAINTEXT_LOGS_OR_SERVER_READABLE_ESCROW", "METADATA_LIMITS_DISCLOSED"]
+        "conditions": ["EXACT_SCOPE_IS_MESSAGES_AND_APPROVED_ATTACHMENTS", "DELIVERED_ONLY_THROUGH_APPROVED_PROTECTED_CLIENT", "SUPPORTED_REVIEWED_IMPLEMENTATION", "ENDPOINT_ONLY_CONTENT_KEYS", "DEVICE_MEMBERSHIP_AND_KEY_CHANGE_TESTS", "NO_PLAINTEXT_LOGS_OR_SERVER_READABLE_ESCROW", "METADATA_LIMITS_DISCLOSED"]
       },
       {
         "claim": "MESSAGING_INTERMEDIARY_DOES_NOT_HOLD_KEYS_NEEDED_TO_DECRYPT_DESIGNATED_MESSAGE_CONTENT",
-        "conditions": ["NO_BLANKET_DECRYPTION_AUTHORITY", "NO_SILENT_RECIPIENT_ADDITION", "NO_SERVER_READABLE_BACKUP", "PLAINTEXT_EXCLUSION_TESTS", "AUTHORIZED_ENDPOINT_WEB_CODE_REPORTING_DECLASSIFICATION_AND_METADATA_LIMITS_DISCLOSED"]
+        "conditions": ["NO_BLANKET_DECRYPTION_AUTHORITY", "NO_SILENT_RECIPIENT_ADDITION", "NO_SERVER_READABLE_BACKUP", "PLAINTEXT_EXCLUSION_TESTS", "APPROVED_SIGNED_CLIENT_RELEASE_ENDPOINT_REPORTING_DECLASSIFICATION_AND_METADATA_LIMITS_DISCLOSED", "BROWSER_CODE_DELIVERY_SCOPED_TO_RESEARCH_ONLY_E2EE_FINDING"]
+      },
+      {
+        "claim": "PROTECTED_WHOLESALE_CONTENT_IS_EXCLUDED_FROM_SCREENSHOTS_AND_SCREEN_RECORDINGS_ON_THIS_SUPPORTED_APPROVED_CLIENT",
+        "conditions": ["EXACT_CLIENT_BUILD_PLATFORM_VERSION_DEVICE_STATE_AND_PROTECTED_SURFACE", "NAMED_OS_OR_APPLICATION_CONTROL", "PASSING_CAPTURE_AND_FAILURE_TESTS", "UNSUPPORTED_MODIFIED_PRIVILEGED_ALREADY_RENDERED_AND_EXTERNAL_CAMERA_LIMITS_DISCLOSED", "CONTINUOUS_EVIDENCE_AND_REVOCATION"]
+      },
+      {
+        "claim": "PROTECTED_WHOLESALE_CONTENT_CANNOT_NORMALLY_BE_COPIED_FORWARDED_SAVED_DOWNLOADED_PRINTED_OR_EXPORTED_THROUGH_THIS_APPROVED_CLIENT",
+        "conditions": ["EXACT_TESTED_CLIENT_AND_SERVICE_PATHS", "ORDINARY_SUPPORTED_COMMAND_SCOPE_STATED", "INSTRUMENTATION_ENDPOINT_MEMORY_TRANSCRIPTION_AND_CAMERA_LIMITS_DISCLOSED", "NO_PUBLIC_OR_DURABLE_ASSET_URL", "CONTINUOUS_EVIDENCE_AND_REVOCATION"]
+      },
+      {
+        "claim": "PRIVATE_WHOLESALE_USES_PROTECTED_CONTENT_CONTROLS_IN_ADDITION_TO_END_TO_END_ENCRYPTED_MESSAGING",
+        "conditions": ["DESIGNATED_MESSAGES_AND_APPROVED_ATTACHMENTS_ONLY_ARE_E2EE", "DELIVERED_ONLY_THROUGH_APPROVED_PROTECTED_CLIENT", "SUPPORTED_REVIEWED_E2EE_IMPLEMENTATION", "CATALOG_PRICING_INVENTORY_MEDIA_AND_MANIFEST_ARE_RESTRICTED_SERVER_DECRYPTABLE_CONTENT", "EACH_CONTENT_CLASS_PASSES_ITS_OWN_CAPTURE_EXTRACTION_AND_AUTHORIZATION_TESTS"]
+      },
+      {
+        "claim": "WHOLESALE_ROOM_ACCESS_IS_RESTRICTED_TO_APPROVED_ACCOUNTS_AND_APPROVED_PROTECTED_CLIENTS",
+        "conditions": ["EVERY_OBJECT_FIELD_MEDIA_MESSAGE_AND_MANIFEST_REQUEST_IS_SERVER_AUTHORIZED", "EXACT_SIGNED_CLIENT_BUILD_AND_SUPPORTED_PLATFORM_CONTROL_STATE", "CURRENT_ENDPOINT_ACCOUNT_ROOM_RESOURCE_GRANT_INTEGRITY_FRESHNESS_AND_REVOCATION", "NO_PUBLIC_ENUMERATION_OR_BULK_LEAK", "UNKNOWN_STALE_OR_ERROR_STATE_FAILS_CLOSED"]
+      },
+      {
+        "claim": "MEDIA_ACCESS_EXPIRES_AND_CAN_BE_REVOKED",
+        "conditions": ["CLAIM_LIMITED_TO_FUTURE_SERVER_REQUESTS_RANGES_SEGMENTS_KEYS_AND_LEASES", "EXPIRY_AND_REVOCATION_TESTS_PASS", "RECEIVED_OR_RENDERED_CONTENT_RECALL_IS_NOT_CLAIMED"]
+      },
+      {
+        "claim": "PERSONALIZED_WATERMARKS_HELP_DETER_AND_INVESTIGATE_LEAKS",
+        "conditions": ["MARK_IS_ACTUALLY_DELIVERED", "PSEUDONYMOUS_MAPPING_AND_RETENTION_ARE_GOVERNED", "EVIDENCE_CHAIN_HUMAN_REVIEW_CORRECTION_AND_APPEAL_EXIST", "ATTRIBUTION_IS_NOT_DESCRIBED_AS_PROOF"]
+      },
+      {
+        "claim": "ACCOUNT_CAN_BE_RECOVERED_AFTER_ALL_DEVICES_ARE_LOST",
+        "conditions": ["MULTIFACTOR_RISK_BASED_RECOVERY", "SECURITY_NOTIFICATIONS_AND_OLD_DEVICE_REVOCATION", "NEW_CRYPTOGRAPHIC_IDENTITY_ESTABLISHED", "OLD_MESSAGE_HISTORY_MAY_NOT_RETURN_IS_DISCLOSED"]
       },
       {
         "claim": "OPTIONAL_ONION_ACCESS",
-        "conditions": ["LIVE_VERIFIED_ONION_ADDRESS", "SAME_CANONICAL_SYSTEM", "ORIGIN_LEAK_AND_RESOURCE_GRAPH_TESTS", "KEY_CONTINUITY_AND_INCIDENT_RUNBOOK"]
+        "conditions": ["PUBLIC_OR_NONPROTECTED_BROWSER_ENTRANCE_ONLY_UNLESS_APPROVED_NATIVE_CLIENT_HAS_SEPARATELY_AUDITED_TOR_TRANSPORT", "LIVE_VERIFIED_ONION_ADDRESS", "SAME_CANONICAL_SYSTEM", "ORIGIN_LEAK_AND_RESOURCE_GRAPH_TESTS", "KEY_CONTINUITY_AND_INCIDENT_RUNBOOK"]
       },
       {
         "claim": "WE_MINIMIZE_THE_DATA_WE_COLLECT",
@@ -742,40 +938,52 @@
       {"claim": "MESSAGES_DISAPPEAR", "qualification": "ONLY_FROM_DEFINED_CONTROLLED_SURFACES_AND_LIFECYCLES; NOT_FROM_SCREENSHOTS_EXPORTS_CAMERAS_OR_COMPROMISED_ENDPOINTS"},
       {"claim": "SUPPORTED_NATIVE_CLIENTS_USE_SCREEN_CAPTURE_PROTECTIONS", "qualification": "NAME_THE_EXACT_PLATFORM_VERSION_AND_CONTROL_AND_WHETHER_IT_BLOCKS_DETECTS_OR_REDACTS; DISCLOSE_GAPS_PRIOR_CAPTURES_COMPROMISED_DEVICES_AND_EXTERNAL_CAMERAS"},
       {"claim": "PRIVATE_MEDIA", "qualification": "ACCESS_RESTRICTED_AND_SERVER_DECRYPTABLE; NOT E2EE OR UNCOPYABLE"},
-      {"claim": "DATA_IS_NOT_THE_PRODUCT", "qualification": "REQUIRES APPROVED BUSINESS PRACTICE, CONTRACT, PROVIDER, AND SECONDARY_USE EVIDENCE OUTSIDE THIS TECHNICAL GATE"}
+      {"claim": "THIS_MANIFEST_IS_AVAILABLE_FOR_FIVE_MINUTES_AFTER_EXPLICIT_REVEAL", "qualification": "IMMUTABLE_SERVER_CLOCK_APPROVED_PROTECTED_CLIENT_ACCESSIBILITY_TRANSMISSION_FAILURE_REISSUE_AND_DENY_AFTER_EXPIRY_RULES_MUST_BE_STATED_AND_TESTED"},
+      {"claim": "ONION_ACCESS_IMPROVES_NETWORK_PATH_PRIVACY", "qualification": "ACCOUNT_PHONE_PAYMENT_SHIPPING_PICKUP_DELIVERY_AND_APPLICATION_METADATA_CAN_STILL_IDENTIFY_OR_CORRELATE_THE_TRANSACTION"},
+      {"claim": "DATA_IS_NOT_THE_PRODUCT", "qualification": "REQUIRES_APPROVED_BUSINESS_PRACTICE_CONTRACT_PROVIDER_AND_SECONDARY_USE_EVIDENCE_OUTSIDE_THIS_TECHNICAL_GATE"},
+      {"claim": "WE_NEVER_SELL_YOUR_PERSONAL_DATA", "qualification": "REQUIRES_QUALIFIED_LEGAL_DEFINITION_JURISDICTION_PROVIDER_ADTECH_TRANSFER_CONTRACT_AND_AUDIT_EVIDENCE"},
+      {"claim": "WHOLESALE_ORDERS_OVER_1000_GET_FREE_SAME_DAY_DELIVERY", "qualification": "STRICTLY_OVER_1000_CURRENT_MERCHANDISE_SUBTOTAL_EXACT_ORDER_AND_ADDRESS_ELIGIBILITY_CAPACITY_EXCLUSIONS_AND_INTERNAL_COST_RECORDING"}
     ],
     "prohibited": [
       "ANONYMOUS_ORDER_OR_DELIVERY",
       "TOR_MAKES_THE_TRANSACTION_ANONYMOUS",
       "NEVER_TRACKED_OR_ZERO_TRACKING",
       "EVEN_THE_OWNER_CANNOT_READ_YOUR_CONVERSATIONS",
-      "SCREENSHOTS_ARE_BLOCKED",
-      "SCREEN_RECORDING_IS_IMPOSSIBLE",
+      "UNSCOPED_OR_UNIVERSAL_SCREENSHOTS_ARE_BLOCKED",
+      "UNSCOPED_OR_UNIVERSAL_SCREEN_RECORDING_IS_IMPOSSIBLE",
       "SCREENSHOTS_OR_RECORDING_ARE_IMPOSSIBLE_OR_BLOCKED_EVERYWHERE",
       "PRIVATE_MEDIA_CANNOT_BE_COPIED",
+      "NO_ONE_CAN_EVER_COPY_OUR_CONTENT",
+      "PRIVATE_INVENTORY_CAN_NEVER_LEAK",
+      "EXTERNAL_CAMERAS_ARE_IMPOSSIBLE",
+      "MANIFEST_IS_ERASED_FROM_THE_DEVICE_AFTER_FIVE_MINUTES",
+      "WATERMARKS_PROVE_WHO_LEAKED_CONTENT",
       "MESSAGES_OR_MANIFESTS_ARE_GUARANTEED_GONE_EVERYWHERE",
       "OWNER_STAFF_OR_AUTHORIZED_PARTICIPANTS_CAN_NEVER_READ_ANY_CONVERSATION",
+      "RECOVER_OLD_ENCRYPTED_MESSAGES_WITH_ORDER_NUMBER",
       "ALL_WHOLESALE_SALES_ARE_FINAL_NO_EXCEPTIONS",
       "NO_METADATA",
       "PERFECT_SECURITY"
     ]
   },
   "decisions": [
-    {"id": "SEC-02-ADR-001", "decision": "BROWSER_FIRST_REMAINS_DEFAULT_WHOLESALE_FEASIBILITY_DIRECTION_WITH_ACTIVE_CODE_DELIVERY_RISK"},
+    {"id": "SEC-02-ADR-001", "decision": "BROWSER_FIRST_APPLIES_TO_PUBLIC_RETAIL_AND_CONDITIONAL_E2EE_RESEARCH_NOT_PROTECTED_WHOLESALE_DELIVERY"},
     {"id": "SEC-02-ADR-002", "decision": "NO_E2EE_IMPLEMENTATION_IS_SELECTED_MATRIX_IS_PROOF_CANDIDATE_AND_UNSUITABLE_CANDIDATES_REMAIN_REJECTED_OR_BLOCKED"},
-    {"id": "SEC-02-ADR-003", "decision": "PWA_INSTALLABILITY_IS_NOT_A_SECURITY_BOUNDARY"},
-    {"id": "SEC-02-ADR-004", "decision": "SIGNED_NATIVE_CLIENT_IS_OPTIONAL_FUTURE_HIGHER_ASSURANCE_TIER"},
+    {"id": "SEC-02-ADR-003", "decision": "PWA_INSTALLABILITY_IS_NOT_A_SECURITY_BOUNDARY_AND_PWA_IS_REJECTED_FOR_PROTECTED_WHOLESALE"},
+    {"id": "SEC-02-ADR-004", "decision": "SIGNED_APPROVED_CLIENT_IS_REQUIRED_FOR_PROTECTED_WHOLESALE_ANDROID_AND_WINDOWS_ARE_CONDITIONAL_IOS_IPADOS_AND_MACOS_ARE_REJECTED"},
     {"id": "SEC-02-ADR-005", "decision": "ACCOUNT_RECOVERY_AND_HISTORY_RECOVERY_REMAIN_SEPARATE_AND_ORDER_NUMBER_IS_NOT_A_SUFFICIENT_SECRET"},
-    {"id": "SEC-02-ADR-006", "decision": "CAPTURE_CLAIMS_ARE_LAYERED_DETERRENCE_AND_ATTRIBUTION_NOT_UNIVERSAL_PREVENTION"},
+    {"id": "SEC-02-ADR-006", "decision": "SUPPORTED_PATH_CAPTURE_ENFORCEMENT_IS_A_HARD_RELEASE_GATE_WATERMARKING_IS_SECONDARY_AND_UNIVERSAL_OR_CAMERA_PREVENTION_REMAINS_IMPOSSIBLE"},
     {"id": "SEC-02-ADR-007", "decision": "WHOLESALE_MEDIA_USES_HYBRID_CLASSIFICATION"},
-    {"id": "SEC-02-ADR-008", "decision": "MANIFEST_EXPIRY_IS_FUTURE_SERVER_ACCESS_EXPIRY_NOT_ENDPOINT_ERASURE"},
+    {"id": "SEC-02-ADR-008", "decision": "FULL_MANIFEST_EXPIRES_VIEW_AT_EQUALS_FIRST_VIEW_AT_PLUS_5_MINUTES_MINIMAL_PROTECTED_REFERENCE_MAY_REMAIN_UNTIL_DISPUTE_BEGIN_BY_EQUALS_FIRST_VIEW_AT_PLUS_30_MINUTES_AND_EXPIRY_IS_NOT_ENDPOINT_ERASURE"},
     {"id": "SEC-02-ADR-009", "decision": "OPTIONAL_ONION_IS_ISOLATED_NONANONYMOUS_AND_DEFAULTS_TO_SEPARATE_REAUTHENTICATED_SESSIONS"},
-    {"id": "SEC-02-ADR-010", "decision": "WHOLESALE_POLICY_PHONE_NEGOTIATION_FULFILLMENT_AND_FREE_DELIVERY_DO_NOT_BYPASS_CANONICAL_DOMAIN_OR_QUALIFIED_POLICY_AUTHORITY"}
+    {"id": "SEC-02-ADR-010", "decision": "WHOLESALE_POLICY_PHONE_NEGOTIATION_FULFILLMENT_AND_FREE_DELIVERY_DO_NOT_BYPASS_CANONICAL_DOMAIN_OR_QUALIFIED_POLICY_AUTHORITY"},
+    {"id": "SEC-02-ADR-011", "decision": "PRIVATE_WHOLESALE_PROTECTED_CONTENT_IS_A_HARD_FAIL_CLOSED_RELEASE_GATE_WITH_NO_CURRENT_APPROVED_CLIENT"}
   ],
   "ownership": [
     {"subject": "E2EE_MESSAGE_PLAINTEXT_AND_CONTENT_KEYS", "owner": "REGISTERED_CUSTOMER_AND_ASSIGNED_STAFF_ENDPOINTS"},
     {"subject": "E2EE_ROUTING_CIPHERTEXT_AND_MINIMIZED_METADATA", "owner": "E2EE_ROUTING_BOUNDARY"},
     {"subject": "ACCOUNT_DEVICE_RECOVERY_AND_SESSION_AUTHORITY", "owner": "IDENTITY_AND_SESSION_SECURITY_BOUNDARY"},
+    {"subject": "PROTECTED_CLIENT_BUILD_PLATFORM_CONTROL_INTEGRITY_AND_RELEASE_ADMISSION", "owner": "SECURITY_PLATFORM_RELEASE_AND_ENDPOINT_TRUST_AUTHORITIES"},
     {"subject": "WHOLESALE_CATALOG_PROFILE_PROOF_AND_MEDIA_PROVENANCE", "owner": "EXISTING_CATALOG_PROOF_AND_MEDIA_DOMAINS"},
     {"subject": "PRIVATE_PRICE_STARTING_PRICE_AND_CANONICAL_QUOTE", "owner": "PRICE_AND_ORDER_DOMAINS_WITH_VERSIONED_REP_AUTHORITY"},
     {"subject": "INVENTORY_AND_AVAILABILITY", "owner": "INVENTORY_DOMAIN"},
@@ -787,17 +995,21 @@
     {"subject": "CLAIM_APPROVAL_RETENTION_RIGHTS_FINAL_SALE_AND_RECOVERY_POLICY", "owner": "QUALIFIED_OWNER_LEGAL_PRIVACY_PAYMENT_AND_COMPLIANCE_AUTHORITIES"}
   ],
   "contradictionsAndQualifications": [
-    {"ownerIntent": "STRONGLY_PREVENT_BROWSER_CAPTURE", "technicalResult": "FAIL", "governingQualification": "BROWSER_CAPTURE_PROTECTION_IS_DETERRENCE_AND_ATTRIBUTION_ONLY"},
+    {"ownerIntent": "HARD_PRIVATE_WHOLESALE_CAPTURE_PROTECTION", "technicalResult": "BROWSER_PWA_IOS_IPADOS_AND_MACOS_FAIL_ANDROID_AND_WINDOWS_CONDITIONAL", "governingQualification": "REJECT_INCAPABLE_CLIENTS_REQUIRE_APPROVED_SIGNED_CLIENT_KEEP_WATERMARKING_SECONDARY_AND_PRESERVE_EXTERNAL_CAMERA_LIMIT"},
     {"ownerIntent": "MESSAGES_AND_MANIFESTS_DISAPPEAR", "technicalResult": "CONDITIONAL", "governingQualification": "CONTROLLED_ACCESS_AND_LIFECYCLES_NOT_UNIVERSAL_ERASURE"},
     {"ownerIntent": "RECOVER_AFTER_ALL_DEVICES_ARE_LOST", "technicalResult": "PARTIAL", "governingQualification": "ACCOUNT_RECOVERY_CAN_SUCCEED_WHILE_UNRECOVERABLE_HISTORY_REMAINS_UNAVAILABLE"},
     {"ownerIntent": "E2EE_PRIVATE_WHOLESALE", "technicalResult": "CONDITIONAL", "governingQualification": "MESSAGES_AND_APPROVED_ATTACHMENTS_ARE_E2EE; CATALOG_MEDIA_IS_RESTRICTED_SERVER_DECRYPTABLE"},
-    {"ownerIntent": "PWA_HARDENED_BOUNDARY", "technicalResult": "FAIL_AS_SECURITY_BOUNDARY", "governingQualification": "PWA_MAY_ONLY_BE_A_CONVENIENCE_OPTION"},
+    {"ownerIntent": "PWA_HARDENED_BOUNDARY", "technicalResult": "FAIL_AS_PROTECTED_CONTENT_SECURITY_BOUNDARY", "governingQualification": "PWA_MAY_PACKAGE_NONPROTECTED_FUNCTIONS_ONLY"},
     {"ownerIntent": "ONION_PRIVACY", "technicalResult": "CONDITIONAL", "governingQualification": "ONION_PROTECTS_ROUTE_AND_SERVICE_ORIGIN_BUT_ACCOUNT_PAYMENT_AND_DELIVERY_CAN_IDENTIFY"},
     {"ownerIntent": "ALL_WHOLESALE_SALES_FINAL", "technicalResult": "BLOCKED", "governingQualification": "NONWAIVABLE_LAW_PAYMENT_FRAUD_DEFECT_AND_REGULATORY_RIGHTS_PREVAIL"}
   ],
   "openGates": [
     "E2EE_IMPLEMENTATION_PROTOCOL_PROFILE_RUNTIME_LICENSE_MAINTENANCE_AND_MIGRATION_SELECTION",
     "INDEPENDENT_CRYPTOGRAPHY_APPLICATION_SECURITY_AND_PRIVACY_REVIEW",
+    "SIGNED_NATIVE_ANDROID_OR_WINDOWS_CLIENT_SELECTION_EXACT_SUPPORTED_MATRIX_AND_RELEASE_REVOCATION_POLICY",
+    "OS_SCREENSHOT_RECORDING_MIRRORING_NON_SECURE_DISPLAY_AND_FAILURE_TESTS",
+    "COPY_FORWARD_SAVE_DOWNLOAD_PRINT_DRAG_EXPORT_AND_DIRECT_RETRIEVAL_NEGATIVE_TESTS",
+    "REQUEST_BOUND_CLIENT_APP_DEVICE_INTEGRITY_AND_FAIL_CLOSED_ADMISSION_PROOF",
     "BROWSER_RELEASE_INTEGRITY_KEY_DIRECTORY_EQUIVOCATION_AND_ENDPOINT_STORAGE_PROOF",
     "DEVICE_ADD_REVOKE_REPLACE_LOSS_COMPROMISE_AND_IDENTITY_CHANGE_TESTS",
     "OPTIONAL_ENDPOINT_CONTROLLED_HISTORY_RECOVERY_DECISION_AND_REVIEW",
@@ -814,25 +1026,61 @@
     "id": "SEC-03",
     "name": "Security Candidate Proof, Qualified Policy, and Independent Review Gate",
     "type": "SYNTHETIC_DATA_PROOF_AND_REVIEW_NOT_PRODUCTION_DEPLOYMENT",
-    "authorization": "PROPOSED_BY_SEC_02_NOT_OWNER_APPROVED_DUE_TO_TRUNCATED_SOURCE_TAIL",
+    "authorization": "PROPOSED_BY_SEC_02_NOT_OWNER_APPROVED_CORRECTION_SOURCE_CONFIRMS_PROTECTED_CONTENT_PROOF_REQUIREMENTS",
     "requiredEvidence": [
       "SHORTLISTED_SUPPORTED_E2EE_IMPLEMENTATION_WITH_LICENSE_MAINTENANCE_AND_SECURITY_RESPONSE",
       "EXACT_PROTOCOL_AND_STORAGE_PROFILE_WITH_TEST_VECTORS",
       "MALICIOUS_SERVER_CODE_KEY_DIRECTORY_REPLAY_MULTI_DEVICE_AND_RECOVERY_TESTS",
       "INDEPENDENT_CRYPTOGRAPHY_APPLICATION_SECURITY_PRIVACY_AND_ACCESSIBILITY_REVIEW",
-      "PLATFORM_CAPTURE_TEST_MATRIX_AND_CUSTOMER_CLAIM_EVIDENCE",
-      "MEDIA_PIPELINE_CACHE_PROVIDER_WATERMARK_AND_LEAK_RESPONSE_PROOF",
-      "MANIFEST_CLOCK_CACHE_OFFLINE_RETRY_ACCESSIBILITY_AND_AUDIT_TESTS",
+      "SELECTED_SIGNED_ANDROID_OR_WINDOWS_CLIENT_WITH_EXACT_SUPPORTED_PLATFORM_DEVICE_VERSION_FRAMEWORK_MATRIX",
+      "FAIL_CLOSED_CLIENT_BUILD_PLATFORM_CONTROL_ENDPOINT_ACCOUNT_ROOM_RESOURCE_AND_FRESHNESS_ADMISSION",
+      "PLATFORM_SCREENSHOT_RECORDING_MIRRORING_NON_SECURE_DISPLAY_COPY_FORWARD_SAVE_DOWNLOAD_PRINT_DRAG_EXPORT_AND_ADVERSARIAL_TEST_MATRIX",
+      "MEDIA_PIPELINE_APPROVED_CLIENT_CACHE_PROVIDER_RANGE_SEGMENT_KEY_EXPIRY_WATERMARK_AND_LEAK_RESPONSE_PROOF",
+      "MANIFEST_PLUS_5_MINUTE_FULL_DENIAL_PLUS_30_MINUTE_MINIMAL_REFERENCE_RETRY_ACCESSIBILITY_AND_AUDIT_TESTS",
       "ONION_ORIGIN_RESOURCE_SESSION_PARITY_KEY_AND_INCIDENT_TESTS",
       "QUALIFIED_POLICY_APPROVALS_FOR_RETENTION_RECOVERY_FINAL_SALE_AND_WHOLESALE_FULFILLMENT"
     ],
     "prohibitedOutcomes": ["PRODUCTION_STACK_SELECTION_BY_DOCUMENTATION_ALONE", "PRODUCTION_DATA", "LAUNCH_AUTHORIZATION", "UNQUALIFIED_CUSTOMER_CLAIMS"],
     "missingOrConflictingEvidenceResult": "BLOCKED_OR_EXPLICITLY_QUALIFIED_NEVER_SILENTLY_APPROVED"
   },
+  "internalEvidenceCatalog": [
+    {"id": "SEC-01", "type": "GOVERNING_DOCUMENT_PACKAGE", "path": "docs/security-architecture/", "use": "SEC_01_SECURITY_ARCHITECTURE_BASELINE"},
+    {"id": "SEC-01_ACCESS_CONTROL", "type": "GOVERNING_DOCUMENT", "path": "docs/security-architecture/05-identity-access-sessions-and-delivery-hub-security.md", "use": "AUTHORIZATION_AND_SESSION_BOUNDARY"},
+    {"id": "SEC-01_CANONICAL_OWNERS", "type": "GOVERNING_DOCUMENT", "path": "docs/technical-architecture/02-domain-boundaries-and-record-ownership.md", "use": "CANONICAL_DOMAIN_OWNERSHIP"},
+    {"id": "SEC-01_CANONICAL_OWNERSHIP", "type": "GOVERNING_DOCUMENT", "path": "docs/technical-architecture/02-domain-boundaries-and-record-ownership.md", "use": "CANONICAL_DOMAIN_OWNERSHIP"},
+    {"id": "SEC-01_D0_D4", "type": "GOVERNING_DOCUMENT", "path": "docs/security-architecture/02-data-classification-encryption-and-key-management.md", "use": "DATA_CLASSIFICATION"},
+    {"id": "SEC-01_DECLASSIFICATION", "type": "GOVERNING_DOCUMENT", "path": "docs/security-architecture/04-private-wholesale-e2ee-architecture.md", "use": "DELIBERATE_DECLASSIFICATION_BOUNDARY"},
+    {"id": "SEC-01_DELIVERY_HUB_REQUIREMENTS", "type": "GOVERNING_DOCUMENT", "path": "docs/security-architecture/05-identity-access-sessions-and-delivery-hub-security.md", "use": "DELIVERY_HUB_CAPABILITY_BOUNDARY"},
+    {"id": "SEC-01_E2EE_BOUNDARY", "type": "GOVERNING_DOCUMENT", "path": "docs/security-architecture/04-private-wholesale-e2ee-architecture.md", "use": "E2EE_CONTENT_AND_INTERMEDIARY_BOUNDARY"},
+    {"id": "SEC-01_E2EE_DEVICE_MODEL", "type": "GOVERNING_DOCUMENT", "path": "docs/security-architecture/04-private-wholesale-e2ee-architecture.md", "use": "E2EE_ENDPOINT_AND_DEVICE_MODEL"},
+    {"id": "SEC-01_ENDPOINT_KEY_BOUNDARY", "type": "GOVERNING_DOCUMENT", "path": "docs/security-architecture/04-private-wholesale-e2ee-architecture.md", "use": "ENDPOINT_KEY_AUTHORITY"},
+    {"id": "SEC-01_IDENTITY_BOUNDARY", "type": "GOVERNING_DOCUMENT", "path": "docs/security-architecture/05-identity-access-sessions-and-delivery-hub-security.md", "use": "IDENTITY_AUTHENTICATION_AND_AUTHORIZATION_SEPARATION"},
+    {"id": "SEC-01_LIFECYCLE_SEPARATION", "type": "GOVERNING_DOCUMENT", "path": "docs/security-architecture/06-privacy-retention-logging-and-third-party-boundaries.md", "use": "PER_COPY_RETENTION_AND_DELETION_BOUNDARY"},
+    {"id": "SEC-01_POLICY_BOUNDARY", "type": "GOVERNING_DOCUMENT", "path": "docs/security-architecture/08-security-decisions-and-next-gate.md", "use": "POLICY_AND_IMPLEMENTATION_AUTHORITY_BOUNDARY"},
+    {"id": "SEC-01_SERVER_BLIND_E2EE_BOUNDARY", "type": "GOVERNING_DOCUMENT", "path": "docs/security-architecture/04-private-wholesale-e2ee-architecture.md", "use": "SERVER_BLIND_MESSAGE_CONTENT_BOUNDARY"},
+    {"id": "TECHNICAL_ARCHITECTURE", "type": "GOVERNING_DOCUMENT_PACKAGE", "path": "docs/technical-architecture/", "use": "DOMAIN_TOPOLOGY_AND_CANONICAL_RECORD_BASELINE"},
+    {"id": "DELIVERY_NETWORK_ARCHITECTURE", "type": "GOVERNING_DOCUMENT_PACKAGE", "path": "docs/delivery-network/", "use": "BSDN_SERVICE_FULFILLMENT_AND_COST_BASELINE"},
+    {"id": "CANONICAL_CATALOG_AND_ORDER_OWNERS", "type": "GOVERNING_DOCUMENT", "path": "docs/technical-architecture/02-domain-boundaries-and-record-ownership.md", "use": "CATALOG_AND_ORDER_TRUTH_OWNERSHIP"},
+    {"id": "CATALOG_PROVENANCE_ARCHITECTURE", "type": "GOVERNING_DOCUMENT", "path": "docs/technical-architecture/05-proof-compatibility-fit-and-eligibility.md", "use": "FIELD_PROVENANCE_AND_EVIDENCE_BOUNDARY"},
+    {"id": "PRICE_AND_ORDER_OWNERS", "type": "GOVERNING_DOCUMENT", "path": "docs/technical-architecture/02-domain-boundaries-and-record-ownership.md", "use": "PRICE_AND_ORDER_TRUTH_OWNERSHIP"},
+    {"id": "PRICE_ORDER_AND_BSDN_OWNERS", "type": "GOVERNING_DOCUMENT_PACKAGE", "paths": ["docs/technical-architecture/", "docs/delivery-network/"], "use": "PRICE_ORDER_FULFILLMENT_AND_COST_AUTHORITY"},
+    {"id": "PRIVACY_LIFECYCLE", "type": "GOVERNING_DOCUMENT", "path": "docs/security-architecture/06-privacy-retention-logging-and-third-party-boundaries.md", "use": "PRIVACY_RETENTION_PROVIDER_AND_BACKUP_LIFECYCLE"},
+    {"id": "SERVER_AUTHORITATIVE_TRANSACTION_PATTERN", "type": "GOVERNING_DOCUMENT", "path": "docs/technical-architecture/03-contracts-events-and-state-machines.md", "use": "ATOMIC_SERVER_STATE_AND_IDEMPOTENCY_PATTERN"},
+    {"id": "UNKNOWN_SEMANTICS", "type": "GOVERNING_DOCUMENT", "path": "docs/technical-architecture/05-proof-compatibility-fit-and-eligibility.md", "use": "UNKNOWN_AND_UNVERIFIED_DATA_SEMANTICS"},
+    {"id": "E2EE_CANDIDATE_EVIDENCE", "type": "SEC_02_SYNTHESIS", "path": "docs/security-assurance/02-private-wholesale-e2ee-candidates.md", "use": "E2EE_CANDIDATE_COMPARISON"},
+    {"id": "MEDIA_DECISION", "type": "SEC_02_SYNTHESIS", "path": "docs/security-assurance/05-wholesale-media-security.md", "use": "HYBRID_MEDIA_CLASSIFICATION"},
+    {"id": "SEC-02_CLAIM_MATRIX", "type": "SEC_02_SYNTHESIS", "path": "docs/security-assurance/08-security-claims-decisions-and-next-gate.md", "use": "CUSTOMER_CLAIM_CLASSIFICATION"},
+    {"id": "TOR_PRIVACY_BOUNDARY", "type": "SEC_02_SYNTHESIS", "path": "docs/security-assurance/06-public-web-onion-and-session-assurance.md", "use": "ONION_ROUTE_PRIVACY_AND_IDENTITY_LIMITS"},
+    {"id": "NO_CANDIDATE_SELECTED", "type": "ASSESSMENT_STATE", "use": "EXPLICIT_ABSENCE_OF_A_SELECTED_OR_VERIFIED_CANDIDATE"},
+    {"id": "OWNER_WHOLESALE_RULE", "type": "OWNER_REQUIREMENT", "source": "CORRECTION_BRIEF_DESCRIBED_IN_AUTHORITY_SOURCE_BOUNDARY", "use": "ONE_STRAIN_ONE_POUND_QUALIFICATION"},
+    {"id": "OWNER_FULFILLMENT_RULE", "type": "OWNER_REQUIREMENT", "source": "CORRECTION_BRIEF_DESCRIBED_IN_AUTHORITY_SOURCE_BOUNDARY", "use": "OVER_1000_WHOLESALE_DELIVERY_CHARGE_RULE"},
+    {"id": "OWNER_POLICY_INTENT", "type": "OWNER_REQUIREMENT", "source": "CORRECTION_BRIEF_DESCRIBED_IN_AUTHORITY_SOURCE_BOUNDARY", "use": "WHOLESALE_FINAL_SALE_POLICY_INTENT"}
+  ],
   "primarySources": [
     {"id": "SIGNAL_PROTOCOLS", "url": "https://signal.org/docs/", "use": "PUBLISHED_ASYNC_ESTABLISHMENT_RATCHET_AND_MULTI_DEVICE_PROPERTY_REFERENCE"},
     {"id": "SIGNAL_LIBSIGNAL_README", "url": "https://github.com/signalapp/libsignal/blob/main/README.md", "use": "CURRENT_RUNTIME_SUPPORT_AND_OUTSIDE_USE_LIMITATION"},
     {"id": "MATRIX_JS_SDK", "url": "https://github.com/matrix-org/matrix-js-sdk", "use": "CURRENT_BROWSER_RUNTIME_RUST_CRYPTO_STORAGE_AND_DEVICE_FEATURE_EVIDENCE"},
+    {"id": "MATRIX_E2EE_DEVICE_MODEL", "url": "https://matrix.org/docs/matrix-concepts/end-to-end-encryption/", "accessDate": "2026-08-14", "use": "MATRIX_DEVICE_VERIFICATION_CROSS_SIGNING_AND_KEY_CHANGE_REFERENCE"},
     {"id": "MATRIX_JS_SDK_V42_1_0", "url": "https://github.com/matrix-org/matrix-js-sdk/releases/tag/v42.1.0", "use": "OBSERVED_CURRENT_STABLE_RELEASE_ON_2026_08_14"},
     {"id": "MATRIX_VODOZEMAC_AUDIT", "url": "https://matrix.org/blog/2022/05/16/independent-public-audit-of-vodozemac-a-native-rust-reference-implementation-of-matrix-end-to-end-encryption/", "use": "PUBLIC_INDEPENDENT_REVIEW_RECORD"},
     {"id": "MATRIX_VODOZEMAC_2026_DISCLOSURE", "url": "https://matrix.org/blog/2026/02/analysis-of-reported-issues-in-vodozemac/", "use": "MAINTAINER_CONFIRMATION_OF_ALL_ZERO_X25519_OUTPUT_ACCEPTANCE_AND_DISPUTED_IMPACT_ASSESSMENT"},
@@ -851,14 +1099,51 @@
     {"id": "W3C_CLEAR_SITE_DATA", "url": "https://www.w3.org/TR/clear-site-data/", "use": "CONTROLLED_BROWSER_CLEARING_AND_RESIDUAL_LIMITATIONS"},
     {"id": "W3C_SERVICE_WORKERS", "url": "https://www.w3.org/TR/service-workers/", "use": "PWA_CACHE_AND_UPDATE_BOUNDARY"},
     {"id": "W3C_APP_MANIFEST", "url": "https://www.w3.org/TR/appmanifest/", "use": "PWA_INSTALLABILITY_BOUNDARY"},
+    {"id": "W3C_PWA_SCREENSHOT_PROPOSAL", "url": "https://github.com/w3c/manifest/issues/1154", "accessDate": "2026-08-14", "use": "CLOSED_PROPOSAL_CONFIRMS_NO_STANDARD_PWA_CAPTURE_PREVENTION_FEATURE"},
     {"id": "W3C_SCREEN_CAPTURE", "url": "https://www.w3.org/TR/screen-capture/", "use": "WEB_CAPTURE_API_SCOPE"},
+    {"id": "CHROME_DEVTOOLS_DEVICE_MODE", "url": "https://developer.chrome.com/docs/devtools/device-mode", "accessDate": "2026-08-14", "use": "CHROMIUM_VIEWPORT_AND_FULL_PAGE_SCREENSHOT_WORKFLOWS"},
+    {"id": "CHROME_DEVTOOLS_NETWORK", "url": "https://developer.chrome.com/docs/devtools/network/", "accessDate": "2026-08-14", "use": "CHROMIUM_REQUEST_RESOURCE_HEADER_AND_RESPONSE_INSPECTION"},
+    {"id": "FIREFOX_SCREENSHOTS", "url": "https://support.mozilla.org/en-US/kb/take-screenshots-firefox", "accessDate": "2026-08-14", "use": "FIREFOX_VISIBLE_SELECTED_AND_FULL_PAGE_SCREENSHOT_WORKFLOWS"},
+    {"id": "FIREFOX_DEVTOOLS", "url": "https://firefox-source-docs.mozilla.org/devtools-user/", "accessDate": "2026-08-14", "use": "FIREFOX_PAGE_NETWORK_STORAGE_PWA_AND_SCREENSHOT_INSPECTION"},
+    {"id": "SAFARI_WEB_INSPECTOR", "url": "https://developer.apple.com/documentation/safari-developer-tools/web-inspector", "accessDate": "2026-08-14", "use": "SAFARI_DOM_RESOURCE_NETWORK_STORAGE_AND_CACHE_INSPECTION"},
+    {"id": "APPLE_MACOS_SCREENSHOT", "url": "https://support.apple.com/guide/mac-help/take-a-screenshot-mh26782/mac", "accessDate": "2026-08-14", "use": "MACOS_OPERATING_SYSTEM_SCREENSHOT_AND_RECORDING_WORKFLOWS"},
+    {"id": "APPLE_IPHONE_SCREENSHOT", "url": "https://support.apple.com/en-ca/guide/iphone/iphc872c0115/ios", "accessDate": "2026-08-14", "use": "IPHONE_ORDINARY_AND_SUPPORTED_FULL_PAGE_SCREENSHOT_WORKFLOWS"},
+    {"id": "W3C_CSS_UI", "url": "https://www.w3.org/TR/css-ui-4/", "accessDate": "2026-08-14", "use": "USER_SELECT_IS_UI_BEHAVIOR_NOT_A_SECURITY_BOUNDARY"},
+    {"id": "W3C_CLIPBOARD", "url": "https://www.w3.org/TR/clipboard-apis/", "accessDate": "2026-08-14", "use": "ORDINARY_WEB_COPY_CUT_EVENT_AND_CLIPBOARD_SCOPE"},
+    {"id": "WHATWG_DRAG_DROP", "url": "https://html.spec.whatwg.org/multipage/dnd.html", "accessDate": "2026-08-14", "use": "WEB_DRAG_START_AND_DATA_TRANSFER_BEHAVIOR_SCOPE"},
+    {"id": "CHROME_PRINT", "url": "https://support.google.com/chrome/answer/1069693", "accessDate": "2026-08-14", "use": "CHROME_PRINT_AND_SAVE_TO_PDF_WORKFLOW"},
+    {"id": "SAFARI_SAVE_WEBPAGE", "url": "https://support.apple.com/guide/safari/save-part-or-all-of-a-webpage-ibrw1089/mac", "accessDate": "2026-08-14", "use": "SAFARI_TEXT_IMAGE_WEB_ARCHIVE_AND_SOURCE_SAVE_WORKFLOWS"},
     {"id": "W3C_ENCRYPTED_MEDIA", "url": "https://www.w3.org/TR/encrypted-media/", "use": "MEDIA_KEY_SYSTEM_SCOPE_AND_LIMITATION_REFERENCE"},
     {"id": "ANDROID_SECURE_DISPLAY", "url": "https://developer.android.com/security/fraud-prevention/activities", "use": "FLAG_SECURE_CAPABILITY_AND_LIMITATIONS"},
     {"id": "ANDROID_SCREENSHOT_DETECTION", "url": "https://developer.android.com/about/versions/14/features/screenshot-detection", "use": "ANDROID_CAPTURE_DETECTION_REFERENCE"},
+    {"id": "ANDROID_SCREEN_RECORDING_CALLBACK", "url": "https://developer.android.com/reference/android/view/WindowManager#addScreenRecordingCallback(java.util.concurrent.Executor,java.util.function.Consumer)", "accessDate": "2026-08-14", "use": "ANDROID_15_RECORDING_VISIBILITY_CALLBACK_NOT_PREVENTION"},
+    {"id": "ANDROID_PLAY_INTEGRITY", "url": "https://developer.android.com/google/play/integrity/overview", "accessDate": "2026-08-14", "use": "APP_DEVICE_LICENSE_AND_CAPTURE_OR_CONTROL_RISK_ADMISSION_SIGNALS_AND_LIMITS"},
+    {"id": "ANDROID_PLAY_INTEGRITY_VERDICTS", "url": "https://developer.android.com/google/play/integrity/verdicts", "accessDate": "2026-08-14", "use": "DOCUMENTED_APP_LICENSE_DEVICE_PATCH_AND_ACCESS_RISK_VERDICT_SCOPE"},
+    {"id": "ANDROID_KEYSTORE", "url": "https://developer.android.com/privacy-and-security/keystore", "accessDate": "2026-08-14", "use": "SUPPORTED_HARDWARE_BACKED_AND_STRONGBOX_KEY_PROPERTIES"},
+    {"id": "ANDROID_KEYSTORE_ATTESTATION", "url": "https://developer.android.com/privacy-and-security/security-key-attestation", "accessDate": "2026-08-14", "use": "HARDWARE_BACKED_KEY_PROPERTY_EVIDENCE_AND_LIMITS"},
+    {"id": "ANDROID_APP_SIGNING", "url": "https://developer.android.com/studio/publish/app-signing", "accessDate": "2026-08-14", "use": "ANDROID_PACKAGE_AND_UPDATE_SIGNING_TRUST_BOUNDARY"},
+    {"id": "ANDROID_DEVICE_POLICY", "url": "https://developer.android.com/reference/android/app/admin/DevicePolicyManager#setScreenCaptureDisabled(android.content.ComponentName,boolean)", "accessDate": "2026-08-14", "use": "ENROLLED_ANDROID_DEVICE_OR_PROFILE_OWNER_SCREEN_CAPTURE_RESTRICTION"},
     {"id": "APPLE_CAPTURE_STATE", "url": "https://developer.apple.com/documentation/uikit/uiscreen/iscaptured", "use": "APPLE_RECORDING_AND_MIRRORING_CAPTURE_STATE_REFERENCE"},
     {"id": "APPLE_SCREENSHOT_NOTIFICATION", "url": "https://developer.apple.com/documentation/uikit/uiapplication/userdidtakescreenshotnotification", "use": "POST_SCREENSHOT_NOTIFICATION_LIMITATION"},
-    {"id": "WINDOWS_DISPLAY_AFFINITY", "url": "https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setwindowdisplayaffinity", "use": "WINDOW_CAPTURE_EXCLUSION_AND_NON_DRM_LIMITATION"},
-    {"id": "APPLE_MACOS_WINDOW_SHARING_TYPE", "url": "https://developer.apple.com/documentation/appkit/nswindow/sharingtype-swift.enum", "use": "CURRENT_MACOS_LEGACY_WINDOW_SHARING_CONTROL_LIMITATION"},
+    {"id": "APPLE_SCREEN_SHARE_PROTECTION", "url": "https://developer.apple.com/documentation/swiftui/protecting-sensitive-content-when-screen-sharing", "accessDate": "2026-08-14", "use": "ACTIVE_RECORDING_MIRRORING_OR_REMOTE_CONTROL_REDACTION_SCOPE"},
+    {"id": "APPLE_APP_ATTEST", "url": "https://developer.apple.com/documentation/devicecheck/establishing-your-app-s-integrity", "accessDate": "2026-08-14", "use": "LEGITIMATE_APP_INSTANCE_AND_REQUEST_BINDING_WITHOUT_CAPTURE_GUARANTEE"},
+    {"id": "APPLE_SECURE_ENCLAVE", "url": "https://developer.apple.com/documentation/security/protecting-keys-with-the-secure-enclave", "accessDate": "2026-08-14", "use": "SUPPORTED_SECURE_ENCLAVE_BACKED_KEY_PROTECTION_SCOPE"},
+    {"id": "APPLE_CODE_SIGNING", "url": "https://support.apple.com/guide/security/sec7c917bf14/web", "accessDate": "2026-08-14", "use": "APPLE_PLATFORM_CODE_SIGNING_TRUST_BOUNDARY"},
+    {"id": "APPLE_DEVICE_MANAGEMENT_RESTRICTIONS", "url": "https://developer.apple.com/documentation/devicemanagement/restrictions", "accessDate": "2026-08-14", "use": "ENROLLED_DEVICE_SCREENSHOT_AND_RECORDING_RESTRICTION"},
+    {"id": "APPLE_VISION_PRO_PROTECTED_CONTENT", "url": "https://developer.apple.com/documentation/bundleresources/entitlements/com.apple.developer.protected-content", "accessDate": "2026-08-14", "use": "VISION_PRO_ONLY_PROTECTED_CONTENT_CAPABILITY_NOT_IOS_IPADOS_OR_MACOS_EVIDENCE"},
+    {"id": "WINDOWS_DISPLAY_AFFINITY", "url": "https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowdisplayaffinity", "accessDate": "2026-08-14", "use": "WINDOW_CAPTURE_EXCLUSION_AND_NON_DRM_LIMITATION"},
+    {"id": "WINDOWS_DXGI_SWAP_CHAIN_FLAGS", "url": "https://learn.microsoft.com/en-us/windows/win32/api/dxgi/ne-dxgi-dxgi_swap_chain_flag", "accessDate": "2026-08-14", "use": "DISPLAY_ONLY_AND_PROTECTED_RENDERING_PATH_SCOPE_AND_LIMITS"},
+    {"id": "WINDOWS_MSIX_SIGNING", "url": "https://learn.microsoft.com/en-us/windows/msix/package/signing-package-overview", "accessDate": "2026-08-14", "use": "WINDOWS_PACKAGE_PUBLISHER_AND_INTEGRITY_SIGNING_BOUNDARY"},
+    {"id": "WINDOWS_TPM", "url": "https://learn.microsoft.com/en-us/windows/security/hardware-security/tpm/how-windows-uses-the-tpm", "accessDate": "2026-08-14", "use": "WINDOWS_TPM_BACKED_ROOT_AND_KEY_PROTECTION_SCOPE"},
+    {"id": "WINDOWS_HEALTH_ATTESTATION", "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/healthattestation-csp", "accessDate": "2026-08-14", "use": "MANAGED_WINDOWS_BOOT_AND_SECURITY_POSTURE_REPORTING_SCOPE"},
+    {"id": "WINDOWS_EXPERIENCE_POLICY", "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience", "accessDate": "2026-08-14", "use": "MANAGED_WINDOWS_SCREEN_CAPTURE_AND_NARROWER_RECORDER_POLICY_SCOPE"},
+    {"id": "APPLE_MACOS_WINDOW_SHARING_TYPE", "url": "https://developer.apple.com/documentation/appkit/nswindow/sharingtype-swift.enum/none", "accessDate": "2026-08-14", "use": "CURRENT_MACOS_LEGACY_WINDOW_SHARING_CONTROL_LIMITATION"},
+    {"id": "TELEGRAM_CONTENT_PROTECTION", "url": "https://core.telegram.org/api/content-protection", "accessDate": "2026-08-14", "use": "REFERENCE_CLIENT_CONTRACT_FOR_FORWARD_DOWNLOAD_COPY_AND_SCREENSHOT_RESTRICTIONS"},
+    {"id": "TELEGRAM_PROTECTED_CONTENT_ANNOUNCEMENT", "url": "https://telegram.org/blog/protected-content-delete-by-date-and-more", "accessDate": "2026-08-14", "use": "REFERENCE_PRODUCT_FORWARD_SAVE_AND_DESCRIBED_SCREENSHOT_RESTRICTION"},
+    {"id": "TELEGRAM_DESKTOP_WEB_PROTECTED_CONTENT_RESPONSE", "url": "https://bugs.telegram.org/c/63404/3", "accessDate": "2026-08-14", "use": "OFFICIAL_ADMIN_RESPONSE_CONFIRMING_DESKTOP_AND_WEB_SCREENSHOTS_ARE_CURRENTLY_INTENDED"},
+    {"id": "TELEGRAM_IOS_PROTECTED_CONTENT_REPORTS", "url": "https://bugs.telegram.org/c/42017", "accessDate": "2026-08-14", "use": "OFFICIAL_TRACKER_USER_REPORTS_OF_CURRENT_IOS_ANDROID_VARIATION_NOT_OS_AUTHORITY"},
+    {"id": "TELEGRAM_SCREENSHOT_AND_CAMERA_LIMITS", "url": "https://telegram.org/faq", "accessDate": "2026-08-14", "use": "REFERENCE_PRODUCT_ACKNOWLEDGMENT_OF_SCREENSHOT_DETECTION_AND_EXTERNAL_CAMERA_LIMITS"},
+    {"id": "EDGE_DISABLE_SCREENSHOTS_POLICY", "url": "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-policies/DisableScreenshots", "accessDate": "2026-08-14", "use": "MANAGED_EDGE_BROWSER_SHORTCUT_AND_EXTENSION_RESTRICTION_NOT_OS_CAPTURE_BLOCK"},
     {"id": "TOR_ONION_PROTOCOL", "url": "https://spec.torproject.org/rend-spec/protocol-overview.html", "use": "ONION_IDENTITY_ROUTING_AND_SERVICE_ORIGIN_REFERENCE"},
     {"id": "TOR_ONION_OPERATIONS", "url": "https://community.torproject.org/onion-services/", "use": "ONION_SERVICE_DEPLOYMENT_ISOLATION_AND_CLIENT_AUTH_GUIDANCE"}
   ],
@@ -872,6 +1157,7 @@
     {"path": "docs/security-assurance/06-public-web-onion-and-session-assurance.md", "purpose": "PUBLIC_WEB_ONION_ORIGIN_RESOURCE_SESSION_AND_DELIVERY_HUB_ASSURANCE"},
     {"path": "docs/security-assurance/07-manifest-dispute-and-fulfillment-assurance.md", "purpose": "MANIFEST_CLOCKS_DISPUTE_POLICY_FULFILLMENT_AND_BSDN_ECONOMICS"},
     {"path": "docs/security-assurance/08-security-claims-decisions-and-next-gate.md", "purpose": "CLAIM_MATRIX_DECISIONS_OPEN_GATES_CONTRADICTIONS_AND_NEXT_GATE"},
+    {"path": "docs/security-assurance/private-wholesale-protected-content-assurance.md", "purpose": "GOVERNING_PROTECTED_CONTENT_RELEASE_CRITERION_CLIENT_MATRIX_FAIL_CLOSED_RULES_MANIFEST_COMPROMISE_AND_LIVE_EVIDENCE_REGISTER"},
     {"path": "docs/security-assurance/security-assurance-registry.json", "purpose": "MACHINE_READABLE_SEC_02_FEASIBILITY_AND_ASSURANCE_REGISTRY"}
   ]
 }

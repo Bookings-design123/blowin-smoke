@@ -2,11 +2,15 @@
 
 **Document role:** Governing private-wholesale communication architecture
 **Priority:** Highest security-design priority in SEC-01
-**Implementation status:** Protocol and browser feasibility review required; implementation not authorized
+**Implementation status:** Protocol and approved-client feasibility review required; implementation not authorized
+
+## SEC-02 protected-client supersession
+
+SEC-02 preserves the E2EE security properties and lifecycle requirements in this document but narrowly supersedes its browser client selection for protected Private Wholesale content. Browser E2EE is a research-only conditional feasibility path and receives zero protected payload. Protected plaintext requires a future signed approved client that passes the SEC-02 capture, extraction, object-authorization, integrity, accessibility, and fail-closed gates. No client, protocol, library, or production stack is selected. See [Private Wholesale Protected Content Assurance](../security-assurance/private-wholesale-protected-content-assurance.md).
 
 ## 1. Purpose and boundary
 
-Blowin' Smoke will support private, non-indexed wholesale conversations for qualified one-pound-and-above business through a browser-accessible, Signal-style E2EE channel. The customer does not need the Signal app or any installed messaging app.
+Blowin' Smoke will support private, non-indexed wholesale conversations for qualified one-pound-and-above business through a future signed approved client using a Signal-style E2EE channel. The customer does not need the Signal app; the exact approved client remains unselected and may require installation.
 
 “Signal-style” describes required security properties—authenticated asynchronous establishment, endpoint identities, per-message key evolution, forward secrecy, recovery after some compromise conditions where the selected reviewed protocol supports it, multi-device lifecycle, and key-change warnings. It is not a Signal compatibility claim, a library choice, or permission to recreate Signal's protocols.
 
@@ -20,7 +24,7 @@ PRIVATE WHOLESALE
 Bulk purchasing: 1+ lb
 
 [ START PRIVATE WHOLESALE INQUIRY ]
-  -> browser establishes an authenticated-protocol E2EE context with peer-verification state visible
+  -> approved signed client establishes an authenticated-protocol E2EE context with peer-verification state visible
   -> customer composes plaintext locally
   -> customer endpoint encrypts locally
   -> Blowin' Smoke infrastructure receives, stores, and routes ciphertext
@@ -37,7 +41,7 @@ Account or endpoint registration authenticates a relationship to the service; it
 ## 3. Content and trust topology
 
 ```text
-Customer browser endpoint                         Authorized wholesale endpoint
+Approved customer endpoint                        Authorized wholesale endpoint
 ┌──────────────────────────┐                     ┌────────────────────────────┐
 │ endpoint identity keys   │                     │ endpoint identity keys     │
 │ session/ratchet state    │                     │ session/ratchet state      │
@@ -123,7 +127,7 @@ A candidate library/protocol implementation must be:
 - mature and actively maintained;
 - based on a published, versioned protocol with a precise security model;
 - independently security reviewed, with findings and remediation visible to the evaluators;
-- actually supported in the target browser/runtime—not merely exposing a similarly named package;
+- actually supported in the selected approved-client runtime—not merely exposing a similarly named package;
 - usable through a high-level misuse-resistant API;
 - equipped with official test vectors, cross-version tests, and deterministic failure behavior;
 - able to satisfy endpoint identity, prekey, ratchet, replay, out-of-order, multi-device, attachment, and migration requirements;
@@ -133,9 +137,9 @@ A candidate library/protocol implementation must be:
 
 Signal's official [`libsignal` repository](https://github.com/signalapp/libsignal#readme) states that use outside Signal is unsupported and does not establish a supported browser integration. It is therefore evidence for an evaluation constraint, not a selected dependency.
 
-## 7. Browser endpoint security
+## 7. Client-delivery security and browser research boundary
 
-A browser E2EE endpoint receives and displays plaintext. The server that delivers client code can potentially deliver malicious code that exfiltrates keys or plaintext. Browser extensions, the operating system, copied content, screenshots, developer tools, local storage, and endpoint malware are also outside the cryptographic tunnel.
+A browser E2EE endpoint would receive and display plaintext, so the server delivering client code could potentially deliver malicious code that exfiltrates keys or plaintext. Browser extensions, the operating system, copied content, screenshots, developer tools, local storage, and endpoint malware are also outside the cryptographic tunnel. SEC-02 therefore retains browser E2EE only as conditional research evidence: ordinary browsers and PWAs are rejected for protected wholesale and receive zero protected payload.
 
 Required controls include:
 
@@ -143,7 +147,7 @@ Required controls include:
 - authenticated transport, strict content policy, no unnecessary third-party JavaScript, controlled frames/workers/connections, and safe cache behavior;
 - pinned and reviewed dependencies, reproducible/auditable release provenance where feasible, protected publishing authority, and rapid rollback;
 - no analytics, support widget, advertising code, tag manager, session replay, or third-party font/script within the plaintext-capable surface;
-- local key-state protection appropriate to the selected browser platform and honest disclosure of its limits;
+- local key-state protection appropriate to the selected approved-client platform and honest disclosure of its limits;
 - reauthentication and endpoint unlock before sensitive content according to approved policy;
 - safe rendering and output encoding for messages and attachments;
 - explicit clipboard/download/export behavior and warnings;
@@ -156,7 +160,7 @@ The W3C [Web Cryptography API Recommendation](https://www.w3.org/TR/2017/REC-Web
 The choice between anonymous/pre-account inquiry and an authenticated wholesale account remains `OPEN`. Either model must distinguish:
 
 - commercial/customer account identity;
-- individual browser/device cryptographic endpoint identity;
+- individual approved-client/device cryptographic endpoint identity;
 - authorized wholesale staff identity;
 - authentication credential and session;
 - cryptographic identity verification between correspondents.
@@ -288,8 +292,8 @@ Availability failures remain explicit: prekey unavailable, endpoint unverified, 
 
 The next gate must resolve or formally retain:
 
-- the reviewed asynchronous establishment/ratchet/multi-device protocol and supported browser library;
-- exact browser/client delivery trust architecture;
+- the reviewed asynchronous establishment/ratchet/multi-device protocol and supported approved-client library;
+- exact approved-client delivery trust architecture, with browser research kept outside protected delivery;
 - authenticated account versus pre-account inquiry;
 - endpoint key persistence, loss, and endpoint-controlled recovery; server-readable escrow is outside SEC-01 and would require a new governing decision;
 - staff multi-device authorization and removal;
@@ -300,4 +304,4 @@ The next gate must resolve or formally retain:
 - declassification workflow, schemas, consent/disclosure, correction, and audit;
 - protocol upgrades, vulnerability response, dependency integrity, penetration testing, and independent cryptographic review.
 
-Implementation remains unauthorized until a qualified review supplies protocol/library evidence, browser threat validation, interoperability and adversarial test results, privacy disclosure, incident exercises, and explicit approval.
+Implementation remains unauthorized until a qualified review supplies protocol/library evidence, approved-client and browser-boundary threat validation, interoperability and adversarial test results, privacy disclosure, incident exercises, and explicit approval.

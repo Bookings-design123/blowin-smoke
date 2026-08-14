@@ -1,22 +1,24 @@
 # Capture Resistance and Leakage Attribution
 
 **Document role:** Platform-specific assurance boundary for screenshots, recording, copying, export, watermarking, and incident response
-**Controlling conclusion:** Prevent unauthorized access; deter and attribute authorized leakage; never promise control over pixels already shown
+**Controlling conclusion:** Protected wholesale is released only to an approved client that passes supported-path capture and extraction tests; watermarking remains secondary and external-camera prevention remains impossible
 
 ## 1. Platform capability matrix
 
-| Client class | Screenshot | Screen recording/mirroring | Copy/download/print | Second camera | Honest posture |
+| Client class | Screenshot | Screen recording/mirroring | Copy/download/print | Second camera | Protected wholesale status |
 |---|---|---|---|---|---|
-| Ordinary desktop browser | `NOT POSSIBLE` to guarantee prevention | `NOT POSSIBLE` to guarantee prevention | UI restrictions are `DETERRENCE`; authorized user controls client/devtools | `NOT POSSIBLE` | Access control + watermark + short exposure + audit/revoke |
-| Ordinary mobile browser | `NOT POSSIBLE` | `NOT POSSIBLE` | `DETERRENCE` only | `NOT POSSIBLE` | Same as desktop browser |
-| Installed PWA | `NOT POSSIBLE` | `NOT POSSIBLE` | `DETERRENCE`; persistent caches can add risk | `NOT POSSIBLE` | Same web boundary; no private offline cache |
-| Android native | `BEST-EFFORT` secure-window blocking/detection on supported paths | `BEST-EFFORT` blocking/detection; gaps remain | App-controlled export restrictions are `DETERRENCE` | `NOT POSSIBLE` | `CONDITIONAL`; per-version/device tests |
-| iOS/iPadOS native | Screenshot notification is after capture: prevention `NOT POSSIBLE` | Active capture can be detected/redacted: `BEST-EFFORT`; protected video is narrower | App UI can omit export; endpoint remains controlled by viewer | `NOT POSSIBLE` | Screenshot `FAIL`; recording response `CONDITIONAL` |
-| Windows native | Supported OS capture exclusion is `BEST-EFFORT` | Same | App UI restrictions are `DETERRENCE` | `NOT POSSIBLE` | `CONDITIONAL`; Microsoft says it is not DRM/security guarantee |
-| macOS native | No verified current target-app veto: `NOT POSSIBLE` | No verified current target-app veto: `NOT POSSIBLE` | App UI restrictions are `DETERRENCE` | `NOT POSSIBLE` | `FAIL` for capture-prevention guarantee |
-| Managed Android/Apple device | Admin policy can disable common capture: `BEST-EFFORT` in enrolled boundary | Same | Managed sharing restrictions may add control | `NOT POSSIBLE` | `CONDITIONAL`; not viable as ordinary BYOD requirement |
+| Ordinary desktop browser | Target veto `NOT ENFORCEABLE` | Target veto `NOT ENFORCEABLE` | UI restrictions are `BEST-EFFORT`; authorized user controls client/devtools | `NOT POSSIBLE` | `REJECTED FOR PROTECTED WHOLESALE` |
+| Ordinary mobile browser | `NOT ENFORCEABLE` | `NOT ENFORCEABLE` | `BEST-EFFORT` only | `NOT POSSIBLE` | `REJECTED FOR PROTECTED WHOLESALE` |
+| Installed PWA | `NOT ENFORCEABLE` | `NOT ENFORCEABLE` | `BEST-EFFORT`; persistent caches can add risk | `NOT POSSIBLE` | `REJECTED FOR PROTECTED WHOLESALE` |
+| Android native, provisionally Android 12+ | `OS-ENFORCED / NOT YET VERIFIED` with secure window on supported paths | Protected pixels excluded from supported non-secure virtual-display paths: `OS-ENFORCED / BEST-EFFORT / NOT YET VERIFIED` | Signed-app paths `APPLICATION-ENFORCED / NOT YET VERIFIED` | `NOT POSSIBLE` | `CONDITIONAL CANDIDATE` |
+| iOS/iPadOS native | Notification is after capture: prevention `NOT ENFORCEABLE` | Active capture detection/redaction `BEST-EFFORT`; protected video is narrower | Signed-app paths `APPLICATION-ENFORCED / NOT YET VERIFIED` | `NOT POSSIBLE` | `REJECTED FOR PROTECTED WHOLESALE` |
+| Windows native, provisionally Windows 10 2004+ | Supported public capture-path exclusion is `OS-ENFORCED / BEST-EFFORT / NOT YET VERIFIED` | Same declared scope | Signed-app paths `APPLICATION-ENFORCED / NOT YET VERIFIED` | `NOT POSSIBLE` | `CONDITIONAL CANDIDATE` |
+| macOS native | No verified current target-app veto: `NOT ENFORCEABLE` | No verified current target-app veto: `NOT ENFORCEABLE` | Signed-app paths `APPLICATION-ENFORCED / NOT YET VERIFIED` | `NOT POSSIBLE` | `REJECTED FOR PROTECTED WHOLESALE` |
+| Managed Android device | Device/profile-owner policy can disable capture: `OS-ENFORCED / NOT YET VERIFIED` in exact boundary | Policy/output scope: `OS-ENFORCED / BEST-EFFORT / NOT YET VERIFIED` | App + management policy `NOT YET VERIFIED` | `NOT POSSIBLE` | `CONDITIONAL CANDIDATE` — enterprise only |
+| Managed Apple device | Enrolled restrictions payload can disable screenshot/recording on listed supported platforms: `OS-ENFORCED / NOT YET VERIFIED` | Same exact enrolled payload scope | App + management policy `NOT YET VERIFIED` | `NOT POSSIBLE` | `CONDITIONAL CANDIDATE` — enterprise only |
+| Managed Windows device | Experience CSP screen-capture controls: `OS-ENFORCED / BEST-EFFORT / NOT YET VERIFIED` in exact edition/version scope | Recorder policy is narrower by OS version and tool: `OS-ENFORCED / BEST-EFFORT / NOT YET VERIFIED` | App + management policy `NOT YET VERIFIED` | `NOT POSSIBLE` | `CONDITIONAL CANDIDATE` — enterprise only |
 
-No row earns an unqualified `GUARANTEED` capture-prevention label.
+No row earns an unqualified universal `GUARANTEED` label, and no row is an approved Blowin' Smoke client today. Genuine OS enforcement remains enforcement inside its exact supported/tested boundary; the lack of universal protection does not reduce it to watermarking or deterrence.
 
 ## 2. Evidence and exact limits
 
@@ -32,7 +34,7 @@ Disabling context menus, text selection, keyboard shortcuts, print CSS, drag, �
 
 Android's [`FLAG_SECURE` guidance](https://developer.android.com/security/fraud-prevention/activities) supports blocking common screenshots and display on non-secure outputs. Android itself documents limitations, including incomplete reliability on older versions and gaps against overlay/other paths. [Android 14 screenshot detection](https://developer.android.com/about/versions/14/features/screenshot-detection) covers specific user screenshot actions and excludes ADB/instrumentation. Android 15 recording callbacks can report recording visibility; detection is not prevention.
 
-Therefore Android earns `CONDITIONAL / BEST-EFFORT`, never a universal claim. Rooted devices, instrumentation, modified OS images, camera capture, and previously rendered content remain outside assurance.
+Therefore supported Android secure-window behavior is `OS-ENFORCED` for the documented path, while the Blowin' Smoke client remains a `CONDITIONAL CANDIDATE / NOT YET VERIFIED`. Android 11 and lower are rejected because Google documents only about 70% reliability there. Android 12+ is a provisional floor, not proof of perfect coverage. Rooted devices, instrumentation, modified OS images, cameras, and previously rendered content remain outside assurance and require integrity gating, negative tests, and fail-closed handling.
 
 ### iOS and iPadOS native
 
@@ -42,13 +44,13 @@ Unsupported secure-text-field/window-layer tricks must not be represented as a s
 
 ### Windows and macOS native
 
-Windows [`SetWindowDisplayAffinity`](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowdisplayaffinity) can exclude a top-level window from supported public capture paths. Microsoft explicitly says it is not DRM or a guarantee and calls out photographing the screen. Treat it as best-effort defense in depth.
+Windows [`SetWindowDisplayAffinity`](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowdisplayaffinity) can OS-enforce exclusion of a top-level window from a specified set of supported public capture paths. Microsoft explicitly says it is not DRM or a strict guarantee and calls out photographing the screen. Native Windows is therefore a conditional candidate only after exact framework/window/OS/tool testing; the control is real within its stated path but cannot support a broader claim.
 
 Current Apple documentation labels `NSWindow.SharingType.none` [a legacy constant macOS no longer uses](https://developer.apple.com/documentation/appkit/nswindow/sharingtype-swift.enum). ScreenCaptureKit exclusions are selected by the capturing application for its own stream, not a target-application veto. No current public macOS target-controlled prevention mechanism was verified; any future claim remains `BLOCKED` until official supported evidence exists and fails as a present guarantee.
 
 ### Managed devices
 
-Android device/profile-owner policy can [disable screen capture](https://developer.android.com/reference/android/app/admin/DevicePolicyManager#setScreenCaptureDisabled(android.content.ComponentName,boolean)); Apple management restrictions can disable [screenshots and screen recording](https://support.apple.com/guide/deployment/review-device-management-restrictions-dep739685973/web). These controls require enrollment/administrative authority and still cannot stop an external camera. They are appropriate for managed staff endpoints or a separately contracted enterprise deployment—not a normal wholesale-customer browser requirement.
+Android device/profile-owner policy can [disable screen capture](https://developer.android.com/reference/android/app/admin/DevicePolicyManager#setScreenCaptureDisabled(android.content.ComponentName,boolean)); Apple management restrictions can disable [screenshots and screen recording](https://support.apple.com/guide/deployment/review-device-management-restrictions-dep739685973/web); and Windows [Experience Policy CSP](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience) documents a device-scoped screen-capture policy plus a narrower version/tool-scoped screen-recorder policy. These are distinct platform controls, not one uniform managed-client guarantee. They require enrollment/administrative authority, exact platform/edition/version/tool proof, and still cannot stop an external camera. They are appropriate for managed staff endpoints or a separately contracted enterprise deployment—not a normal wholesale-customer browser requirement.
 
 ## 3. The second-camera boundary
 
@@ -61,6 +63,14 @@ The product requirement must be expressed as:
 > Blowin' Smoke limits who can access private wholesale material, reduces how long it remains accessible, marks authorized views, investigates credible leaks, and can revoke future access. It does not claim to control every copy after material is displayed.
 
 ## 4. Layered anti-leak model
+
+### Release gate — Enforce capture and ordinary extraction controls
+
+- expose protected content only in a signed approved client with a current supported platform/control state;
+- block or exclude protected pixels from supported screenshots, recordings, mirroring, and non-secure display paths;
+- omit and deny copy, cut, forward/share, save, download, open-original, print, drag, and export actions;
+- fail closed before any wholesale menu, prices, inventory, media, messages, negotiation history, or manifest is returned when client capability is absent, stale, unknown, or revoked; and
+- keep the complete control and client matrix in [private-wholesale-protected-content-assurance.md](private-wholesale-protected-content-assurance.md).
 
 ### Layer 1 — Prevent unauthorized disclosure (`GUARANTEED` only within tested server scope)
 
@@ -84,12 +94,11 @@ The product requirement must be expressed as:
 
 ### Layer 3 — Deter casual copying (`DETERRENCE`)
 
-- no download/export/print action for restricted catalog and manifest;
-- selection/context-menu/drag limitations only when they do not harm accessibility;
 - concise handling notice;
 - repeated individualized visible watermark;
-- variable but non-distracting placement and bounded updates;
-- supported native secure-display controls when a native client exists.
+- static-per-render or static-per-session placement variation that does not animate, flash, or impair inspection.
+
+App-owned copy/download/export/print denial and OS secure-display controls remain release-gate enforcement in Layer 0, not deterrence. Text selection and accessibility semantics remain available to the least privilege necessary for legitimate use; hostile anti-copy gestures are prohibited.
 
 ### Layer 4 — Attribute credible leakage (`ATTRIBUTION`)
 
@@ -118,7 +127,7 @@ Required characteristics:
 - server/edge-burned derivative for valuable still/video where feasible;
 - sufficient contrast to remain identifiable without obscuring color, texture, proof text, captions, or controls;
 - alternative accessible description available without revealing additional private data;
-- placement changes that respect reduced motion and do not flash, flicker, or impair concentration;
+- placement may vary only when producing a new static render/session derivative; it does not move or animate during viewing and must not flash, flicker, or impair concentration;
 - exact mapping retained only for the investigation purpose and approved schedule;
 - disclosure that marked views are used for leakage deterrence/investigation.
 
@@ -147,7 +156,7 @@ No adverse account action may be automated solely from a detector result.
 
 ## 7. What not to do
 
-- Do not say “screenshots blocked” or “screen recording impossible.”
+- Do not make universal “screenshots blocked” or “screen recording impossible” claims. A supported-client statement remains prohibited until the exact build/platform/surface passes the gate and states its boundary.
 - Do not call a missing download button “non-downloadable.”
 - Do not draw sensitive content to canvas and claim protection.
 - Do not degrade, flash, or constantly move content to frustrate cameras.
@@ -161,14 +170,18 @@ No adverse account action may be automated solely from a detector result.
 
 | Desired property | Status | Assurance label |
 |---|---|---|
-| Browser/PWA screenshot or recording prevention | `FAIL` | `NOT POSSIBLE` |
-| Android supported-path secure display | `CONDITIONAL` | `BEST-EFFORT` |
+| Browser/PWA screenshot or recording target veto | `FAIL` | `NOT ENFORCEABLE`; client rejected |
+| Android supported-path secure display | `CONDITIONAL CANDIDATE` | Screenshot/non-secure display `OS-ENFORCED / NOT YET VERIFIED`; recording-path exclusion `OS-ENFORCED / BEST-EFFORT / NOT YET VERIFIED`; provisional Android 12+ boundary |
 | iOS screenshot prevention | `FAIL` | `NOT POSSIBLE` |
 | iOS active-recording redaction | `CONDITIONAL` | `BEST-EFFORT` |
-| Windows supported-path exclusion | `CONDITIONAL` | `BEST-EFFORT` |
+| Windows supported-path exclusion | `CONDITIONAL CANDIDATE` | `OS-ENFORCED / BEST-EFFORT / NOT YET VERIFIED` within documented public capture paths |
 | macOS current public target-app capture veto | `FAIL` | `NOT POSSIBLE` based on verified evidence |
-| Managed-device restriction | `CONDITIONAL` | `BEST-EFFORT` within enrolled boundary |
+| Managed Android restriction | `CONDITIONAL CANDIDATE` | `OS-ENFORCED / NOT YET VERIFIED` within exact enrolled policy boundary; recording paths remain `BEST-EFFORT / NOT YET VERIFIED` |
+| Managed Apple restriction | `CONDITIONAL CANDIDATE` | `OS-ENFORCED / NOT YET VERIFIED` only on exact payload-supported platforms/versions |
+| Managed Windows restriction | `CONDITIONAL CANDIDATE` | `OS-ENFORCED / BEST-EFFORT / NOT YET VERIFIED` within exact edition/version/tool policy boundary |
 | Second-camera prevention | `FAIL` | `NOT POSSIBLE` |
 | Visible personalized watermark | `PASS` as a control | `DETERRENCE` and limited `ATTRIBUTION` |
 | Forensic watermark | `BLOCKED` | Potential `ATTRIBUTION` only |
-| Guaranteed non-copyable wholesale material | `FAIL` | `NOT POSSIBLE` |
+| Fail-closed unsupported client | `PASS` as an architectural requirement | `NOT YET VERIFIED` |
+| Approved-client ordinary copy/forward/save/download/print/drag restrictions | `CONDITIONAL` | `APPLICATION-ENFORCED / NOT YET VERIFIED` |
+| Guaranteed non-copyable wholesale material on an arbitrary or compromised endpoint | `FAIL` | `NOT POSSIBLE` |

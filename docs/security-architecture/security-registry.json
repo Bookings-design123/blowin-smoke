@@ -9,6 +9,15 @@
     "docs/technical-architecture/",
     "docs/delivery-network/"
   ],
+  "sec02ProtectedClientSupersession": {
+    "effectiveDate": "2026-08-14",
+    "scope": "PROTECTED_PRIVATE_WHOLESALE_CLIENT_SELECTION_ONLY",
+    "preserved": "SEC_01_E2EE_ENDPOINT_IDENTITY_DEVICE_LIFECYCLE_RECOVERY_DECLASSIFICATION_CANONICAL_OWNERSHIP_AND_ONION_REQUIREMENTS",
+    "browserE2eeDisposition": "RESEARCH_ONLY_CONDITIONAL_FEASIBILITY_ZERO_PROTECTED_PAYLOAD",
+    "protectedPlaintextRequirement": "FUTURE_SIGNED_APPROVED_CLIENT_PASSING_SEC_02_HARD_FAIL_CLOSED_RELEASE_GATE",
+    "selectionStatus": "NO_CLIENT_PROTOCOL_LIBRARY_OR_PRODUCTION_STACK_SELECTED",
+    "governingDocument": "docs/security-assurance/private-wholesale-protected-content-assurance.md"
+  },
   "status": {
     "logicalSecurityArchitecture": "COMPLETE_FOR_CURRENT_SPECIFICATION_PHASE",
     "privateWholesaleE2EE": "REQUIREMENTS_COMPLETE_IMPLEMENTATION_NOT_SELECTED",
@@ -266,7 +275,7 @@
     {"id": "SEC-ADR-003", "decision": "ENCRYPTION_LAYERS_REMAIN_EXPLICIT"},
     {"id": "SEC-ADR-004", "decision": "D0_THROUGH_D4_GOVERN_EVERY_COPY"},
     {"id": "SEC-ADR-005", "decision": "KEYS_PURPOSE_SEPARATED_AND_LIFECYCLE_GOVERNED"},
-    {"id": "SEC-ADR-006", "decision": "PRIVATE_WHOLESALE_CONTENT_USES_ENDPOINT_E2EE"},
+    {"id": "SEC-ADR-006", "decision": "PRIVATE_WHOLESALE_MESSAGE_CONTENT_USES_ENDPOINT_E2EE_THROUGH_A_FUTURE_SIGNED_APPROVED_CLIENT_BROWSER_RESEARCH_RECEIVES_ZERO_PROTECTED_PAYLOAD"},
     {"id": "SEC-ADR-007", "decision": "METADATA_IS_SEPARATE_PRIVACY_SURFACE"},
     {"id": "SEC-ADR-008", "decision": "CANONICAL_COMMERCE_REQUIRES_DELIBERATE_DECLASSIFICATION"},
     {"id": "SEC-ADR-009", "decision": "DELIVERY_HUB_LINKS_ARE_NARROW_CAPABILITIES"},
@@ -287,7 +296,7 @@
     "NO_PRODUCTION_IMPLEMENTATION_AUTHORIZATION"
   ],
   "openDecisions": [
-    "E2EE_PROTOCOL_LIBRARY_AND_BROWSER_CLIENT_ARCHITECTURE",
+    "E2EE_PROTOCOL_LIBRARY_AND_APPROVED_CLIENT_ARCHITECTURE_BROWSER_RESEARCH_ONLY",
     "E2EE_ENDPOINT_PERSISTENCE_ENDPOINT_CONTROLLED_RECOVERY_MULTI_DEVICE_AND_KEY_TRANSPARENCY",
     "FIELD_ENCRYPTION_ALGORITHMS_MODES_KEY_PLATFORM_AND_CRYPTOPERIODS",
     "ONION_HOST_GATEWAY_HTTPS_ONION_LOCATION_COOKIE_ACCOUNT_AND_AUTHENTICATED_ADDRESS_MIGRATION",
@@ -333,7 +342,7 @@
     {"path": "docs/security-architecture/01-threat-model-and-security-objectives.md", "purpose": "THREATS_OBJECTIVES_BOUNDARIES_AND_NON_GOALS"},
     {"path": "docs/security-architecture/02-data-classification-encryption-and-key-management.md", "purpose": "D0_D4_ENCRYPTION_LAYERS_KEY_HIERARCHY_AND_LIFECYCLE"},
     {"path": "docs/security-architecture/03-public-web-and-onion-service-topology.md", "purpose": "PUBLIC_AND_OPTIONAL_ONION_ENTRANCES"},
-    {"path": "docs/security-architecture/04-private-wholesale-e2ee-architecture.md", "purpose": "BROWSER_E2EE_IDENTITY_ATTACHMENTS_METADATA_AND_DECLASSIFICATION"},
+    {"path": "docs/security-architecture/04-private-wholesale-e2ee-architecture.md", "purpose": "APPROVED_CLIENT_E2EE_IDENTITY_ATTACHMENTS_METADATA_DECLASSIFICATION_AND_BROWSER_RESEARCH_BOUNDARY"},
     {"path": "docs/security-architecture/05-identity-access-sessions-and-delivery-hub-security.md", "purpose": "AUTHENTICATION_AUTHORIZATION_SESSIONS_ROLES_AND_CAPABILITIES"},
     {"path": "docs/security-architecture/06-privacy-retention-logging-and-third-party-boundaries.md", "purpose": "PRIVACY_LIFECYCLE_LOGGING_AND_ADAPTER_DISCLOSURE"},
     {"path": "docs/security-architecture/07-backup-recovery-incident-and-key-compromise.md", "purpose": "BACKUP_RESTORE_INCIDENT_AND_COMPROMISE_PLAYBOOKS"},

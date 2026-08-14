@@ -36,6 +36,8 @@ Published protocols are necessary but not sufficient. Identity binding, delivery
 
 ## 3. Client-architecture comparison
 
+This section distinguishes two questions that version 1.0 combined: whether a client can support genuine E2EE, and whether it may receive Private Wholesale Protected Content. The browser remains a conditional E2EE execution environment. It is nevertheless rejected for protected wholesale because it cannot satisfy the hard capture gate. The governing release matrix is [private-wholesale-protected-content-assurance.md](private-wholesale-protected-content-assurance.md).
+
 ### Scoring method
 
 For capability rows, `1` is weakest and `5` is strongest. For friction/burden/complexity rows, `1` is lowest and `5` is highest. Scores are comparative feasibility judgments supported by the findings below; they are not measured production results.
@@ -65,8 +67,9 @@ For capability rows, `1` is weakest and `5` is strongest. For friction/burden/co
 
 ### A — Browser-first E2EE Wholesale Room
 
-**Status:** `CONDITIONAL`
-**Commercial position:** Default feasibility direction; lowest customer friction and strongest ordinary accessibility/Onion alignment.
+**E2EE feasibility:** `CONDITIONAL`
+**Protected-content client status:** `REJECTED FOR PROTECTED WHOLESALE`
+**Commercial position:** Public retail and generic protected-client onboarding may remain browser-accessible; no wholesale menu, catalog, prices, media, messages, negotiation history, or manifest may be delivered.
 
 The browser can execute a maintained WebAssembly/JavaScript cryptographic client, persist endpoint state, and encrypt before upload. The service can route ciphertext without content keys. The unresolved trust boundary is code delivery: an operator or attacker controlling the origin can deliver targeted code that reads plaintext or invokes local keys. The [Web Cryptography API](https://www.w3.org/TR/WebCryptoAPI/) explicitly provides primitives, not an application protocol, and script injection remains able to act with page authority.
 
@@ -76,21 +79,23 @@ Default policy should keep decrypted content and keys out of offline application
 
 ### B — Installable PWA with a hardened wholesale boundary
 
-**Status:** `CONDITIONAL`, with **no material cryptographic-security advantage over A by installability alone**
-**Commercial position:** Optional convenience layer only if its cache/update lifecycle passes review.
+**E2EE feasibility:** `CONDITIONAL`, with **no material cryptographic-security advantage over A by installability alone**
+**Protected-content client status:** `REJECTED FOR PROTECTED WHOLESALE`
+**Commercial position:** A PWA may package nonprotected public/account functions, but installability never authorizes protected wholesale content.
 
-A PWA still receives executable code from a web origin. A service worker can cache/update an application shell but does not create an independent signing trust root. It introduces additional stale-release, revoked-device, offline-data, and cache-clearing hazards. Private manifests and catalog media must not be placed into an offline service-worker cache; authorization and revocation should be revalidated online.
+A PWA still receives executable code from a web origin. A service worker can cache/update an application shell but does not create an independent signing trust root. It introduces additional stale-release, revoked-device, offline-data, and cache-clearing hazards. Because the PWA is rejected for protected wholesale, private manifests, catalog media, messages, and negotiation history must never be delivered into its response graph or service-worker/cache boundary. Authorization and revocation research does not create a fallback exception.
 
-PWA installation and behavior in Tor Browser must not be assumed. Tor's higher security levels restrict JavaScript and media, so the full E2EE room requires tested client/security-level disclosure and a safe fallback.
+PWA installation and behavior in Tor Browser must not be assumed. Tor's higher security levels restrict JavaScript and media, so any browser E2EE experiment requires tested client/security-level disclosure. It remains research-only: Tor Browser and every PWA are rejected for protected wholesale, and no fallback may reveal a protected room or protected payload.
 
 ### C — Dedicated signed native wholesale client
 
-**Status:** `CONDITIONAL`; strongest endpoint/release assurance, highest friction
-**Commercial position:** Future optional high-assurance tier, not a prerequisite for ordinary retail or the initial browser-accessible room.
+**E2EE feasibility:** `CONDITIONAL`; strongest endpoint/release assurance, highest friction
+**Protected-content client status:** Platform-specific. Native Android and Windows are `CONDITIONAL CANDIDATE`; unmanaged native iOS/iPadOS and native macOS are `REJECTED FOR PROTECTED WHOLESALE`; managed endpoints are a separate conditional enterprise case. No client is approved.
+**Commercial position:** A signed approved native client is required for protected wholesale. It is never required for ordinary retail.
 
 Platform signing creates an independent update identity relative to ordinary same-origin web delivery. Apple Secure Enclave and Android Keystore can protect suitable long-term/wrapping keys; app attestation/integrity signals can add risk evidence. Not every rapidly changing ratchet/group state can be assumed to remain in secure hardware.
 
-Native controls can improve recording response and block common screenshot paths on some platforms, but no platform guarantees capture prevention and no native design stops a second camera. Native also adds two-platform accessibility parity, distribution policy, release/emergency-update, device support, incident, and customer adoption burdens. A native app is not Onion-compatible merely because it can make network requests; an embedded/audited Tor transport would be a separate high-risk design.
+Android supplies a secure-window control that excludes screenshots and non-secure display output on supported implementations. Windows can exclude a top-level window from specified public capture paths, while Microsoft expressly disclaims DRM/security-grade coverage. Those mechanisms are real platform controls but remain unverified for Blowin' Smoke. iOS/iPadOS can detect a completed screenshot and react to active recording/mirroring but has no verified supported whole-window screenshot veto for arbitrary UI; macOS has no verified current target-app veto. Native also adds accessibility parity, distribution policy, release/emergency-update, device support, incident, and adoption burdens. No native design stops a second camera. A native app is not Onion-compatible merely because it can make network requests; an embedded/audited Tor transport would be a separate high-risk design.
 
 Primary platform sources:
 
@@ -210,10 +215,10 @@ This is a property flow, not production design:
 
 ## 6. Recommendation and non-selection
 
-1. Preserve browser-first as the default feasibility direction because the owner requires browser access and commercially usable onboarding.
+1. Preserve browser-first for public retail and as a conditional E2EE feasibility finding, but reject browser and PWA delivery of every protected wholesale content class.
 2. Advance Matrix JS + Rust crypto only as a constrained **proof candidate**, with key-backup/history behaviors disabled unless expressly approved. This is not production selection.
 3. Keep MLS as a long-term protocol-family candidate; do not approve OpenMLS or `mls-rs` until supported targets, audit closure, application semantics, and migration evidence pass.
 4. Reject `libsignal` for browser use and do not imply Signal support/compatibility.
-5. Treat PWA as optional UX packaging, not a stronger trust boundary.
-6. Keep signed native as a possible future high-assurance tier, not the only room entrance.
-7. Require external cryptographic design review, integration audit, protocol vectors/interoperability tests, reproducible/reviewed release evidence, adversarial device/recovery tests, and a named vulnerability-response owner before any stack decision.
+5. Treat PWA as optional packaging for nonprotected functions only; it is not a protected-room entrance.
+6. Require a signed approved client for protected wholesale. Advance native Android and native Windows only as conditional candidates; reject unmanaged iOS/iPadOS and macOS under current supported capture APIs; govern managed devices separately.
+7. Require exact platform capture/extraction tests, fail-closed client verification, accessibility review, external cryptographic design review, integration audit, protocol vectors/interoperability tests, reproducible/reviewed release evidence, adversarial device/recovery tests, and a named vulnerability-response owner before any stack decision.

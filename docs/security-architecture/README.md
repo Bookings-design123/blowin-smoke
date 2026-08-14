@@ -10,6 +10,10 @@ This package defines the privacy, encryption, Onion access, identity, session, r
 
 This is a logical security architecture, not production code, a deployment plan, a vendor selection, legal advice, or launch approval. Where policy, law, operations, platform choice, or cryptographic implementation review is still required, the decision remains explicitly open.
 
+### SEC-02 protected-client supersession
+
+SEC-02 preserves this package's E2EE, endpoint-identity, device-lifecycle, recovery, declassification, canonical-ownership, and Onion requirements. It narrowly supersedes SEC-01's **browser client selection for protected Private Wholesale content**. Browser E2EE remains a research-only conditional feasibility finding, but an ordinary browser or PWA receives zero protected wholesale payload. Protected plaintext requires a future signed approved client that passes the hard fail-closed release gate in [SEC-02 Protected Content Assurance](../security-assurance/private-wholesale-protected-content-assurance.md). No client, protocol, library, or production stack has been selected.
+
 ## Phase status
 
 ```text
@@ -75,9 +79,9 @@ Ordinary customers receive the complete baseline security posture through the no
 
 ## Private wholesale model
 
-Private wholesale supports qualified one-pound-and-above conversations through a browser-accessible, Signal-style E2EE channel. Inventory availability, private pricing, negotiation, and quote discussion stay private and non-indexed. The messaging service stores ciphertext and necessary minimized metadata; registered authorized endpoints decrypt content locally.
+Private wholesale supports qualified one-pound-and-above conversations through a future signed approved client using a Signal-style E2EE channel. Inventory availability, private pricing, negotiation, and quote discussion stay private and non-indexed. The messaging service stores ciphertext and necessary minimized metadata; registered authorized endpoints decrypt content locally. Browser delivery remains research-only and may expose only generic approved-client onboarding with zero protected payload.
 
-This is a protocol requirement, not a claim of Signal compatibility and not permission to invent a protocol. A future implementation must use mature, published, independently reviewed primitives and protocol libraries that pass the evaluation gate in this package. No Signal application installation is required.
+This is a protocol requirement, not a claim of Signal compatibility and not permission to invent a protocol. A future implementation must use mature, published, independently reviewed primitives and protocol libraries that pass the evaluation gate in this package. No Signal application installation is required, and no replacement client is approved by this statement.
 
 An approved conversation may become a canonical quote or order only through deliberate declassification. Retail and wholesale may differ in minimums, package structure, pricing, and economics, while approved fulfillment still enters the same eligibility, order, payment, BSDN/pickup/shipping, consent, and audit boundaries.
 

@@ -5,7 +5,7 @@
 
 ## 1. Public web is the primary security baseline
 
-Ordinary customers must receive the complete security posture in a supported modern browser without Tor, VPN, extension, or app. The normal entrance therefore requires the same canonical authorization, price, inventory, eligibility, order, payment, fulfillment, consent, correction, and audit controls that any optional Onion entrance receives.
+Ordinary retail customers must receive the complete **public retail** security posture in a supported modern browser without Tor, VPN, extension, or app. The normal entrance therefore requires the same canonical authorization, price, inventory, eligibility, order, payment, fulfillment, consent, correction, and audit controls that any optional Onion entrance receives. This does not authorize browser delivery of Private Wholesale Protected Content: browsers and PWAs may provide generic sign-in/onboarding and approved-client handoff only, with no private wholesale menu or payload.
 
 **Feasibility:** `PASS`, implementation evidence required.
 
@@ -119,12 +119,12 @@ An external capability must be one of:
 
 ## 6. Onion client compatibility
 
-Tor Browser security levels can restrict JavaScript and make HTML5 media click-to-play. Full browser E2EE using WebAssembly/IndexedDB and 4K streaming must be tested at every claimed security level; “works over Onion” cannot mean only that a static login page loads.
+Tor Browser security levels can restrict JavaScript and make HTML5 media click-to-play. Browser E2EE remains a conditional research property, but Tor Browser is rejected for protected wholesale for the same capture reason as every other browser. “Optional Onion access” may describe the public/nonprotected entrance only unless a future approved native client has a separately audited Tor transport and the protected resource graph passes its own proof.
 
 Requirements:
 
-- disclose the tested Tor Browser/version/security-level support boundary;
-- fail closed with a plain explanation when E2EE state cannot initialize;
+- disclose the tested Tor Browser/version/security-level support boundary for public/nonprotected functions and browser-E2EE research only;
+- fail closed with a plain explanation when a research-only E2EE state cannot initialize, and never substitute a non-E2EE or browser protected room;
 - provide a progressively enhanced low-JavaScript route for public/product/account information where possible;
 - make 4K explicit and offer lower renditions;
 - never silently send media to a clearnet CDN;
@@ -149,7 +149,7 @@ Sources:
 | Session identifier | Independent, rotated | Independent, rotated | Server may map both to same account after authentication |
 | CSRF state | Public session scoped | Onion session scoped | Never transferred |
 | Authentication ceremony | Explicit | Explicit, Tor-compatible | Reauthentication when crossing entrance |
-| E2EE endpoint | Exact enrolled endpoint | Exact enrolled endpoint | An endpoint key is not implied by account session |
+| Protected E2EE endpoint | None; browser session is not a protected endpoint | None in Tor Browser; any future protected Onion path requires an approved signed client with separately audited Tor transport | An endpoint key is never implied by either browser session |
 | Analytics/telemetry | Minimized/consented | Stricter, operational only | No routine cross-entrance marketing correlation |
 | Transition | Explicit user action | Explicit user action | Never bearer session/token in URL |
 
@@ -168,7 +168,7 @@ Before any deployment decision, independent testing must cover:
 - public-to-Onion and Onion-to-public cookie/session/CSRF confusion;
 - authentication, logout, recovery, key/device verification and security notifications;
 - Tor Browser Standard/Safer/Safest behavior, JavaScript disabled, media blocked, storage cleared;
-- E2EE WASM/IndexedDB availability, corruption, update and fail-closed states;
+- research-only browser E2EE WASM/IndexedDB availability, corruption, update and fail-closed states, with zero protected-wholesale payload in Tor Browser;
 - upstream outage, Tor outage, denial of service, clock error and stale projection;
 - Onion identity-key backup, compromise, replacement/address migration and authenticated customer notice;
 - monitoring/log payload minimization and incident usefulness;
@@ -211,13 +211,15 @@ Sensitive actions require the governing authenticated/step-up authority, current
 | Capability | Outcome |
 |---|---|
 | Secure ordinary-browser retail without Tor/app | `PASS` feasibility |
+| Browser or Tor Browser as protected-wholesale content client | `FAIL`; rejected and fails closed |
 | Aggressive data minimization | `CONDITIONAL` on field/purpose/policy evidence |
 | Optional Onion protocol entrance | `PASS` feasibility |
 | Production Onion origin isolation | `CONDITIONAL` on exact topology/tests/operations |
 | Same canonical truth across entrances | `PASS` and mandatory |
 | Silent shared browser session across origins | Not recommended; `BLOCKED` absent separate approval |
 | Exclusive WebAuthn-only Onion login | `FAIL` under current documented Tor Browser support |
-| Full E2EE/4K compatibility at every Tor security level | `BLOCKED`; must be tested and disclosed |
+| Browser-E2EE research compatibility at every Tor security level | `BLOCKED`; public/nonprotected research only and never a protected-room fallback |
+| Protected 4K over a future approved native Tor transport | `BLOCKED`; requires a separately audited transport and protected resource-graph proof |
 | Delivery Hub narrow bootstrap capability | `CONDITIONAL` |
 | Capability-only sensitive writes | `FAIL` |
 | Anonymous order/delivery because Onion is used | `FAIL` and prohibited claim |

@@ -25,12 +25,12 @@ Unsupported product facts, unavailable price/inventory, unresolved eligibility, 
 
 ## 2. Server-authoritative clock semantics
 
-The supplied brief ends mid-formula at `EXPIRES_VIEW_AT = FIRST`; the following completed semantics derive only from the surviving requirements and do not claim to reproduce absent text.
+The original SEC-02 brief ended mid-formula. The complete correction brief now confirms the following exact governing semantics:
 
 ```text
-FIRST_VIEW_AT          = immutable server acceptance time of first explicit reveal
-EXPIRES_VIEW_AT        = FIRST_VIEW_AT + 5 minutes
-DISPUTE_BEGIN_BY       = FIRST_VIEW_AT + 30 minutes
+FIRST_VIEW_AT = immutable server acceptance time of first explicit reveal
+EXPIRES_VIEW_AT = FIRST_VIEW_AT + 5 minutes
+DISPUTE_BEGIN_BY = FIRST_VIEW_AT + 30 minutes
 ```
 
 `FIRST_VIEW_AT` does not mean a human saw, understood, or rendered every field. It means the server accepted an explicit authenticated reveal and began issuing the authorized response.
@@ -40,7 +40,7 @@ DISPUTE_BEGIN_BY       = FIRST_VIEW_AT + 30 minutes
 1. A normal link navigation, GET, HEAD, preview, prefetch, prerender, link scanner, notification delivery, or asset request must not start either clock.
 2. The authenticated customer sees a pre-reveal summary explaining the two clocks, capture limits, and dispute route.
 3. An explicit `Reveal manifest` action submits a fresh, purpose-bound, anti-CSRF request.
-4. Server validates current account/session/device posture, exact manifest/order/version, authorization, state, revocation, and policy.
+4. Server validates current account/session, signed approved client, supported platform/capture-control state, trusted endpoint, exact manifest/order/version, authorization, state, revocation, and policy. A browser, PWA, unsupported client, stale integrity result, or unknown control state receives no manifest data.
 5. In one consistency boundary, server sets `FIRST_VIEW_AT` only if absent and derives both deadlines from the same authoritative clock; retry/concurrent requests return the same values.
 6. The response receives an immutable view event/audit reference without sensitive payload duplication.
 7. Refresh, focus, reconnect, another tab, another device, replay, or customer clock change never extends the deadlines.
@@ -67,6 +67,7 @@ The system must not pretend that transport success proves human perception.
 Required controlled-system behavior:
 
 - online-only reveal; no offline manifest or service-worker/Cache Storage persistence;
+- reveal only in a signed approved protected client; browser/PWA manifest delivery fails closed;
 - object-level authorization for text, image, playlist, media segment/key, captions, and accessible alternatives;
 - opaque high-entropy manifest-view grant scoped to exact account/session/manifest/version/purpose;
 - grant verifier protected server-side; no customer/order IDs in the value; no value in navigation URL;
@@ -86,8 +87,9 @@ Required controlled-system behavior:
 | Tab open and online at +5m | Deny all subsequent protected requests | Timer redacts/removes view; recheck confirms expiry | `BEST-EFFORT` UI + enforceable future server denial |
 | Tab backgrounded/suspended | Requests expire on server | Redact on resume/visibility event | Cannot promise exact local moment |
 | Device goes offline after reveal | Server lease still expires | Timer may redact if running; reconnect denied | Cannot remove already rendered offline pixels |
-| Browser back/forward or crash restore | Protected data must not be served from app cache; server denies refresh | Redact after lifecycle event | Browser/OS remnants remain possible |
-| Screenshot/recording/print/copy | No recall authority | Omit ordinary UI actions; watermark/deter | Prevention guarantee `FAIL` |
+| App restart/crash restore | Protected data must not be served from app cache; server denies refresh after expiry | Restore only after complete current reauthorization | OS/app remnants remain possible |
+| Screenshot/recording through supported approved-client paths | No recall authority for prior output | OS exclusion plus app restrictions must pass before reveal | `NOT YET VERIFIED`; client remains conditional |
+| Print/copy/save/forward/drag/export | Server denies owned actions and reusable resources | Approved client exposes no ordinary action | Application-enforced path; compromised endpoint remains |
 | Assistive technology consumed output | Server access expires | Accessible view/timing must remain operable | Cannot retract remembered/externalized output |
 | External camera | No control | None beyond visible individualized mark | Prevention `FAIL` |
 
@@ -106,10 +108,10 @@ Therefore:
 Potential owner choices:
 
 1. authorize a bounded customer extension before expiry under the accessibility rule;
-2. make the five-minute high-detail reveal supplemental while a minimal accessible verification summary remains until dispute deadline;
+2. make the five-minute high-detail reveal supplemental while a minimal accessible protected reference remains until the dispute deadline;
 3. establish, with qualified evidence, that exact timing is essential and provide an equivalent staff-assisted verification route.
 
-SEC-02 does not choose among them.
+The correction adopts option 2 as the feasibility direction, combined with staff assistance. Exact accessible content, timing accommodation, transmission-failure/reissue, and qualified policy remain release blockers.
 
 ## 5. Thirty-minute dispute-initiation assurance
 
@@ -130,15 +132,15 @@ The dispute-start path must:
 
 ### Five-minute/30-minute product tension
 
-After the full manifest expires at five minutes, the customer has 25 minutes in which they may not remember enough detail to identify an error. The owner must authorize one of these coherent models:
+After the full manifest expires at five minutes, the customer has 25 minutes in which they may not remember enough detail to identify an error. The following models were evaluated before selecting the governing direction:
 
 | Option | Behavior | Security/privacy tradeoff | Customer tradeoff |
 |---|---|---|---|
-| A — Minimal reference surface | Keep non-sensitive line labels/quantities/issue categories—without prices/media/full fulfillment detail—until +30m | More limited data remains visible | Customer can identify the line/reason |
+| A — Minimal protected reference surface | Keep only manifest/version reference, concise line identity and quantity, issue categories, dispute deadline, receipt state, and action—without photos, video, private unit prices/totals, broader inventory, negotiation history, or full fulfillment detail—until +30m | More limited protected data remains visible | Customer can identify the line/reason |
 | B — Initiate within five, complete within thirty | Customer must preserve a case during full view; details can be completed until +30m | Shortest full-detail exposure | High time pressure; accessibility burden |
 | C — Staff-assisted initiation | Customer calls/requests callback before +30m; server receipt preserves time | Staff sees necessary canonical context under role | Availability/hold-time risk; auditable call workflow needed |
 
-The full manifest must not remain visible for 30 minutes by accident. SEC-02 recommends Option A plus staff fallback for feasibility, subject to privacy/accessibility/policy approval.
+The full manifest must not remain visible for 30 minutes by accident. Option A plus staff fallback is the governing feasibility direction, subject to privacy/accessibility/policy approval. The minimal surface is available only in the same approved protected client and expires at `DISPUTE_BEGIN_BY`; after that, only a nonsensitive receipt/status route may remain under records policy.
 
 ## 6. Wholesale qualification and pricing
 
@@ -256,7 +258,7 @@ The customer may see “free same-day delivery” only when current serviceabili
 
 1. Exact meaning of first authorized view and transmission-failure/reissue handling.
 2. Accessible timing model or qualified essential exception.
-3. Option A/B/C for the five-minute/30-minute information gap; outage/grace and staff coverage.
+3. Exact fields, accessibility behavior, outage/grace, and staff coverage for the governing minimal protected reference plus staff fallback.
 4. Wholesale account/qualification policy owner, review, suspension, and appeal.
 5. Approved strain/SKU identity and quantity conversion rule authority.
 6. Representative negotiation/discount limits, dual approval, quote expiry, and call documentation/consent.
@@ -275,7 +277,7 @@ The customer may see “free same-day delivery” only when current serviceabili
 | Guarantee removal from an offline/open/compromised endpoint | `FAIL` |
 | Fixed five-minute presentation accessibility | `BLOCKED` pending qualified review |
 | Server-received dispute start by +30m | `PASS` |
-| Coherent customer reference during remaining 25 minutes | `BLOCKED` pending owner choice |
+| Minimal protected line/dispute reference during remaining 25 minutes | `CONDITIONAL`; governing direction selected, exact accessible fields/outage/staff policy blocked |
 | One-strain one-pound threshold | `PASS` as business rule |
 | Phone-negotiated price becomes order automatically | `FAIL` |
 | Deliberate canonical quote/order conversion | `CONDITIONAL` |

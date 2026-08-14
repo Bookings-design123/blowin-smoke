@@ -4,6 +4,8 @@
 **Decision:** **C — hybrid by media class**
 **Provider/stack selection:** None
 
+**Protected-client correction:** The hybrid encryption decision is preserved, but every D3/D4 private wholesale presentation is now restricted to an approved protected client. Browser/PWA delivery is rejected. See [private-wholesale-protected-content-assurance.md](private-wholesale-protected-content-assurance.md).
+
 ## 1. Decision summary
 
 Private Wholesale contains two different privacy problems:
@@ -26,14 +28,14 @@ Encryption does not lower classification.
 
 | Material | Recommended protection | Server/provider plaintext boundary | Update/revocation need | Customer delivery | Capture reality |
 |---|---|---|---|---|---|
-| Private unit price | D3 restricted field/projection | Authorized Price projection/runtime can read | Immediate/versioned | Authorized HTML/data; short response; watermark page | Can be photographed/transcribed |
-| Availability/private count | D3 restricted current projection | Authorized Inventory projection/runtime can read | Immediate; stale state explicit | Minimum decision-needed precision; avoid bulk payload | Can be copied; staleness must be visible |
-| Evidence-backed strain profile | D3 restricted catalog projection | Catalog/content runtime can read | Version/correction/provenance | Accessible structured content | Can be copied; no invented facts |
-| Proof information | Governed proof projection at highest contained class | Proof owner and authorized renderer | Expiry/invalidation/correction | Linked, versioned, accessible evidence | Can be copied; truth/provenance remains controlling |
-| High-resolution catalog photo | D3 restricted media | Authorized origin/derivative/watermark path can read | Version/revoke/replace | Sized derivatives; explicit high-res reveal | Screenshot/camera remains |
-| Catalog 4K video | D3 restricted media | Authorized transcode/package/watermark/CDN path can read | Version/revoke/lease | Adaptive segmented stream; no autoplay | Segments/output can be captured |
-| Negotiation attachment | D4 E2EE object | Routing/object store sees ciphertext only | Conversation lifecycle | Encrypt before upload; decrypt/render at endpoint | Authorized endpoint can copy |
-| One-to-one sensitive product media | D4 only if genuinely conversation-specific and no server transform is required | Ciphertext store only | Conversation lifecycle | Endpoint-encrypted attachment | No server watermark/transcode; endpoint capture remains |
+| Private unit price | D3 restricted field/projection | Authorized Price projection/runtime can read | Immediate/versioned | Approved protected client; short response; watermark page | Ordinary client copy/capture blocked; transcription, external-camera, compromised/privileged extraction remain |
+| Availability/private count | D3 restricted current projection | Authorized Inventory projection/runtime can read | Immediate; stale state explicit | Minimum decision-needed precision; avoid bulk payload | Ordinary client copy blocked; transcription/compromise remain; staleness must be visible |
+| Evidence-backed strain profile | D3 restricted catalog projection | Catalog/content runtime can read | Version/correction/provenance | Accessible structured protected content | Ordinary client copy blocked; transcription/compromise remain; no invented facts |
+| Proof information | Governed proof projection at highest contained class | Proof owner and authorized renderer | Expiry/invalidation/correction | Linked, versioned, accessible protected evidence | Ordinary client copy blocked; privileged/compromised extraction remains; truth/provenance controls |
+| High-resolution catalog photo | D3 restricted media | Authorized origin/derivative/watermark path can read | Version/revoke/replace | Sized derivatives; explicit approved-client high-res reveal | Supported screenshot/record paths blocked; external camera and privileged/compromised extraction remain |
+| Catalog 4K video | D3 restricted media | Authorized transcode/package/watermark/CDN path can read | Version/revoke/lease | Adaptive segmented approved-client stream; no autoplay | Ordinary save/capture blocked; privileged/compromised segment or output extraction and camera remain |
+| Negotiation attachment | D4 E2EE object | Routing/object store sees ciphertext only | Conversation lifecycle | Encrypt before upload; decrypt/render only in approved protected endpoint | Ordinary copy/export/capture blocked; transcription, camera, compromise remain |
+| One-to-one sensitive product media | D4 only if genuinely conversation-specific and no server transform is required | Ciphertext store only | Conversation lifecycle | Approved-endpoint encrypted attachment | No server watermark/transcode; ordinary capture blocked, privileged/compromised capture and camera remain |
 | Final manifest | D3 canonical order projection | Order/manifest runtime can read | Immutable version/correction, ephemeral view | Online reveal; five-minute access lease | Cannot be recalled after display |
 
 ## 3. 4K photo and video feasibility
@@ -44,7 +46,7 @@ Encryption does not lower classification.
 
 Deliver fit-for-inspection derivatives rather than original camera masters. Every request must revalidate current room grant, account/session/device posture, exact media/version, purpose, and expiry. Generate a server/edge-burned individualized derivative where it does not distort product truth. Avoid stable public filenames, predictable object keys, EXIF/location metadata, or long-lived URLs.
 
-High-resolution images can be fetched, reconstructed, screenshotted, or photographed by an authorized viewer. “View-only” and “non-downloadable” are prohibited as absolute claims.
+An approved client must block ordinary supported screenshot, recording, save, download, and open-original paths before high-resolution reveal. A privileged or compromised endpoint can still fetch or reconstruct renderable data, and an authorized viewer can still photograph or manually reproduce what is visible. “View-only” and “non-downloadable” remain prohibited as absolute claims.
 
 ### 4K video
 
@@ -54,6 +56,7 @@ Adaptive segmented streaming can make 4K commercially usable while reducing unne
 
 Required behavior:
 
+- reveal only after the signed client, supported platform/control state, trusted endpoint, account/room grant, and object authorization pass; unknown or unsupported state fails closed;
 - thumbnail/poster and lower rendition first;
 - explicit 4K selection, never autoplay;
 - per-playback authorization and short lease;
@@ -68,7 +71,7 @@ Required behavior:
 
 The [W3C Encrypted Media Extensions Recommendation](https://www.w3.org/TR/2017/REC-encrypted-media-20170918/) is an interface to content-protection key systems, not a universal DRM guarantee. Android support varies by scheme/format/device ([Media3 DRM](https://developer.android.com/media/media3/exoplayer/drm)); Apple FairPlay is an Apple-platform HLS system with separate approval/credential requirements ([FairPlay Streaming](https://developer.apple.com/streaming/fps/)).
 
-DRM may reduce some direct video extraction on supported paths. It does not protect price, profiles, still photography, ordinary UI screenshots, or a second camera. It can reduce accessibility/platform/Onion reach. SEC-02 treats DRM as `OPTIONAL / BLOCKED PENDING CANDIDATE`, not a prerequisite or selected architecture.
+DRM may reduce some direct video extraction on supported paths. DRM alone does not protect price, profiles, still photography, ordinary UI screenshots, or a second camera; the approved client's separate capture gate still applies to the full protected surface. DRM can reduce accessibility/platform/Onion reach. SEC-02 treats DRM as `OPTIONAL / BLOCKED PENDING CANDIDATE`, not a prerequisite or selected architecture.
 
 ## 4. Authorization and URL semantics
 
@@ -88,18 +91,19 @@ Expiry denies later requests; it does not revoke bytes already delivered. A tran
 
 ## 5. Cache behavior
 
-All restricted catalog/manifest responses use the strictest compatible cache baseline, including `Cache-Control: no-store` where appropriate, no service-worker/Cache Storage persistence, and no prefetch/prerender. Yet [RFC 9111](https://www.rfc-editor.org/rfc/rfc9111) expressly says `no-store` is not a reliable or sufficient privacy mechanism and malicious/compromised caches may ignore it.
+All restricted catalog/manifest responses are available only to an approved protected client and use the strictest compatible server and application-cache baseline, including `Cache-Control: no-store` where applicable, no persistent private app cache, and no prefetch/prerender. Browsers and PWAs receive no protected response. [RFC 9111](https://www.rfc-editor.org/rfc/rfc9111) remains negative evidence that `no-store` is not a reliable or sufficient privacy mechanism and malicious/compromised caches may ignore it.
 
-[Clear-Site-Data](https://www.w3.org/TR/clear-site-data/) can request origin cache/storage/context clearing, but its specification says complete disk-remnant removal cannot be promised. It is broad by origin and response-triggered; an offline endpoint cannot receive it.
+[Clear-Site-Data](https://www.w3.org/TR/clear-site-data/) is also browser negative evidence: it can request origin cache/storage/context clearing but cannot promise complete disk-remnant removal. It is not a protected-client control or a reason to send protected data to a browser.
 
 Consequences:
 
-- use a dedicated wholesale origin to reduce unrelated-origin collateral and accidental storage mixing;
-- never treat browser-cache headers as remote erasure;
+- use a dedicated wholesale service/origin boundary while returning zero protected payload to browser/PWA clients;
+- test browser/Tor/PWA routes as negative proof that no protected response, identifier, preload, cache entry, service-worker entry, or metadata-rich error is delivered;
+- never treat cache headers or application cleanup as remote erasure;
 - do not store private 4K or manifests for offline use;
 - keep decrypted message attachments out of persistent application state by default;
 - revalidate grant/revocation online before each sensitive reveal/playback;
-- test browser back/forward cache, memory, downloads, print, crash restore, range requests, and service-worker absence;
+- test approved-client application memory/cache, background/task preview, crash/restart, offline transition, range/segment/key, output, and cleanup behavior;
 - record only controlled-system deletion results; external copies remain outside the claim.
 
 ## 6. Origin, CDN, and provider exposure
@@ -128,7 +132,7 @@ For D4 attachments, the object store/CDN may receive ciphertext and metadata onl
 |---|---|---|---|
 | DOM/page session overlay | `PASS` as basic deterrence | Mark text/UI and reinforce handling | Removable by a capable client |
 | Server/edge-burned visible derivative | `PASS` as deterrence/limited attribution | Mark the actual image/video pixels | Can be cropped/obscured; processing path sees plaintext |
-| Variable/moving overlay | `CONDITIONAL` | Make clean recording harder | Must respect reduced motion; still recordable; can impair inspection |
+| Static-per-render/session placement variation | `CONDITIONAL` | Make one reusable clean crop less convenient without animation | Still removable/recordable; must remain stable, accessible, and non-obscuring |
 | Forensic video/still watermark | `BLOCKED` | Potential session attribution | Requires independent robustness/false-positive/evidence validation |
 
 Use pseudonymous trace IDs rather than full identity. Keep mapping restricted and time-bounded. A match supports investigation; it never independently proves intent or actor.
@@ -150,19 +154,13 @@ Required conditions:
 
 ## 9. Onion implications
 
-4K over Onion is technically possible but `CONDITIONAL`. Tor adds relay latency/variable throughput, and Tor Browser higher security levels may disable JavaScript or make media click-to-play. The room must:
+The optional browser Onion entrance may serve public/nonprotected content and generic approved-client onboarding, but Tor Browser is rejected for protected wholesale under the same capture gate as every browser. It must not receive private catalog media, messages, or manifests.
 
-- test the exact E2EE/WASM/IndexedDB/media behavior at disclosed Tor Browser security levels;
-- provide a low-JavaScript information fallback where technically possible;
-- serve thumbnail/lower rendition first and make 4K explicit;
-- use same-Onion/self-hosted or privacy-preserving resource paths—never a silent clearnet CDN fallback;
-- avoid IP pinning;
-- provide honest performance/degraded states;
-- not claim a signed native client is Onion-compatible without a separately reviewed Tor transport.
+Protected 4K media over Onion is therefore `BLOCKED` until an approved signed client has a separately reviewed Tor transport. Any such candidate must test E2EE, object authorization, media ranges/segments/keys, resource isolation, performance, accessibility, and failure behavior without a silent clearnet CDN fallback; use thumbnail/lower rendition before explicit 4K; avoid IP pinning; and state degraded/unavailable outcomes honestly. A static login or public Onion page does not establish protected-media compatibility.
 
 ## 10. Competitor leakage and scraping response
 
-The system can limit systematic unauthorized extraction; it cannot stop an authorized customer from manually recording current prices or media.
+The system can block ordinary supported-client recording and extraction and limit systematic unauthorized extraction. It cannot stop manual transcription, an external camera, or privileged/compromised/unsupported endpoint capture of current prices or media.
 
 Allowed controls:
 
@@ -182,7 +180,7 @@ Do not fingerprint customers invasively, create unsupported fraud conclusions, o
 2. “End-to-end encrypted” applies only to designated messages and approved attachments whose keys never enter the intermediary.
 3. Moving an attachment into catalog, proof, quote, order, support, or incident truth requires deliberate declassification, customer disclosure where applicable, target-domain validation, receipt, and correction path.
 4. The final manifest is an authorized projection of canonical commerce data. Its presentation can expire; its required canonical source records do not.
-5. No path makes authorized 4K media, prices, or inventory uncopyable. Short access, individualized marks, detection, audit, and revocation are deterrence/attribution controls.
+5. Approved clients must block supported screenshots/recordings and ordinary copy/forward/save/download/print/drag/export paths as a release condition. Even after that gate passes, an external camera, compromised endpoint, or privileged unsupported capture can reproduce content; short access, individualized marks, audit, and revocation remain defense in depth.
 
 ## 12. Final media outcomes
 
@@ -193,7 +191,9 @@ Do not fingerprint customers invasively, create unsupported fraud conclusions, o
 | Messages/approved negotiation attachments as genuine E2EE | `CONDITIONAL`, required class |
 | Hybrid by media class | `PASS` as the controlling feasibility decision; implementation evidence still required |
 | Private 4K access control | `CONDITIONAL` |
-| Truly “non-downloadable” browser media | `FAIL` as an absolute claim |
+| Browser/PWA private media delivery | `FAIL`; rejected for protected wholesale |
+| Approved-client ordinary save/download path removal | `CONDITIONAL / APPLICATION-ENFORCED / NOT YET VERIFIED` |
+| Truly “non-downloadable” media against an endpoint owner | `FAIL` as an absolute claim |
 | Segmentation as copy prevention | `FAIL`; useful delivery/access-control mechanism only |
 | Visible individualized watermark | `PASS` as deterrence/limited attribution |
 | Forensic watermark | `BLOCKED` pending independent evidence |
