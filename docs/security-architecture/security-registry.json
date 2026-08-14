@@ -1,0 +1,343 @@
+{
+  "schemaVersion": "1.0",
+  "packageVersion": "1.0",
+  "packageId": "SEC-01",
+  "packageName": "Blowin' Smoke Privacy, Encryption, Onion, and Private Wholesale Security Architecture",
+  "sourceCommit": "e2d55f531df1ead37b44e55af6760474ae794fef",
+  "documentationOnly": true,
+  "parentArchitectures": [
+    "docs/technical-architecture/",
+    "docs/delivery-network/"
+  ],
+  "status": {
+    "logicalSecurityArchitecture": "COMPLETE_FOR_CURRENT_SPECIFICATION_PHASE",
+    "privateWholesaleE2EE": "REQUIREMENTS_COMPLETE_IMPLEMENTATION_NOT_SELECTED",
+    "onionService": "OPTIONAL_ACCESS_ARCHITECTURE_COMPLETE_DEPLOYMENT_NOT_AUTHORIZED",
+    "privacyRetentionPolicy": "CAPABILITY_REQUIREMENTS_DEFINED_QUALIFIED_POLICY_OPEN",
+    "providerPlatformSelection": "NOT_AUTHORIZED",
+    "productionImplementation": "NOT_AUTHORIZED",
+    "launchReadiness": "NOT_ESTABLISHED"
+  },
+  "securityObjectives": [
+    "CONFIDENTIALITY",
+    "INTEGRITY",
+    "AUTHENTICITY",
+    "AVAILABILITY",
+    "PRIVACY",
+    "AUDITABILITY",
+    "RECOVERABILITY"
+  ],
+  "entrances": [
+    {
+      "id": "normal_public_web",
+      "role": "PRIMARY",
+      "clientRequirement": "ORDINARY_MODERN_BROWSER_NO_TOR_VPN_EXTENSION_OR_APP_REQUIRED",
+      "canonicalTruth": "SHARED"
+    },
+    {
+      "id": "optional_onion_service",
+      "role": "OPTIONAL_SUPPLEMENT",
+      "clientRequirement": "TOR_BROWSER_CHOSEN_BY_CUSTOMER",
+      "canonicalTruth": "SHARED",
+      "gatewayIsolation": "REQUIRED"
+    }
+  ],
+  "encryptionLayers": [
+    {
+      "id": "transport",
+      "protects": "DATA_BETWEEN_AUTHENTICATED_CONNECTION_ENDPOINTS",
+      "serverCanReadApplicationPlaintext": true
+    },
+    {
+      "id": "storage",
+      "protects": "AUTHORIZED_STORAGE_DATABASE_OBJECT_BACKUP_COPIES_AT_REST",
+      "authorizedRuntimeCanDecrypt": true
+    },
+    {
+      "id": "field_application",
+      "protects": "SELECTED_VALUES_FROM_BROAD_STORAGE_OR_SERVICE_ACCESS",
+      "purposeSeparatedDecryptor": true
+    },
+    {
+      "id": "e2ee",
+      "protects": "PRIVATE_WHOLESALE_CONTENT_BETWEEN_REGISTERED_ENDPOINTS",
+      "intermediaryContentDecryptAuthority": false,
+      "metadataAutomaticallyProtected": false
+    }
+  ],
+  "classifications": [
+    {
+      "id": "D0",
+      "name": "PUBLIC",
+      "definition": "APPROVED_FOR_INTENTIONAL_PUBLIC_DISCLOSURE",
+      "examples": ["PUBLISHED_RETAIL_CATALOG", "APPROVED_PUBLIC_PRICE", "APPROVED_PUBLIC_MEDIA", "PUBLIC_POLICY_CONTENT"]
+    },
+    {
+      "id": "D1",
+      "name": "INTERNAL",
+      "definition": "NONPUBLIC_BUSINESS_OR_OPERATIONAL_INFORMATION",
+      "examples": ["INTERNAL_DRAFTS", "INVENTORY_OPERATIONS", "SERVICE_HEALTH", "SUPPLIER_COMMERCIAL_DATA"]
+    },
+    {
+      "id": "D2",
+      "name": "PERSONAL",
+      "definition": "PERSONAL_PSEUDONYMOUS_COMMERCIAL_BEHAVIORAL_OR_PRECISE_OPERATIONAL_INFORMATION",
+      "examples": ["CONTACT", "ADDRESS", "ORDER_HISTORY", "DRIVER_IDENTITY", "PRECISE_GPS", "INSTRUCTIONS", "WHOLESALE_METADATA"]
+    },
+    {
+      "id": "D3",
+      "name": "RESTRICTED",
+      "definition": "HIGH_IMPACT_IDENTITY_COMPLIANCE_FINANCIAL_AUTHENTICATION_PROOF_SAFETY_OR_PRIVILEGED_DATA",
+      "examples": ["AGE_RESULT_REFERENCE", "EXCEPTIONAL_RAW_ID_EVIDENCE", "PAYMENT_REFERENCE", "HANDOFF_AUTHORIZATION", "PROOF_MEDIA", "SECRETS"]
+    },
+    {
+      "id": "D4",
+      "name": "E2EE_CONTENT",
+      "definition": "WHOLESALE_MESSAGE_OR_ATTACHMENT_PLAINTEXT_AVAILABLE_ONLY_AT_AUTHENTICATED_COMMUNICATING_ENDPOINTS",
+      "examples": ["WHOLESALE_MESSAGE_BODY", "WHOLESALE_ATTACHMENT_PLAINTEXT", "ATTACHMENT_CONTENT_KEY"]
+    }
+  ],
+  "dataFamilies": [
+    {"id": "retail_publication", "minimumClass": "D0", "owner": "EXISTING_CATALOG_PRICE_MEDIA_POLICY_DOMAINS"},
+    {"id": "customer_identity_contact", "minimumClass": "D2", "owner": "IDENTITY_CONSENT"},
+    {"id": "addresses", "minimumClass": "D2", "owner": "ORDER_FULFILLMENT_BSDN_BY_CONTEXT"},
+    {"id": "order_history", "minimumClass": "D2", "owner": "ORDER"},
+    {"id": "payment_references", "minimumClass": "D3", "owner": "PAYMENT_BOUNDARY"},
+    {"id": "age_result_reference", "minimumClass": "D3", "owner": "AGE_QUALIFICATION"},
+    {"id": "raw_id_if_exceptionally_authorized", "minimumClass": "D3", "owner": "QUALIFIED_POLICY_AND_AGE_BOUNDARY", "default": "PROHIBITED"},
+    {"id": "driver_identity_device", "minimumClass": "D2", "owner": "BSDN_DRIVER_DISPATCH"},
+    {"id": "precise_gps_route", "minimumClass": "D2", "risk": "HIGH", "owner": "BSDN_TRACKING_ETA"},
+    {"id": "delivery_instructions", "minimumClass": "D2", "owner": "BSDN_DELIVERY_AGE_HANDOFF"},
+    {"id": "handoff_authorization", "minimumClass": "D3", "owner": "BSDN_DELIVERY_AGE_HANDOFF"},
+    {"id": "proof_of_delivery", "minimumClass": "D3", "owner": "BSDN_PACKAGE_CUSTODY"},
+    {"id": "tip_payment_movement", "minimumClass": "D3", "owner": "BSDN_TIP_ACCOUNTING_AND_PAYMENT_BOUNDARY"},
+    {"id": "feedback_comments_support", "minimumClass": "D2", "owner": "BSDN_DELIVERY_EXPERIENCE_RECOVERY_AND_SUPPORT"},
+    {"id": "delivery_hub_and_session_tokens", "minimumClass": "D3", "handling": "SECRET", "owner": "IDENTITY_SESSION_SECURITY_BOUNDARY"},
+    {"id": "wholesale_ciphertext", "minimumClass": "D4", "operationalMetadataClass": "D2_OR_D3", "owner": "E2EE_ROUTING_BOUNDARY"},
+    {"id": "wholesale_plaintext", "minimumClass": "D4", "owner": "REGISTERED_ENDPOINTS"},
+    {"id": "wholesale_metadata", "minimumClass": "D2", "owner": "E2EE_ROUTING_BOUNDARY"},
+    {"id": "keys_and_secrets", "minimumClass": "D3", "handling": "SECRET", "owner": "PURPOSE_SPECIFIC_KEY_OR_ENDPOINT_BOUNDARY"},
+    {"id": "audit_security_records", "minimumClass": "D1", "inheritsTargetClass": true, "maximumClass": "D3", "owner": "AUDIT_CORRECTIONS_AND_SECURITY_OPERATIONS"}
+  ],
+  "keyRoles": [
+    {"id": "root_key_management_trust", "custody": "MOST_RESTRICTED_NONAPPLICATION_BOUNDARY"},
+    {"id": "environment_key", "custody": "ENVIRONMENT_SEPARATED"},
+    {"id": "domain_purpose_kek", "custody": "PURPOSE_SEPARATED"},
+    {"id": "data_encryption_key", "custody": "WRAPPED_WITH_VERSIONED_CONTEXT"},
+    {"id": "customer_sensitive_field_key", "custody": "OWNING_WORKFLOW_DECRYPTOR"},
+    {"id": "bsdn_location_key", "custody": "BOUNDED_TRACKING_AND_INCIDENT_PURPOSE"},
+    {"id": "proof_evidence_key", "custody": "CONTROLLED_EVIDENCE_BOUNDARY"},
+    {"id": "backup_key", "custody": "SEPARATE_FROM_ORDINARY_PRODUCTION_ACCESS"},
+    {"id": "wholesale_endpoint_identity_key", "custody": "REGISTERED_ENDPOINT_ONLY"},
+    {"id": "wholesale_session_message_key_state", "custody": "ENDPOINT_ONLY_SELECTED_PROTOCOL"},
+    {"id": "onion_identity_private_key", "custody": "ISOLATED_ONION_BOUNDARY"}
+  ],
+  "trustContexts": [
+    "PUBLIC_UNAUTHENTICATED",
+    "CUSTOMER_ACCOUNT",
+    "DELIVERY_HUB_CAPABILITY",
+    "DRIVER",
+    "DISPATCHER",
+    "ORIGIN_STAFF",
+    "SUPPORT_RECOVERY",
+    "FINANCE_PAYROLL",
+    "POLICY_SECURITY_AUDITOR",
+    "WHOLESALE_STAFF_ENDPOINT",
+    "SERVICE_IDENTITY"
+  ],
+  "threats": [
+    "PASSIVE_NETWORK_OBSERVATION",
+    "HOSTILE_NETWORK_REDIRECT_DOWNGRADE_INJECTION",
+    "DNS_DOMAIN_TAKEOVER",
+    "CREDENTIAL_THEFT_AND_PHISHING",
+    "CUSTOMER_ACCOUNT_TAKEOVER",
+    "ADMINISTRATOR_COMPROMISE",
+    "DRIVER_ACCOUNT_DEVICE_COMPROMISE",
+    "LOST_OR_STOLEN_ENDPOINT",
+    "DATABASE_OBJECT_BACKUP_EXPORT_COMPROMISE",
+    "LOG_ANALYTICS_COMPROMISE",
+    "SECRET_API_TOKEN_COMPROMISE",
+    "MALICIOUS_OR_COMPROMISED_ADAPTER",
+    "EXCESSIVE_EMPLOYEE_OR_INSIDER_ACCESS",
+    "WHOLESALE_ROUTING_SERVER_COMPROMISE",
+    "E2EE_BROWSER_CLIENT_DELIVERY_COMPROMISE",
+    "E2EE_ENDPOINT_COMPROMISE",
+    "WHOLESALE_IDENTITY_KEY_COMPROMISE",
+    "ONION_IDENTITY_KEY_COMPROMISE",
+    "TRACKING_GRANT_LEAK_ENUMERATION",
+    "SESSION_FIXATION_HIJACK",
+    "CSRF",
+    "XSS_CLIENT_CODE_INJECTION",
+    "QUERY_COMMAND_INJECTION",
+    "REPLAY_DUPLICATE_SUBMISSION",
+    "BRUTE_FORCE_ENUMERATION",
+    "PRECISE_LOCATION_SURVEILLANCE",
+    "METADATA_ACCUMULATION",
+    "AGE_DOCUMENT_OVERCOLLECTION",
+    "PROOF_EXPOSURE_TAMPERING",
+    "SUPPORT_INSTRUCTION_COMMENT_LEAKAGE",
+    "RANSOMWARE_DESTRUCTIVE_ATTACK",
+    "SERVICE_DENIAL_DEGRADATION"
+  ],
+  "e2eeRequirements": [
+    "MATURE_PUBLISHED_INDEPENDENTLY_REVIEWED_IMPLEMENTATION",
+    "SUPPORTED_BROWSER_RUNTIME_CONFIRMED",
+    "AUTHENTICATED_ASYNCHRONOUS_ESTABLISHMENT",
+    "ENDPOINT_IDENTITY_KEYS",
+    "SIGNED_AND_ONE_TIME_PREKEYS_OR_REVIEWED_EQUIVALENT",
+    "PER_MESSAGE_KEY_EVOLUTION",
+    "FORWARD_SECRECY_WITH_EXACT_CLAIM",
+    "POST_COMPROMISE_RECOVERY_ONLY_WHERE_PROTOCOL_SUPPORTS",
+    "AUTHENTICATED_ENCRYPTION",
+    "REPLAY_RESISTANCE",
+    "BOUNDED_OUT_OF_ORDER_HANDLING",
+    "PROTOCOL_VERSION_AND_DOWNGRADE_PROTECTION",
+    "DEVICE_ADD_LIST_VERIFY_REVOKE_REPLACE_LOSS_WORKFLOWS",
+    "IDENTITY_KEY_CHANGE_WARNING_AND_ACKNOWLEDGEMENT",
+    "ENDPOINT_ONLY_CONTENT_DECRYPTION",
+    "TLS_AROUND_E2EE_TRANSPORT",
+    "HARDENED_AUDITABLE_CLIENT_DELIVERY",
+    "CLIENT_ENCRYPTED_ATTACHMENTS",
+    "METADATA_INVENTORY_AND_MINIMIZATION",
+    "EXPLICIT_LIMITED_DELETION_SEMANTICS",
+    "DELIBERATE_DECLASSIFICATION_FOR_CANONICAL_COMMERCE",
+    "RECORDED_CUSTOMER_AUTHORIZATION_OR_CONSENT_FOR_EVERY_DECLASSIFICATION",
+    "ENDPOINT_CONTROLLED_RECOVERY_WITH_NO_INTERMEDIARY_DECRYPTION_AUTHORITY",
+    "NO_SIGNAL_COMPATIBILITY_CLAIM",
+    "NO_HOMEMADE_CRYPTOGRAPHY"
+  ],
+  "deliveryHubRequirements": [
+    "HIGH_ENTROPY_NONSEQUENTIAL_CAPABILITY",
+    "NO_CUSTOMER_ORDER_DELIVERY_OR_PROVIDER_ID_IN_TOKEN_OR_URL",
+    "ONE_DELIVERY_PURPOSE_AND_ACTION_SCOPE",
+    "EXPIRATION_AND_REVOCATION",
+    "RATE_LIMIT_AND_REPLAY_PROTECTION",
+    "NO_PLAINTEXT_TOKEN_IN_LOGS_ANALYTICS_REFERRERS_OR_THIRD_PARTIES",
+    "CAPABILITY_IS_NOT_ACCOUNT_ACCESS",
+    "SENSITIVE_WRITES_REQUIRE_STRONGER_AUTHORITY",
+    "TRACKING_DOES_NOT_AUTHORIZE_AGE_HANDOFF_CUSTODY_OR_COMPLETION"
+  ],
+  "privacyLifecycleActions": [
+    "COLLECT",
+    "USE",
+    "SHARE",
+    "RETAIN",
+    "DELETE",
+    "EXPORT",
+    "CORRECT"
+  ],
+  "adapterDisclosureContractFields": [
+    "EXACT_FIELDS_AND_CLASSIFICATION",
+    "PURPOSE_AND_AUTHORITY",
+    "FLOW_DIRECTION_AND_TRIGGER",
+    "LEGAL_ROLE_DETERMINATION",
+    "SECURITY_AND_ACCESS_EXPECTATIONS",
+    "RETENTION_DELETION_AND_CONFIRMATION",
+    "ONWARD_SHARING_SUBPROCESSORS_REGION",
+    "SECONDARY_USE_AND_BROWSER_DISCLOSURE",
+    "RIGHTS_HOLD_AND_PROPAGATION",
+    "INCIDENT_AND_COMPROMISE_NOTIFICATION",
+    "OUTAGE_RETRY_IDEMPOTENCY_REPLAY_ERRORS",
+    "EXPORT_MIGRATION_TERMINATION_REPLACEMENT",
+    "ASSURANCE_CHANGE_NOTICE_AND_CONTRACT_TESTS"
+  ],
+  "incidentPlaybooks": [
+    "CUSTOMER_ACCOUNT_SESSION_COMPROMISE",
+    "ADMIN_ACCOUNT_SESSION_COMPROMISE",
+    "DRIVER_ACCOUNT_DEVICE_COMPROMISE",
+    "DELIVERY_HUB_GRANT_EXPOSURE",
+    "DATABASE_OBJECT_STORE_COMPROMISE",
+    "BACKUP_EXPORT_COMPROMISE",
+    "LOG_ANALYTICS_COMPROMISE",
+    "AGE_DATA_PROVIDER_COMPROMISE",
+    "PRECISE_GPS_LOCATION_COMPROMISE",
+    "PROOF_EVIDENCE_COMPROMISE",
+    "WHOLESALE_ENDPOINT_IDENTITY_KEY_COMPROMISE",
+    "WHOLESALE_ROUTING_E2EE_SERVER_COMPROMISE",
+    "E2EE_BROWSER_CLIENT_DELIVERY_COMPROMISE",
+    "ONION_IDENTITY_KEY_COMPROMISE_OR_LOSS",
+    "TLS_DOMAIN_DNS_COMPROMISE",
+    "API_PROVIDER_SECRET_OR_FORGED_CALLBACK",
+    "RANSOMWARE_DESTRUCTIVE_EVENT"
+  ],
+  "decisions": [
+    {"id": "SEC-ADR-001", "decision": "ORDINARY_PUBLIC_WEB_REMAINS_PRIMARY"},
+    {"id": "SEC-ADR-002", "decision": "OPTIONAL_ONION_ENTRANCE_SHARES_CANONICAL_SYSTEM"},
+    {"id": "SEC-ADR-003", "decision": "ENCRYPTION_LAYERS_REMAIN_EXPLICIT"},
+    {"id": "SEC-ADR-004", "decision": "D0_THROUGH_D4_GOVERN_EVERY_COPY"},
+    {"id": "SEC-ADR-005", "decision": "KEYS_PURPOSE_SEPARATED_AND_LIFECYCLE_GOVERNED"},
+    {"id": "SEC-ADR-006", "decision": "PRIVATE_WHOLESALE_CONTENT_USES_ENDPOINT_E2EE"},
+    {"id": "SEC-ADR-007", "decision": "METADATA_IS_SEPARATE_PRIVACY_SURFACE"},
+    {"id": "SEC-ADR-008", "decision": "CANONICAL_COMMERCE_REQUIRES_DELIBERATE_DECLASSIFICATION"},
+    {"id": "SEC-ADR-009", "decision": "DELIVERY_HUB_LINKS_ARE_NARROW_CAPABILITIES"},
+    {"id": "SEC-ADR-010", "decision": "SENSITIVE_BSDN_DATA_MINIMIZED_BY_LIFECYCLE"},
+    {"id": "SEC-ADR-011", "decision": "BACKUPS_AND_INCIDENTS_PRESERVE_TRUST_NOT_ONLY_BYTES"},
+    {"id": "SEC-ADR-012", "decision": "UNKNOWN_AND_SECURITY_FAILURE_REMAIN_EXPLICIT"}
+  ],
+  "prohibitions": [
+    "NO_HOMEMADE_CRYPTOGRAPHY_OR_ONION_ROUTING",
+    "NO_SIGNAL_COMPATIBILITY_CLAIM_WITHOUT_VERIFIED_COMPATIBILITY",
+    "NO_ANONYMITY_PROMISE_WHERE_COMMERCE_IDENTIFIES",
+    "NO_ONION_SHADOW_COMMERCE_TRUTH_OR_POLICY_BYPASS",
+    "NO_E2EE_PLAINTEXT_IN_LOGS_ANALYTICS_CRM_SEARCH_OR_SUPPORT_BY_DEFAULT",
+    "NO_KEYS_SECRETS_TOKENS_RAW_IDS_FULL_PAYMENT_PRECISE_GPS_OR_RAW_PROOF_IN_ROUTINE_LOGS",
+    "NO_INDEFINITE_TRACKING_OR_METADATA_RETENTION",
+    "NO_UNKNOWN_STALE_INVALID_REVOKED_OR_SERVICE_ERROR_AS_SUCCESS",
+    "NO_PROVIDER_PLATFORM_LIBRARY_OR_ALGORITHM_SELECTION_IN_SEC_01",
+    "NO_PRODUCTION_IMPLEMENTATION_AUTHORIZATION"
+  ],
+  "openDecisions": [
+    "E2EE_PROTOCOL_LIBRARY_AND_BROWSER_CLIENT_ARCHITECTURE",
+    "E2EE_ENDPOINT_PERSISTENCE_ENDPOINT_CONTROLLED_RECOVERY_MULTI_DEVICE_AND_KEY_TRANSPARENCY",
+    "FIELD_ENCRYPTION_ALGORITHMS_MODES_KEY_PLATFORM_AND_CRYPTOPERIODS",
+    "ONION_HOST_GATEWAY_HTTPS_ONION_LOCATION_COOKIE_ACCOUNT_AND_AUTHENTICATED_ADDRESS_MIGRATION",
+    "AUTHENTICATION_MFA_SESSION_RECOVERY_ROLE_STEP_UP_AND_DEVICE_POLICY",
+    "DELIVERY_HUB_TOKEN_TTL_BINDING_ROTATION_AND_ALLOWED_ACTIONS",
+    "PURPOSE_LAWFUL_BASIS_CONSENT_RETENTION_DELETION_EXPORT_CORRECTION_HOLD",
+    "DRIVER_LOCATION_LABOR_SAFETY_ACCESS_AND_APPEAL_POLICY",
+    "AGE_HANDOFF_PROOF_FEEDBACK_FREE_TEXT_AND_WORKFORCE_POLICY",
+    "WHOLESALE_ACCOUNT_METADATA_ATTACHMENT_ABUSE_DECLASSIFICATION_AND_OPERATIONS",
+    "INCIDENT_STAFFING_SEVERITY_NOTIFICATION_RPO_RTO_BACKUP_AND_EXERCISES",
+    "ALL_PROVIDERS_PLATFORMS_SLOS_THRESHOLDS_AND_CAPACITY"
+  ],
+  "nextGate": {
+    "id": "SEC-02",
+    "name": "Security, Privacy, Cryptography, Onion, and Private Wholesale Feasibility and Assurance Gate",
+    "type": "DECISION_AND_EVIDENCE_NOT_IMPLEMENTATION",
+    "requiredDisciplines": [
+      "SECURITY_ARCHITECTURE",
+      "APPLICATION_SECURITY",
+      "CRYPTOGRAPHY",
+      "PRIVACY_LEGAL_COMPLIANCE",
+      "BSDN_OPERATIONS_AND_DRIVER_SAFETY",
+      "WHOLESALE_OPERATIONS",
+      "ACCESSIBILITY",
+      "PLATFORM_ENGINEERING"
+    ],
+    "missingOrConflictingEvidenceResult": "OPEN_BLOCKED_OR_NOT_AUTHORIZED"
+  },
+  "externalStandards": [
+    {"id": "RFC9846", "url": "https://www.rfc-editor.org/info/rfc9846", "use": "CURRENT_TLS_1_3_TRANSPORT_REFERENCE"},
+    {"id": "NIST_SP_800_57_PART_1_REV_5", "url": "https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final", "use": "KEY_MANAGEMENT_LIFECYCLE_REFERENCE"},
+    {"id": "NIST_SP_800_61_REV_3", "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final", "use": "INCIDENT_RESPONSE_REFERENCE"},
+    {"id": "NIST_SP_800_63B_4", "url": "https://pages.nist.gov/800-63-4/sp800-63b.html", "use": "AUTHENTICATION_AND_SESSION_REFERENCE"},
+    {"id": "OWASP_ASVS", "url": "https://owasp.org/www-project-application-security-verification-standard/", "use": "APPLICATION_SECURITY_VERIFICATION_REFERENCE"},
+    {"id": "TOR_ONION_SERVICES", "url": "https://community.torproject.org/onion-services/overview/", "use": "ONION_IDENTITY_AND_TOPOLOGY_REFERENCE"},
+    {"id": "SIGNAL_PQXDH", "url": "https://signal.org/docs/specifications/pqxdh/", "use": "ASYNC_AUTHENTICATED_ESTABLISHMENT_REQUIREMENT_REFERENCE"},
+    {"id": "SIGNAL_DOUBLE_RATCHET", "url": "https://signal.org/docs/specifications/doubleratchet/", "use": "MESSAGE_KEY_EVOLUTION_REQUIREMENT_REFERENCE"},
+    {"id": "SIGNAL_SESAME", "url": "https://signal.org/docs/specifications/sesame/", "use": "MULTI_DEVICE_REQUIREMENT_REFERENCE"},
+    {"id": "W3C_WEB_CRYPTO_RECOMMENDATION", "url": "https://www.w3.org/TR/2017/REC-WebCryptoAPI-20170126/", "use": "LOW_LEVEL_BROWSER_PRIMITIVES_LIMITATION_REFERENCE"}
+  ],
+  "documentMap": [
+    {"path": "docs/security-architecture/README.md", "purpose": "PACKAGE_AUTHORITY_TERMINOLOGY_STATUS_AND_MAP"},
+    {"path": "docs/security-architecture/01-threat-model-and-security-objectives.md", "purpose": "THREATS_OBJECTIVES_BOUNDARIES_AND_NON_GOALS"},
+    {"path": "docs/security-architecture/02-data-classification-encryption-and-key-management.md", "purpose": "D0_D4_ENCRYPTION_LAYERS_KEY_HIERARCHY_AND_LIFECYCLE"},
+    {"path": "docs/security-architecture/03-public-web-and-onion-service-topology.md", "purpose": "PUBLIC_AND_OPTIONAL_ONION_ENTRANCES"},
+    {"path": "docs/security-architecture/04-private-wholesale-e2ee-architecture.md", "purpose": "BROWSER_E2EE_IDENTITY_ATTACHMENTS_METADATA_AND_DECLASSIFICATION"},
+    {"path": "docs/security-architecture/05-identity-access-sessions-and-delivery-hub-security.md", "purpose": "AUTHENTICATION_AUTHORIZATION_SESSIONS_ROLES_AND_CAPABILITIES"},
+    {"path": "docs/security-architecture/06-privacy-retention-logging-and-third-party-boundaries.md", "purpose": "PRIVACY_LIFECYCLE_LOGGING_AND_ADAPTER_DISCLOSURE"},
+    {"path": "docs/security-architecture/07-backup-recovery-incident-and-key-compromise.md", "purpose": "BACKUP_RESTORE_INCIDENT_AND_COMPROMISE_PLAYBOOKS"},
+    {"path": "docs/security-architecture/08-security-decisions-and-next-gate.md", "purpose": "ADRS_OPEN_DECISIONS_STATUS_AND_SEC_02_GATE"},
+    {"path": "docs/security-architecture/security-registry.json", "purpose": "MACHINE_READABLE_SECURITY_PACKAGE_REGISTRY"}
+  ]
+}
