@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "package": "SEC-03",
+  "run_date": "2026-08-15",
+  "classification": "SYNTHETIC_NON_PRODUCTION_PROOF",
+  "host": {
+    "os": "macOS 26.6.1",
+    "architecture": "arm64",
+    "node": "v18.17.0",
+    "npm": "9.6.7"
+  },
+  "node_test_result": {
+    "command": "npm test",
+    "tests": 16,
+    "passed": 16,
+    "failed": 0,
+    "skipped": 0,
+    "scope": [
+      "synthetic fail-closed admission",
+      "one-time protected resource grants",
+      "expiry, revocation, mismatch, replay, and enumeration denial",
+      "trusted-device add, revoke, and all-device-loss recovery",
+      "no-store response policy",
+      "synthetic 3840x2160 watermarked image descriptor",
+      "representative 4K stream segment descriptor",
+      "immutable +5 minute view and +30 minute dispute clocks"
+    ],
+    "does_not_prove": [
+      "native platform capture exclusion",
+      "production server or media delivery",
+      "real platform attestation",
+      "production cryptography or E2EE",
+      "durable storage erasure",
+      "native accessibility"
+    ]
+  },
+  "platform_execution": {
+    "ios_ipados": "BLOCKED_EVIDENCE_NOT_ESTABLISHED",
+    "android": "BLOCKED_EVIDENCE_NOT_ESTABLISHED",
+    "windows": "BLOCKED_EVIDENCE_NOT_ESTABLISHED",
+    "macos": "BLOCKED_EVIDENCE_NOT_ESTABLISHED"
+  },
+  "approved_client": null,
+  "production_authorized": false
+}

@@ -1,0 +1,12 @@
+{
+  "name": "blowin-smoke-sec-03-proof",
+  "version": "0.0.0-proof",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0",
+  "package_id": "SEC-03",
+  "title": "Approved Client Proof & Platform Validation",
+  "assessment_date": "2026-08-15",
+  "repository_base": "f0e29cbfe4bc4ce717a569b1ecc3b66d7b422aeb",
+  "production_authorized": false,
+  "private_wholesale_launch_authorized": false,
+  "proven_candidate": null,
+  "status_vocabulary": [
+    "PROVEN CANDIDATE",
+    "DOCUMENTATION-SUPPORTED — EXECUTION PROOF BLOCKED",
+    "CONDITIONAL — ADDITIONAL EVIDENCE REQUIRED",
+    "REJECTED FOR PROTECTED WHOLESALE"
+  ],
+  "platforms": {
+    "ios_ipados_unmanaged": {
+      "status": "REJECTED FOR PROTECTED WHOLESALE",
+      "candidate_minimum": null,
+      "mechanisms": [
+        "AVSampleBufferDisplayLayer.preventsCapture for a narrow video layer",
+        "FairPlay Streaming for supported protected video",
+        "active-capture detection and reactive redaction",
+        "app-switcher snapshot sanitization"
+      ],
+      "whole_surface_capture_gate": "FAIL",
+      "execution_proof": "BLOCKED — EVIDENCE NOT ESTABLISHED",
+      "reason": "No supported public unmanaged-app mechanism was established that excludes an entire accessible arbitrary application UI from normal screenshots and screen recordings. Narrow protected-media mechanisms do not cover the complete wholesale surface."
+    },
+    "ios_ipados_managed": {
+      "status": "DOCUMENTATION-SUPPORTED — EXECUTION PROOF BLOCKED",
+      "candidate_minimum": "exact supported enrolled-device profile and OS not yet tested",
+      "mechanisms": [
+        "managed allowScreenShot=false restriction"
+      ],
+      "whole_surface_capture_gate": "NOT EXECUTED",
+      "execution_proof": "BLOCKED — EVIDENCE NOT ESTABLISHED",
+      "reason": "The device-management restriction is an enterprise device boundary, not unmanaged application authority."
+    },
+    "android": {
+      "status": "DOCUMENTATION-SUPPORTED — EXECUTION PROOF BLOCKED",
+      "candidate_minimum": "Android 14 / API 34 on an exact currently serviced, patched, Google Play-certified OEM device/build",
+      "mechanisms": [
+        "FLAG_SECURE on every protected window",
+        "SurfaceView.setSecure(true) for separately composed secure media surfaces",
+        "HIDE_OVERLAY_WINDOWS",
+        "setRecentsScreenshotEnabled(false) as defense in depth",
+        "Play Integrity and hardware-backed key attestation as separate admission signals"
+      ],
+      "whole_surface_capture_gate": "DOCUMENTATION SUPPORTED; EXECUTION BLOCKED",
+      "execution_proof": "BLOCKED — EVIDENCE NOT ESTABLISHED",
+      "reason": "Public controls support a serious proof candidate, but no physical OEM/device capture, extraction, integrity, accessibility, or bypass matrix was executed. Android 12 and 13 are not retained as a blanket current admission floor."
+    },
+    "windows": {
+      "status": "DOCUMENTATION-SUPPORTED — EXECUTION PROOF BLOCKED",
+      "mechanism_api_floor": "Windows 10 version 2004 / build 19041",
+      "candidate_minimum": "fully patched Windows 11 24H2 at minimum; Windows 11 25H2 or later preferred for a new consumer proof",
+      "mechanisms": [
+        "WDA_EXCLUDEFROMCAPTURE on every app-owned top-level HWND",
+        "ApplicationView.IsScreenCaptureEnabled=false in a separate UWP corroboration proof",
+        "AppCapture.SetAllowedAsync(false) for system app capture in a separate UWP proof",
+        "signed MSIX/package integrity and TPM-backed endpoint keys as separate trust layers"
+      ],
+      "whole_surface_capture_gate": "DOCUMENTATION SUPPORTED; EXECUTION BLOCKED",
+      "execution_proof": "BLOCKED — EVIDENCE NOT ESTABLISHED",
+      "reason": "The public affinity API is not DRM and does not document every capture, remote-session, display, video, or framework path. No Windows execution environment was available."
+    },
+    "macos_unmanaged": {
+      "status": "REJECTED FOR PROTECTED WHOLESALE",
+      "candidate_minimum": null,
+      "mechanisms": [
+        "narrow AVSampleBufferDisplayLayer protected-video layer",
+        "FairPlay Streaming for supported protected video"
+      ],
+      "whole_surface_capture_gate": "FAIL",
+      "execution_proof": "BLOCKED — EVIDENCE NOT ESTABLISHED",
+      "reason": "No current supported target-controlled arbitrary AppKit/SwiftUI UI capture exclusion was established; NSWindow sharingType none is legacy and not a qualifying security control."
+    },
+    "macos_managed": {
+      "status": "DOCUMENTATION-SUPPORTED — EXECUTION PROOF BLOCKED",
+      "candidate_minimum": "exact supported enrolled-device profile and OS not yet tested",
+      "mechanisms": [
+        "managed allowScreenShot=false restriction"
+      ],
+      "whole_surface_capture_gate": "NOT EXECUTED",
+      "execution_proof": "BLOCKED — EVIDENCE NOT ESTABLISHED",
+      "reason": "The device-management restriction is a separate enterprise boundary, not unmanaged application authority."
+    },
+    "browser_pwa": {
+      "status": "REJECTED FOR PROTECTED WHOLESALE",
+      "candidate_minimum": null,
+      "mechanisms": [],
+      "whole_surface_capture_gate": "FAIL",
+      "execution_proof": "NOT REOPENED",
+      "reason": "No genuinely new browser target-controlled capture-exclusion evidence was established. Public retail remains browser-first and unaffected."
+    }
+  },
+  "local_proof": {
+    "classification": "SYNTHETIC NON-PRODUCTION PLATFORM-NEUTRAL LOGIC PROOF",
+    "result_file": "proofs/sec-03/results/2026-08-15-local-proof.json",
+    "tests": 16,
+    "passed": 16,
+    "failed": 0,
+    "native_capture_tests_executed": 0,
+    "approved_client_created": false
+  },
+  "governing_rules": {
+    "protected_content_release_gate": "HARD FAIL-CLOSED GATE",
+    "screenshot_acceptance": "normal supported screenshot must not contain readable protected content",
+    "recording_acceptance": "normal supported recording/capture must not contain readable protected content",
+    "post_capture_notification_only": "FAIL",
+    "detection_while_readable_pixels_continue": "FAIL",
+    "unknown_state": "DENY PROTECTED PAYLOAD",
+    "external_camera": "NOT PREVENTABLE",
+    "watermarking": "DEFENSE IN DEPTH ONLY",
+    "accessibility": "MANDATORY AND NOT WAIVABLE",
+    "e2ee_selection": "NOT SELECTED",
+    "onion_transport": "SEPARATE FUTURE AUDITED DECISION"
+  },
+  "distribution_boundary": {
+    "status": "MATERIAL POLICY BLOCKER — ROUTE NOT SELECTED",
+    "apple": "Current App Review policy restricts apps facilitating tobacco sales; exact THCA/private-wholesale classification and any eligible managed/custom route require separate qualified review.",
+    "google_play": "Current Google Play policy restricts apps facilitating marijuana/THC and tobacco/nicotine sales; ordinary Play distribution and PLAY_RECOGNIZED admission cannot be assumed.",
+    "effect_on_capture_verdict": "NONE — distribution feasibility and capture capability are separate gates",
+    "production_route_selected": false
+  },
+  "documents": {
+    "canonical_verdict": "docs/security-assurance/sec-03-approved-client-proof-and-platform-validation.md",
+    "test_matrix": "docs/security-assurance/sec-03-platform-test-matrix.md",
+    "evidence_register": "docs/security-assurance/sec-03-evidence-register.md",
+    "proof_package": "proofs/sec-03/README.md"
+  }
+}
