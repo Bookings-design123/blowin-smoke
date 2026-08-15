@@ -12,6 +12,8 @@ This package tests the security, privacy, cryptography, Onion, and Private Whole
 
 SEC-01 remains the governing logical architecture except for one explicitly recorded, narrow supersession: its browser client selection for protected Private Wholesale content. SEC-02 preserves SEC-01's cryptographic, endpoint, recovery, declassification, canonical-ownership, and Onion requirements while requiring a future signed approved client for protected plaintext and zero protected payload to browsers/PWAs. The SEC-01 authoritative entry points are annotated accordingly. SEC-02 does not select a production dependency, deploy an Onion Service, build a client, authorize wholesale operations, or establish launch readiness. The Constitution, Technical Architecture, and Blowin' Smoke Same-Day Delivery Network (BSDN) architecture continue to govern canonical ownership, evidence, fulfillment, correction, and audit.
 
+SEC-03 performed the approved-client platform validation. SEC-03A subsequently and narrowly supersedes SEC-03's unmanaged iOS/iPadOS rejection with `CONDITIONAL — APP-STORE-VIABLE TECHNIQUE REQUIRES DEVICE PROOF`, based on a supported capture-protected sample-buffer image plane and an unexecuted whole-surface rasterized proof hypothesis. No client is approved, no production implementation is authorized, and all other platform verdicts remain unchanged.
+
 ## Gate conclusion
 
 ```text
@@ -30,7 +32,10 @@ FAIL — INSTALLABILITY DOES NOT SOLVE CODE-SUBSTITUTION OR CAPTURE RISK
 NATIVE ANDROID OR WINDOWS PROTECTED-CONTENT CLIENT:
 CONDITIONAL CANDIDATE — EXACT BUILD/PLATFORM TEST EVIDENCE REQUIRED
 
-NATIVE IOS/IPADOS OR MACOS PROTECTED-CONTENT CLIENT:
+NATIVE IOS/IPADOS PROTECTED-CONTENT CLIENT:
+CONDITIONAL PUBLIC-API RASTERIZED-SURFACE HYPOTHESIS — DEVICE PROOF REQUIRED
+
+NATIVE MACOS PROTECTED-CONTENT CLIENT:
 FAIL UNDER CURRENT SUPPORTED UNMANAGED APP APIS
 
 SUPPORTED-CLIENT SCREENSHOT/RECORDING EXCLUSION:
@@ -49,7 +54,7 @@ PRODUCTION IMPLEMENTATION:
 NOT AUTHORIZED
 ```
 
-The owner model is technically coherent only when public retail and protected wholesale use different client boundaries. Public retail remains browser-first. Browser E2EE remains a valid conditional cryptographic finding, but browsers and PWAs are rejected as protected wholesale delivery clients because they cannot meet the capture gate. Private Wholesale now requires a signed approved client that passes platform capture, ordinary extraction, object-authorization, device-trust, accessibility, and fail-closed tests. Native Android and Windows are conditional candidates; there are no approved candidates and no stack selection. The governing correction and full matrix are in [private-wholesale-protected-content-assurance.md](private-wholesale-protected-content-assurance.md).
+The owner model is technically coherent only when public retail and protected wholesale use different client boundaries. Public retail remains browser-first. Browser E2EE remains a valid conditional cryptographic finding, but browsers and PWAs are rejected as protected wholesale delivery clients because they cannot meet the capture gate. Private Wholesale now requires a signed approved client that passes platform capture, ordinary extraction, object-authorization, device-trust, accessibility, and fail-closed tests. Native Android and Windows are documentation-supported candidates; unmanaged iOS/iPadOS now has a conditional public-API rendering hypothesis under SEC-03A. There are no approved candidates and no stack selection. The governing correction and full matrix are in [private-wholesale-protected-content-assurance.md](private-wholesale-protected-content-assurance.md), with the focused iOS supersession in [sec-03a-ios-protected-rendering-investigation.md](sec-03a-ios-protected-rendering-investigation.md).
 
 ## Evidence vocabulary
 
@@ -80,7 +85,7 @@ Statuses are capability findings; they are not launch approvals.
 1. **True endpoint E2EE is conditionally feasible.** The intermediary can route ciphertext without blanket content-decryption authority. A supported candidate, independent review, exact protocol profile, device lifecycle, browser delivery integrity, and adversarial tests remain mandatory.
 2. **No reviewed implementation has been selected.** Matrix's current Rust-crypto browser path is a serious evaluation candidate, not an approval. MLS is a serious protocol family, but OpenMLS's browser target is not presently sufficient evidence for approval. Signal's official `libsignal` is unsuitable for this general browser use because its maintainers state that outside use is unsupported and its TypeScript package uses a native Node bridge.
 3. **Browsers and PWAs are rejected for protected wholesale.** Their E2EE feasibility is not capture authority. They may support public retail and a generic access-requirement/onboarding surface but receive no protected wholesale content.
-4. **Protected wholesale requires an approved signed client.** Native Android and Windows are conditional candidates pending exact supported-version, capture, extraction, integrity, accessibility, and adversarial proof. Unmanaged native iOS/iPadOS and native macOS are rejected under current supported APIs. Managed endpoints remain a separate conditional enterprise case. No client is approved now.
+4. **Protected wholesale requires an approved signed client.** Native Android and Windows are conditional candidates pending exact supported-version, capture, extraction, integrity, accessibility, and adversarial proof. Unmanaged iOS/iPadOS has a conditional SEC-03A sample-buffer whole-surface proof hypothesis; unmanaged macOS remains rejected. Managed endpoints remain a separate conditional enterprise case. No client is approved now.
 5. **All-device-loss recovery restores the account, not unknowable keys.** A prior order number is an identifier/evidence pointer, never a sufficient secret. Recovery requires independent factors and notifications. Old E2EE plaintext remains unavailable unless the customer previously enabled an independently reviewed endpoint-controlled recovery design.
 6. **Wholesale catalog media uses a hybrid model.** Message attachments intended to be private conversation content remain E2EE. Current inventory, prices, profiles, photos, and video are restricted server-authorized content because they require current revocation, streaming, merchandising, and controlled delivery. The server and authorized media pipeline can therefore access that catalog media; claims must say so.
 7. **Capture protection is a hard supported-client gate.** Genuine OS enforcement is classified as enforcement, not deterrence. Watermarking, short authorization, anti-enumeration, audit, abuse response, and revocation remain secondary controls. Browser/PWA delivery fails closed; external-camera prevention remains impossible.
@@ -106,6 +111,11 @@ The original SEC-02 brief contained 715 lines / 21,783 bytes and ended mid-formu
 | [07-manifest-dispute-and-fulfillment-assurance.md](07-manifest-dispute-and-fulfillment-assurance.md) | First-view semantics, independent clocks, final-sale qualification, wholesale threshold, negotiation, fulfillment, and BSDN economics. |
 | [08-security-claims-decisions-and-next-gate.md](08-security-claims-decisions-and-next-gate.md) | Customer-facing claim matrix, final decisions, unresolved blockers, contradiction register, and the next evidence gate. |
 | [private-wholesale-protected-content-assurance.md](private-wholesale-protected-content-assurance.md) | Governing hard release criterion, complete client matrix, control classifications, fail-closed rules, manifest compromise, and dated live evidence register. |
+| [sec-03-approved-client-proof-and-platform-validation.md](sec-03-approved-client-proof-and-platform-validation.md) | SEC-03 platform verdict and approved-client proof boundary, with the iOS verdict narrowly superseded by SEC-03A. |
+| [sec-03a-ios-protected-rendering-investigation.md](sec-03a-ios-protected-rendering-investigation.md) | Canonical SEC-03A unmanaged iOS/iPadOS protected-rendering finding and conditional verdict. |
+| [sec-03a-ios-evidence-register.md](sec-03a-ios-evidence-register.md) | Claim-bounded Apple, Telegram, owner-reference, SDK, and technique-classification ledger. |
+| [sec-03a-ios-test-matrix.md](sec-03a-ios-test-matrix.md) | Owner Telegram R01–R16 checklist and Blowin' Smoke iOS I01–I30 physical proof matrix. |
+| [sec-03a-registry.json](sec-03a-registry.json) | Machine-readable SEC-03A verdict, mechanisms, proof state, residuals, and document paths. |
 | [security-assurance-registry.json](security-assurance-registry.json) | Machine-readable findings, approach scores, candidates, claims, decisions, ownership, and next-gate requirements. |
 
 ## Primary evidence baseline

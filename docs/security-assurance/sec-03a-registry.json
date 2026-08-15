@@ -1,0 +1,165 @@
+{
+  "schema_version": "1.0",
+  "package_id": "SEC-03A",
+  "title": "iOS/iPadOS Protected-Rendering Investigation",
+  "assessment_date": "2026-08-15",
+  "repository_base": "4407e42ae778514e04e821371a4e395058dd0bed",
+  "scope": "UNMANAGED_IOS_IPADOS",
+  "production_authorized": false,
+  "private_wholesale_launch_authorized": false,
+  "proven_candidate": false,
+  "primary_status": "CONDITIONAL — APP-STORE-VIABLE TECHNIQUE REQUIRES DEVICE PROOF",
+  "status_meaning": "A supported public capture-protected sample-buffer image plane creates a legitimate whole-surface proof hypothesis. No physical capture, accessibility, failure-path, or App Review proof exists.",
+  "owner_reference": {
+    "incorporated": true,
+    "classification": "OWNER_OBSERVED_REFERENCE_MECHANISM_UNKNOWN",
+    "device": "iPhone 15 Pro",
+    "behavior": "protected Telegram content visible on device; resulting saved screenshot protected region black",
+    "artifact_in_repository": false,
+    "mechanism_attributed": false,
+    "screen_recording_established": false
+  },
+  "public_mechanisms": {
+    "sample_buffer_display_layer": {
+      "api": "AVSampleBufferDisplayLayer.preventsCapture",
+      "classification": "SUPPORTED PUBLIC CONTRACT",
+      "documented_scope": "image data displayed by that layer",
+      "local_sdk_declared_floor": "iOS 13.0",
+      "whole_window_inheritance": false,
+      "physical_execution": "BLOCKED — NOT PERFORMED"
+    },
+    "clear_key_video": {
+      "api": "AVPlayer.allowsCaptureOfClearKeyVideo",
+      "classification": "SUPPORTED PUBLIC CONTRACT — CLEARKEY ENCRYPTED VIDEO ONLY",
+      "official_metadata_floor": "iOS/iPadOS 26.4",
+      "default": false,
+      "documented_exclusions": [
+        "screenshots",
+        "screen recordings",
+        "AVPlayerItemVideoOutput",
+        "ScreenCaptureKit"
+      ],
+      "local_sdk_available": false,
+      "whole_surface_solution": false
+    },
+    "fairplay": {
+      "classification": "SUPPORTED PUBLIC CONTRACT — ELIGIBLE PROTECTED AUDIOVISUAL MEDIA ONLY",
+      "video_capture_behavior": "narrow protected-video omission/blackening documented",
+      "audio_capture_behavior": "protected audio may remain included",
+      "credential_eligibility": "NOT ESTABLISHED",
+      "whole_surface_solution": false
+    },
+    "capture_state": {
+      "apis": [
+        "UIApplication.userDidTakeScreenshotNotification",
+        "UITraitCollection.sceneCaptureState",
+        "UIScreen.isCaptured"
+      ],
+      "classification": "SUPPORTED REACTIVE APIS",
+      "gate_result": "FAIL AS SOLE CONTROL",
+      "reason": "post-screenshot notification or first-frame race"
+    }
+  },
+  "whole_surface_hypothesis": {
+    "classification": "PUBLIC APIS COMPOSED INTO AN IMPLEMENTATION-SENSITIVE ARCHITECTURE",
+    "visual_plane": "one opaque protected AVSampleBufferDisplayLayer",
+    "required_content_inside_plane": [
+      "text",
+      "prices",
+      "quantities",
+      "still images",
+      "moving video",
+      "messages",
+      "captions and visible transcripts",
+      "manifests",
+      "protected navigation titles",
+      "modal content",
+      "protected visual control labels",
+      "selection state"
+    ],
+    "native_siblings": "NON_SENSITIVE_ONLY",
+    "accessibility": "CUSTOM SEMANTIC TREE REQUIRED — EXECUTION NOT PERFORMED",
+    "capture_readiness_attestation": "NOT PROVIDED BY PUBLIC API",
+    "failure_policy": "NEUTRAL PLACEHOLDER AND DENY PROTECTED PAYLOAD"
+  },
+  "rejected_techniques": [
+    {
+      "technique": "secure text field as arbitrary child-view container",
+      "classification": "PUBLIC API USED OUTSIDE DOCUMENTED SECURITY CONTRACT / OBSERVED IMPLEMENTATION SIDE EFFECT"
+    },
+    {
+      "technique": "UIKit internal class-name lookup or private secure layer reparenting",
+      "classification": "PRIVATE / UNDOCUMENTED"
+    },
+    {
+      "technique": "private Core Animation or IOSurface flags",
+      "classification": "PRIVATE / UNDOCUMENTED"
+    },
+    {
+      "technique": "Metal private or memoryless storage treated as screenshot protection",
+      "classification": "PUBLIC API — WRONG SECURITY PROPERTY"
+    }
+  ],
+  "test_state": {
+    "telegram_reference_rows": 16,
+    "telegram_reference_executed": 0,
+    "blowin_smoke_ios_rows": 30,
+    "blowin_smoke_ios_executed": 0,
+    "physical_devices_tested": 0,
+    "screenshots_in_repository": 0,
+    "screen_recordings_in_repository": 0,
+    "owner_device_test_required": true
+  },
+  "proof_harness": {
+    "path": "proofs/sec-03a/ios/",
+    "classification": "SYNTHETIC NON_PRODUCTION PUBLIC_API SOURCE HARNESS",
+    "implemented_scope": "INITIAL C0/C1/C2 PIXEL-PLANE PRIMITIVE ONLY",
+    "full_i01_i30_matrix_implemented": false,
+    "additional_isolated_states_required_before_platform_conclusion": true,
+    "controls": [
+      "C0 ordinary UIKit readable-capture baseline",
+      "C1 sample-buffer layer with preventsCapture=false",
+      "C2 identical sample-buffer layer with preventsCapture=true before enqueue"
+    ],
+    "source_typecheck": "PASS — THREE SWIFT FILES AGAINST INSTALLED IPHONE SIMULATOR SDK",
+    "build": "BLOCKED — LOCAL XCODE REQUIRED LIBRARY LOAD FAILURE",
+    "linked_application_build": false,
+    "simulator_execution": false,
+    "physical_execution": false,
+    "approved_client_created": false
+  },
+  "capture_acceptance": {
+    "allowed_outputs": [
+      "BLACK",
+      "REDACTED_ZERO_INFORMATION",
+      "OMITTED",
+      "SECURITY_PLACEHOLDER_ZERO_INFORMATION"
+    ],
+    "one_readable_frame": "FAIL",
+    "detection_only": "FAIL",
+    "post_capture_callback": "FAIL",
+    "watermarked_readable_capture": "FAIL"
+  },
+  "residual_limits": {
+    "external_camera": "NOT PREVENTABLE",
+    "manual_transcription": "NOT PREVENTABLE",
+    "jailbreak_privileged_compromise": "OUTSIDE SUPPORTED GUARANTEE",
+    "in_process_frame_extraction": "NOT PREVENTED BY DISPLAY LAYER",
+    "voiceover_audio_capture": "BLOCKED — EVIDENCE NOT ESTABLISHED",
+    "app_review_acceptance": "UNKNOWN",
+    "business_app_store_eligibility": "MATERIAL SEPARATE POLICY / LEGAL BLOCKER"
+  },
+  "sec_03_impact": {
+    "previous_unmanaged_ios_status": "REJECTED FOR PROTECTED WHOLESALE",
+    "superseding_status": "CONDITIONAL — APP-STORE-VIABLE TECHNIQUE REQUIRES DEVICE PROOF",
+    "other_platform_verdicts_changed": false,
+    "release_gate_weakened": false
+  },
+  "documents": {
+    "canonical_investigation": "docs/security-assurance/sec-03a-ios-protected-rendering-investigation.md",
+    "evidence_register": "docs/security-assurance/sec-03a-ios-evidence-register.md",
+    "test_matrix": "docs/security-assurance/sec-03a-ios-test-matrix.md",
+    "proof_package": "proofs/sec-03a/README.md",
+    "local_environment_result": "proofs/sec-03a/results/2026-08-15-local-environment.json"
+  }
+}

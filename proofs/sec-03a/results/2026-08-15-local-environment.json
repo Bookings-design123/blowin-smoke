@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "package": "SEC-03A",
+  "run_date": "2026-08-15",
+  "classification": "SYNTHETIC_NON_PRODUCTION_IOS_PROOF_ENVIRONMENT",
+  "host": {
+    "os": "macOS 26.6.1",
+    "build": "25G76",
+    "architecture": "arm64"
+  },
+  "sdk_header_evidence": {
+    "file": "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/AVFoundation.framework/Headers/AVSampleBufferDisplayLayer.h",
+    "declaration": "@property (nonatomic) BOOL preventsCapture API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);",
+    "meaning": "The installed public SDK declares the narrow sample-buffer-layer property. A header declaration is not device execution proof."
+  },
+  "toolchain": {
+    "swiftc_path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+    "typecheck_sdk": "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk",
+    "typecheck_target": "arm64-apple-ios17.0-simulator",
+    "source_typecheck": "PASS",
+    "source_files_typechecked": 3,
+    "xcodebuild": "BLOCKED_BEFORE_PROJECT_EVALUATION",
+    "xcrun": "BLOCKED_BEFORE_SDK_QUERY",
+    "error_class": "XCODE_REQUIRED_LIBRARY_LOAD_FAILURE",
+    "error_summary": "USDKit framework could not resolve a required pxr TfSingleton symbol",
+    "linked_application_build": false,
+    "project_compiled": false,
+    "simulator_run": false,
+    "physical_device_run": false
+  },
+  "artifacts": {
+    "screenshots": 0,
+    "screen_recordings": 0,
+    "device_logs": 0
+  },
+  "result": "EXECUTION PROOF BLOCKED",
+  "approved_client_created": false,
+  "production_authorized": false
+}

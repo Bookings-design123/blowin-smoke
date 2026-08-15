@@ -9,11 +9,11 @@
 
 ## 1. Decision
 
-SEC-03 did not establish a production-ready Private Wholesale client. It established two supported **documentation candidates** whose required platform execution remains blocked in the available environment, and it reaffirmed that unmanaged Apple clients and browser clients do not meet the governing whole-surface capture gate.
+SEC-03 did not establish a production-ready Private Wholesale client. It established two supported **documentation candidates** whose required platform execution remains blocked in the available environment. SEC-03A subsequently identified a public capture-protected sample-buffer image plane and defined a whole-surface rasterized proof hypothesis for unmanaged iOS/iPadOS. That focused finding conditionally supersedes only the unmanaged iOS/iPadOS rejection below; it does not approve a client or change any other platform verdict.
 
 | Client boundary | SEC-03 status | Governing reason |
 |---|---|---|
-| Unmanaged iOS / iPadOS | **REJECTED FOR PROTECTED WHOLESALE** | Current supported public APIs do not give a target application a general arbitrary-UI screenshot veto. Capture notifications and active-capture state do not prevent a readable screenshot. Narrow protected-media rendering does not protect the whole wholesale surface. |
+| Unmanaged iOS / iPadOS | **CONDITIONAL — APP-STORE-VIABLE TECHNIQUE REQUIRES DEVICE PROOF** per SEC-03A | No general UIKit/SwiftUI veto exists. `AVSampleBufferDisplayLayer.preventsCapture` is, however, a supported public contract for that layer's image data, and uncompressed composite frames create a legitimate whole-surface proof hypothesis. No build/device/capture/accessibility/failure proof exists. |
 | Native Android, Android 14 / API 34 candidate floor | **DOCUMENTATION-SUPPORTED — EXECUTION PROOF BLOCKED** | `FLAG_SECURE` is a supported secure-window control for documented screenshot and non-secure-display paths. No Android device/emulator execution was available, so the full capture, extraction, integrity, accessibility, and failure matrix remains unproved. |
 | Native Windows, fully patched Windows 11 24H2 minimum; Windows 11 25H2+ preferred | **DOCUMENTATION-SUPPORTED — EXECUTION PROOF BLOCKED** | `WDA_EXCLUDEFROMCAPTURE` is a supported target-window mechanism for documented public capture paths. No Windows runtime/SDK/test environment was available, and Microsoft expressly limits the mechanism: it is not DRM or a universal capture guarantee. |
 | Unmanaged macOS | **REJECTED FOR PROTECTED WHOLESALE** | No current supported target-controlled capture-exclusion mechanism sufficient for arbitrary protected application UI was established. ScreenCaptureKit selection is controlled by the capturing process, not the target application. |
@@ -22,7 +22,7 @@ SEC-03 did not establish a production-ready Private Wholesale client. It establi
 
 There is no `PROVEN CANDIDATE`. Documentation, a compilable harness, a detection callback, a disabled menu item, or a watermark cannot independently satisfy the gate. A candidate can advance only after authoritative support and representative execution demonstrate the required property, required bypasses are exercised, and the exact platform, version, framework, device, and capture path are recorded.
 
-The complete authoritative-source ledger is in [SEC-03 Evidence Register](sec-03-evidence-register.md). The test-level disposition is in [SEC-03 Platform Test Matrix](sec-03-platform-test-matrix.md). Those documents control source qualifications and T01–T41 results; this document does not duplicate either ledger.
+The complete original authoritative-source ledger is in [SEC-03 Evidence Register](sec-03-evidence-register.md). The original test-level disposition is in [SEC-03 Platform Test Matrix](sec-03-platform-test-matrix.md). The focused iOS supersession, new evidence, and R01–R16/I01–I30 proof requirements are in [SEC-03A iOS Protected-Rendering Investigation](sec-03a-ios-protected-rendering-investigation.md), [SEC-03A Evidence Register](sec-03a-ios-evidence-register.md), and [SEC-03A Test Matrix](sec-03a-ios-test-matrix.md).
 
 ## 2. Purpose and boundary
 
@@ -106,9 +106,9 @@ This is a support-and-validation boundary, not a claim that Android 12 or 13 nev
 
 The API’s historical availability must never be presented as evidence that an obsolete Windows release is an acceptable protected client.
 
-### 4.3 Apple conclusions strengthened, not loosened
+### 4.3 Apple conclusion conditionally narrowed by SEC-03A
 
-Current Apple evidence reinforces the unmanaged iOS/iPadOS rejection: no supported public general screenshot-veto API was established for arbitrary application UI. Current narrow protected-video/sample-buffer mechanisms are recorded separately so their real scope is not lost, but they do not convert a mixed text, image, price, messaging, manifest, and media interface into a protected whole surface.
+No supported public general screenshot-veto API exists for arbitrary UIKit/SwiftUI application UI. SEC-03A nevertheless confirms that `AVSampleBufferDisplayLayer.preventsCapture` is a public capture-protection contract for that layer's image data and that public APIs can supply uncompressed composite frames. A full opaque protected-pixel plane is therefore a legitimate implementation-sensitive proof hypothesis. It remains unproved and does not protect ordinary sibling overlays. The exact scoped supersession is controlled by SEC-03A.
 
 The unmanaged macOS rejection also remains. Managed-device restrictions are separated as an enterprise profile rather than attributed to an ordinary application.
 
@@ -120,17 +120,21 @@ SEC-03 found no genuinely new browser platform authority that changes SEC-02. Pu
 
 ### 5.1 Verdict
 
-**Status:** `REJECTED FOR PROTECTED WHOLESALE`
-**Supported whole-surface mechanism:** None established
-**Proof status:** Rejection is evidence-based; a qualifying whole-surface proof could not be defined from supported public APIs
-**Remaining blocker:** A future supported public target-controlled mechanism would have to exclude readable arbitrary wholesale UI from screenshots and recordings across the declared boundary, followed by representative execution and bypass testing
+**Status:** `CONDITIONAL — APP-STORE-VIABLE TECHNIQUE REQUIRES DEVICE PROOF` per SEC-03A
+
+**Supported whole-surface mechanism:** No general UI mechanism; conditional architecture built around one opaque `AVSampleBufferDisplayLayer` with `preventsCapture=true` before first protected enqueue
+
+**Proof status:** Source harness defined; local Xcode failed before project evaluation; no simulator/device/capture artifact exists
+
+**Remaining blocker:** Physical iPhone/iPad proof of every required screenshot, recording, first-frame, overlay, lifecycle, output, extraction, accessibility, and fail-closed path
 
 ### 5.2 What supported APIs establish
 
 - The application can learn that a screenshot has already been taken. That is a post-capture notification; it cannot retract readable pixels already written to the screenshot.
 - Scene/screen capture state can report active recording, mirroring, or related capture conditions and let the app replace or pause content. Detection plus application redaction is useful defense in depth, but it is not a general OS-enforced veto and requires tests for first-frame/race behavior.
 - The application can obscure its app-switcher/background snapshot through lifecycle-controlled cover UI. That protects a separate snapshot path; it does not establish screenshot or recording exclusion while the scene is active.
-- Supported protected-video technologies, including FairPlay-based media paths and protected sample-buffer display behavior, can protect a narrower media-rendering path under their documented conditions. They do not protect ordinary UIKit/SwiftUI text, prices, still images, lists, controls, messages, dialogs, manifests, or accessibility surfaces.
+- `AVSampleBufferDisplayLayer.preventsCapture` publicly protects the image data displayed by that layer, which accepts compressed or uncompressed frames. SEC-03A therefore permits a proof in which every sensitive visual pixel is rasterized into one opaque protected plane. Ordinary UIKit/SwiftUI siblings, captions, controls, dialogs, and accessibility overlays do not inherit that contract.
+- ClearKey-encrypted video on current Apple platforms and FairPlay provide additional narrow protected-video contracts. Neither protects the complete wholesale surface, and FairPlay-protected audio may remain capturable.
 - Managed-device restrictions can disable screenshots and screen recordings within an exact enrolled-policy boundary. That is administrative device control, not authority held by an unmanaged App Store client.
 
 ### 5.3 What does not qualify
@@ -141,7 +145,7 @@ Telegram’s protected-content product language establishes a desired customer o
 
 ### 5.4 Architectural implication
 
-Rebuilding selected video as a protected-media surface would protect only that media under its exact supported conditions. The Private Wholesale experience also requires protected text, prices, inventory, still imagery, navigation, messages, order verification, and accessible controls. Because the complete surface cannot satisfy the screenshot gate, a partially protected iOS/iPadOS client cannot receive protected wholesale payload.
+Rebuilding only selected video as a protected-media surface remains insufficient. SEC-03A's permitted proof is stricter: protected text, prices, inventory, still imagery, navigation labels, messages, order verification, captions, manifest content, and protected visual controls must all be inside the same protected sample-buffer plane, with nonsensitive native hit targets and a separately tested custom accessibility tree. Any readable protected sibling overlay fails. Until the complete physical matrix passes, the client cannot receive protected wholesale payload.
 
 ## 6. Android validation
 
@@ -375,7 +379,7 @@ The following are accurate:
 - “No Private Wholesale client is approved or proven.”
 - “Android provides a documented secure-window candidate; Blowin’ Smoke has not executed the required device proof.”
 - “Windows provides a documented target-window capture-exclusion candidate for specified supported paths; Blowin’ Smoke has not executed the required Windows proof, and the mechanism is not DRM.”
-- “No supported general arbitrary-UI screenshot veto was established for an unmanaged iOS/iPadOS or macOS client.”
+- “No supported general arbitrary-UI screenshot veto was established for an unmanaged iOS/iPadOS or macOS client; SEC-03A identifies a separate public protected-sample-buffer whole-surface proof hypothesis for iOS/iPadOS that has not been executed.”
 - “Managed Apple restrictions are a separate enrolled-device possibility, not an unmanaged application capability.”
 - “Watermarking deters and can contribute evidence; it does not prevent screenshots or conclusively identify a person.”
 - “An external camera and privileged endpoint compromise remain outside the supported digital-capture guarantee.”
@@ -393,11 +397,11 @@ The following remain prohibited:
 
 ## 19. Next gate
 
-SEC-03 closes platform documentation research for the current evidence set. The next authorized work, if separately approved, is a **representative device execution and independent review gate**, not product implementation.
+SEC-03 closes its broad platform documentation research for the original evidence set. SEC-03A adds one focused unmanaged-iOS proof hypothesis. The next authorized work is a **representative device execution and independent review gate**, not product implementation.
 
 At minimum it must:
 
-1. compile signed synthetic proof clients using a declared Android and Windows framework/release profile;
+1. compile signed synthetic proof clients using a declared Android and Windows framework/release profile and the public-API-only SEC-03A iOS sample-buffer harness;
 2. run the complete T01–T41 matrix on the exact supported OS/device/tool boundary, retaining screenshots/recordings/logs and hashes as evidence;
 3. test every protected window, dialog, framework surface, media type, output, extraction command, app-state transition, cache, and accessibility path;
 4. exercise unsupported/stale/tampered builds, endpoint enrollment and revocation, resource expiry/replay/enumeration, integrity failures, root/instrumentation or equivalent privileged scenarios, and recovery;
@@ -412,7 +416,7 @@ An execution result promotes only the exact tested boundary. A later OS, framewo
 - **PROVEN PRIVATE WHOLESALE CLIENT: NONE**
 - **ANDROID 14 / API 34: DOCUMENTATION-SUPPORTED — EXECUTION PROOF BLOCKED**
 - **WINDOWS 11 24H2 MINIMUM / 25H2+ PREFERRED: DOCUMENTATION-SUPPORTED — EXECUTION PROOF BLOCKED**
-- **UNMANAGED IOS / IPADOS: REJECTED FOR PROTECTED WHOLESALE**
+- **UNMANAGED IOS / IPADOS: CONDITIONAL — APP-STORE-VIABLE TECHNIQUE REQUIRES DEVICE PROOF UNDER SEC-03A**
 - **UNMANAGED MACOS: REJECTED FOR PROTECTED WHOLESALE**
 - **MANAGED APPLE: DOCUMENTATION-SUPPORTED — EXECUTION PROOF BLOCKED AS A SEPARATE ENTERPRISE PROFILE**
 - **BROWSER / PWA: REJECTED FOR PROTECTED WHOLESALE; PUBLIC RETAIL UNAFFECTED**

@@ -10,22 +10,26 @@
   "status_vocabulary": [
     "PROVEN CANDIDATE",
     "DOCUMENTATION-SUPPORTED — EXECUTION PROOF BLOCKED",
+    "CONDITIONAL — APP-STORE-VIABLE TECHNIQUE REQUIRES DEVICE PROOF",
     "CONDITIONAL — ADDITIONAL EVIDENCE REQUIRED",
     "REJECTED FOR PROTECTED WHOLESALE"
   ],
   "platforms": {
     "ios_ipados_unmanaged": {
-      "status": "REJECTED FOR PROTECTED WHOLESALE",
-      "candidate_minimum": null,
+      "status": "CONDITIONAL — APP-STORE-VIABLE TECHNIQUE REQUIRES DEVICE PROOF",
+      "status_source": "SEC-03A focused supersession",
+      "candidate_minimum": "exact physical iOS/iPadOS boundary not established",
       "mechanisms": [
-        "AVSampleBufferDisplayLayer.preventsCapture for a narrow video layer",
+        "AVSampleBufferDisplayLayer.preventsCapture for one opaque protected image plane",
+        "public uncompressed CVImageBuffer/CMSampleBuffer composite-frame path",
+        "AVPlayer.allowsCaptureOfClearKeyVideo for current supported ClearKey-encrypted video only",
         "FairPlay Streaming for supported protected video",
         "active-capture detection and reactive redaction",
         "app-switcher snapshot sanitization"
       ],
-      "whole_surface_capture_gate": "FAIL",
-      "execution_proof": "BLOCKED — EVIDENCE NOT ESTABLISHED",
-      "reason": "No supported public unmanaged-app mechanism was established that excludes an entire accessible arbitrary application UI from normal screenshots and screen recordings. Narrow protected-media mechanisms do not cover the complete wholesale surface."
+      "whole_surface_capture_gate": "CONDITIONAL HYPOTHESIS — NOT EXECUTED",
+      "execution_proof": "BLOCKED — SOURCE TYPE-CHECKED; NO LINKED BUILD OR RUN",
+      "reason": "Apple exposes no general arbitrary UIKit/SwiftUI veto. SEC-03A confirms a supported capture-protected sample-buffer image plane and defines a whole-surface rasterized proof hypothesis. Every sensitive pixel must remain inside that plane; overlays, accessibility, first-frame, output, extraction, and failure behavior require physical proof."
     },
     "ios_ipados_managed": {
       "status": "DOCUMENTATION-SUPPORTED — EXECUTION PROOF BLOCKED",
@@ -128,6 +132,9 @@
     "canonical_verdict": "docs/security-assurance/sec-03-approved-client-proof-and-platform-validation.md",
     "test_matrix": "docs/security-assurance/sec-03-platform-test-matrix.md",
     "evidence_register": "docs/security-assurance/sec-03-evidence-register.md",
-    "proof_package": "proofs/sec-03/README.md"
+    "proof_package": "proofs/sec-03/README.md",
+    "ios_supersession": "docs/security-assurance/sec-03a-ios-protected-rendering-investigation.md",
+    "ios_supersession_registry": "docs/security-assurance/sec-03a-registry.json",
+    "ios_proof_package": "proofs/sec-03a/README.md"
   }
 }
