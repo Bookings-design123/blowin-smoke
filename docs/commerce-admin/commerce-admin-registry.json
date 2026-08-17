@@ -1,0 +1,620 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": {
+    "id": "COM-ADM-01",
+    "name": "Commerce Admin, Catalog, Media and Inventory Management Architecture",
+    "mode": "recovery-completion-pass",
+    "governingBase": "399ed490cc285fb5970b49d118e9ae5accb9aa86",
+    "status": "COMPLETE",
+    "scope": "VENDOR_NEUTRAL_LOGICAL_ARCHITECTURE"
+  },
+  "implementationStatus": {
+    "liveAdminSystem": "NOT_IMPLEMENTED",
+    "liveInventoryDatabase": "NOT_IMPLEMENTED",
+    "liveMediaPipeline": "NOT_IMPLEMENTED",
+    "liveSupplierIntegrations": "NOT_IMPLEMENTED",
+    "productionImplementation": "NOT_AUTHORIZED",
+    "launchReadiness": "NOT_ESTABLISHED"
+  },
+  "operationalBoundary": {
+    "canonicalSystem": "BLOWIN_SMOKE_CANONICAL_COMMERCE_APPLICATION",
+    "adminEntrances": [
+      "WEB_ADMIN",
+      "AUTHORIZED_ADMIN_APP"
+    ],
+    "routineOperationsRequireGitHub": false,
+    "routineOperationsRequireCodex": false,
+    "routineOperationsRequireCodeChange": false,
+    "routineOperationsRequireDeployment": false,
+    "routineOperationsRequireDeveloper": false,
+    "githubOwns": [
+      "SOURCE_CODE",
+      "ARCHITECTURE",
+      "SCHEMAS",
+      "MIGRATIONS",
+      "RELEASES",
+      "DOCUMENTATION",
+      "EXPLICITLY_SYNTHETIC_TEST_FIXTURES"
+    ],
+    "githubMustNotOwn": [
+      "LIVE_PRODUCTS",
+      "LIVE_PRICES",
+      "LIVE_INVENTORY",
+      "LIVE_LOTS",
+      "LIVE_RESERVATIONS",
+      "LIVE_CHANNEL_OFFERS",
+      "LIVE_MEDIA_ASSIGNMENTS",
+      "LIVE_EVIDENCE_STATE",
+      "LIVE_PURCHASE_ORDERS",
+      "LIVE_RECEIVING_STATE"
+    ]
+  },
+  "recordContract": {
+    "canonicalIdentity": "STABLE_BLOWIN_SMOKE_ID",
+    "externalIds": "VERSIONED_ALIASES_ONLY",
+    "requiredFields": [
+      "OWNING_DOMAIN",
+      "MONOTONIC_VERSION",
+      "STATUS_OR_CURRENTNESS",
+      "SOURCE_OR_PROVENANCE",
+      "OBSERVED_OR_EFFECTIVE_TIME_WHERE_APPLICABLE",
+      "ACTOR_OR_SERVICE_AUTHORITY",
+      "CORRECTION_LINEAGE"
+    ],
+    "unknownIsExplicit": true,
+    "silentLastWriteWins": false
+  },
+  "canonicalOwners": [
+    {
+      "domain": "CATALOG",
+      "owns": ["PRODUCT", "PRODUCT_TYPE", "PRODUCT_ROLE", "CATEGORY", "COLLECTION", "PUBLICATION_STATE"]
+    },
+    {
+      "domain": "VARIANT_AND_OPTION",
+      "owns": ["VARIANT", "SKU", "OPTION_DIMENSION", "OPTION_VALUE", "VALID_COMBINATION"]
+    },
+    {
+      "domain": "INVENTORY_AND_RECEIVING",
+      "owns": ["INVENTORY_LOCATION", "STOCK_POSITION", "INVENTORY_LEDGER_ENTRY", "RESERVATION", "CHANNEL_ALLOCATION", "LOT_BATCH", "RECEIVING_EVENT", "RECEIVING_SESSION", "RECEIVING_LINE", "DISCREPANCY", "TRANSFER"]
+    },
+    {
+      "domain": "PRICING_AND_CHANNEL_COMMERCE",
+      "owns": ["PRICE", "PROMOTION", "PRICE_HISTORY", "CHANNEL_OFFER"]
+    },
+    {
+      "domain": "WHOLESALE_COMMERCE",
+      "owns": ["NEGOTIATED_QUOTE", "WHOLESALE_SALES_STATUS"]
+    },
+    {
+      "domain": "MEDIA_AND_RIGHTS",
+      "owns": ["MEDIA_ASSET", "MEDIA_DERIVATIVE", "MEDIA_ASSIGNMENT", "RIGHTS_STATE"]
+    },
+    {
+      "domain": "EVIDENCE_AND_PROOF",
+      "owns": ["EVIDENCE_RECORD", "COA_PROOF_RECORD", "APPLICABILITY_RELATIONSHIP", "DOCUMENT_VERSION"]
+    },
+    {
+      "domain": "SUPPLIER_AND_PURCHASING",
+      "owns": ["SUPPLIER", "SUPPLIER_PRODUCT_REFERENCE", "PURCHASE_ORDER", "PURCHASE_ORDER_LINE", "EXPECTED_RECEIPT"]
+    },
+    {
+      "domain": "ORDER",
+      "owns": ["ORDER", "IMMUTABLE_ORDER_LINE_SNAPSHOT"]
+    },
+    {
+      "domain": "FULFILLMENT",
+      "owns": ["FULFILLMENT", "FULFILLMENT_SELECTION"]
+    },
+    {
+      "domain": "IDENTITY_AND_ACCESS",
+      "owns": ["ADMIN_ACTOR", "ROLE_ASSIGNMENT", "PERMISSION_CAPABILITY"]
+    },
+    {
+      "domain": "AUDIT_PROVENANCE_AND_CORRECTIONS",
+      "owns": ["AUDIT_EVENT", "CORRECTION_REFERENCE", "PROPAGATION_STATUS"]
+    }
+  ],
+  "entities": [
+    "PRODUCT",
+    "PRODUCT_TYPE",
+    "PRODUCT_ROLE",
+    "CATEGORY",
+    "COLLECTION",
+    "PUBLICATION_STATE",
+    "VARIANT",
+    "SKU",
+    "OPTION_DIMENSION",
+    "OPTION_VALUE",
+    "VALID_COMBINATION",
+    "LOT_BATCH",
+    "INVENTORY_LOCATION",
+    "STOCK_POSITION",
+    "INVENTORY_LEDGER_ENTRY",
+    "RESERVATION",
+    "CHANNEL_ALLOCATION",
+    "RECEIVING_EVENT",
+    "RECEIVING_SESSION",
+    "RECEIVING_LINE",
+    "DISCREPANCY",
+    "TRANSFER",
+    "CHANNEL_OFFER",
+    "PRICE",
+    "PROMOTION",
+    "PRICE_HISTORY",
+    "NEGOTIATED_QUOTE",
+    "WHOLESALE_SALES_STATUS",
+    "MEDIA_ASSET",
+    "MEDIA_DERIVATIVE",
+    "MEDIA_ASSIGNMENT",
+    "RIGHTS_STATE",
+    "EVIDENCE_RECORD",
+    "COA_PROOF_RECORD",
+    "APPLICABILITY_RELATIONSHIP",
+    "DOCUMENT_VERSION",
+    "SUPPLIER",
+    "SUPPLIER_PRODUCT_REFERENCE",
+    "PURCHASE_ORDER",
+    "PURCHASE_ORDER_LINE",
+    "EXPECTED_RECEIPT",
+    "ORDER",
+    "IMMUTABLE_ORDER_LINE_SNAPSHOT",
+    "FULFILLMENT",
+    "FULFILLMENT_SELECTION",
+    "ADMIN_ACTOR",
+    "ROLE_ASSIGNMENT",
+    "PERMISSION_CAPABILITY",
+    "AUDIT_EVENT",
+    "CORRECTION_REFERENCE",
+    "PROPAGATION_STATUS"
+  ],
+  "inventory": {
+    "owner": "INVENTORY_AND_RECEIVING",
+    "scope": [
+      "EXACT_VARIANT_OR_SKU_CONFIGURATION",
+      "OWNED_INVENTORY_LOCATION",
+      "QUANTITY_KIND_AND_UNIT",
+      "LOT_BATCH_WHERE_MATERIAL"
+    ],
+    "accountingModel": "IMMUTABLE_LEDGER_WITH_TRANSACTIONALLY_MAINTAINED_FOLDED_POSITION",
+    "buckets": [
+      "PHYSICAL_ON_HAND",
+      "RESERVED",
+      "COMMITTED",
+      "DAMAGED",
+      "QUARANTINED",
+      "UNSELLABLE",
+      "SAFETY_RESERVE",
+      "AVAILABLE_TO_PROMISE"
+    ],
+    "equations": {
+      "SELLABLE_ON_HAND": "PHYSICAL_ON_HAND - DAMAGED - QUARANTINED - UNSELLABLE",
+      "ENCUMBERED": "RESERVED + COMMITTED",
+      "AVAILABLE_TO_PROMISE": "SELLABLE_ON_HAND - RESERVED - COMMITTED - SAFETY_RESERVE"
+    },
+    "invariants": [
+      "ALL_BUCKETS_ARE_NONNEGATIVE",
+      "DAMAGED_PLUS_QUARANTINED_PLUS_UNSELLABLE_LTE_PHYSICAL_ON_HAND",
+      "RESERVED_PLUS_COMMITTED_PLUS_SAFETY_RESERVE_LTE_SELLABLE_ON_HAND",
+      "RESERVED_AND_COMMITTED_DO_NOT_DOUBLE_COUNT_THE_SAME_CLAIM",
+      "RECEIPT_DOES_NOT_AUTOMATICALLY_CREATE_SELLABILITY",
+      "PURCHASE_ORDER_AND_EXPECTED_RECEIPT_ARE_NOT_PHYSICAL_ON_HAND",
+      "CHANNEL_ALLOCATION_DOES_NOT_CREATE_STOCK",
+      "PROJECTION_CANNOT_AUTHORIZE_RESERVATION_OR_COMMITMENT",
+      "HISTORICAL_LEDGER_ENTRIES_ARE_NOT_OVERWRITTEN",
+      "CORRECTIONS_USE_LINKED_COMPENSATING_ENTRIES_WHERE_APPROPRIATE"
+    ],
+    "mutationTypes": [
+      "RECEIPT",
+      "RESERVATION",
+      "RESERVATION_RELEASE",
+      "SALE_COMMITMENT",
+      "FULFILLMENT",
+      "ORDER_CANCELLATION",
+      "VOID",
+      "REVERSAL",
+      "DAMAGE",
+      "LOSS",
+      "SHRINKAGE",
+      "QUARANTINE",
+      "UNQUARANTINE",
+      "MANUAL_CORRECTION",
+      "STOCKTAKE_CORRECTION",
+      "CHANNEL_REALLOCATION",
+      "TRANSFER"
+    ]
+  },
+  "quantitySemantics": {
+    "supportedKinds": ["MASS", "COUNT"],
+    "canonicalRepresentation": "SIGNED_INTEGER_COUNT_OF_VERSIONED_GOVERNED_QUANTUM",
+    "binaryFloatingPointPermitted": false,
+    "conversionArithmetic": "EXACT_INTEGER_OR_RATIONAL",
+    "massInputUnitsMayInclude": ["lb", "oz", "g"],
+    "canonicalMassQuantum": "OWNER_OPERATIONS_DECISION_REQUIRED",
+    "countQuantum": "INTEGER_ONE_OF_CONTROLLED_COUNTING_UNIT",
+    "crossDimensionAggregation": false,
+    "partialQuantity": "ONLY_WHERE_VARIANT_PACKAGE_OPERATIONS_AND_COMPLIANCE_AUTHORIZE",
+    "lotProvenanceRequiredWhereMaterial": true,
+    "wholesaleQualification": {
+      "minimum": "1_LB",
+      "scope": "ONE_PARTICULAR_CANONICAL_STRAIN",
+      "crossStrainAggregation": false,
+      "equivalenceSource": "AUTHORITATIVE_CANONICAL_MAPPING_ONLY"
+    }
+  },
+  "moneySemantics": {
+    "canonicalRepresentation": "SIGNED_INTEGER_MINOR_UNITS_PLUS_ISO_4217_CURRENCY",
+    "binaryFloatingPointPermitted": false,
+    "currencyExponentAndScale": "CONTROLLED_VERSIONED_REGISTRY",
+    "quantityBasedUnitPrice": "INTEGER_MINOR_AMOUNT_DIVIDED_BY_EXACT_CANONICAL_QUANTITY_DENOMINATOR",
+    "calculationArithmetic": "EXACT_INTEGER_OR_RATIONAL",
+    "rounding": "ONLY_AN_APPROVED_VERSIONED_RULE_AT_AN_APPROVED_STAGE_WITH_RESULT_RECORDED",
+    "crossCurrencyArithmeticWithoutGovernedConversion": false,
+    "priceClasses": [
+      "RETAIL_PRICE",
+      "WHOLESALE_REFERENCE_PRICE",
+      "PROMOTIONAL_PRICE",
+      "NEGOTIATED_QUOTE_PRICE",
+      "HISTORICAL_PRICE"
+    ],
+    "history": "SUCCESSOR_RECORDS_WITH_EFFECTIVE_TIME_AND_AUDIT",
+    "invariants": [
+      "NEGOTIATED_QUOTE_DOES_NOT_REWRITE_WHOLESALE_REFERENCE_PRICE",
+      "PRICE_DOES_NOT_OWN_STOCK_TAX_OR_PAYMENT_AUTHORIZATION",
+      "FROM_PRICE_IS_DERIVED_NOT_AUTHORED",
+      "STALE_OR_UNKNOWN_PRICE_BLOCKS_FINAL_RESOLUTION"
+    ]
+  },
+  "channelModel": {
+    "productDuplicationByChannel": false,
+    "visibilityFlags": ["RETAIL_VISIBLE", "WHOLESALE_VISIBLE"],
+    "fulfillmentEligibility": ["SHIPPING", "YORK_PICKUP", "BSDN_SAME_DAY"],
+    "offerFields": [
+      "CANONICAL_PRODUCT_VARIANT_REFERENCE",
+      "DISPLAYED_PRICE_REFERENCE",
+      "MINIMUM_QUANTITY",
+      "MAXIMUM_QUANTITY",
+      "ALLOCATION_REFERENCE",
+      "MERCHANDISING_COPY",
+      "VISIBILITY",
+      "QUALIFICATION",
+      "FULFILLMENT_ELIGIBILITY",
+      "EFFECTIVE_STATE"
+    ],
+    "sharedCanonicalPhysicalStock": true,
+    "privateWholesaleFieldsImplicitlyPublic": false
+  },
+  "reservationModel": {
+    "owner": "INVENTORY_AND_RECEIVING",
+    "states": [
+      "REQUESTED",
+      "RESERVED",
+      "COMMITTED",
+      "FULFILLED",
+      "RELEASED",
+      "EXPIRED",
+      "FAILED"
+    ],
+    "supportedContexts": [
+      "RETAIL",
+      "WHOLESALE",
+      "SHIPPING",
+      "YORK_PICKUP",
+      "BSDN_SAME_DAY"
+    ],
+    "requiredCommandInputs": [
+      "IDEMPOTENCY_KEY",
+      "EXPECTED_POSITION_VERSION",
+      "EXACT_POSITION",
+      "EXACT_QUANTITY",
+      "CHANNEL",
+      "FULFILLMENT_MODE",
+      "DEMAND_CONTEXT"
+    ],
+    "timeoutPolicy": "OWNER_DECISION_REQUIRED",
+    "conflictBehavior": "RETURN_CURRENT_STATE_AND_PRESERVE_DEMAND_CONTEXT",
+    "oversellAuthority": "CANONICAL_INVENTORY_ONLY"
+  },
+  "adminAuthorization": {
+    "model": "SERVER_SIDE_CAPABILITY_BASED_RBAC_WITH_OBJECT_AND_CONTEXT_SCOPE",
+    "universalAdministrator": false,
+    "candidateRoles": {
+      "OWNER": ["catalog.read", "catalog.edit", "inventory.read", "price.read", "staff.read", "role.manage", "audit.read"],
+      "ADMINISTRATOR": ["catalog.read", "catalog.edit", "inventory.read", "price.read", "media.read", "evidence.read", "order.read", "audit.read"],
+      "INVENTORY_MANAGER": ["inventory.read", "inventory.receive", "inventory.adjust", "inventory.quarantine", "inventory.unquarantine", "inventory.transfer", "inventory.channel_reallocate", "reservation.read", "reservation.release", "reservation.override", "supplier.read", "supplier.manage", "purchase_order.manage", "receiving.commit", "receiving.discrepancy.resolve"],
+      "CATALOG_MANAGER": ["catalog.read", "catalog.edit", "catalog.publish", "catalog.unpublish", "catalog.archive", "catalog.restore", "variant.manage", "sku.activate", "media.read", "media.upload", "media.assign", "media.reorder", "media.replace", "media.archive", "media.rights.review", "evidence.read", "evidence.attach", "channel.read", "channel.offer.edit", "channel.visibility.edit", "channel.fulfillment_eligibility.edit"],
+      "WHOLESALE_SALES": ["catalog.read", "inventory.read", "price.read", "price.history.read", "quote.create", "quote.convert", "wholesale.read", "wholesale.publish", "wholesale.hide", "wholesale.allocation.edit", "wholesale.profile.edit", "wholesale.protected.read", "order.read"],
+      "FULFILLMENT": ["catalog.read", "inventory.read", "reservation.read", "reservation.release", "order.read", "fulfillment.manage", "fulfillment.exception.resolve"],
+      "SUPPORT": ["catalog.read", "inventory.read", "price.read", "order.read", "recovery.case.manage"],
+      "AUDITOR_READ_ONLY": ["catalog.read", "inventory.read", "reservation.read", "price.read", "price.history.read", "media.read", "evidence.read", "supplier.read", "order.read", "staff.read", "audit.read"]
+    },
+    "capabilityVocabulary": [
+      "catalog.read", "catalog.edit", "catalog.publish", "catalog.unpublish", "catalog.archive", "catalog.restore", "variant.manage", "sku.activate",
+      "inventory.read", "inventory.receive", "inventory.adjust", "inventory.quarantine", "inventory.unquarantine", "inventory.transfer", "inventory.channel_reallocate",
+      "reservation.read", "reservation.release", "reservation.override",
+      "price.read", "price.retail.edit", "price.wholesale.edit", "price.promotion.edit", "price.history.read", "quote.create", "quote.convert",
+      "media.read", "media.upload", "media.assign", "media.reorder", "media.replace", "media.archive", "media.rights.review", "media.protected.read",
+      "evidence.read", "evidence.attach", "evidence.review", "evidence.replace", "evidence.archive", "evidence.claim_link",
+      "channel.read", "channel.offer.edit", "channel.visibility.edit", "channel.fulfillment_eligibility.edit",
+      "wholesale.read", "wholesale.publish", "wholesale.hide", "wholesale.allocation.edit", "wholesale.profile.edit", "wholesale.protected.read",
+      "supplier.read", "supplier.manage", "purchase_order.manage", "receiving.commit", "receiving.discrepancy.resolve",
+      "order.read", "fulfillment.manage", "fulfillment.exception.resolve",
+      "staff.read", "role.manage", "audit.read", "audit.export", "bulk.execute", "data.export", "recovery.case.manage", "account.recovery.execute", "security.config", "financial.correction"
+    ],
+    "roleAssignmentsAreLiveGrants": false,
+    "listedRoleCapabilitiesAreRepresentativeSubsets": true,
+    "listedRoleCapabilitiesAreMaximumEligibilityTemplates": false,
+    "completeConditionalRoleMatrix": "06-admin-roles-security-and-audit.md#6-capability-based-rbac-matrix",
+    "requiredControls": [
+      "STRONG_PHISHING_RESISTANT_MFA_AT_HIGHEST_FEASIBLE_SELECTED_ASSURANCE",
+      "NO_SHARED_ACCOUNTS",
+      "LEAST_PRIVILEGE",
+      "CURRENT_SESSION_AND_OBJECT_ACTION_AUTHORIZATION",
+      "RECENT_OR_STEP_UP_AUTHENTICATION_WHERE_RISK_REQUIRES",
+      "REASON_CODES",
+      "APPROVAL_WHERE_POLICY_REQUIRES",
+      "RAPID_REVOCATION",
+      "DURABLE_AUDIT"
+    ],
+    "highRiskActions": [
+      "LARGE_INVENTORY_CORRECTION",
+      "WHOLESALE_PRICE_CHANGE",
+      "COA_REPLACEMENT",
+      "MANUAL_RESERVATION_OVERRIDE",
+      "PERMISSION_CHANGE",
+      "ACCOUNT_RECOVERY",
+      "SECURITY_CONFIGURATION_CHANGE",
+      "BULK_EXPORT",
+      "SENSITIVE_WHOLESALE_VISIBILITY_CHANGE",
+      "MANUAL_FINANCIAL_CORRECTION"
+    ],
+    "exactRolesThresholdsAndApprovals": "OWNER_SECURITY_OPERATIONS_DECISION_REQUIRED"
+  },
+  "audit": {
+    "model": "IMMUTABLE_OR_TAMPER_EVIDENT",
+    "requiredForMaterialMutation": true,
+    "requiredForSensitiveRead": true,
+    "requiredFields": [
+      "ACTOR_OR_SERVICE_IDENTITY",
+      "AUTHORITY_AND_ROLE",
+      "COMMAND_ACTION_PURPOSE_AND_REASON",
+      "TARGET_REFERENCE_AND_VERSION",
+      "PREVIOUS_STATE_REFERENCE",
+      "NEW_STATE_REFERENCE",
+      "RELATED_ORDER_SKU_LOT_WHERE_APPLICABLE",
+      "SESSION_REQUEST_CORRELATION_AND_CAUSATION",
+      "OCCURRED_AND_RECEIVED_TIME",
+      "RESULT",
+      "CORRECTION_LINEAGE"
+    ],
+    "sensitivePayloadDuplication": false,
+    "auditFailureForRequiredWrite": "BLOCK_WRITE"
+  },
+  "mediaOwnership": {
+    "owner": "MEDIA_AND_RIGHTS",
+    "pipeline": [
+      "UPLOAD",
+      "VALIDATE",
+      "SECURITY_SCAN",
+      "METADATA_EXTRACTION",
+      "MASTER_STORAGE",
+      "DERIVATIVE_GENERATION",
+      "ROLE_ASSIGNMENT",
+      "PUBLISH_OR_PROTECT",
+      "ARCHIVE_OR_REPLACE"
+    ],
+    "artifactClasses": [
+      "MEDIA_MASTER",
+      "IMAGE_DERIVATIVE",
+      "VIDEO_DERIVATIVE",
+      "THUMBNAIL",
+      "CARD_MEDIA",
+      "PDP_MEDIA",
+      "WHOLESALE_PROTECTED_DERIVATIVE",
+      "WATERMARKED_DERIVATIVE",
+      "STREAMING_DERIVATIVE"
+    ],
+    "manualStorageUrlRequiredFromOwner": false,
+    "replacement": "IMMUTABLE_SUCCESSOR_WITH_ASSIGNMENT_AND_RIGHTS_LINEAGE",
+    "protectedWholesale": {
+      "approvedProductionClientExists": false,
+      "browserOrPwaProtectedPayload": "DENY_ZERO_PAYLOAD",
+      "durablePublicUrl": false,
+      "ordinarySaveDownloadSharePrintExport": false,
+      "authorization": "SHORT_LIVED_EXACT_CLIENT_ENDPOINT_ACCOUNT_ROOM_OBJECT_VERSION_PURPOSE_GRANT",
+      "watermarking": "DEFENSE_IN_DEPTH_NOT_CAPTURE_PREVENTION",
+      "securityArchitectureRedesignedByThisPhase": false
+    }
+  },
+  "evidence": {
+    "owner": "EVIDENCE_AND_PROOF",
+    "states": [
+      "CURRENT",
+      "STALE",
+      "MISSING",
+      "NOT_SUPPLIED",
+      "UNMATCHED",
+      "CONFLICTING",
+      "PENDING_VERIFICATION",
+      "SUPERSEDED",
+      "ARCHIVED",
+      "UNKNOWN"
+    ],
+    "scopeFields": [
+      "TYPE",
+      "SOURCE",
+      "ISSUER",
+      "SUBJECT",
+      "PRODUCT_SCOPE",
+      "VARIANT_SCOPE",
+      "LOT_BATCH_SAMPLE_SCOPE",
+      "DATE_AND_EFFECTIVE_CONTEXT",
+      "STATUS",
+      "DOCUMENT_VERSION"
+    ],
+    "uploadCreatesVerifiedTruth": false,
+    "batchAValidatesBatchB": false,
+    "storageFailureMeansMissing": false,
+    "correction": "PRESERVE_ORIGINAL_AND_CREATE_LINKED_SUCCESSOR_OR_ADDENDUM"
+  },
+  "supplierState": {
+    "physicalInventory": "NONE_REPRESENTED_OR_PROVIDED",
+    "wholesaleDistributorAccounts": "NONE_REPRESENTED_OR_PROVIDED",
+    "actualSuppliers": "NONE_REPRESENTED_OR_PROVIDED",
+    "providerSelected": false,
+    "futureEntities": [
+      "SUPPLIER",
+      "SUPPLIER_PRODUCT_REFERENCE",
+      "PURCHASE_ORDER",
+      "PURCHASE_ORDER_LINE",
+      "EXPECTED_RECEIPT",
+      "RECEIVING_SESSION",
+      "RECEIVING_LINE",
+      "LOT_BATCH",
+      "RECEIVED_QUANTITY",
+      "UNIT_COST",
+      "EVIDENCE_RECEIVED",
+      "DISCREPANCY",
+      "QUARANTINE"
+    ],
+    "purchaseOrderIsPhysicalOnHand": false,
+    "expectedReceiptIsSellable": false,
+    "inventoryCreatedBy": "AUTHORIZED_PHYSICAL_RECEIVING_EVENT_AND_LEDGER_COMMIT"
+  },
+  "readProjections": [
+    "RETAIL_CATALOG",
+    "WHOLESALE_CATALOG",
+    "SEARCH",
+    "ADMIN_INVENTORY",
+    "ADMIN_PRODUCT_DETAIL",
+    "CART_AVAILABILITY",
+    "BSDN_AVAILABILITY",
+    "LOW_STOCK_DASHBOARD",
+    "EVIDENCE_STATUS"
+  ],
+  "projectionRules": {
+    "canonicalOwnership": false,
+    "rebuildable": true,
+    "carriesSourceVersionAndProjectionTime": true,
+    "lagAndFailureObservable": true,
+    "staleProjectionCanAuthorizeStockCommitment": false,
+    "transactionalOutboxRequired": true,
+    "eventDelivery": "AT_LEAST_ONCE_WITH_IDEMPOTENT_CONSUMERS"
+  },
+  "integrationOwnership": {
+    "retail": "CONSUMER_OF_CANONICAL_CATALOG_PRICE_INVENTORY_MEDIA_AND_ELIGIBILITY",
+    "privateWholesale": "RESTRICTED_CONSUMER_OF_CANONICAL_OFFERS_ALLOCATIONS_MEDIA_EVIDENCE_AND_STOCK",
+    "shipping": "FULFILLMENT_MODE_CONSUMER_NOT_INVENTORY_OWNER",
+    "yorkPickup": "FULFILLMENT_MODE_CONSUMER_NOT_INVENTORY_OWNER",
+    "bsdn": "DELIVERY_EXECUTION_OWNER_CONSUMING_ORDER_ITEMS_ELIGIBILITY_AND_COMMITTED_INVENTORY_NOT_STOCK_OWNER",
+    "search": "NONAUTHORITATIVE_PROJECTION",
+    "support": "SCOPED_CONSUMER_AND_CORRECTION_REQUESTER_NOT_CANONICAL_TRUTH_EDITOR",
+    "providers": "REPLACEABLE_ADAPTERS_WITH_EXTERNAL_IDS_AS_ALIASES"
+  },
+  "storageResponsibilities": {
+    "transactionalDatabase": ["CANONICAL_OPERATIONAL_RECORDS", "VERSIONS", "LEDGER", "RESERVATIONS", "OUTBOX", "BUSINESS_AUDIT_REFERENCES"],
+    "objectMediaStorage": ["IMMUTABLE_MEDIA_MASTERS", "DERIVATIVES", "EVIDENCE_DOCUMENT_BYTES", "INTEGRITY_METADATA"],
+    "searchIndex": ["REBUILDABLE_PURPOSE_SPECIFIC_QUERY_DOCUMENTS"],
+    "cache": ["DISPOSABLE_NONAUTHORITATIVE_RESPONSES"],
+    "auditStorage": ["TAMPER_EVIDENT_SENSITIVE_AUDIT_EVIDENCE"],
+    "analyticsAndProjections": ["PURPOSE_LIMITED_REBUILDABLE_DERIVED_VIEWS"],
+    "github": ["CODE", "ARCHITECTURE", "SCHEMAS", "MIGRATIONS", "RELEASES", "DOCUMENTATION"]
+  },
+  "operationalSignals": [
+    "LOW_STOCK",
+    "OUT_OF_STOCK",
+    "RESERVATION_AGING",
+    "EVIDENCE_STALE",
+    "EVIDENCE_MISSING",
+    "MEDIA_MISSING",
+    "PRICE_MISSING",
+    "UNPUBLISHED",
+    "QUARANTINED",
+    "FAILED_PROJECTION",
+    "FULFILLMENT_BLOCKER"
+  ],
+  "unresolvedDecisions": {
+    "owner": [
+      "LAUNCH_ASSORTMENT_AND_SKUS",
+      "IDENTIFIER_CONVENTION",
+      "EXACT_INVENTORY_LOCATION_AND_YORK_ORIGIN",
+      "RECEIVING_INSPECTION_RECONCILIATION_AND_DISPOSITION_PROCEDURES",
+      "STOCK_ADJUSTMENT_APPROVAL_THRESHOLDS",
+      "SAFETY_RESERVE_AND_CHANNEL_ALLOCATION_POLICY",
+      "RESERVATION_TIMEOUT_EXTENSION_EXPIRY_AND_OVERRIDE",
+      "PRICE_AUTHORITY_PROMOTION_AND_CART_ACKNOWLEDGMENT_POLICY",
+      "WHOLESALE_QUOTE_APPROVAL_AND_RESERVATION_POLICY",
+      "ADMIN_ROLES_DUAL_APPROVAL_BREAK_GLASS_AND_ACCESS_REVIEW",
+      "ACTUAL_SUPPLIER_AND_WHOLESALE_DISTRIBUTOR_ACCOUNT_ACQUISITION",
+      "SUPPLIER_ACCEPTANCE_PO_AND_DISCREPANCY_POLICY",
+      "BATCH_GRANULARITY_AND_MEASUREMENT_PROCEDURES",
+      "MEDIA_RIGHTS_COVERAGE_AND_ARCHIVE_POLICY",
+      "EVIDENCE_VERIFICATION_CURRENTNESS_AND_ARCHIVE_POLICY",
+      "SPECIALIST_CATALOG_MEDIA_EVIDENCE_AND_PUBLICATION_AUTHORITIES",
+      "COMPATIBILITY_AND_PHYSICAL_FIT_VERIFIER_COVERAGE_AND_REVIEW_POLICY",
+      "FULFILLMENT_RETURN_CANCELLATION_AND_SUPPORT_PROCEDURES",
+      "BSDN_SERVICE_ECONOMICS_CAPACITY_AND_OPERATING_POLICY",
+      "ACCOUNTING_EXPORT_PURPOSE_SCOPE_AND_AUTHORITY",
+      "ALERT_THRESHOLDS_STAFFING_SLOS_RPO_AND_RTO"
+    ],
+    "providerOrTechnology": [
+      "APPLICATION_FRAMEWORK",
+      "TRANSACTIONAL_DATABASE",
+      "COMMERCE_PIM_INVENTORY_PLATFORM",
+      "ADMIN_AUTHENTICATION_AND_MFA_PROVIDER",
+      "MEDIA_STORAGE_SCAN_TRANSCODING_STREAMING_AND_DELIVERY",
+      "PROTECTED_MEDIA_GATEWAY_AND_APPROVED_CLIENT_INTEGRATION",
+      "SEARCH_INDEX",
+      "CACHE_PROJECTION_AND_OUTBOX_INFRASTRUCTURE",
+      "SUPPLIER_IMPORT_ADAPTER",
+      "ACCOUNTING_INTEGRATION",
+      "PAYMENT_TAX_AGE_ELIGIBILITY_CARRIER_AND_ROUTING_ADAPTERS",
+      "SUPPORT_AND_NOTIFICATION_ADAPTERS",
+      "PROVIDER_PORTABILITY_EXPORT_EXIT_AND_REPLACEMENT_PROOF",
+      "AUDIT_OBSERVABILITY_SECRETS_ENCRYPTION_AND_KEY_MANAGEMENT"
+    ],
+    "legalOrCompliance": [
+      "AGE_DESTINATION_PRODUCT_PROOF_AND_FULFILLMENT_RULES",
+      "PRIVACY_CONSENT_RIGHTS_RETENTION_DELETION_AND_HOLDS",
+      "COA_EVIDENCE_CLAIM_PUBLICATION_AND_RECORDKEEPING_RULES",
+      "STAFF_ACCESS_MONITORING_RECOVERY_AND_INCIDENT_RULES",
+      "SUPPLIER_AUTHENTICITY_AND_PRODUCT_DOCUMENTATION_REQUIREMENTS",
+      "RETURNS_DAMAGE_DISPOSAL_TAX_ACCOUNTING_AND_FINANCIAL_CORRECTION_RULES",
+      "MEDIA_LICENSING_ACCESSIBILITY_AND_PROTECTED_CONTENT_RIGHTS"
+    ],
+    "implementation": [
+      "BUILD_ACCESSIBLE_ADMIN_CLIENTS_AND_CANONICAL_APIS",
+      "IMPLEMENT_SCHEMAS_MIGRATIONS_COMMANDS_QUERIES_LEDGER_AND_AUDIT",
+      "IMPLEMENT_MEDIA_EVIDENCE_RECEIVING_AND_WHOLESALE_WORKFLOWS",
+      "IMPLEMENT_ADAPTERS_PROJECTIONS_SEARCH_OUTBOX_MONITORING_EXPORT_AND_DELETION",
+      "TEST_CONCURRENCY_OVERSELL_IDEMPOTENCY_FAILURE_ACCESSIBILITY_SECURITY_AND_RECOVERY",
+      "COMPLETE_CONTROLLED_PILOT_AND_SEPARATE_LAUNCH_APPROVAL"
+    ]
+  },
+  "nextGate": {
+    "name": "Supplier, Merchant, Compliance, and Pilot Catalog Feasibility Intake",
+    "type": "BUSINESS_EVIDENCE_AND_ACCOUNTABLE_DECISION_GATE",
+    "requiredInputs": [
+      "SUPPLIER_ACCOUNT_FEASIBILITY_AND_AUTHORITATIVE_CROSS_DIVISION_PILOT_RECORDS",
+      "MERCHANT_PAYMENT_UNDERWRITING_FEASIBILITY",
+      "QUALIFIED_AGE_DESTINATION_PRODUCT_PROOF_PRIVACY_RETENTION_AND_FULFILLMENT_RULES",
+      "OWNER_RECEIVING_INVENTORY_RESERVATION_ALLOCATION_PRICE_QUOTE_MEDIA_EVIDENCE_SUPPORT_AND_STAFF_AUTHORITY_DECISIONS",
+      "RIGHTS_CLEARED_MEDIA_PROOF_APPLICABILITY_COMPATIBILITY_FIT_LOCATION_AND_OPERATIONS_INPUTS",
+      "NAMED_OWNERS_AND_SAFE_CONSEQUENCES_FOR_UNRESOLVED_OPERATING_POLICY"
+    ],
+    "sequencing": "ONLY_AFTER_THIS_INTAKE_MAY_A_SEPARATE_GATE_AUTHORIZE_PROVIDER_EVALUATION;_SELECTION_DOES_NOT_AUTHORIZE_IMPLEMENTATION;_IMPLEMENTATION_DOES_NOT_AUTHORIZE_PILOT_OR_LAUNCH",
+    "implementationAuthorized": false,
+    "providerEvaluationAuthorizedByThisRegistry": false,
+    "competitorResearchRequired": false
+  },
+  "productionAuthorization": {
+    "adminApplication": false,
+    "database": false,
+    "mediaPipeline": false,
+    "supplierIntegration": false,
+    "providerSelection": false,
+    "privateWholesaleLaunch": false,
+    "productionImplementation": false,
+    "pilot": false,
+    "launch": false
+  }
+}
