@@ -1,0 +1,798 @@
+{
+  "phase": {
+    "id": "COM-ADM-02",
+    "name": "Technology, Provider, and Implementation Feasibility",
+    "status": "COMPLETE",
+    "scope": "PROVIDER_AND_TECHNOLOGY_FEASIBILITY",
+    "recommendation_status": "SELECTED_FOR_LATER_PROOF",
+    "implementation_status": "NOT_AUTHORIZED",
+    "pilot_status": "NOT_AUTHORIZED",
+    "launch_status": "NOT_ESTABLISHED"
+  },
+  "base_sha": "e241ce89520dc05fe3bf0f4aa9cf9f8df37aa9e2",
+  "evidence_date": "2026-08-17",
+  "owner_profile": {
+    "initial_operators": 1,
+    "initial_operator_type": "OWNER",
+    "surfaces": [
+      "RESPONSIVE_WEB_ADMIN",
+      "THIN_NATIVE_IPHONE_COMPANION",
+      "MAC_SAFARI_ADD_TO_DOCK"
+    ],
+    "device_policy": "PERSONAL_OR_UNAPPROVED_DEVICES_PROHIBITED",
+    "sensitive_access": [
+      "APPROVED_DEVICE_REQUIRED",
+      "PHISHING_RESISTANT_MFA_REQUIRED",
+      "RECENT_STEP_UP_REQUIRED_FOR_HIGH_RISK_COMMANDS"
+    ],
+    "catalog_scale": "FEWER_THAN_100_PRODUCTS_AT_LAUNCH",
+    "inventory_locations": [
+      "YORK_PENNSYLVANIA"
+    ],
+    "typical_active_batches_per_product": 1,
+    "required_operations": [
+      "CATALOG",
+      "INVENTORY_LEDGER",
+      "PURCHASE_ORDERS",
+      "RECEIVING",
+      "COGS",
+      "SUPPLIER_PRICE_HISTORY",
+      "MEDIA_AND_EVIDENCE",
+      "BARCODE_AND_QR",
+      "LABELS",
+      "POS",
+      "ACCOUNTING_INTEGRATION",
+      "DETERMINISTIC_REORDER_INTELLIGENCE"
+    ],
+    "media_requirements": [
+      "IPHONE_AND_DESKTOP_UPLOAD",
+      "RESUMABLE_UPLOAD",
+      "HIGH_RESOLUTION_STILLS",
+      "FOUR_K_VIDEO",
+      "PRIVATE_QUARANTINE",
+      "IMMUTABLE_CANONICAL_MASTERS",
+      "REPLACEABLE_DERIVATIVE_PROCESSORS"
+    ],
+    "infrastructure_preference": "RELIABILITY_SECURITY_AND_MANAGED_OPERATIONS_OVER_LOWEST_COST",
+    "admin_experience": "CUSTOM_TAILORED_TO_BLOWIN_SMOKE",
+    "canonical_authority": "BLOWIN_SMOKE_COMMERCE_ADMIN",
+    "routine_operations_require_github": false,
+    "routine_operations_require_codex": false,
+    "routine_operations_require_deployment": false
+  },
+  "evaluation_criteria": [
+    {
+      "criterion": "RELIABILITY_AND_RECOVERABILITY",
+      "weight": 16
+    },
+    {
+      "criterion": "SECURITY_AND_PRIVACY",
+      "weight": 16
+    },
+    {
+      "criterion": "COM_ADM_01_CORRECTNESS",
+      "weight": 15
+    },
+    {
+      "criterion": "OPERATIONAL_BURDEN",
+      "weight": 12
+    },
+    {
+      "criterion": "DATA_OWNERSHIP_AND_EXIT",
+      "weight": 10
+    },
+    {
+      "criterion": "MANAGED_SERVICE_MATURITY",
+      "weight": 9
+    },
+    {
+      "criterion": "CUSTOM_ADMIN_FLEXIBILITY",
+      "weight": 8
+    },
+    {
+      "criterion": "INTEGRATION_QUALITY",
+      "weight": 6
+    },
+    {
+      "criterion": "COST_FIT",
+      "weight": 5
+    },
+    {
+      "criterion": "GROWTH_PATH",
+      "weight": 3
+    }
+  ],
+  "provider_candidates": {
+    "transactional_database": [
+      {
+        "candidate": "NEON_LAUNCH_POSTGRESQL",
+        "status": "RECOMMENDED"
+      },
+      {
+        "candidate": "SUPABASE_PRO_POSTGRESQL",
+        "status": "VIABLE_ALTERNATIVE",
+        "condition": "SERVER_SIDE_DOMAIN_COMMANDS_ONLY"
+      },
+      {
+        "candidate": "RENDER_POSTGRESQL",
+        "status": "VIABLE_ALTERNATIVE"
+      }
+    ],
+    "backend_api_and_deployment": [
+      {
+        "candidate": "VERCEL_PRO_NODEJS_MODULAR_MONOLITH",
+        "status": "RECOMMENDED"
+      },
+      {
+        "candidate": "CLOUDFLARE_WORKERS_PAID",
+        "status": "VIABLE_ALTERNATIVE",
+        "condition": "REPRESENTATIVE_TRANSACTION_AND_RUNTIME_PROOF"
+      },
+      {
+        "candidate": "RENDER_WEB_SERVICE",
+        "status": "VIABLE_ALTERNATIVE"
+      },
+      {
+        "candidate": "BROWSER_TO_DATABASE_OR_GENERATED_CRUD_WRITE_PATH",
+        "status": "REJECTED"
+      }
+    ],
+    "identity": [
+      {
+        "candidate": "AUTH0_ESSENTIALS",
+        "status": "RECOMMENDED"
+      },
+      {
+        "candidate": "WORKOS_AUTHKIT",
+        "status": "VIABLE_ALTERNATIVE"
+      },
+      {
+        "candidate": "CLERK_PRO",
+        "status": "REJECTED",
+        "reason": "CONVENIENCE_REVERIFICATION_CAN_DOWNGRADE_ASSURANCE_UNLESS_REPLACED"
+      },
+      {
+        "candidate": "CUSTOM_OR_SELF_HOSTED_IDENTITY",
+        "status": "REJECTED"
+      }
+    ],
+    "approved_device_controls": [
+      {
+        "candidate": "APPLICATION_OWNED_ADMIN_DEVICE_REGISTRY",
+        "status": "RECOMMENDED"
+      },
+      {
+        "candidate": "CLOUDFLARE_ACCESS_AND_PAID_WARP_FOR_WEB_AND_MAC",
+        "status": "RECOMMENDED"
+      },
+      {
+        "candidate": "APPLE_APP_ATTEST_FOR_NATIVE_IPHONE",
+        "status": "RECOMMENDED"
+      },
+      {
+        "candidate": "APPLE_BUSINESS_BUILT_IN_DEVICE_MANAGEMENT",
+        "status": "RECOMMENDED",
+        "role": "SUPPORTING_MANAGED_DEVICE_CONTROL"
+      },
+      {
+        "candidate": "APPLE_MANAGED_DEVICE_ATTESTATION_AND_ACME",
+        "status": "BLOCKED_EVIDENCE_INSUFFICIENT",
+        "reason": "EXACT_MDM_ACME_CA_AND_RELYING_PARTY_INTEGRATION_NOT_ESTABLISHED"
+      },
+      {
+        "candidate": "MTLS_CLIENT_CERTIFICATE",
+        "status": "VIABLE_ALTERNATIVE",
+        "condition": "HARDWARE_BOUND_ISSUANCE_AND_REVOCATION_PROOF"
+      },
+      {
+        "candidate": "PASSKEY_OR_WEBAUTHN_ALONE_AS_DEVICE_GATE",
+        "status": "REJECTED"
+      },
+      {
+        "candidate": "USER_AGENT_COOKIE_OR_APPROVED_TRUE_ASSERTION",
+        "status": "REJECTED"
+      }
+    ],
+    "canonical_object_storage": [
+      {
+        "candidate": "AMAZON_S3",
+        "status": "RECOMMENDED"
+      },
+      {
+        "candidate": "CLOUDFLARE_R2",
+        "status": "VIABLE_ALTERNATIVE"
+      },
+      {
+        "candidate": "SUPABASE_STORAGE_AS_SOLE_CANONICAL_OR_D3_STORE",
+        "status": "REJECTED"
+      }
+    ],
+    "image_derivatives": [
+      {
+        "candidate": "CLOUDFLARE_IMAGES",
+        "status": "RECOMMENDED"
+      },
+      {
+        "candidate": "CLOUDINARY",
+        "status": "VIABLE_ALTERNATIVE"
+      }
+    ],
+    "four_k_video": [
+      {
+        "candidate": "MUX",
+        "status": "RECOMMENDED"
+      },
+      {
+        "candidate": "BUNNY_STREAM",
+        "status": "VIABLE_ALTERNATIVE",
+        "condition": "CONTROLLED_COST_AND_SECURITY_PROOF"
+      },
+      {
+        "candidate": "CLOUDFLARE_STREAM",
+        "status": "REJECTED",
+        "reason": "CURRENT_DOCUMENTED_OUTPUT_CEILING_IS_1080P"
+      }
+    ],
+    "search": [
+      {
+        "candidate": "POSTGRESQL_FULL_TEXT_SEARCH_AND_PG_TRGM",
+        "status": "RECOMMENDED"
+      },
+      {
+        "candidate": "ALGOLIA_GROW",
+        "status": "VIABLE_ALTERNATIVE",
+        "condition": "MEASURED_REQUIREMENTS_EXCEED_POSTGRESQL"
+      }
+    ],
+    "cache": [
+      {
+        "candidate": "NO_EXTERNAL_CACHE_AT_LAUNCH",
+        "status": "RECOMMENDED"
+      },
+      {
+        "candidate": "UPSTASH_REDIS_AT_LAUNCH",
+        "status": "REJECTED",
+        "reconsideration": "DISPOSABLE_DATA_ONLY_AFTER_MEASURED_NEED"
+      }
+    ],
+    "audit_backup_and_observability": [
+      {
+        "candidate": "POSTGRESQL_TRANSACTIONAL_AUDIT_AND_OUTBOX",
+        "status": "RECOMMENDED"
+      },
+      {
+        "candidate": "NEON_RESTORE_HISTORY_AND_PITR",
+        "status": "RECOMMENDED"
+      },
+      {
+        "candidate": "ENCRYPTED_PG_DUMP_TO_SEPARATE_ACCOUNT_S3_OBJECT_LOCK",
+        "status": "RECOMMENDED"
+      },
+      {
+        "candidate": "SENTRY_TEAM",
+        "status": "RECOMMENDED"
+      },
+      {
+        "candidate": "BETTER_STACK",
+        "status": "VIABLE_ALTERNATIVE"
+      },
+      {
+        "candidate": "PROVIDER_LOGS_AS_SOLE_COMMERCE_AUDIT",
+        "status": "REJECTED"
+      }
+    ],
+    "admin_delivery": [
+      {
+        "candidate": "RESPONSIVE_CUSTOM_WEB_ADMIN",
+        "status": "RECOMMENDED"
+      },
+      {
+        "candidate": "THIN_NATIVE_SWIFTUI_IPHONE_COMPANION",
+        "status": "RECOMMENDED"
+      },
+      {
+        "candidate": "MAC_SAFARI_ADD_TO_DOCK",
+        "status": "RECOMMENDED"
+      },
+      {
+        "candidate": "ELECTRON_OR_TAURI_WRAPPER_AT_LAUNCH",
+        "status": "REJECTED"
+      },
+      {
+        "candidate": "THREE_INDEPENDENT_FULL_CLIENTS",
+        "status": "REJECTED"
+      }
+    ],
+    "barcode_and_labels": [
+      {
+        "candidate": "APPLE_VISIONKIT_IPHONE_SCANNING",
+        "status": "RECOMMENDED"
+      },
+      {
+        "candidate": "VERSIONED_PDF_AND_ZPL_LABEL_GENERATION",
+        "status": "RECOMMENDED"
+      },
+      {
+        "candidate": "ZEBRA_ZD421_CLASS_300_DPI_NETWORK_THERMAL_BENCHMARK",
+        "status": "RECOMMENDED",
+        "condition": "REAL_LABEL_STOCK_AND_PACKAGE_PROOF_BEFORE_PURCHASE"
+      },
+      {
+        "candidate": "BROTHER_QL_1110NWB",
+        "status": "VIABLE_ALTERNATIVE"
+      },
+      {
+        "candidate": "BROWSER_ONLY_CONSUMER_PRINTING_AS_SOLE_LABEL_PATH",
+        "status": "REJECTED"
+      }
+    ],
+    "pos": [
+      {
+        "candidate": "CUSTOM_ONLINE_FIRST_BLOWIN_SMOKE_POS",
+        "status": "RECOMMENDED"
+      },
+      {
+        "candidate": "REPLACEABLE_PAYMENT_TERMINAL_ADAPTER",
+        "status": "BLOCKED_EVIDENCE_INSUFFICIENT",
+        "reason": "ACTUAL_CATALOG_MERCHANT_UNDERWRITING_NOT_ESTABLISHED"
+      },
+      {
+        "candidate": "SHOPIFY_POS_AS_CANONICAL_POS",
+        "status": "REJECTED"
+      },
+      {
+        "candidate": "SQUARE_POS_AS_CANONICAL_POS",
+        "status": "REJECTED"
+      },
+      {
+        "candidate": "LIGHTSPEED_RETAIL_AS_CANONICAL_POS",
+        "status": "REJECTED"
+      }
+    ],
+    "accounting": [
+      {
+        "candidate": "QUICKBOOKS_ONLINE_ESSENTIALS",
+        "status": "RECOMMENDED"
+      },
+      {
+        "candidate": "QUICKBOOKS_ONLINE_PLUS",
+        "status": "VIABLE_ALTERNATIVE"
+      },
+      {
+        "candidate": "XERO_GROWING",
+        "status": "VIABLE_ALTERNATIVE"
+      },
+      {
+        "candidate": "ZOHO_BOOKS_PROFESSIONAL",
+        "status": "VIABLE_ALTERNATIVE"
+      },
+      {
+        "candidate": "SPREADSHEET_OR_MANUAL_BOOKS_AS_PRIMARY_SYSTEM",
+        "status": "REJECTED"
+      }
+    ],
+    "reorder": [
+      {
+        "candidate": "DETERMINISTIC_THRESHOLD_AND_INVENTORY_MATH",
+        "status": "RECOMMENDED"
+      },
+      {
+        "candidate": "STATISTICAL_FORECASTING_AFTER_CLEAN_HISTORY",
+        "status": "VIABLE_ALTERNATIVE",
+        "condition": "SUFFICIENT_AUTHORITATIVE_HISTORY_AND_BACKTESTING"
+      },
+      {
+        "candidate": "AI_REORDERING_AT_LAUNCH",
+        "status": "REJECTED"
+      }
+    ]
+  },
+  "candidate_statuses": [
+    {
+      "status": "RECOMMENDED",
+      "meaning": "BEST_CURRENT_FIT_SUBJECT_TO_PROOF_PROCUREMENT_AND_OWNER_AUTHORIZATION"
+    },
+    {
+      "status": "VIABLE_ALTERNATIVE",
+      "meaning": "CREDIBLE_BUT_NOT_SELECTED_FOR_THE_CURRENT_OWNER_PROFILE"
+    },
+    {
+      "status": "REJECTED",
+      "meaning": "CONFLICTS_WITH_A_MATERIAL_CURRENT_REQUIREMENT_OR_LAUNCH_BOUNDARY"
+    },
+    {
+      "status": "BLOCKED_EVIDENCE_INSUFFICIENT",
+      "meaning": "A_REQUIRED_CURRENT_CLAIM_OR_ELIGIBILITY_DECISION_IS_NOT_ESTABLISHED"
+    }
+  ],
+  "recommended_stack": {
+    "transactional_database": "NEON_LAUNCH_POSTGRESQL",
+    "backend_api": "SERVER_ONLY_TYPESCRIPT_MODULAR_MONOLITH_COMMAND_API",
+    "deployment": "VERCEL_PRO",
+    "web_admin": "RESPONSIVE_CUSTOM_WEB_ADMIN",
+    "iphone_admin": "THIN_NATIVE_SWIFTUI_COMPANION",
+    "mac_admin": "SAFARI_ADD_TO_DOCK_ON_MACOS_SONOMA_14_OR_LATER",
+    "authentication": "AUTH0_ESSENTIALS",
+    "mfa": "PIN_OR_USER_VERIFYING_FIDO2_ROAMING_SECURITY_KEY_WITH_SEPARATE_RECOVERY_KEY",
+    "approved_device": [
+      "APPLICATION_OWNED_ADMIN_DEVICE_REGISTRY",
+      "CLOUDFLARE_ZERO_TRUST_ACCESS_AND_PAID_WARP_FOR_WEB_AND_MAC",
+      "APPLE_APP_ATTEST_FOR_NATIVE_IPHONE"
+    ],
+    "canonical_object_storage": "PRIVATE_AMAZON_S3_QUARANTINE_AND_IMMUTABLE_KEY_MASTERS",
+    "image_derivatives": "CLOUDFLARE_IMAGES",
+    "four_k_video": "MUX",
+    "search": "POSTGRESQL_FULL_TEXT_SEARCH_AND_PG_TRGM",
+    "cache": "NO_EXTERNAL_CACHE_AT_LAUNCH",
+    "audit": "APPEND_ONLY_APPLICATION_AUDIT_AND_TRANSACTIONAL_OUTBOX_IN_POSTGRESQL",
+    "backup": "NEON_RESTORE_HISTORY_PLUS_ENCRYPTED_SCHEDULED_PG_DUMP_TO_SEPARATE_AWS_ACCOUNT_S3_OBJECT_LOCK",
+    "observability": "SENTRY_TEAM_WITH_STRICT_SCRUBBING",
+    "barcode_qr": "APPLE_VISIONKIT_WITH_MANUAL_ACCESSIBLE_FALLBACK",
+    "labels": "VERSIONED_PDF_AND_ZPL_WITH_300_DPI_NETWORK_THERMAL_PRINTER_PROOF",
+    "pos": "CUSTOM_ONLINE_FIRST_BLOWIN_SMOKE_POS_OVER_CANONICAL_API",
+    "accounting": "QUICKBOOKS_ONLINE_ESSENTIALS_ADAPTER",
+    "reorder": "DETERMINISTIC_THRESHOLD_AND_INVENTORY_MATH_WITH_PHASED_FORECASTING_LATER"
+  },
+  "alternatives": [
+    {
+      "category": "DATABASE_BACKEND_STORAGE",
+      "candidate": "SUPABASE_PRO",
+      "status": "VIABLE_ALTERNATIVE",
+      "boundary": "EXPLICIT_SERVER_DOMAIN_COMMANDS_AND_INDEPENDENT_STORAGE_BACKUP_REQUIRED"
+    },
+    {
+      "category": "BACKEND_API",
+      "candidate": "CLOUDFLARE_WORKERS_PAID",
+      "status": "VIABLE_ALTERNATIVE",
+      "boundary": "TRANSACTION_DRIVER_RUNTIME_AND_FAILURE_PROOF_REQUIRED"
+    },
+    {
+      "category": "BACKEND_AND_DATABASE",
+      "candidate": "RENDER_WEB_SERVICE_AND_POSTGRESQL",
+      "status": "VIABLE_ALTERNATIVE",
+      "boundary": "CURRENT_COMPLETE_CONFIGURATION_PRICE_AND_RECOVERY_PROOF_REQUIRED"
+    },
+    {
+      "category": "IDENTITY",
+      "candidate": "WORKOS_AUTHKIT",
+      "status": "VIABLE_ALTERNATIVE"
+    },
+    {
+      "category": "OBJECT_STORAGE",
+      "candidate": "CLOUDFLARE_R2",
+      "status": "VIABLE_ALTERNATIVE",
+      "boundary": "EXTERNAL_MALWARE_SCAN_APPLICATION_VERSIONING_AND_INDEPENDENT_BACKUP_REQUIRED"
+    },
+    {
+      "category": "IMAGE_DERIVATIVES",
+      "candidate": "CLOUDINARY",
+      "status": "VIABLE_ALTERNATIVE",
+      "boundary": "HIGHER_BASE_COST_AND_TRANSFORMATION_WORKFLOW_LOCK_IN"
+    },
+    {
+      "category": "FOUR_K_VIDEO",
+      "candidate": "BUNNY_STREAM",
+      "status": "VIABLE_ALTERNATIVE",
+      "boundary": "CONTROLLED_UPLOAD_SECURITY_RECOVERY_REVOCATION_AND_SUPPORT_PROOF_REQUIRED"
+    },
+    {
+      "category": "SEARCH",
+      "candidate": "ALGOLIA_GROW",
+      "status": "VIABLE_ALTERNATIVE",
+      "boundary": "REBUILDABLE_PROJECTION_ONLY_AFTER_MEASURED_NEED"
+    },
+    {
+      "category": "OBSERVABILITY",
+      "candidate": "BETTER_STACK",
+      "status": "VIABLE_ALTERNATIVE"
+    },
+    {
+      "category": "ACCOUNTING",
+      "candidate": "XERO_GROWING_OR_ZOHO_BOOKS_PROFESSIONAL",
+      "status": "VIABLE_ALTERNATIVE",
+      "boundary": "ACCOUNTANT_PREFERENCE_AND_MAPPING_PROOF"
+    },
+    {
+      "category": "ACCOUNTING",
+      "candidate": "QUICKBOOKS_ONLINE_PLUS",
+      "status": "VIABLE_ALTERNATIVE",
+      "boundary": "ONLY_FOR_ACCOUNTANT_APPROVED_NEED_WITHOUT_MAKING_QBO_INVENTORY_CANONICAL"
+    }
+  ],
+  "cost_ranges": {
+    "currency": "USD",
+    "estimate_class": "PLANNING_RANGE_NOT_QUOTE",
+    "pricing_evidence_date": "2026-08-17",
+    "modeled_profile": {
+      "operators": 1,
+      "products": "FEWER_THAN_100",
+      "canonical_media_gb": "100_TO_250",
+      "retained_encoded_video_minutes": "100_TO_600",
+      "protected_wholesale_delivery_included": false
+    },
+    "monthly_low_volume": {
+      "minimum": 215,
+      "maximum": 365
+    },
+    "monthly_moderate_growth": {
+      "minimum": 400,
+      "maximum": 950
+    },
+    "selected_component_planning_ranges": {
+      "neon_launch": "15_TO_35_PER_MONTH",
+      "vercel_pro": "20_TO_40_PER_MONTH",
+      "auth0_essentials": "35_PER_MONTH",
+      "cloudflare_zero_trust_one_user_assumption": "7_PER_MONTH_VERIFY_BILLING_MINIMUM",
+      "apple_developer_program": "99_PER_YEAR",
+      "s3_guardduty_and_media_archive": "5_TO_25_PER_MONTH_PLANNING_ALLOWANCE",
+      "cloudflare_images": "5_TO_15_PER_MONTH",
+      "mux": "1_TO_35_PER_MONTH_AT_MODELED_LOW_VOLUME",
+      "s3_object_lock_archive": "1_TO_10_PER_MONTH_PLANNING_ALLOWANCE",
+      "sentry_team": "26_TO_50_PER_MONTH",
+      "quickbooks_online_essentials": "85_PER_MONTH"
+    },
+    "one_time_known": {
+      "two_yubico_security_key_c_nfc_devices_before_tax_and_shipping": 58,
+      "brother_ql_1110nwb_candidate_before_tax_and_shipping": 334.99
+    },
+    "excluded": [
+      "DEVELOPMENT_LABOR",
+      "LEGAL_TAX_PRIVACY_AND_COMPLIANCE_WORK",
+      "PAYMENT_PROCESSING_AND_MERCHANT_RESERVES",
+      "SHIPPING_TAX_AND_AGE_VERIFICATION_VENDORS",
+      "CUSTOMER_EMAIL_AND_SMS",
+      "DOMAINS_AND_PUBLIC_STOREFRONT_OUTSIDE_ADMIN_SCOPE",
+      "UNPRICED_POS_PERIPHERALS",
+      "PROTECTED_WHOLESALE_PRODUCTION_DELIVERY"
+    ]
+  },
+  "security_requirements": {
+    "fail_closed_rule": "MISSING_UNKNOWN_STALE_REVOKED_UNSUPPORTED_OR_FAILED_MANDATORY_STATE_DENIES",
+    "required_controls": [
+      "SERVER_SIDE_COMMAND_AND_OBJECT_AUTHORIZATION",
+      "PHISHING_RESISTANT_MFA",
+      "RECENT_EXPLICIT_STEP_UP_FOR_HIGH_RISK_COMMANDS",
+      "APPLICATION_OWNED_DEVICE_ADMISSION_AND_REVOCATION",
+      "LEAST_PRIVILEGE_RUNTIME_MIGRATION_BACKUP_AND_OPERATOR_ROLES",
+      "NO_BROWSER_DATABASE_CREDENTIALS",
+      "ONE_TRANSACTION_FOR_BUSINESS_WRITE_REQUIRED_AUDIT_IDEMPOTENCY_AND_OUTBOX",
+      "PRIVATE_MEDIA_QUARANTINE_AND_DENY_UNTIL_CLEAN",
+      "NO_PUBLIC_OR_PREDICTABLE_CANONICAL_MEDIA_URL",
+      "STRICT_LOG_TELEMETRY_AND_ERROR_REDACTION",
+      "ENCRYPTED_INDEPENDENT_BACKUP_AND_PROVED_RESTORE",
+      "PROVIDER_IDS_AS_VERSIONED_ALIASES_ONLY",
+      "ACCESSIBLE_MANUAL_FALLBACKS_FOR_SCANNING_AND_HIGH_RISK_WORKFLOWS"
+    ],
+    "prohibited_shortcuts": [
+      "ADMIN_TRUE_OR_USER_AGENT_AUTHORIZATION",
+      "IDENTITY_PROVIDER_ROLE_AS_FINAL_COMMERCE_AUTHORITY",
+      "SIGNED_URL_AS_APPROVED_DEVICE_PROOF",
+      "WARP_AS_FINAL_COMMAND_AUTHORIZATION",
+      "APP_ATTEST_AS_PERFECT_DEVICE_INTEGRITY_CLAIM",
+      "PROVIDER_LOG_AS_CANONICAL_AUDIT",
+      "CACHE_SEARCH_ACCOUNTING_POS_OR_MEDIA_PROVIDER_AS_CANONICAL_COMMERCE_AUTHORITY"
+    ],
+    "private_wholesale_boundary": {
+      "browser_pwa_d3_d4_payload": "DENIED",
+      "admin_technology_approves_protected_wholesale_client": false,
+      "capture_and_extraction_gate": "SEPARATE_SEC_02_SEC_03_HARD_GATE",
+      "watermark_drm_signed_url_mfa_warp_and_app_attest_replace_capture_gate": false
+    }
+  },
+  "approved_device_strategy": {
+    "canonical_owner": "APPLICATION_ADMIN_DEVICE_REGISTRY",
+    "web_and_mac_layers": [
+      "AUTH0_IDENTITY_AND_RECENT_MFA",
+      "CLOUDFLARE_ACCESS",
+      "PAID_WARP_DEVICE_POSTURE",
+      "ACTIVE_ADMIN_DEVICE_RECORD",
+      "SERVER_SIDE_CAPABILITY_OBJECT_AND_COMMAND_AUTHORIZATION"
+    ],
+    "iphone_layers": [
+      "AUTH0_IDENTITY_AND_RECENT_MFA",
+      "NATIVE_SWIFTUI_CLIENT",
+      "APP_ATTEST_KEY_BOUND_TO_ADMIN_DEVICE",
+      "FRESH_ASSERTION_FOR_SELECTED_SENSITIVE_REQUESTS",
+      "ACTIVE_ADMIN_DEVICE_RECORD",
+      "SERVER_SIDE_CAPABILITY_OBJECT_AND_COMMAND_AUTHORIZATION"
+    ],
+    "factor_policy": {
+      "daily_factor": "FIDO2_ROAMING_SECURITY_KEY_WITH_USER_VERIFICATION",
+      "recovery_factor": "SEPARATELY_STORED_SECOND_PHYSICAL_KEY",
+      "sms_or_email_as_equivalent_sensitive_fallback": false
+    },
+    "revocation_events": [
+      "DEVICE_LOSS",
+      "FACTOR_LOSS",
+      "OWNER_SECURITY_ACTION",
+      "STALE_OR_UNSUPPORTED_BUILD",
+      "INTEGRITY_OR_POSTURE_FAILURE",
+      "INCIDENT_RESPONSE"
+    ],
+    "perfect_integrity_claim": false,
+    "private_wholesale_client_approved": false
+  },
+  "media_strategy": {
+    "canonical_store": "AMAZON_S3",
+    "image_processor": "CLOUDFLARE_IMAGES",
+    "video_processor": "MUX",
+    "flow": [
+      "AUTHORIZED_UPLOAD_SESSION",
+      "SHORT_LIVED_ONE_OBJECT_MULTIPART_GRANT",
+      "PRIVATE_S3_QUARANTINE",
+      "CHECKSUM_AND_COMPLETION_VERIFICATION",
+      "GUARDDUTY_MALWARE_SCAN",
+      "MAGIC_BYTE_PARSER_DECODE_AND_LIMIT_VALIDATION",
+      "PRIVACY_AND_TECHNICAL_METADATA_EXTRACTION",
+      "VERSIONED_IMMUTABLE_KEY_S3_MASTER",
+      "CLOUDFLARE_IMAGES_OR_MUX_DERIVATIVE_PROCESSING",
+      "SEPARATE_ROLE_ASSIGNMENT_RIGHTS_AND_PUBLICATION_COMMAND"
+    ],
+    "states": [
+      "REQUESTED",
+      "AUTHORIZED",
+      "UPLOADING",
+      "UPLOAD_COMPLETE_UNVERIFIED",
+      "QUARANTINED",
+      "MALWARE_SCAN_PENDING",
+      "CONTENT_VALIDATION_PENDING",
+      "METADATA_REVIEW_PENDING",
+      "ACCEPTED_MASTER",
+      "DERIVATIVES_QUEUED",
+      "DERIVATIVES_PROCESSING",
+      "READY_FOR_ASSIGNMENT",
+      "REJECTED_OR_FAILED",
+      "REVOKED",
+      "SUPERSEDED",
+      "ARCHIVED"
+    ],
+    "invariants": [
+      "UPLOAD_NEVER_AUTO_PUBLISHES",
+      "ORIGINAL_MASTER_NEVER_DIRECTLY_SERVES_STOREFRONT_OR_WHOLESALE",
+      "REPLACEMENT_CREATES_SUCCESSOR_VERSION",
+      "UNKNOWN_OR_FAILED_SCAN_NEVER_PROMOTES",
+      "PUBLIC_INTERNAL_D3_D4_AND_EVIDENCE_CLASSES_REMAIN_SEPARATE",
+      "CLOUDFLARE_IMAGES_AND_MUX_NEVER_OWN_CANONICAL_TRUTH",
+      "EXACT_ORIGINAL_REMAINS_EXPORTABLE_IN_S3",
+      "DIRECT_DEVICE_TO_PROCESSOR_UPLOAD_IS_NOT_CANONICAL_INTAKE",
+      "SIGNED_PLAYBACK_DRM_AND_WATERMARK_DO_NOT_APPROVE_PROTECTED_WHOLESALE"
+    ],
+    "iphone_and_desktop_upload": "S3_MULTIPART_WITH_INTERRUPTION_RETRY_AND_EXACT_CLIENT_PROOF_REQUIRED",
+    "d3_release_status": "NOT_AUTHORIZED"
+  },
+  "pos_strategy": {
+    "selected": "CUSTOM_ONLINE_FIRST_BLOWIN_SMOKE_POS_OVER_CANONICAL_API",
+    "canonical_owners": [
+      "CATALOG",
+      "PRICE_AND_CHANNEL_OFFER",
+      "ORDER",
+      "RESERVATION",
+      "INVENTORY_LEDGER",
+      "AUDIT"
+    ],
+    "payment_terminal_role": "LATER_REPLACEABLE_UNDERWRITTEN_ADAPTER",
+    "offline_authoritative_commitment_at_launch": false,
+    "offline_allowed_state": "CLEARLY_LABELED_NONSENSITIVE_UNCOMMITTED_DRAFT_CART_ONLY",
+    "merchant_underwriting": "BLOCKED_EVIDENCE_INSUFFICIENT_FOR_ACTUAL_MIXED_CATALOG",
+    "barcode_scanning": "VISIONKIT_RESOLVES_SERVER_RECORD_AND_NEVER_AUTHORIZES_WRITE_BY_ITSELF",
+    "label_strategy": "VERSIONED_PDF_AND_ZPL_WITH_REPRESENTATIVE_300_DPI_PRINTER_PROOF",
+    "canonical_external_pos_platform": null
+  },
+  "accounting_strategy": {
+    "selected_destination": "QUICKBOOKS_ONLINE_ESSENTIALS",
+    "canonical_commerce_admin_owns": [
+      "PRODUCT_AND_SKU",
+      "SUPPLIER_REFERENCE",
+      "PURCHASE_ORDER",
+      "RECEIPT",
+      "LOT_COST_LAYER",
+      "INVENTORY_LEDGER",
+      "ORDER",
+      "OPERATIONAL_COGS_INPUT"
+    ],
+    "quickbooks_owns": [
+      "GENERAL_LEDGER",
+      "BILLS",
+      "PAYMENTS",
+      "ACCOUNTING_REPORTS"
+    ],
+    "required_adapter_controls": [
+      "STABLE_CANONICAL_EVENT_ID",
+      "VERSIONED_MAPPING",
+      "INTEGER_MINOR_UNIT_AMOUNTS",
+      "IDEMPOTENCY",
+      "VERIFIED_AND_DEDUPLICATED_WEBHOOKS",
+      "CONTROLLED_API_RECONCILIATION",
+      "EXPLICIT_CORRECTION_OR_COMPENSATING_EVENT",
+      "SERVER_SIDE_OAUTH_TOKEN_PROTECTION"
+    ],
+    "accountant_mapping_approval": "OPEN",
+    "inventory_cost_method": "OPEN_QUALIFIED_ACCOUNTANT_DECISION",
+    "quickbooks_inventory_as_canonical": false
+  },
+  "reorder_strategy": {
+    "selected_launch_method": "DETERMINISTIC_THRESHOLDS_AND_INVENTORY_MATH",
+    "authoritative_inputs": [
+      "AVAILABLE_TO_PROMISE",
+      "SAFETY_STOCK",
+      "APPROVED_LEAD_TIME",
+      "OPEN_PURCHASE_ORDER_QUANTITY",
+      "EXPECTED_RECEIPT_WITH_CONFIDENCE_STATE",
+      "SALES_AND_FULFILLMENT_HISTORY",
+      "SUPPLIER_MINIMUM_AND_PACK_QUANTITY",
+      "SEASONAL_OR_EVENT_OVERRIDE_WHEN_APPROVED"
+    ],
+    "phases": [
+      {
+        "phase": 1,
+        "method": "MIN_MAX_OR_REORDER_POINT_WITH_EXPLICIT_APPROVAL",
+        "status": "RECOMMENDED_FOR_LAUNCH"
+      },
+      {
+        "phase": 2,
+        "method": "DEMAND_RATE_LEAD_TIME_AND_SAFETY_STOCK_FROM_CLEAN_HISTORY",
+        "status": "DEFERRED_PENDING_HISTORY"
+      },
+      {
+        "phase": 3,
+        "method": "BACKTESTED_STATISTICAL_FORECASTING_WITH_HUMAN_APPROVAL",
+        "status": "DEFERRED_PENDING_EVIDENCE"
+      }
+    ],
+    "automatic_purchase_order_submission": false,
+    "ai_at_launch": false,
+    "unknown_supplier_or_unit_mapping_behavior": "BLOCK_RECOMMENDATION_OR_SHOW_UNRESOLVED"
+  },
+  "open_gates": {
+    "provider_and_implementation_proof": [
+      "ACCOUNT_REGION_TERMS_DPA_SUBPROCESSOR_SUPPORT_PRICE_SPEND_ALERT_AND_OWNERSHIP_CONFIRMATION",
+      "DATABASE_ISOLATION_LOCKING_EXACT_ARITHMETIC_IDEMPOTENCY_AUDIT_OUTBOX_MIGRATION_ROLLBACK_AND_OUTAGE_PROOF",
+      "BACKUP_PITR_LOGICAL_EXPORT_INDEPENDENT_OBJECT_RESTORE_AND_APPROVED_RPO_RTO",
+      "AUTH0_FACTOR_STEP_UP_REVOCATION_EXPORT_AND_FAILURE_PROOF",
+      "CLOUDFLARE_WARP_ENROLLMENT_REVOCATION_BYPASS_AND_ADMIN_DEVICE_BINDING_PROOF",
+      "APP_ATTEST_ENROLLMENT_REINSTALL_MIGRATION_NONCE_REPLAY_STALE_BUILD_REVOCATION_AND_ACCESSIBILITY_PROOF",
+      "IPHONE_AND_DESKTOP_INTERRUPTED_MEDIA_UPLOAD_MALWARE_METADATA_FOUR_K_REVOCATION_BACKUP_AND_EXIT_PROOF",
+      "LABEL_PRINTER_SCANNER_RECEIPT_CASH_DRAWER_AND_ACCESSIBILITY_PROOF",
+      "POS_TRANSACTION_PAYMENT_WEBHOOK_RETRY_CORRECTION_AND_MERCHANT_UNDERWRITING_PROOF",
+      "ACCOUNTANT_MAPPING_RECONCILIATION_CORRECTION_EXPORT_AND_EXIT_PROOF",
+      "DETERMINISTIC_REORDER_FORMULA_VALIDATION_WITH_AUTHORITATIVE_HISTORY"
+    ],
+    "business_legal_and_operating_authority": [
+      "AGE_PRODUCT_DESTINATION_TAX_PRIVACY_RETENTION_SHIPPING_PICKUP_BSDN_AND_RETURN_RULES",
+      "AUTHORITATIVE_PILOT_CATALOG_SUPPLIER_PRODUCT_PACKAGE_LOT_COST_MEDIA_RIGHTS_AND_EVIDENCE",
+      "APPROVED_RECEIVING_STOCKTAKE_CORRECTION_RESERVATION_ALLOCATION_PRICE_PO_CASH_CLOSE_SUPPORT_INCIDENT_AND_RECOVERY_PROCEDURES",
+      "NAMED_ACCOUNT_SECURITY_RECOVERY_AUTHORITY_AND_ALL_DEVICES_LOST_PROCEDURE",
+      "APPROVED_INVENTORY_COST_ACCOUNTING_METHOD_AND_FINANCIAL_CONTROLS"
+    ],
+    "protected_wholesale": "SEPARATE_SEC_02_SEC_03_GATE_NO_ADMIN_TECHNOLOGY_APPROVES_CLIENT",
+    "authorization_status": {
+      "provider_procurement": "NOT_AUTHORIZED",
+      "production_code": "NOT_CREATED_OR_CHANGED_BY_COM_ADM_02",
+      "implementation": "NOT_AUTHORIZED",
+      "live_admin_inventory_media_pos_accounting": "NOT_IMPLEMENTED",
+      "pilot": "NOT_AUTHORIZED",
+      "launch": "NOT_AUTHORIZED",
+      "launch_readiness": "NOT_ESTABLISHED"
+    }
+  },
+  "next_gate": {
+    "id": "COM-ADM-03",
+    "name": "Controlled Implementation Plan and Proof Specification",
+    "mode": "PLAN_AND_PROOF_GATE_ONLY",
+    "may_define": [
+      "PROVIDER_ACCOUNT_REGION_CONFIGURATION_AND_PROCUREMENT_CHECKS",
+      "SCHEMA_MIGRATION_AND_API_CONTRACT_PLAN_MAPPED_TO_COM_ADM_01",
+      "TRANSACTION_CONCURRENCY_EXACT_MONEY_AUDIT_OUTBOX_AND_RECOVERY_PROOF_HARNESSES",
+      "IDENTITY_DEVICE_ENROLLMENT_REVOCATION_RECOVERY_AND_STEP_UP_PROOF_PLAN",
+      "MEDIA_QUARANTINE_VALIDATION_DERIVATIVE_BACKUP_AND_EXIT_PROOF_PLAN",
+      "POS_ACCOUNTING_AND_PERIPHERAL_ADAPTER_CONTRACTS_AND_UNDERWRITING_GATES",
+      "ACCESSIBILITY_PRIVACY_SECURITY_OBSERVABILITY_INCIDENT_RPO_RTO_PILOT_AND_ROLLBACK_ACCEPTANCE_MATRICES",
+      "COST_REVALIDATION_AND_STAGED_PROCUREMENT_APPROVAL"
+    ],
+    "production_deployment": "NOT_AUTHORIZED",
+    "live_data_population": "NOT_AUTHORIZED",
+    "pilot": "NOT_AUTHORIZED",
+    "launch": "NOT_AUTHORIZED"
+  },
+  "production_authorized": false
+}
