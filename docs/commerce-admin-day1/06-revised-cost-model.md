@@ -103,7 +103,7 @@ Free is still a provider dependency requiring privacy-safe configuration, owners
 ### Hardware
 
 - Existing iPhone and Mac/desktop are assumed and excluded.
-- Two physical FIDO2 security keys remain a required one-time security purchase; COM-ADM-02 recorded $58 before tax/shipping for two then-current Yubico Security Key C NFC devices. Reprice before purchase.
+- COM-ADM-02B supersedes the two-application-key assumption: one $29 Yubico Security Key C NFC is the selected application-user hardware, with a separate rotating offline recovery code. Reserve another $29 as a control-plane hardware contingency if proof requires a dedicated Auth0 tenant key. Reprice before purchase; no hardware procurement is authorized.
 - Label printer, scanner, receipt printer, cash drawer, payment terminal, and POS peripherals are deferred. The former Brother candidate was $334.99 before tax/shipping; no hardware procurement is authorized.
 
 ## 7. Exclusions

@@ -568,7 +568,10 @@
   "security_decision": {
     "auth0": "KEEP",
     "authentication": "PASSWORD_PLUS_USER_VERIFYING_WEBAUTHN_ROAMING_SECURITY_KEY",
-    "physical_keys_required": 2,
+    "physical_keys_required": 1,
+    "credential_detail_superseded_by": "COM-ADM-02B",
+    "independent_recovery_credential": "PHYSICALLY_ISOLATED_ROTATING_AUTH0_RECOVERY_CODE_VIA_RECOVERY_ONLY_CLIENT",
+    "control_plane_hardware_contingency": "ONE_ADDITIONAL_KEY_IF_PROOF_REQUIRES_SEPARATE_AUTH0_TENANT_HARDWARE",
     "sms_or_email_as_equivalent_fallback": false,
     "provider_identity_is_business_authorization": false,
     "admin_device_model": "REVOCABLE_REGISTERED_BROWSER_CONTINUITY",

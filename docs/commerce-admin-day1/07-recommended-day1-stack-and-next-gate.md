@@ -10,7 +10,7 @@
 |---|---|---|
 | Canonical database | Neon Launch PostgreSQL | No single transactional authority for inventory, exact pricing/cost, orders, audit, outbox, or recovery history |
 | Admin/API/website execution | Vercel Pro responsive Web Admin + server-only modular-monolith command API | No approved commercial owner surface, server command boundary, managed release/rollback, or automatic website execution |
-| Authentication | Auth0 Essentials with password + user-verifying roaming FIDO2 key, exact step-up, two keys, and offline recovery | No selected managed service currently establishes the required phishing-resistant MFA and factor-specific high-risk path at lower total risk |
+| Authentication | Auth0 Essentials with password + one user-verifying roaming FIDO2 key, exact step-up, and a separate recovery-only client with rotating offline recovery code; COM-ADM-02B supersedes the two-key assumption | No selected managed service currently establishes the required phishing-resistant MFA and factor-specific high-risk path at lower total risk |
 | Device/session admission | Simplified application `AdminDevice` + revocable BFF session per browser | Unknown endpoint could receive Admin data or a lost browser could not be independently revoked |
 | Security notification | Canonical notification outbox + AWS SES to a preverified owner security destination | Factor/device/recovery/security changes could occur without independent warning or delivery-failure evidence |
 | Canonical media/evidence | Private S3 quarantine, GuardDuty result, application validation, immutable masters/versions | No safe iPhone/desktop intake, COA/evidence store, canonical original, or controlled publication path |
@@ -60,7 +60,7 @@ COM-ADM-03 must define and later execute representative tests for:
 
 ### Identity and Admin
 
-- owner bootstrap, two roaming keys, key loss, provider recovery, all-devices-lost recovery;
+- owner bootstrap, one roaming application key, separate recovery-only flow, recovery-code rotation/resealing, key loss, provider recovery, Auth0 control-plane hardening, and all-devices-lost recovery;
 - iPhone and Mac browser enrollment, self-approval denial, unknown/pending/active/suspended/revoked states;
 - exact factor-specific step-up, freshness, one-use command binding, replay, session fixation/rotation, and global revocation;
 - provider/device/audit outage and fail-closed behavior;

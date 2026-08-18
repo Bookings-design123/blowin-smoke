@@ -5,9 +5,11 @@
 **Approved-device claim:** Browser continuity and explicit owner approval, not hardware integrity
 **Production configuration:** Not authorized
 
+**COM-ADM-02B correction:** The provider decision and $35 monthly cost remain unchanged. Current specific Auth0 guidance supports one application-user YubiKey for this factor, not the two-key enrollment previously assumed in this document. The governing Day-1 model is one UV-required roaming key plus a separate recovery-only client and physically isolated rotating recovery code; see `docs/commerce-admin-auth/`.
+
 ## 1. Decision
 
-**Auth0 Essentials remains `DAY_1_REQUIRED` at its current $35/month list price.** For this owner-only Admin, it is the lowest-risk reviewed option with documented Pro MFA, WebAuthn roaming security keys, factor-specific challenge behavior, custom domain, recovery codes, log stream, and supported step-up building blocks.
+**Auth0 Essentials remains `DAY_1_REQUIRED` at its current $35/month list price.** For this owner-only Admin, it is the lowest-risk reviewed option with documented Pro MFA, WebAuthn roaming security keys, factor-specific challenge behavior, recovery codes, log stream, support, and step-up building blocks. Auth0 Free already includes the custom-domain/basic-protection baseline; COM-ADM-02B does not count those as paid incremental value.
 
 The cost reduction occurs in device tooling:
 
@@ -21,8 +23,8 @@ The cost reduction occurs in device tooling:
 
 | Candidate | Current evidence | Material limitation | Day-1 decision |
 |---|---|---|---|
-| Auth0 Free | $0; up to 25,000 MAU; custom domain and passkeys; limited Actions/logs | No Pro MFA. Auth0 documents that password remains configured as passkey backup; current evidence does not establish plan-native strict password denial plus passkey-specific high-risk step-up | Not selected |
-| **Auth0 Essentials** | $35/month; 500 MAU; custom domain; Pro MFA; one log stream; five-day provider logs; standard support | Provider log is not canonical audit; identity is not authorization; configured behavior still needs execution proof | **`DAY_1_REQUIRED`** |
+| Auth0 Free | $0; up to 25,000 MAU; custom domain and multiple database passkeys; limited Actions/logs | No Pro MFA. An Action can detect passkey authentication, but current evidence does not establish roaming-hardware-only enforcement, two physically independent keys, safe password/email-independent enrollment and recovery, or exact passkey-specific high-risk step-up | Not selected |
+| **Auth0 Essentials** | $35/month; 500 MAU; custom domain (also a Free baseline feature); Pro MFA; one log stream; five-day provider logs; standard support | Provider log is not canonical audit; identity is not authorization; configured behavior still needs execution proof | **`DAY_1_REQUIRED`** |
 | WorkOS AuthKit | Core $0 through 1 million users; passkeys, session revocation, `auth_time`, and `max_age` reauthentication | Official guidance says configure a custom domain before production passkeys; that domain is $99/month. Passkeys are hosted-UI-only and reauthentication chooses the method; complete credential/recovery exit is not established | Viable alternative, no Day-1 cost advantage |
 | Clerk Pro | $20/month annual or $25 monthly; passkeys, MFA, sessions, device/session visibility | Documented reverification excludes passkeys and may downgrade requested assurance when a stronger factor is unavailable | Conditional alternative, not selected |
 | Application-owned WebAuthn | No identity subscription | Blowin' Smoke would own challenge validation, authenticator/recovery/session lifecycle, abuse controls, migration, monitoring, and incident response | `REMOVE_FROM_RECOMMENDED_PATH` |
@@ -36,13 +38,14 @@ Selecting the plan without this policy does not satisfy Day 1:
 3. Configure one Blowin' Smoke authentication custom domain before WebAuthn enrollment.
 4. Require password plus a `webauthn-roaming` challenge for Admin authentication.
 5. Set MFA to always required; do not use adaptive-only admission for the owner Admin.
-6. Enroll two FIDO2 roaming security keys: one daily key and one separately stored recovery key.
+6. Enroll one daily FIDO2 roaming security key. Current Auth0 evidence does not support the previously assumed second application-user YubiKey.
 7. Require security-key user verification/PIN.
 8. Do not enable SMS or email as an assurance-equivalent fallback.
-9. Keep provider recovery material sealed offline and separate from endpoints and both keys.
-10. For a high-risk command, request the exact roaming-key factor rather than `any`, require fresh authentication, and issue an application command grant only after successful verification.
-11. Use the provider subject only as an alias to one canonical `AdminActor`; provider roles or metadata never authorize a commerce operation.
-12. Stream/minimize provider security events, but retain canonical business audit in PostgreSQL.
+9. Keep the rotating recovery code sealed offline and separate from the key/endpoints; permit it only through the COM-ADM-02B recovery-only client, never the ordinary Admin client.
+10. Require synchronous recovery factor/client/audience checks, recovery lock, key replacement, old-state containment, replacement-code resealing, notice, and audit before ordinary access resumes.
+11. For a high-risk command, request the exact roaming-key factor rather than `any`, require fresh authentication, and issue an application command grant only after successful verification.
+12. Use the provider subject only as an alias to one canonical `AdminActor`; provider roles or metadata never authorize a commerce operation.
+13. Stream/minimize provider security events, but retain canonical business audit in PostgreSQL.
 
 ## 4. Minimal application-owned `AdminDevice`
 
@@ -106,8 +109,9 @@ High-risk actions include inventory correction, wholesale price/visibility, COA 
 
 The one-owner design must not turn strong MFA into an unplanned lockout path.
 
-- Maintain two independently stored FIDO2 keys.
-- Keep recovery codes offline, inventoried, and sealed.
+- Maintain one UV-required roaming FIDO2 key plus the separately stored Auth0 recovery credential; do not claim a second enrolled application-user key.
+- Keep the rotating recovery code offline, inventoried, and sealed; after use, retire the consumed code and reseal the replacement.
+- Use the separate recovery-only client and application recovery lock; asynchronous provider logs never gate the first payload.
 - Send an independent AWS SES notification to a preverified owner security destination for new factor, new device, recovery, session revocation, and security-policy change.
 - Define a cooling-off period and evidence/authority requirements for all-devices-lost recovery.
 - Globally revoke old sessions/devices before replacement activation.
