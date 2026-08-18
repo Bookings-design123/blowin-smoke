@@ -16,12 +16,12 @@ Usage prices vary by region, bytes, requests, execution time, scan volume, trans
 | Component | Day-1 cost basis | Low-load planning amount |
 |---|---|---:|
 | Vercel Pro | Current commercial plan fee; includes one deploying seat and usage credit | $20 |
-| Auth0 Essentials | Current plan price up to 500 MAU | $35 |
+| Auth0 Free | Selected for the initial one-owner profile with passkeys/WebAuthn | $0 |
 | Neon Launch | Metered, no contractual monthly minimum; small scale-to-zero workload model | Approximately $3–15 |
 | AWS S3/GuardDuty/KMS/CloudFront/SES/backup runner and archive | Small initial media, low-volume security notices, and nightly logical backup; current allowances where eligible | Approximately $1–5 |
 | Sentry Developer | One owner, 5,000 errors, one uptime and one cron monitor | $0 |
 | PostgreSQL search/audit/outbox/low-stock | Included in database workload | $0 incremental |
-| **Absolute required planning floor** | | **Approximately $59–$75/month** |
+| **Absolute required planning floor** | | **Approximately $24–$40/month** |
 
 This is the lowest defensible operating model, not the recommended budget. A zero-dollar Neon or AWS invoice is not assumed merely because a service is metered or has free allowances.
 
@@ -32,11 +32,11 @@ The Neon lower-bound illustration assumes roughly 100 active hours at 0.25 CU, a
 | Component | Recommended planning allowance | Why headroom exists |
 |---|---:|---|
 | Vercel Pro | $20 | Commercial plan fee; included credit is not counted twice |
-| Auth0 Essentials | $35 | Fixed selected identity/MFA plan |
+| Auth0 Free | $0 | Selected one-owner identity/passkey tier |
 | Neon Launch | $15–35 | Official intermittent-load example near the low end; additional compute/storage/history headroom |
 | AWS media, scanning, delivery, SES notices, KMS, runner, and independent archive | $6–30 | Bytes, scans, messages, requests, transfer, retention, and CDN eligibility vary; one provider, multiple bounded services |
 | Sentry Developer | $0 | Narrow alert/diagnostic use within current free limits |
-| **Recommended Day-1 budget** | **$76–$120/month** | Planning envelope before actual workload proof |
+| **Recommended Day-1 budget** | **$41–$85/month** | Planning envelope before actual workload proof |
 
 Set provider budgets/spend alerts and reprice immediately before any procurement decision.
 
@@ -46,17 +46,18 @@ The following were modeled as recurring components in COM-ADM-02 and are now unp
 
 | Deferred component | COM-ADM-02 monthly planning amount | Day-1 amount | Avoided/deferred |
 |---|---:|---:|---:|
+| Auth0 Essentials | $35 | $0; Auth0 Free selected | $35 |
 | Cloudflare Zero Trust/WARP | $7 COM-ADM-02 paid-plan assumption | $0 | $7 modeled-stack delta |
 | Apple Developer Program | $99/year = $8.25 monthly equivalent | $0 | $8.25 |
 | Cloudflare Images | $5–15 | $0 | $5–15 |
 | Mux | $1–35 | $0 | $1–35 |
 | Sentry Team | $26–50 | $0 | $26–50 |
 | QuickBooks Online Essentials | $85 | $0 | $85 |
-| **Direct recurring total deferred/avoided** | | | **$132.25–$200.25/month** |
+| **Direct recurring total deferred/avoided** | | | **$167.25–$235.25/month** |
 
-Reported as a rounded planning range: **$132–$200/month**.
+Reported as a rounded planning range: **$167–$235/month**.
 
-This is the reduction from COM-ADM-02's selected paid-plan model, not a guarantee of literal cash savings. Cloudflare currently also lists a free under-50-user tier; if that had replaced the earlier paid assumption, its one-owner marginal subscription could have been $0 and the comparable cash-avoidance range would be approximately **$125–$193/month**. The governing reported number remains the like-for-like COM-ADM-02 model delta.
+This is the reduction from COM-ADM-02's selected paid-plan model, not a guarantee of literal cash savings. Cloudflare currently also lists a free under-50-user tier; if that had replaced the earlier paid assumption, its one-owner marginal subscription could have been $0 and the comparable cash-avoidance range would be approximately **$160–$228/month**. The governing reported number remains the like-for-like COM-ADM-02 model delta.
 
 No savings are claimed for PostgreSQL search or the absence of Redis because COM-ADM-02 already modeled them at $0. No recurring savings are invented for POS, native Mac, labels, scanners, or other unpriced work.
 
@@ -76,7 +77,6 @@ These are not Day-1 commitments. Future activation is component-by-component aft
 ### Fixed software subscription
 
 - Vercel Pro: $20/month.
-- Auth0 Essentials: $35/month.
 
 ### Usage-based infrastructure
 
@@ -91,6 +91,7 @@ These are not Day-1 commitments. Future activation is component-by-component aft
 
 ### Free Day-1 service tier
 
+- Auth0 Free for the initial one-owner identity and passkey/WebAuthn profile.
 - Sentry Developer within current one-user, error, uptime, cron, and retention limits.
 
 Free is still a provider dependency requiring privacy-safe configuration, ownership, export/exit awareness, availability behavior, and an upgrade/disable decision.
@@ -103,7 +104,7 @@ Free is still a provider dependency requiring privacy-safe configuration, owners
 ### Hardware
 
 - Existing iPhone and Mac/desktop are assumed and excluded.
-- COM-ADM-02B supersedes the two-application-key assumption: one $29 Yubico Security Key C NFC is the selected application-user hardware, with a separate rotating offline recovery code. Reserve another $29 as a control-plane hardware contingency if proof requires a dedicated Auth0 tenant key. Reprice before purchase; no hardware procurement is authorized.
+- Two independent owner credentials/recovery keys, stored separately, remain required. Any one-time hardware cost is outside the recurring model and must be repriced and separately authorized before purchase; no hardware procurement is authorized.
 - Label printer, scanner, receipt printer, cash drawer, payment terminal, and POS peripherals are deferred. The former Brother candidate was $334.99 before tax/shipping; no hardware procurement is authorized.
 
 ## 7. Exclusions
@@ -136,7 +137,7 @@ All sources were accessed 2026-08-17.
 | Neon pricing | https://neon.com/pricing | Current Launch rates, seven-day restore ceiling, and monitoring/plan dimensions | Actual workload, invoice, recovery success, or production fitness |
 | Neon usage pricing | https://neon.com/blog/new-usage-based-pricing | No monthly minimum, scale-to-zero billing, and example economics | Blowin' Smoke usage |
 | Vercel Pro/pricing | https://vercel.com/docs/plans/pro-plan and https://vercel.com/pricing | Current $20 plan fee, included seat/credit, allowances, and spend controls | Final usage, application correctness, or future price |
-| Auth0 pricing | https://auth0.com/pricing?pm=true | Current $35 Essentials price and plan features | Configured assurance or final tax/invoice |
+| Auth0 pricing | https://auth0.com/pricing?pm=true | Auth0 Free is the fixed $0 Day-1 planning basis; paid tier is deferred | Configured assurance, future paid-tier need, or final invoice |
 | Sentry pricing | https://sentry.io/pricing/ | Current Developer limits and $26 Team list price | Adequate detection, privacy-safe setup, or event volume |
 | S3/GuardDuty pricing | https://aws.amazon.com/s3/pricing/ and https://aws.amazon.com/guardduty/pricing/ | Storage/request/scan dimensions and current allowances | One universal monthly media price |
 | Amazon SES pricing | https://aws.amazon.com/ses/pricing/ | Current plan/à-la-carte message rates and no-minimum option | Delivery, configured identity, actual message volume, or final bill |

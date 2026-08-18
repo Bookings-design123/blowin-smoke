@@ -11,7 +11,7 @@ Day 1 is successful only when the owner can run routine commerce through the Adm
 
 | Owner operation | Day-1 system behavior | Governing control |
 |---|---|---|
-| Secure sign-in | Managed identity, mandatory phishing-resistant roaming-key MFA, approved browser registration, revocable server session | Fail closed; no shared account; no SMS/email-equivalent fallback |
+| Secure sign-in | Auth0 Free, mandatory phishing-resistant passkey/WebAuthn authentication, two independent owner credentials/recovery keys, approved browser registration, revocable server session | Fail closed; no shared account; lower-assurance fallback cannot authorize Admin access |
 | Add/edit/archive/unpublish product | Structured product, variant, SKU, category, publication, and reasoned successor state | Canonical command; no live product in Git |
 | Set retail price | Governed retail price and channel state | Integer minor units and effective history |
 | Set wholesale reference price | Required canonical command and price class | `CLIENT_REQUIRED` under current COM-ADM-01 classification; browser receives no protected value or command preview |
@@ -112,7 +112,7 @@ Routine mutations synchronize the website through canonical projections. They ne
 Before any later pilot authorization, proof must establish:
 
 1. all listed non-protected owner workflows on both iPhone and Mac/desktop browsers, plus explicit `CLIENT_REQUIRED` denial for protected wholesale operations;
-2. fail-closed identity, device/session, capability, object, and step-up behavior;
+2. fail-closed identity, device/session, capability, object, and server-verified fresh-authentication behavior;
 3. exact concurrent reservation/commitment and correction behavior;
 4. no routine GitHub, Codex, deployment, or developer dependency;
 5. safe upload quarantine, validation, publication, replacement, and evidence applicability;

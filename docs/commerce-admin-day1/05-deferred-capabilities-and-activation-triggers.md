@@ -19,6 +19,7 @@ A trigger opens a focused evidence/proof decision. It does not automatically buy
 
 | Deferred capability | Preserved destination contract | Concrete activation trigger | What activation must not change |
 |---|---|---|---|
+| Auth0 Essentials / paid Auth0 tier | Managed identity adapter over application-owned authorization, device, session, revocation, audit, and command controls | Staff access, advanced MFA policy, higher limits, centralized log streaming, support, or another concrete paid-feature requirement | Provider identity/authentication evidence never becomes business authorization; paid features do not replace canonical application controls |
 | Cloudflare Access/WARP | Edge identity/posture signal linked to canonical `AdminDevice` | Second Admin actor; staff/BYOD/remote endpoints; insurer/compliance posture mandate; or incident/proof shows browser registration insufficient | Application actor/device/capability authorization remains final; WARP never becomes perfect integrity |
 | Native SwiftUI iPhone Admin | Shared command API, media and scan adapters, native attestation hook | Browser scanning/receiving/stocktake/upload/peripheral workflow fails measured operational acceptance, or native attestation becomes mandatory | No second domain model, offline inventory authority, or private-wholesale conflation |
 | Apple Developer Program | Native signing/test/distribution boundary | Native iPhone build or device-test work is separately authorized | Membership does not authorize production app or launch |

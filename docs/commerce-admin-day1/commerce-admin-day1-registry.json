@@ -49,7 +49,7 @@
   },
   "day1_provider_summary": {
     "proposed_day1_provider_count": 5,
-    "paid_or_metered_core_provider_count": 4,
+    "paid_or_metered_core_provider_count": 3,
     "activation_state": "NOT_PROVISIONED",
     "providers": [
       {
@@ -64,8 +64,9 @@
       },
       {
         "provider": "AUTH0",
-        "role": "OWNER_IDENTITY_PHISHING_RESISTANT_MFA_AND_STEP_UP",
-        "cost_class": "FIXED"
+        "role": "OWNER_IDENTITY_AND_PHISHING_RESISTANT_PASSKEY_WEBAUTHN_AUTHENTICATION",
+        "plan": "FREE",
+        "cost_class": "FREE_WITH_LIMITS"
       },
       {
         "provider": "AWS",
@@ -102,7 +103,7 @@
       "activation_trigger": null
     },
     {
-      "id": "AUTH0_ESSENTIALS",
+      "id": "AUTH0_FREE",
       "classification": "DAY_1_REQUIRED",
       "designed": true,
       "day1_build": true,
@@ -110,6 +111,16 @@
       "day1_enable": true,
       "provider": "AUTH0",
       "activation_trigger": null
+    },
+    {
+      "id": "AUTH0_ESSENTIALS",
+      "classification": "DEFER_UNTIL_TRIGGER",
+      "designed": true,
+      "day1_build": false,
+      "day1_provision": false,
+      "day1_enable": false,
+      "provider": "AUTH0",
+      "activation_trigger": "STAFF_ADVANCED_MFA_POLICY_HIGHER_LIMITS_CENTRALIZED_LOG_STREAMING_SUPPORT_OR_OTHER_CONCRETE_PAID_FEATURE_REQUIREMENT"
     },
     {
       "id": "CLOUDFLARE_ZERO_TRUST_ACCESS_AND_WARP",
@@ -517,21 +528,21 @@
     "currency": "USD",
     "estimate_class": "PLANNING_RANGE_NOT_QUOTE",
     "absolute_required_monthly": {
-      "minimum": 59,
-      "maximum": 75
+      "minimum": 24,
+      "maximum": 40
     },
     "recommended_day1_monthly": {
-      "minimum": 76,
-      "maximum": 120
+      "minimum": 41,
+      "maximum": 85
     },
     "monthly_deferred_or_avoided": {
-      "minimum": 132,
-      "maximum": 200
+      "minimum": 167,
+      "maximum": 235
     },
     "monthly_deferred_or_avoided_basis": "COM_ADM_02_SELECTED_PAID_PLAN_MODEL_DELTA",
     "cash_avoidance_if_current_cloudflare_free_under_50_used": {
-      "minimum": 125,
-      "maximum": 193
+      "minimum": 160,
+      "maximum": 228
     },
     "future_full_stack_low_volume": {
       "minimum": 215,
@@ -543,12 +554,13 @@
     },
     "retained_component_planning": {
       "vercel_pro": "20_PER_MONTH",
-      "auth0_essentials": "35_PER_MONTH",
+      "auth0_free": "0_PER_MONTH",
       "neon_launch": "3_TO_15_LOW_LOAD_15_TO_35_RECOMMENDED",
       "aws_media_scan_delivery_security_notification_and_backup": "1_TO_5_LOW_LOAD_6_TO_30_RECOMMENDED",
       "sentry_developer": "0_WITH_LIMITS"
     },
     "deferred_component_planning": {
+      "auth0_essentials": "35_PER_MONTH_COM_ADM_02_PAID_PLAN_ASSUMPTION",
       "cloudflare_zero_trust": "7_PER_MONTH_COM_ADM_02_PAID_PLAN_ASSUMPTION",
       "apple_developer_program": "99_PER_YEAR",
       "cloudflare_images": "5_TO_15_PER_MONTH",
@@ -562,22 +574,40 @@
       "PAYMENT_PROCESSING_MERCHANT_UNDERWRITING_AND_RESERVES",
       "SHIPPING_TAX_AGE_VERIFICATION_CUSTOMER_EMAIL_AND_SMS",
       "NATIVE_AND_PROTECTED_WHOLESALE_IMPLEMENTATION",
-      "HARDWARE_EXCEPT_RECORDED_ONE_TIME_SECURITY_KEY_REQUIREMENT"
+      "HARDWARE_AND_CREDENTIAL_PROCUREMENT"
     ]
   },
   "security_decision": {
     "auth0": "KEEP",
-    "authentication": "PASSWORD_PLUS_USER_VERIFYING_WEBAUTHN_ROAMING_SECURITY_KEY",
-    "physical_keys_required": 1,
-    "credential_detail_superseded_by": "COM-ADM-02B",
-    "independent_recovery_credential": "PHYSICALLY_ISOLATED_ROTATING_AUTH0_RECOVERY_CODE_VIA_RECOVERY_ONLY_CLIENT",
-    "control_plane_hardware_contingency": "ONE_ADDITIONAL_KEY_IF_PROOF_REQUIRES_SEPARATE_AUTH0_TENANT_HARDWARE",
+    "auth0_day1_plan": "FREE",
+    "auth0_day1_recurring_cost_usd": 0,
+    "auth0_essentials": "DEFER_UNTIL_CONCRETE_PAID_FEATURE_REQUIREMENT",
+    "auth0_essentials_activation_triggers": [
+      "STAFF_ACCESS",
+      "ADVANCED_MFA_POLICY",
+      "HIGHER_LIMITS",
+      "CENTRALIZED_LOG_STREAMING",
+      "SUPPORT",
+      "OTHER_CONCRETE_REQUIREMENT"
+    ],
+    "authentication": "PHISHING_RESISTANT_PASSKEY_WEBAUTHN",
+    "independent_owner_credentials_or_recovery_keys_required": 2,
+    "credential_storage": "INDEPENDENT_AND_SEPARATE",
+    "credential_detail_governed_by": "COM-ADM-02B_CONCISE_DECISION",
     "sms_or_email_as_equivalent_fallback": false,
     "provider_identity_is_business_authorization": false,
+    "application_owned_controls": [
+      "ADMIN_DEVICE_REGISTRY",
+      "AUTHORIZATION",
+      "APPLICATION_SESSIONS",
+      "DEVICE_AND_SESSION_REVOCATION",
+      "CANONICAL_AUDIT",
+      "COMMAND_CONTROLS"
+    ],
     "admin_device_model": "REVOCABLE_REGISTERED_BROWSER_CONTINUITY",
     "perfect_device_integrity_claim": false,
     "unknown_device_payload": "ZERO_ADMIN_PAYLOAD",
-    "high_risk_commands": "FRESH_EXACT_FACTOR_ONE_USE_COMMAND_BOUND_GRANT",
+    "high_risk_commands": "SERVER_VERIFIED_FRESH_AUTHENTICATION_ONE_USE_COMMAND_BOUND_GRANT",
     "security_notification": "CANONICAL_OUTBOX_TO_AWS_SES_PREVERIFIED_OWNER_SECURITY_DESTINATION",
     "security_notification_content": "MINIMIZED_NO_SECRETS_NO_PROTECTED_WHOLESALE_PAYLOAD"
   },

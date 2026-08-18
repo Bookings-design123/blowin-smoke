@@ -20,7 +20,8 @@ Future capabilities remain designed and adapter-bounded. They do not create a cu
 
 ```text
 OWNER — IPHONE OR MAC/DESKTOP BROWSER
-  | Auth0 Essentials: password + user-verifying roaming FIDO2 key
+  | Auth0 Free: phishing-resistant passkey/WebAuthn authentication
+  | two independent owner credentials/recovery keys
   | application-owned AdminDevice browser registration
   v
 RESPONSIVE CUSTOM WEB ADMIN — VERCEL PRO
@@ -46,7 +47,7 @@ OWNER SECURITY NOTIFICATIONS
   AWS SES from a durable canonical notification outbox
 ```
 
-Day 1 has **four paid or metered core providers—Neon, Vercel, Auth0, and AWS—plus Sentry's free Developer monitoring tier**. Cloudflare Zero Trust, native Apple delivery, Cloudflare Images, Mux, paid Sentry, QuickBooks, POS, and label hardware are not provisioned.
+Day 1 has **three paid or metered core providers—Neon, Vercel, and AWS—plus the Auth0 Free identity tier and Sentry's free Developer monitoring tier**. Cloudflare Zero Trust, native Apple delivery, Cloudflare Images, Mux, paid Auth0, paid Sentry, QuickBooks, POS, and label hardware are not provisioned.
 
 ## Day-1 outcome
 
@@ -62,7 +63,7 @@ Routine operations do not require GitHub, Codex, code edits, deployments, or dev
 |---|---|
 | [01 — Day-1 operational requirements](01-day1-operational-requirements.md) | Fixed owner outcome, preserved invariants, client surfaces, and acceptance boundary |
 | [02 — Provider and capability reduction](02-provider-and-capability-reduction.md) | Exact component classifications and build/provision/enable decisions |
-| [03 — Day-1 security and authentication](03-day1-security-and-authentication.md) | Managed identity decision, browser-device continuity, session, step-up, recovery, and evidence |
+| [03 — Day-1 security and authentication](03-day1-security-and-authentication.md) | Auth0 Free status, browser-device continuity, sessions, fresh authentication, recovery, and application-owned controls |
 | [04 — Day-1 media and backup](04-day1-media-and-backup.md) | Consolidated S3 media path, basic derivatives/video, quarantine, backup, and recovery |
 | [05 — Deferred capabilities and triggers](05-deferred-capabilities-and-activation-triggers.md) | Concrete operational activation conditions and preserved adapter contracts |
 | [06 — Revised cost model](06-revised-cost-model.md) | Required floor, recommended budget, avoided cost, future full stack, and exclusions |
@@ -87,9 +88,9 @@ Routine operations do not require GitHub, Codex, code edits, deployments, or dev
 
 | Model | Planning amount |
 |---|---:|
-| Absolute required monthly planning floor | **$59–$75/month** |
-| Recommended Day-1 monthly budget | **$76–$120/month** |
-| Direct monthly cost deferred or avoided versus COM-ADM-02 | **$132–$200/month** |
+| Absolute required monthly planning floor | **$24–$40/month** |
+| Recommended Day-1 monthly budget | **$41–$85/month** |
+| Direct monthly cost deferred or avoided versus COM-ADM-02 | **$167–$235/month** |
 | Preserved future low-volume full-stack range | **$215–$365/month** |
 
 These are workload ranges, not quotes. Neon and AWS have usage-based dimensions with no universal Blowin' Smoke minimum. Payment processing, legal/compliance work, development labor, customer communication providers, domains/public-storefront scope outside this package, and hardware are excluded.

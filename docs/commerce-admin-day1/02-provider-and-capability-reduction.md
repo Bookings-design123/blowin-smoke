@@ -6,14 +6,13 @@
 
 ## 1. Reduction decision
 
-Day 1 uses four paid or metered core providers:
+Day 1 uses five providers. Three are paid or metered core providers:
 
 1. **Neon** for managed PostgreSQL;
 2. **Vercel** for the commercial responsive Admin, website, and server-only command API;
-3. **Auth0** for owner identity and phishing-resistant MFA;
-4. **AWS** for private media/evidence storage, malware scanning, delivery from private origins, and the independently controlled database archive.
+3. **AWS** for private media/evidence storage, malware scanning, delivery from private origins, and the independently controlled database archive.
 
-PostgreSQL absorbs search, audit, outbox, low-stock state, and canonical reporting inputs. The responsive Admin replaces separate iPhone and Mac applications for non-protected operations. It does not replace the separately gated protected-wholesale client. AWS supplies multiple bounded services without adding another vendor. **Sentry Developer is a fifth, free-with-limits monitoring provider** for narrow diagnostics and alerts; it is not a paid Day-1 commitment or business audit system.
+**Auth0 Free** supplies owner identity and phishing-resistant passkey/WebAuthn authentication. **Sentry Developer** supplies free-with-limits monitoring for narrow diagnostics and alerts. Neither is a paid Day-1 commitment. PostgreSQL absorbs search, audit, outbox, low-stock state, and canonical reporting inputs. The responsive Admin replaces separate iPhone and Mac applications for non-protected operations. It does not replace the separately gated protected-wholesale client. AWS supplies multiple bounded services without adding another vendor.
 
 ## 2. Complete activation matrix
 
@@ -23,7 +22,8 @@ Every named COM-ADM-02 component receives exactly one classification. “Provisi
 |---|---|---:|---:|---:|---:|---|
 | Neon Launch PostgreSQL | `DAY_1_REQUIRED` | Yes | Yes | Yes | Yes | Removing it removes canonical transactions, constraints, recovery history, and commerce truth |
 | Vercel Pro | `DAY_1_REQUIRED` | Yes | Yes | Yes | Yes | Removing it leaves no approved commercial Admin/API/website execution and rollback surface |
-| Auth0 Essentials | `DAY_1_REQUIRED` | Yes | Yes | Yes | Yes | Removing it leaves no currently selected, documented roaming-key MFA and factor-specific step-up service |
+| Auth0 Free | `DAY_1_REQUIRED` | Yes | Yes | Yes | Yes | Selected for the initial one-owner profile, passkeys/WebAuthn, and a $0 recurring Day-1 identity cost; application controls remain canonical |
+| Auth0 Essentials | `DEFER_UNTIL_TRIGGER` | Yes | No | No | No | Reevaluate for staff, advanced MFA policy, higher limits, centralized log streaming, support, or another concrete paid-feature requirement |
 | Cloudflare Zero Trust Access/WARP | `DEFER_UNTIL_TRIGGER` | Yes | No | No | No | Activate for second operator/staff/BYOD, endpoint-posture mandate, insurer/compliance requirement, or demonstrated inadequacy of the simplified registry |
 | Responsive custom Web Admin | `DAY_1_REQUIRED` | Yes | Yes | Included in Vercel | Yes | It is the complete iPhone and Mac/desktop owner surface, except any D3/D4 wholesale operation that remains `CLIENT_REQUIRED` |
 | Application-owned `AdminDevice` registry | `DAY_1_SIMPLIFY` | Yes | Yes | Included in Neon/Vercel | Yes | Required revocable browser-continuity boundary; it does not claim hardware integrity |
@@ -67,7 +67,7 @@ Every named COM-ADM-02 component receives exactly one classification. “Provisi
 |---|---|---|---|
 | Database | Neon Launch | Supabase Pro, Render PostgreSQL, larger cloud-managed PostgreSQL | Keep Neon. Standard PostgreSQL, metered small-load economics, scale-to-zero, and seven-day restore history fit the fixed profile. Alternatives remain destination contingencies, not launch providers |
 | API/hosting | Vercel Pro | Cloudflare Workers, Render service, self-hosting | Keep Vercel. Hobby is not the commercial plan; managed deployment/rollback and one web codebase reduce operations. Provider portability remains a proof requirement |
-| Identity | Auth0 Essentials | Auth0 Free, WorkOS AuthKit, Clerk Pro, application-owned WebAuthn | Keep Essentials. Lower-cost options do not currently establish the same fail-closed roaming-key MFA and factor-specific sensitive-action path at lower total risk/cost |
+| Identity | Auth0 Free | Auth0 Essentials, deferred until trigger | Keep Auth0 Free for the one-owner Day-1 profile; preserve application-owned device, authorization, revocation, audit, and command controls |
 | Device edge | Application `AdminDevice` only on Day 1 | Cloudflare Access/WARP, MDM, App Attest, mTLS | Simplify. One owner gets revocable browser continuity, not a false hardware-integrity claim. Stronger layers activate with workforce/risk/native-client evidence |
 | Canonical object storage | Private S3 | R2, Supabase Storage | Keep S3. It reuses one provider for quarantine, versioning, malware workflow, evidence, delivery origin, and database archive. R2 remains an exit/cost alternative, not canonical Day-1 authority |
 | Image pipeline | Fixed sanitized derivative set + CloudFront + responsive `srcset` | Vercel/Next optimizer, Cloudflare Images, Cloudinary | Use one delivery cache and defer specialist/on-demand transformation. Canonical masters and derivative recipes remain portable |
@@ -76,10 +76,6 @@ Every named COM-ADM-02 component receives exactly one classification. “Provisi
 | Observability | Vercel + Neon diagnostics and Sentry Developer | Sentry Team, Vercel Observability Plus, Better Stack | Paid telemetry defers, but free proactive liveness/ops alerts prevent operating blind |
 | Accounting | Canonical COGS plus governed export readiness | QuickBooks, Xero, Zoho | Capture financial inputs now; activate one accountant-approved destination later without giving it inventory authority |
 | POS/peripherals | Canonical API readiness | Generic POS inventory, custom POS now, printers/scanners now | Defer user interfaces and hardware until physical operations; never create a second stock authority |
-
-### Current evidence revision
-
-Current Clerk documentation improves its baseline relative to COM-ADM-02: current instances can treat passkeys as satisfying MFA. It still does not support passkeys in its documented reverification flow, and that flow can downgrade requested assurance in documented circumstances. The Day-1 Auth0 decision therefore does not change.
 
 ## 4. Provider-consolidation boundaries
 
@@ -99,7 +95,7 @@ The following remain Day-1 implementation/proof scope even though they do not ad
 - inventory ledger, reservations, and oversell protection;
 - retail/wholesale channel state;
 - supplier, receipt cost, COGS, and margin inputs;
-- server-side authorization and high-risk command step-up;
+- server-side authorization and server-verified fresh authentication for high-risk commands;
 - media/evidence quarantine, validation, version, rights/scope, and publication state;
 - append-only audit and transactional outbox;
 - website projection freshness/reconciliation;
