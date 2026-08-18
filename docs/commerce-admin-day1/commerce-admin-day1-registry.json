@@ -1,0 +1,674 @@
+{
+  "schema_version": "1.0.0",
+  "phase": {
+    "id": "COM-ADM-02A",
+    "name": "Day-1 Stack Reduction and Capability Activation Plan",
+    "status": "COMPLETE",
+    "mode": "ACTIVATION_AND_COST_REDUCTION",
+    "implementation_status": "NOT_AUTHORIZED",
+    "procurement_status": "NOT_AUTHORIZED",
+    "pilot_status": "NOT_AUTHORIZED",
+    "launch_status": "NOT_ESTABLISHED"
+  },
+  "base_sha": "e914cc9feff8a78c5913bbb6f2ee4d68418bd657",
+  "evidence_access_date": "2026-08-17",
+  "governing_predecessors": [
+    "COM-ADM-01",
+    "COM-ADM-02"
+  ],
+  "governing_rule": "DESIGNED_IS_NOT_IMPLEMENTED_PROVISIONED_ENABLED_OR_REQUIRED_AT_LAUNCH",
+  "lifecycle_semantics": {
+    "day1_build": "REQUIRED_IN_A_LATER_SEPARATELY_AUTHORIZED_IMPLEMENTATION_BEFORE_PILOT",
+    "day1_provision": "REQUIRED_IN_A_LATER_SEPARATELY_AUTHORIZED_PILOT_CONFIGURATION",
+    "day1_enable": "INTENDED_TO_BE_ENABLED_ONLY_AFTER_SEPARATE_PROOF_AND_AUTHORIZATION",
+    "current_activation_state": "NOT_BUILT_NOT_PROVISIONED_NOT_ENABLED"
+  },
+  "classification_vocabulary": [
+    "DAY_1_REQUIRED",
+    "DAY_1_SIMPLIFY",
+    "DEFER_UNTIL_TRIGGER",
+    "REMOVE_FROM_RECOMMENDED_PATH"
+  ],
+  "owner_profile": {
+    "admin_users": 1,
+    "operator": "OWNER",
+    "catalog_products": "FEWER_THAN_100",
+    "typical_active_batches_per_product": 1,
+    "inventory_locations": [
+      "YORK_PENNSYLVANIA"
+    ],
+    "day1_admin_surfaces": [
+      "RESPONSIVE_WEB_ADMIN_ON_IPHONE_BROWSER",
+      "RESPONSIVE_WEB_ADMIN_ON_MAC_OR_DESKTOP_BROWSER"
+    ],
+    "routine_operations_require_github": false,
+    "routine_operations_require_codex": false,
+    "routine_operations_require_code_change": false,
+    "routine_operations_require_deployment": false,
+    "routine_operations_require_developer": false
+  },
+  "day1_provider_summary": {
+    "proposed_day1_provider_count": 5,
+    "paid_or_metered_core_provider_count": 4,
+    "activation_state": "NOT_PROVISIONED",
+    "providers": [
+      {
+        "provider": "NEON",
+        "role": "CANONICAL_MANAGED_POSTGRESQL",
+        "cost_class": "USAGE_BASED"
+      },
+      {
+        "provider": "VERCEL",
+        "role": "RESPONSIVE_ADMIN_WEBSITE_AND_SERVER_COMMAND_API",
+        "cost_class": "FIXED_PLUS_USAGE"
+      },
+      {
+        "provider": "AUTH0",
+        "role": "OWNER_IDENTITY_PHISHING_RESISTANT_MFA_AND_STEP_UP",
+        "cost_class": "FIXED"
+      },
+      {
+        "provider": "AWS",
+        "role": "MEDIA_EVIDENCE_QUARANTINE_VALIDATION_DELIVERY_SECURITY_NOTIFICATION_AND_INDEPENDENT_DATABASE_ARCHIVE",
+        "cost_class": "USAGE_BASED"
+      },
+      {
+        "provider": "SENTRY",
+        "role": "MINIMIZED_ERROR_LIVENESS_AND_OPERATIONS_ALERTING",
+        "plan": "DEVELOPER_FREE",
+        "cost_class": "FREE_WITH_LIMITS"
+      }
+    ]
+  },
+  "component_decisions": [
+    {
+      "id": "NEON_LAUNCH_POSTGRESQL",
+      "classification": "DAY_1_REQUIRED",
+      "designed": true,
+      "day1_build": true,
+      "day1_provision": true,
+      "day1_enable": true,
+      "provider": "NEON",
+      "activation_trigger": null
+    },
+    {
+      "id": "VERCEL_PRO",
+      "classification": "DAY_1_REQUIRED",
+      "designed": true,
+      "day1_build": true,
+      "day1_provision": true,
+      "day1_enable": true,
+      "provider": "VERCEL",
+      "activation_trigger": null
+    },
+    {
+      "id": "AUTH0_ESSENTIALS",
+      "classification": "DAY_1_REQUIRED",
+      "designed": true,
+      "day1_build": true,
+      "day1_provision": true,
+      "day1_enable": true,
+      "provider": "AUTH0",
+      "activation_trigger": null
+    },
+    {
+      "id": "CLOUDFLARE_ZERO_TRUST_ACCESS_AND_WARP",
+      "classification": "DEFER_UNTIL_TRIGGER",
+      "designed": true,
+      "day1_build": false,
+      "day1_provision": false,
+      "day1_enable": false,
+      "provider": "CLOUDFLARE",
+      "activation_trigger": "SECOND_ADMIN_STAFF_BYOD_REMOTE_DEVICE_GROWTH_ENDPOINT_POSTURE_MANDATE_OR_DEMONSTRATED_REGISTRY_INADEQUACY"
+    },
+    {
+      "id": "RESPONSIVE_CUSTOM_WEB_ADMIN",
+      "classification": "DAY_1_REQUIRED",
+      "designed": true,
+      "day1_build": true,
+      "day1_provision": true,
+      "day1_enable": true,
+      "provider": "VERCEL",
+      "activation_trigger": null
+    },
+    {
+      "id": "APPLICATION_ADMIN_DEVICE_REGISTRY",
+      "classification": "DAY_1_SIMPLIFY",
+      "designed": true,
+      "day1_build": true,
+      "day1_provision": true,
+      "day1_enable": true,
+      "provider": "APPLICATION_AND_NEON",
+      "activation_trigger": null,
+      "security_claim": "REGISTERED_BROWSER_CONTINUITY_NOT_HARDWARE_INTEGRITY"
+    },
+    {
+      "id": "PROTECTED_WHOLESALE_REFERENCE_PRICE_AND_SENSITIVE_VISIBILITY_COMMAND",
+      "classification": "DAY_1_REQUIRED",
+      "designed": true,
+      "day1_build": true,
+      "day1_provision": false,
+      "day1_enable": false,
+      "provider": null,
+      "activation_trigger": null,
+      "blocking_gate": "ACCOUNTABLE_NONPROTECTED_FIELD_CLASSIFICATION_OR_SEPARATELY_APPROVED_PROTECTED_CLIENT",
+      "browser_payload": "ZERO_D3_D4_PAYLOAD",
+      "authorization_result": "CLIENT_REQUIRED"
+    },
+    {
+      "id": "NATIVE_SWIFTUI_IPHONE_ADMIN",
+      "classification": "DEFER_UNTIL_TRIGGER",
+      "designed": true,
+      "day1_build": false,
+      "day1_provision": false,
+      "day1_enable": false,
+      "provider": "APPLE",
+      "activation_trigger": "BROWSER_SCANNING_RECEIVING_STOCKTAKE_UPLOAD_PERIPHERAL_OR_ATTESTATION_WORKFLOW_FAILS_MEASURED_OPERATIONAL_ACCEPTANCE"
+    },
+    {
+      "id": "NATIVE_MAC_APPLICATION_OR_WRAPPER",
+      "classification": "REMOVE_FROM_RECOMMENDED_PATH",
+      "designed": true,
+      "day1_build": false,
+      "day1_provision": false,
+      "day1_enable": false,
+      "provider": "APPLE",
+      "activation_trigger": null,
+      "reconsideration_condition": "CONCRETE_MAC_ONLY_PERIPHERAL_BACKGROUND_OFFLINE_SANDBOX_OR_SECURITY_PROPERTY_NOT_MET_BY_WEB"
+    },
+    {
+      "id": "APPLE_DEVELOPER_PROGRAM",
+      "classification": "DEFER_UNTIL_TRIGGER",
+      "designed": true,
+      "day1_build": false,
+      "day1_provision": false,
+      "day1_enable": false,
+      "provider": "APPLE",
+      "activation_trigger": "NATIVE_APPLE_BUILD_SIGNING_DEVICE_TEST_OR_DISTRIBUTION_WORK_BEGINS"
+    },
+    {
+      "id": "APPLE_APP_ATTEST",
+      "classification": "DEFER_UNTIL_TRIGGER",
+      "designed": true,
+      "day1_build": false,
+      "day1_provision": false,
+      "day1_enable": false,
+      "provider": "APPLE",
+      "activation_trigger": "NATIVE_IPHONE_ADMIN_ACTIVATED_OR_NATIVE_APP_INSTANCE_ATTESTATION_REQUIRED"
+    },
+    {
+      "id": "APPLE_MDM_AND_MANAGED_DEVICE_ATTESTATION",
+      "classification": "DEFER_UNTIL_TRIGGER",
+      "designed": true,
+      "day1_build": false,
+      "day1_provision": false,
+      "day1_enable": false,
+      "provider": "APPLE_OR_LATER_MDM_PROVIDER",
+      "activation_trigger": "MANAGED_STAFF_FLEET_ENFORCED_CONFIGURATION_REMOTE_ERASE_OR_EXPLICIT_INSURER_COMPLIANCE_REQUIREMENT"
+    },
+    {
+      "id": "AMAZON_S3",
+      "classification": "DAY_1_REQUIRED",
+      "designed": true,
+      "day1_build": true,
+      "day1_provision": true,
+      "day1_enable": true,
+      "provider": "AWS",
+      "activation_trigger": null
+    },
+    {
+      "id": "CLOUDFLARE_R2_AS_CANONICAL_MEDIA_STORE",
+      "classification": "REMOVE_FROM_RECOMMENDED_PATH",
+      "designed": true,
+      "day1_build": false,
+      "day1_provision": false,
+      "day1_enable": false,
+      "provider": "CLOUDFLARE",
+      "activation_trigger": null,
+      "reconsideration_condition": "MEASURED_S3_COST_OR_EXIT_EVIDENCE_OUTWEIGHS_COMPENSATING_VERSION_MALWARE_RECOVERY_AND_SECURITY_WORK"
+    },
+    {
+      "id": "GUARDDUTY_MALWARE_PROTECTION_FOR_S3",
+      "classification": "DAY_1_REQUIRED",
+      "designed": true,
+      "day1_build": true,
+      "day1_provision": true,
+      "day1_enable": true,
+      "provider": "AWS",
+      "activation_trigger": null
+    },
+    {
+      "id": "CLOUDFRONT_OAC_DELIVERY",
+      "classification": "DAY_1_SIMPLIFY",
+      "designed": true,
+      "day1_build": true,
+      "day1_provision": true,
+      "day1_enable": true,
+      "provider": "AWS",
+      "activation_trigger": null
+    },
+    {
+      "id": "APPLICATION_FIXED_IMAGE_DERIVATIVES_AND_RESPONSIVE_SRCSET",
+      "classification": "DAY_1_SIMPLIFY",
+      "designed": true,
+      "day1_build": true,
+      "day1_provision": true,
+      "day1_enable": true,
+      "provider": "AWS_AND_APPLICATION",
+      "activation_trigger": null
+    },
+    {
+      "id": "VERCEL_NEXT_IMAGE_OPTIMIZATION_SERVICE",
+      "classification": "DEFER_UNTIL_TRIGGER",
+      "designed": true,
+      "day1_build": false,
+      "day1_provision": false,
+      "day1_enable": false,
+      "provider": "VERCEL",
+      "activation_trigger": "FIXED_DERIVATIVES_OPERATIONALLY_INADEQUATE_AND_SECOND_CACHE_UNPUBLISH_REVOCATION_PROOF_PASSES"
+    },
+    {
+      "id": "CLOUDFLARE_IMAGES",
+      "classification": "DEFER_UNTIL_TRIGGER",
+      "designed": true,
+      "day1_build": false,
+      "day1_provision": false,
+      "day1_enable": false,
+      "provider": "CLOUDFLARE",
+      "activation_trigger": "VERCEL_LIMIT_COST_VARIANT_VOLUME_OVERLAY_PRIVATE_VARIANT_OR_MULTI_CLIENT_MEDIA_REQUIREMENT_PROVEN"
+    },
+    {
+      "id": "MUX",
+      "classification": "DEFER_UNTIL_TRIGGER",
+      "designed": true,
+      "day1_build": false,
+      "day1_provision": false,
+      "day1_enable": false,
+      "provider": "MUX",
+      "activation_trigger": "REAL_4K_ADAPTIVE_HEVC_PRORES_CAPTION_THUMBNAIL_OR_FAILED_PROGRESSIVE_MP4_REQUIREMENT"
+    },
+    {
+      "id": "POSTGRESQL_FTS_AND_PG_TRGM",
+      "classification": "DAY_1_SIMPLIFY",
+      "designed": true,
+      "day1_build": true,
+      "day1_provision": true,
+      "day1_enable": true,
+      "provider": "NEON_POSTGRESQL",
+      "activation_trigger": null
+    },
+    {
+      "id": "EXTERNAL_SEARCH",
+      "classification": "DEFER_UNTIL_TRIGGER",
+      "designed": true,
+      "day1_build": false,
+      "day1_provision": false,
+      "day1_enable": false,
+      "provider": null,
+      "activation_trigger": "MEASURED_RELEVANCE_MERCHANDISING_OR_LATENCY_INADEQUATE_AFTER_POSTGRESQL_INDEX_AND_QUERY_TUNING"
+    },
+    {
+      "id": "EXTERNAL_REDIS_OR_CACHE",
+      "classification": "DEFER_UNTIL_TRIGGER",
+      "designed": true,
+      "day1_build": false,
+      "day1_provision": false,
+      "day1_enable": false,
+      "provider": null,
+      "activation_trigger": "MEASURED_LOAD_INADEQUATE_AFTER_DATABASE_API_AND_QUERY_TUNING_WITH_PROVEN_NONAUTHORITATIVE_CACHE_CONTRACT"
+    },
+    {
+      "id": "POSTGRESQL_APPLICATION_AUDIT_AND_TRANSACTIONAL_OUTBOX",
+      "classification": "DAY_1_REQUIRED",
+      "designed": true,
+      "day1_build": true,
+      "day1_provision": true,
+      "day1_enable": true,
+      "provider": "NEON_POSTGRESQL",
+      "activation_trigger": null
+    },
+    {
+      "id": "INDEPENDENT_LOGICAL_BACKUP_ARCHIVE",
+      "classification": "DAY_1_SIMPLIFY",
+      "designed": true,
+      "day1_build": true,
+      "day1_provision": true,
+      "day1_enable": true,
+      "provider": "AWS_S3_SEPARATE_CONTROL_BOUNDARY",
+      "activation_trigger": null,
+      "minimum_model": "NIGHTLY_ENCRYPTED_PG_DUMP_CHECKSUM_MANIFEST_OBJECT_LOCK_FRESHNESS_ALERT_AND_TESTED_RESTORE"
+    },
+    {
+      "id": "SENTRY_DEVELOPER",
+      "classification": "DAY_1_SIMPLIFY",
+      "designed": true,
+      "day1_build": true,
+      "day1_provision": true,
+      "day1_enable": true,
+      "provider": "SENTRY",
+      "activation_trigger": null
+    },
+    {
+      "id": "AWS_SES_OWNER_SECURITY_NOTIFICATIONS",
+      "classification": "DAY_1_SIMPLIFY",
+      "designed": true,
+      "day1_build": true,
+      "day1_provision": true,
+      "day1_enable": true,
+      "provider": "AWS",
+      "activation_trigger": null,
+      "delivery_policy": "CANONICAL_MINIMIZED_NOTIFICATION_OUTBOX_WITH_ACCEPTANCE_BOUNCE_SUPPRESSION_RETRY_AND_FAILURE_EVIDENCE"
+    },
+    {
+      "id": "SENTRY_TEAM_PAID",
+      "classification": "DEFER_UNTIL_TRIGGER",
+      "designed": true,
+      "day1_build": false,
+      "day1_provision": false,
+      "day1_enable": false,
+      "provider": "SENTRY",
+      "activation_trigger": "SECOND_TELEMETRY_OPERATOR_FREE_ERROR_LIMIT_REQUIRED_API_INTEGRATION_INADEQUATE_RETENTION_OR_FAILED_INCIDENT_DIAGNOSIS"
+    },
+    {
+      "id": "VERCEL_OBSERVABILITY_PLUS",
+      "classification": "DEFER_UNTIL_TRIGGER",
+      "designed": true,
+      "day1_build": false,
+      "day1_provision": false,
+      "day1_enable": false,
+      "provider": "VERCEL",
+      "activation_trigger": "VERCEL_NATIVE_ANOMALY_ALERTS_OR_LONGER_RUNTIME_LOGS_PROVEN_NECESSARY_AND_PREFERRED_TO_SENTRY_UPGRADE"
+    },
+    {
+      "id": "VISIONKIT",
+      "classification": "DEFER_UNTIL_TRIGGER",
+      "designed": true,
+      "day1_build": false,
+      "day1_provision": false,
+      "day1_enable": false,
+      "provider": "APPLE",
+      "activation_trigger": "NATIVE_IPHONE_ADMIN_AND_PROVEN_HIGH_VALUE_SCANNING_WORKFLOW_ACTIVATED"
+    },
+    {
+      "id": "BARCODE_QR_IDENTIFIER_DATA",
+      "classification": "DAY_1_SIMPLIFY",
+      "designed": true,
+      "day1_build": true,
+      "day1_provision": true,
+      "day1_enable": true,
+      "provider": "APPLICATION_AND_NEON",
+      "activation_trigger": null
+    },
+    {
+      "id": "BARCODE_QR_SCANNING_SOFTWARE",
+      "classification": "DEFER_UNTIL_TRIGGER",
+      "designed": true,
+      "day1_build": false,
+      "day1_provision": false,
+      "day1_enable": false,
+      "provider": null,
+      "activation_trigger": "REAL_RECEIVING_OR_STOCKTAKE_VOLUME_PROVES_MANUAL_ENTRY_INADEQUATE_AND_EXACT_CLIENT_SCANNING_PASSES_PROOF"
+    },
+    {
+      "id": "VERSIONED_PDF_ZPL_LABEL_GENERATION",
+      "classification": "DEFER_UNTIL_TRIGGER",
+      "designed": true,
+      "day1_build": false,
+      "day1_provision": false,
+      "day1_enable": false,
+      "provider": null,
+      "activation_trigger": "INTERNAL_LABELS_OPERATIONALLY_REQUIRED_AND_EXACT_TEMPLATE_MEDIA_SCAN_AND_COMPLIANCE_TESTS_PASS"
+    },
+    {
+      "id": "LABEL_PRINTER_AND_DEDICATED_SCANNER_HARDWARE",
+      "classification": "DEFER_UNTIL_TRIGGER",
+      "designed": true,
+      "day1_build": false,
+      "day1_provision": false,
+      "day1_enable": false,
+      "provider": null,
+      "activation_trigger": "APPROVED_LABEL_STOCK_DIMENSIONS_VOLUME_OR_SCAN_VOLUME_EXISTS_AND_REPRESENTATIVE_HARDWARE_PASSES_TEST"
+    },
+    {
+      "id": "CUSTOM_POS",
+      "classification": "DEFER_UNTIL_TRIGGER",
+      "designed": true,
+      "day1_build": false,
+      "day1_provision": false,
+      "day1_enable": false,
+      "provider": null,
+      "activation_trigger": "BEFORE_PHYSICAL_COUNTER_SALES_AFTER_MIXED_CATALOG_MERCHANT_UNDERWRITING_AND_TRANSACTION_PROOF"
+    },
+    {
+      "id": "PURCHASE_ORDER_WORKFLOW",
+      "classification": "DEFER_UNTIL_TRIGGER",
+      "designed": true,
+      "day1_build": false,
+      "day1_provision": false,
+      "day1_enable": false,
+      "provider": null,
+      "activation_trigger": "RECURRING_SUPPLIER_ORDERING_APPROVAL_EXPECTED_RECEIPT_PARTIAL_OR_DISCREPANCY_RECONCILIATION_MAKES_RECEIPT_ONLY_OPERATION_INADEQUATE",
+      "day1_receipt_without_po": "EXPLICIT_REASONED_AND_AUDITED"
+    },
+    {
+      "id": "QUICKBOOKS_ONLINE_INTEGRATION_AND_SUBSCRIPTION",
+      "classification": "DEFER_UNTIL_TRIGGER",
+      "designed": true,
+      "day1_build": false,
+      "day1_provision": false,
+      "day1_enable": false,
+      "provider": "INTUIT",
+      "activation_trigger": "ACCOUNTANT_APPROVES_TARGET_AND_MAPPING_AND_MANUAL_EXPORT_NO_LONGER_SATISFIES_REAL_ACCOUNTING_WORKFLOW"
+    },
+    {
+      "id": "MANUAL_REORDER_THRESHOLD_AND_LOW_STOCK_SIGNAL",
+      "classification": "DAY_1_SIMPLIFY",
+      "designed": true,
+      "day1_build": true,
+      "day1_provision": true,
+      "day1_enable": true,
+      "provider": "APPLICATION_AND_NEON",
+      "activation_trigger": null
+    },
+    {
+      "id": "ADVANCED_REORDER_AUTOMATION_AND_FORECASTING",
+      "classification": "DEFER_UNTIL_TRIGGER",
+      "designed": true,
+      "day1_build": false,
+      "day1_provision": false,
+      "day1_enable": false,
+      "provider": null,
+      "activation_trigger": "SUFFICIENT_CLEAN_DEMAND_RECEIPT_SUPPLIER_LEAD_TIME_STOCKOUT_CANCELLATION_AND_SEASONALITY_HISTORY_SUPPORTS_BACKTEST"
+    }
+  ],
+  "day1_capabilities": [
+    "SECURE_OWNER_SIGN_IN",
+    "RESPONSIVE_IPHONE_AND_MAC_DESKTOP_ADMIN",
+    "CATALOG_PRODUCT_VARIANT_SKU_AND_ARCHIVE_PUBLICATION",
+    "RETAIL_PRICE_AND_NONPROTECTED_CHANNEL_STATE",
+    "PROTECTED_WHOLESALE_REFERENCE_PRICE_AND_SENSITIVE_VISIBILITY_REQUIRED_BUT_CLIENT_REQUIRED",
+    "INVENTORY_RECEIPT_ADJUSTMENT_HISTORY_RESERVATION_AND_OVERSELL_PROTECTION",
+    "PRIVATE_IMAGE_ORDINARY_VIDEO_AND_EVIDENCE_UPLOAD",
+    "MEDIA_QUARANTINE_VALIDATION_VERSION_ASSIGNMENT_AND_PUBLICATION",
+    "BASIC_AVAILABILITY_AND_ORDER_VIEW",
+    "SUPPLIER_ACQUISITION_COST_COGS_AND_MARGIN_INPUTS",
+    "CANONICAL_AUDIT_AND_TRANSACTIONAL_OUTBOX",
+    "AUTOMATIC_WEBSITE_PROJECTION_SYNCHRONIZATION",
+    "POSTGRESQL_SEARCH",
+    "MANUAL_REORDER_THRESHOLD_AND_LOW_STOCK_SIGNAL",
+    "PROVIDER_RECOVERY_INDEPENDENT_LOGICAL_ARCHIVE_AND_RESTORE_TEST",
+    "MINIMIZED_PROACTIVE_LIVENESS_OPERATIONS_AND_ERROR_ALERTING"
+  ],
+  "canonical_invariants": [
+    "POSTGRESQL_IS_SOLE_CANONICAL_COMMERCE_AUTHORITY",
+    "BROWSER_HAS_NO_DATABASE_CREDENTIALS_OR_GENERIC_TABLE_WRITE_PATH",
+    "MATERIAL_COMMAND_AUDIT_AND_OUTBOX_COMMIT_ATOMICALLY",
+    "INVENTORY_HISTORY_IS_NOT_OVERWRITTEN",
+    "MONEY_AND_QUANTITY_USE_EXACT_GOVERNED_ARITHMETIC",
+    "WEBSITE_AND_SEARCH_PROJECTIONS_CANNOT_AUTHORIZE_COMMERCE",
+    "UNKNOWN_STALE_REVOKED_UNSUPPORTED_OR_INCONSISTENT_SECURITY_STATE_DENIES",
+    "UPLOAD_NEVER_AUTO_PUBLISHES",
+    "ORIGINALS_EVIDENCE_AND_PROTECTED_WHOLESALE_ARE_NOT_PUBLIC_DELIVERY_SOURCES",
+    "PROVIDER_LOGS_NEVER_REPLACE_CANONICAL_AUDIT",
+    "BACKUP_EXISTENCE_WITHOUT_RESTORE_PROOF_IS_INSUFFICIENT",
+    "NO_ADMIN_BROWSER_IS_APPROVED_FOR_D3_D4_PROTECTED_WHOLESALE"
+  ],
+  "cost_model": {
+    "currency": "USD",
+    "estimate_class": "PLANNING_RANGE_NOT_QUOTE",
+    "absolute_required_monthly": {
+      "minimum": 59,
+      "maximum": 75
+    },
+    "recommended_day1_monthly": {
+      "minimum": 76,
+      "maximum": 120
+    },
+    "monthly_deferred_or_avoided": {
+      "minimum": 132,
+      "maximum": 200
+    },
+    "monthly_deferred_or_avoided_basis": "COM_ADM_02_SELECTED_PAID_PLAN_MODEL_DELTA",
+    "cash_avoidance_if_current_cloudflare_free_under_50_used": {
+      "minimum": 125,
+      "maximum": 193
+    },
+    "future_full_stack_low_volume": {
+      "minimum": 215,
+      "maximum": 365
+    },
+    "future_full_stack_moderate_growth": {
+      "minimum": 400,
+      "maximum": 950
+    },
+    "retained_component_planning": {
+      "vercel_pro": "20_PER_MONTH",
+      "auth0_essentials": "35_PER_MONTH",
+      "neon_launch": "3_TO_15_LOW_LOAD_15_TO_35_RECOMMENDED",
+      "aws_media_scan_delivery_security_notification_and_backup": "1_TO_5_LOW_LOAD_6_TO_30_RECOMMENDED",
+      "sentry_developer": "0_WITH_LIMITS"
+    },
+    "deferred_component_planning": {
+      "cloudflare_zero_trust": "7_PER_MONTH_COM_ADM_02_PAID_PLAN_ASSUMPTION",
+      "apple_developer_program": "99_PER_YEAR",
+      "cloudflare_images": "5_TO_15_PER_MONTH",
+      "mux": "1_TO_35_PER_MONTH",
+      "sentry_team": "26_TO_50_PER_MONTH",
+      "quickbooks_online_essentials": "85_PER_MONTH"
+    },
+    "excluded": [
+      "DEVELOPMENT_AND_OPERATIONS_LABOR",
+      "LEGAL_TAX_PRIVACY_PRODUCT_AGE_DESTINATION_RETENTION_AND_COMPLIANCE",
+      "PAYMENT_PROCESSING_MERCHANT_UNDERWRITING_AND_RESERVES",
+      "SHIPPING_TAX_AGE_VERIFICATION_CUSTOMER_EMAIL_AND_SMS",
+      "NATIVE_AND_PROTECTED_WHOLESALE_IMPLEMENTATION",
+      "HARDWARE_EXCEPT_RECORDED_ONE_TIME_SECURITY_KEY_REQUIREMENT"
+    ]
+  },
+  "security_decision": {
+    "auth0": "KEEP",
+    "authentication": "PASSWORD_PLUS_USER_VERIFYING_WEBAUTHN_ROAMING_SECURITY_KEY",
+    "physical_keys_required": 2,
+    "sms_or_email_as_equivalent_fallback": false,
+    "provider_identity_is_business_authorization": false,
+    "admin_device_model": "REVOCABLE_REGISTERED_BROWSER_CONTINUITY",
+    "perfect_device_integrity_claim": false,
+    "unknown_device_payload": "ZERO_ADMIN_PAYLOAD",
+    "high_risk_commands": "FRESH_EXACT_FACTOR_ONE_USE_COMMAND_BOUND_GRANT",
+    "security_notification": "CANONICAL_OUTBOX_TO_AWS_SES_PREVERIFIED_OWNER_SECURITY_DESTINATION",
+    "security_notification_content": "MINIMIZED_NO_SECRETS_NO_PROTECTED_WHOLESALE_PAYLOAD"
+  },
+  "media_decision": {
+    "canonical_store": "PRIVATE_AMAZON_S3",
+    "quarantine": "REQUIRED",
+    "malware_scan": "GUARDDUTY_RESULT_REQUIRED",
+    "application_validation": "MAGIC_BYTE_PARSER_DECODE_LIMIT_AND_METADATA_POLICY_REQUIRED",
+    "image_day1": "FIXED_SANITIZED_DERIVATIVES_CLOUDFRONT_OAC_AND_RESPONSIVE_SRCSET",
+    "video_day1": "MOST_COMPATIBLE_GUIDANCE_VALIDATED_H264_AAC_AUTOMATIC_MP4_REMUX_AND_PROGRESSIVE_DELIVERY",
+    "unsupported_video": "STORE_SAFELY_BUT_DO_NOT_PUBLISH",
+    "video_accessibility": "MEANINGFUL_AUDIO_REQUIRES_REVIEWED_MANUAL_TRANSCRIPT_AND_CAPTION_TRACK_BEFORE_PUBLICATION",
+    "public_unpublish": "REMOVE_REFERENCES_DISABLE_PUBLIC_COPY_INVALIDATE_EXACT_CLOUDFRONT_VERSION_AND_EXPOSE_PROPAGATION_STATE",
+    "cloudflare_images": "DEFER",
+    "mux": "DEFER",
+    "protected_wholesale_browser_payload": "DENY_ZERO_PAYLOAD"
+  },
+  "backup_decision": {
+    "provider_recovery": "NEON_SEVEN_DAY_RESTORE_HISTORY",
+    "independent_copy": "NIGHTLY_ENCRYPTED_PG_DUMP_TO_SEPARATELY_CONTROLLED_S3_OBJECT_LOCK",
+    "independent_copy_rpo_hours": 24,
+    "restore_before_pilot": true,
+    "recurring_restore_test": "QUARTERLY_AND_AFTER_MATERIAL_CHANGE",
+    "restore_reconciliation": [
+      "MIGRATION_IDENTITY",
+      "ROW_COUNTS",
+      "INVENTORY_INVARIANTS",
+      "AUDIT_CHECKPOINTS",
+      "OUTBOX_STATE",
+      "SELECTED_CANONICAL_RECORDS"
+    ],
+    "single_untested_copy_acceptable": false
+  },
+  "observability_decision": {
+    "sentry_paid": "DEFER",
+    "sentry_day1_plan": "DEVELOPER_FREE",
+    "continuous_liveness_queries_database": false,
+    "aggregate_operations_pulse": "HOURLY_IDEMPOTENT",
+    "aggregate_checks": [
+      "DATABASE_REACHABILITY",
+      "OUTBOX_AND_DEAD_LETTER_BACKLOG",
+      "WEBSITE_PROJECTION_LAG",
+      "BACKUP_FRESHNESS",
+      "LAST_RECONCILIATION_STATUS"
+    ],
+    "browser_sentry_sdk": false,
+    "client_error_path": "ALLOWLISTED_CODE_TO_SAME_ORIGIN_FIRST_PARTY_ENDPOINT_THEN_SERVER_SIDE_MINIMIZED_EVENT",
+    "session_replay": false,
+    "provider_logs_are_canonical_audit": false
+  },
+  "completion_ledger": {
+    "named_components_reevaluated": true,
+    "each_component_exactly_classified": true,
+    "day1_owner_outcome_preserved": true,
+    "routine_operations_independent_of_engineering": true,
+    "responsive_web_primary": true,
+    "native_iphone_reevaluated": true,
+    "native_mac_reevaluated": true,
+    "auth0_reevaluated": true,
+    "approved_device_tooling_reevaluated": true,
+    "media_components_reevaluated": true,
+    "sentry_reevaluated": true,
+    "quickbooks_reevaluated": true,
+    "pos_reevaluated": true,
+    "barcode_and_labels_reevaluated": true,
+    "reorder_reevaluated": true,
+    "search_and_cache_confirmed": true,
+    "backup_adequate_subject_to_execution_proof": true,
+    "revised_cost_calculated": true,
+    "deferred_cost_calculated": true,
+    "all_deferred_have_triggers": true,
+    "future_architecture_preserved": true,
+    "production_remains_unauthorized": true,
+    "json_validation_required_before_delivery": true,
+    "one_commit_required": true,
+    "direct_main_push_required": true,
+    "post_push_remote_verification_required": true
+  },
+  "next_gate": {
+    "id": "COM-ADM-03",
+    "name": "Day-1 Controlled Implementation Plan and Proof Specification",
+    "mode": "NON_PRODUCTION_PLAN_AND_PROOF_SPECIFICATION",
+    "retained_providers_only": [
+      "NEON",
+      "VERCEL",
+      "AUTH0",
+      "AWS",
+      "SENTRY_DEVELOPER"
+    ],
+    "production_accounts_authorized": false,
+    "production_code_authorized": false,
+    "live_data_authorized": false,
+    "pilot_authorized": false,
+    "launch_authorized": false
+  },
+  "production_authorized": false
+}
