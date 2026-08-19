@@ -46,6 +46,43 @@ export const DAY1_ADMIN_IMMUTABLE_TRIGGERS = Object.freeze([
   }),
 ]);
 
+const DAY1_ADMIN_IMMUTABILITY_INSTALL_SQL = `
+SET LOCAL lock_timeout = '15s';
+SET LOCAL statement_timeout = '60s';
+SET LOCAL search_path = public, pg_temp;
+
+SELECT pg_advisory_xact_lock(hashtext('blowin-smoke-day1-admin-migration'));
+
+CREATE OR REPLACE FUNCTION reject_immutable_commerce_row_mutation()
+RETURNS trigger
+LANGUAGE plpgsql
+AS '
+BEGIN
+  RAISE EXCEPTION ''% is immutable'', TG_TABLE_NAME USING ERRCODE = ''55000'';
+END;
+';
+
+DROP TRIGGER IF EXISTS inventory_ledger_immutable ON inventory_ledger;
+CREATE TRIGGER inventory_ledger_immutable
+  BEFORE UPDATE OR DELETE ON inventory_ledger
+  FOR EACH ROW EXECUTE FUNCTION reject_immutable_commerce_row_mutation();
+
+DROP TRIGGER IF EXISTS inventory_consumptions_immutable ON inventory_consumptions;
+CREATE TRIGGER inventory_consumptions_immutable
+  BEFORE UPDATE OR DELETE ON inventory_consumptions
+  FOR EACH ROW EXECUTE FUNCTION reject_immutable_commerce_row_mutation();
+
+DROP TRIGGER IF EXISTS audit_records_immutable ON audit_records;
+CREATE TRIGGER audit_records_immutable
+  BEFORE UPDATE OR DELETE ON audit_records
+  FOR EACH ROW EXECUTE FUNCTION reject_immutable_commerce_row_mutation();
+
+DROP TRIGGER IF EXISTS admin_security_events_immutable ON admin_security_events;
+CREATE TRIGGER admin_security_events_immutable
+  BEFORE UPDATE OR DELETE ON admin_security_events
+  FOR EACH ROW EXECUTE FUNCTION reject_immutable_commerce_row_mutation();
+`;
+
 const OWNER_CAPABILITIES = Object.freeze([
   "catalog.read",
   "catalog.edit",
@@ -1594,6 +1631,20 @@ function schemaStateError(code, details = {}) {
   return error;
 }
 
+function isImmutableProtectionOnlyDrift(error) {
+  const expectedTriggerNames = new Set(
+    DAY1_ADMIN_IMMUTABLE_TRIGGERS.map((trigger) => trigger.name),
+  );
+  return (
+    error?.code === "POSTGRES_SCHEMA_DRIFT" &&
+    Array.isArray(error.missingTables) &&
+    error.missingTables.length === 0 &&
+    Array.isArray(error.missingTriggers) &&
+    error.missingTriggers.length > 0 &&
+    error.missingTriggers.every((name) => expectedTriggerNames.has(name))
+  );
+}
+
 export async function verifyDay1AdminSchema({ queryable, pool } = {}) {
   const database = queryable ?? pool;
   if (!database || typeof database.query !== "function") {
@@ -1683,20 +1734,39 @@ export async function verifyDay1AdminSchema({ queryable, pool } = {}) {
   });
 }
 
+export async function installDay1AdminImmutableProtections({ pool } = {}) {
+  if (!pool || typeof pool.connect !== "function") {
+    throw new Error("POSTGRES_POOL_REQUIRED");
+  }
+  return withTransaction(pool, async (client) => {
+    await client.query({
+      text: DAY1_ADMIN_IMMUTABILITY_INSTALL_SQL,
+      query_timeout: 75_000,
+    });
+    return verifyDay1AdminSchema({ queryable: client });
+  });
+}
+
 export async function runDay1AdminMigrations({ pool } = {}) {
   if (!pool || typeof pool.query !== "function") throw new Error("POSTGRES_POOL_REQUIRED");
 
+  let applied = false;
   try {
     const state = await verifyDay1AdminSchema({ pool });
     return Object.freeze({ applied: false, ...state });
   } catch (error) {
-    if (error?.code !== "POSTGRES_MIGRATION_STATE_MISSING") throw error;
+    if (error?.code === "POSTGRES_MIGRATION_STATE_MISSING") {
+      const sql = await readFile(MIGRATION_URL, "utf8");
+      await pool.query({ text: sql, query_timeout: 75_000 });
+      applied = true;
+    } else if (!isImmutableProtectionOnlyDrift(error)) {
+      throw error;
+    }
   }
 
-  const sql = await readFile(MIGRATION_URL, "utf8");
-  await pool.query({ text: sql, query_timeout: 75_000 });
+  await installDay1AdminImmutableProtections({ pool });
   const state = await verifyDay1AdminSchema({ pool });
-  return Object.freeze({ applied: true, ...state });
+  return Object.freeze({ applied, ...state });
 }
 
 export function createPostgresCommerceStore({

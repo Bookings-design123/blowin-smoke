@@ -305,35 +305,6 @@ CREATE TABLE IF NOT EXISTS admin_security_events (
   occurred_at timestamptz NOT NULL DEFAULT now()
 );
 
-CREATE OR REPLACE FUNCTION reject_immutable_commerce_row_mutation()
-RETURNS trigger
-LANGUAGE plpgsql
-AS '
-BEGIN
-  RAISE EXCEPTION ''% is immutable'', TG_TABLE_NAME USING ERRCODE = ''55000'';
-END;
-';
-
-DROP TRIGGER IF EXISTS inventory_ledger_immutable ON inventory_ledger;
-CREATE TRIGGER inventory_ledger_immutable
-  BEFORE UPDATE OR DELETE ON inventory_ledger
-  FOR EACH ROW EXECUTE FUNCTION reject_immutable_commerce_row_mutation();
-
-DROP TRIGGER IF EXISTS inventory_consumptions_immutable ON inventory_consumptions;
-CREATE TRIGGER inventory_consumptions_immutable
-  BEFORE UPDATE OR DELETE ON inventory_consumptions
-  FOR EACH ROW EXECUTE FUNCTION reject_immutable_commerce_row_mutation();
-
-DROP TRIGGER IF EXISTS audit_records_immutable ON audit_records;
-CREATE TRIGGER audit_records_immutable
-  BEFORE UPDATE OR DELETE ON audit_records
-  FOR EACH ROW EXECUTE FUNCTION reject_immutable_commerce_row_mutation();
-
-DROP TRIGGER IF EXISTS admin_security_events_immutable ON admin_security_events;
-CREATE TRIGGER admin_security_events_immutable
-  BEFORE UPDATE OR DELETE ON admin_security_events
-  FOR EACH ROW EXECUTE FUNCTION reject_immutable_commerce_row_mutation();
-
 INSERT INTO admin_schema_migrations (version, name, revision)
 VALUES (1, '001_day1_admin_mvp', '2026-08-18.1')
 ON CONFLICT (version) DO NOTHING;

@@ -1,13 +1,17 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import { requireProductionRuntimeConfiguration } from "../src/boundaries.mjs";
 import {
   createProductionPostgresStore,
+  DAY1_ADMIN_IMMUTABLE_TRIGGERS,
   productionPostgresPoolOptions,
   runDay1AdminMigrations,
 } from "../src/postgres-commerce-store.mjs";
 import { createProductionAdminApplication } from "../src/server.mjs";
+
+const MIGRATION_URL = new URL("../migrations/001_day1_admin_mvp.sql", import.meta.url);
 
 function productionEnvironment() {
   return {
@@ -51,6 +55,135 @@ function schemaResponse(sql, migrated = true) {
   return { rows: [] };
 }
 
+function queryText(query) {
+  return typeof query === "string" ? query : query.text;
+}
+
+function assertImmutableInstallSql(sql) {
+  assert.match(sql, /CREATE OR REPLACE FUNCTION reject_immutable_commerce_row_mutation/);
+  assert.match(
+    sql,
+    /RAISE EXCEPTION ''% is immutable'', TG_TABLE_NAME USING ERRCODE = ''55000'';/,
+  );
+  assert.equal(sql.match(/\bCREATE TRIGGER\b/g)?.length, 4);
+  for (const trigger of DAY1_ADMIN_IMMUTABLE_TRIGGERS) {
+    assert.match(
+      sql,
+      new RegExp(
+        `CREATE TRIGGER ${trigger.name}\\s+BEFORE UPDATE OR DELETE ON ${trigger.table}\\s+FOR EACH ROW EXECUTE FUNCTION reject_immutable_commerce_row_mutation\\(\\);`,
+      ),
+    );
+  }
+}
+
+function migrationTestPool({
+  migrated = false,
+  installedTriggers = [],
+  omittedOnInstall = [],
+  installError,
+} = {}) {
+  let schemaInstalled = migrated;
+  let committedTriggers = new Set(installedTriggers);
+  let transactionTriggers;
+  const omitted = new Set(omittedOnInstall);
+  const queries = [];
+
+  function response(sql, triggers = committedTriggers) {
+    if (sql.includes("to_regclass('public.admin_schema_migrations')")) {
+      return { rows: [{ relation: schemaInstalled ? "admin_schema_migrations" : null }] };
+    }
+    if (sql.includes("FROM public.admin_schema_migrations")) {
+      return schemaInstalled
+        ? {
+            rowCount: 1,
+            rows: [
+              {
+                version: 1,
+                name: "001_day1_admin_mvp",
+                revision: "2026-08-18.1",
+              },
+            ],
+          }
+        : { rowCount: 0, rows: [] };
+    }
+    if (sql.includes("pg_class.relkind IN ('r', 'p')")) return { rows: [] };
+    if (sql.includes("FROM pg_trigger")) {
+      return {
+        rows: DAY1_ADMIN_IMMUTABLE_TRIGGERS.filter(
+          (trigger) => !triggers.has(trigger.name),
+        ).map((trigger) => ({ name: trigger.name })),
+      };
+    }
+    return { rows: [] };
+  }
+
+  const client = {
+    async query(query) {
+      const sql = queryText(query);
+      queries.push({ scope: "client", sql, options: typeof query === "string" ? null : query });
+      if (sql === "BEGIN") {
+        transactionTriggers = new Set(committedTriggers);
+        return { rows: [] };
+      }
+      if (sql === "COMMIT") {
+        committedTriggers = transactionTriggers;
+        transactionTriggers = undefined;
+        return { rows: [] };
+      }
+      if (sql === "ROLLBACK") {
+        transactionTriggers = undefined;
+        return { rows: [] };
+      }
+      if (sql.includes("CREATE OR REPLACE FUNCTION reject_immutable_commerce_row_mutation")) {
+        assertImmutableInstallSql(sql);
+        if (installError) throw installError;
+        transactionTriggers = new Set(
+          DAY1_ADMIN_IMMUTABLE_TRIGGERS.filter(
+            (trigger) => !omitted.has(trigger.name),
+          ).map((trigger) => trigger.name),
+        );
+        return { rows: [] };
+      }
+      return response(sql, transactionTriggers ?? committedTriggers);
+    },
+    release() {},
+  };
+
+  const pool = {
+    async query(query) {
+      const sql = queryText(query);
+      queries.push({ scope: "pool", sql, options: typeof query === "string" ? null : query });
+      if (sql.startsWith("BEGIN;")) {
+        schemaInstalled = true;
+        return { rows: [] };
+      }
+      const mutation =
+        /^\s*UPDATE\s+([a-z_]+)/i.exec(sql) ??
+        /^\s*DELETE\s+FROM\s+([a-z_]+)/i.exec(sql);
+      if (mutation) {
+        const trigger = DAY1_ADMIN_IMMUTABLE_TRIGGERS.find(
+          (candidate) => candidate.table === mutation[1],
+        );
+        if (trigger && committedTriggers.has(trigger.name)) {
+          const error = new Error(`${mutation[1]} is immutable`);
+          error.code = "55000";
+          throw error;
+        }
+      }
+      return response(sql);
+    },
+    async connect() {
+      return client;
+    },
+  };
+
+  return {
+    pool,
+    queries,
+    committedTriggerNames: () => [...committedTriggers].sort(),
+  };
+}
+
 test("production PostgreSQL configuration requires TLS and bounds serverless pools", () => {
   const options = productionPostgresPoolOptions({ env: productionEnvironment() });
   assert.equal(options.max, 2);
@@ -90,40 +223,136 @@ test("production PostgreSQL configuration requires TLS and bounds serverless poo
   );
 });
 
-test("migration applies once, records exact state, and then verifies without DDL", async () => {
-  let migrated = false;
-  const queries = [];
-  const pool = {
-    async query(query) {
-      const sql = typeof query === "string" ? query : query.text;
-      queries.push({ sql, options: typeof query === "string" ? null : query });
-      if (sql.startsWith("BEGIN;")) {
-        assert.match(sql, /CREATE TABLE IF NOT EXISTS admin_schema_migrations/);
-        assert.match(sql, /unversioned admin schema requires explicit review/);
-        assert.match(sql, /VALUES \(1, '001_day1_admin_mvp', '2026-08-18\.1'\)/);
-        migrated = true;
-        return { rows: [] };
-      }
-      return schemaResponse(sql, migrated);
-    },
-  };
+test("001 is parser-safe schema SQL without procedural bodies", async () => {
+  const sql = await readFile(MIGRATION_URL, "utf8");
 
-  const first = await runDay1AdminMigrations({ pool });
-  const queryCount = queries.length;
-  const second = await runDay1AdminMigrations({ pool });
+  assert.doesNotMatch(sql, /^\s*DO\b/im);
+  assert.doesNotMatch(sql, /\bCREATE\s+(?:OR\s+REPLACE\s+)?FUNCTION\b/i);
+  assert.doesNotMatch(sql, /\bLANGUAGE\s+plpgsql\b/i);
+  assert.doesNotMatch(sql, /\$(?:[A-Za-z_][A-Za-z0-9_]*)?\$/);
+  assert.doesNotMatch(sql, /\bCREATE\s+TRIGGER\b/i);
+  assert.doesNotMatch(sql, /\bRAISE\s+EXCEPTION\b/i);
+  assert.match(sql, /unversioned_admin_schema_guard/);
+  assert.match(sql, /migration_revision_guard/);
+  assert.match(sql, /VALUES \(1, '001_day1_admin_mvp', '2026-08-18\.1'\)/);
+});
+
+test("migration applies schema, installs all protections, and then verifies without DDL", async () => {
+  const database = migrationTestPool();
+  const first = await runDay1AdminMigrations({ pool: database.pool });
+  const queryCount = database.queries.length;
+  const second = await runDay1AdminMigrations({ pool: database.pool });
 
   assert.equal(first.applied, true);
   assert.equal(second.applied, false);
+
+  const migrationIndex = database.queries.findIndex(({ sql }) => sql.startsWith("BEGIN;"));
+  const installIndex = database.queries.findIndex(({ sql }) =>
+    sql.includes("CREATE OR REPLACE FUNCTION reject_immutable_commerce_row_mutation"),
+  );
+  const protectedVerificationIndex = database.queries.findIndex(
+    ({ sql }, index) => index > installIndex && sql.includes("FROM pg_trigger"),
+  );
+  const commitIndex = database.queries.findIndex(
+    ({ sql }, index) => index > protectedVerificationIndex && sql === "COMMIT",
+  );
+
+  assert.ok(migrationIndex >= 0);
+  assert.ok(installIndex > migrationIndex);
+  assert.ok(protectedVerificationIndex > installIndex);
+  assert.ok(commitIndex > protectedVerificationIndex);
+  assert.equal(database.queries[migrationIndex].options.query_timeout, 75_000);
+  assert.equal(database.queries[installIndex].options.query_timeout, 75_000);
+  assert.deepEqual(
+    database.committedTriggerNames(),
+    DAY1_ADMIN_IMMUTABLE_TRIGGERS.map((trigger) => trigger.name).sort(),
+  );
   assert.equal(
-    queries.slice(queryCount).some(({ sql }) => sql.startsWith("BEGIN;")),
+    database.queries
+      .slice(queryCount)
+      .some(
+        ({ sql }) =>
+          sql.startsWith("BEGIN;") ||
+          sql.includes("CREATE OR REPLACE FUNCTION reject_immutable_commerce_row_mutation"),
+      ),
     false,
   );
-  const migrationQuery = queries.find(({ sql }) => sql.startsWith("BEGIN;"));
-  assert.equal(migrationQuery.options.query_timeout, 75_000);
-  const triggerVerification = queries.find(({ sql }) => sql.includes("FROM pg_trigger"));
+
+  const triggerVerification = database.queries.find(({ sql }) =>
+    sql.includes("FROM pg_trigger"),
+  );
   assert.match(triggerVerification.sql, /tgenabled IN \('O', 'A'\)/);
   assert.match(triggerVerification.sql, /tgtype = 27/);
   assert.match(triggerVerification.sql, /reject_immutable_commerce_row_mutation/);
+});
+
+test("runtime protections reject update and delete attempts for every immutable table", async () => {
+  const database = migrationTestPool();
+  await runDay1AdminMigrations({ pool: database.pool });
+
+  for (const trigger of DAY1_ADMIN_IMMUTABLE_TRIGGERS) {
+    await assert.rejects(
+      database.pool.query(
+        `UPDATE ${trigger.table} SET id = id WHERE id = 'protected-record'`,
+      ),
+      (error) => error.code === "55000",
+    );
+    await assert.rejects(
+      database.pool.query(
+        `DELETE FROM ${trigger.table} WHERE id = 'protected-record'`,
+      ),
+      (error) => error.code === "55000",
+    );
+  }
+});
+
+test("runner installs protections after parser-safe schema was applied separately", async () => {
+  const database = migrationTestPool({ migrated: true });
+  const result = await runDay1AdminMigrations({ pool: database.pool });
+
+  assert.equal(result.applied, false);
+  assert.equal(database.queries.some(({ sql }) => sql.startsWith("BEGIN;")), false);
+  assert.equal(
+    database.queries.some(({ sql }) =>
+      sql.includes("CREATE OR REPLACE FUNCTION reject_immutable_commerce_row_mutation"),
+    ),
+    true,
+  );
+  assert.deepEqual(
+    database.committedTriggerNames(),
+    DAY1_ADMIN_IMMUTABLE_TRIGGERS.map((trigger) => trigger.name).sort(),
+  );
+});
+
+test("missing immutable protection fails verification and rolls back the install", async () => {
+  const missingTrigger = "inventory_ledger_immutable";
+  const database = migrationTestPool({ omittedOnInstall: [missingTrigger] });
+
+  await assert.rejects(
+    runDay1AdminMigrations({ pool: database.pool }),
+    (error) => {
+      assert.equal(error.code, "POSTGRES_SCHEMA_DRIFT");
+      assert.deepEqual(error.missingTables, []);
+      assert.deepEqual(error.missingTriggers, [missingTrigger]);
+      return true;
+    },
+  );
+  assert.equal(database.queries.some(({ sql }) => sql === "ROLLBACK"), true);
+  assert.equal(database.queries.some(({ sql }) => sql === "COMMIT"), false);
+  assert.deepEqual(database.committedTriggerNames(), []);
+});
+
+test("immutable protection installation error fails migration and rolls back", async () => {
+  const installError = new Error("IMMUTABLE_PROTECTION_INSTALL_FAILED");
+  const database = migrationTestPool({ installError });
+
+  await assert.rejects(
+    runDay1AdminMigrations({ pool: database.pool }),
+    installError,
+  );
+  assert.equal(database.queries.some(({ sql }) => sql === "ROLLBACK"), true);
+  assert.equal(database.queries.some(({ sql }) => sql === "COMMIT"), false);
+  assert.deepEqual(database.committedTriggerNames(), []);
 });
 
 test("production store consumes DATABASE_URL, verifies schema, and closes its pool", async () => {
