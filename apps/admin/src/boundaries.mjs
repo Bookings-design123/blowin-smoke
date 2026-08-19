@@ -51,6 +51,23 @@ export async function authorizeAdmin(request, authenticateAdmin) {
   }
 }
 
+export function authorizeCapability(actor, capability) {
+  if (
+    !actor ||
+    typeof capability !== "string" ||
+    !Array.isArray(actor.capabilities) ||
+    !actor.capabilities.includes(capability)
+  ) {
+    return Object.freeze({
+      ok: false,
+      status: 403,
+      code: "FORBIDDEN",
+    });
+  }
+
+  return Object.freeze({ ok: true });
+}
+
 export function bindCommerceStore(commerceStore, requiredMethod) {
   if (
     !commerceStore ||

@@ -52,6 +52,49 @@ test("unauthorized product create is denied before any database command", async 
   assert.equal(databaseCalls, 0);
 });
 
+test("configured runtime still fails closed when production adapters are unbound", async () => {
+  const app = createAdminApplication({ env: configuredEnv });
+  const result = await app({
+    method: "POST",
+    url: "/admin/products",
+    body: {
+      name: "SEC-IMPL TEST PRODUCT",
+      sku: "TEST-SKU-001",
+    },
+  });
+
+  assert.equal(result.status, 503);
+  assert.equal(JSON.parse(result.body).code, "AUTH0_BOUNDARY_UNBOUND");
+});
+
+test("authenticated actor without create capability is denied before the store", async () => {
+  let databaseCalls = 0;
+  const app = createAdminApplication({
+    env: configuredEnv,
+    authenticateAdmin: async () => ({ id: "limited-owner", capabilities: [] }),
+    commerceStore: {
+      async executeAdminCommand() {
+        databaseCalls += 1;
+      },
+    },
+  });
+
+  const result = await app({
+    method: "POST",
+    url: "/admin/products",
+    headers: { "idempotency-key": "capability-test-command" },
+    body: {
+      name: "SEC-IMPL TEST PRODUCT",
+      sku: "TEST-SKU-001",
+    },
+  });
+
+  assert.equal(result.status, 403);
+  assert.equal(JSON.parse(result.body).status, "DENIED");
+  assert.equal(JSON.parse(result.body).code, "FORBIDDEN");
+  assert.equal(databaseCalls, 0);
+});
+
 test("customer product read fails closed without the database boundary", async () => {
   const app = createAdminApplication({ env: {} });
   const result = await app({ method: "GET", url: "/api/products" });
