@@ -1,6 +1,42 @@
 BEGIN;
 
+SET LOCAL lock_timeout = '15s';
+SET LOCAL statement_timeout = '60s';
+SET LOCAL search_path = public, pg_temp;
+
 SELECT pg_advisory_xact_lock(hashtext('blowin-smoke-day1-admin-migration'));
+
+CREATE TABLE IF NOT EXISTS admin_schema_migrations (
+  version integer PRIMARY KEY CHECK (version > 0),
+  name text NOT NULL UNIQUE CHECK (length(btrim(name)) > 0),
+  revision text NOT NULL CHECK (length(btrim(revision)) > 0),
+  applied_at timestamptz NOT NULL DEFAULT now()
+);
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM admin_schema_migrations WHERE version = 1
+  ) AND EXISTS (
+    SELECT 1
+      FROM pg_class
+      JOIN pg_namespace ON pg_namespace.oid = pg_class.relnamespace
+     WHERE pg_namespace.nspname = 'public'
+       AND pg_class.relkind IN ('r', 'p')
+       AND pg_class.relname IN (
+         'admin_actors', 'admin_commands', 'admin_device_enrollment_grants',
+         'admin_devices', 'admin_security_events', 'admin_sessions',
+         'audit_records', 'evidence_records', 'inventory_consumptions',
+         'inventory_ledger', 'inventory_lots', 'inventory_reservation_items',
+         'inventory_reservations', 'media_assets', 'product_media',
+         'product_variants', 'products', 'retail_prices', 'skus', 'suppliers'
+       )
+  ) THEN
+    RAISE EXCEPTION 'unversioned admin schema requires explicit review before migration'
+      USING ERRCODE = '55000';
+  END IF;
+END;
+$$;
 
 CREATE TABLE IF NOT EXISTS admin_actors (
   id text PRIMARY KEY,
@@ -300,5 +336,24 @@ DROP TRIGGER IF EXISTS admin_security_events_immutable ON admin_security_events;
 CREATE TRIGGER admin_security_events_immutable
   BEFORE UPDATE OR DELETE ON admin_security_events
   FOR EACH ROW EXECUTE FUNCTION reject_immutable_commerce_row_mutation();
+
+INSERT INTO admin_schema_migrations (version, name, revision)
+VALUES (1, '001_day1_admin_mvp', '2026-08-18.1')
+ON CONFLICT (version) DO NOTHING;
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1
+      FROM admin_schema_migrations
+     WHERE version = 1
+       AND name = '001_day1_admin_mvp'
+       AND revision = '2026-08-18.1'
+  ) THEN
+    RAISE EXCEPTION 'admin migration version 1 conflicts with the expected revision'
+      USING ERRCODE = '55000';
+  END IF;
+END;
+$$;
 
 COMMIT;

@@ -87,6 +87,7 @@ function assertClient(client) {
 export function createS3PrivateMediaStore({
   bucket,
   region,
+  credentials,
   client,
   prefix = "private-media",
   keyFactory = defaultOpaqueKey,
@@ -97,7 +98,10 @@ export function createS3PrivateMediaStore({
   const resolvedClient = assertClient(
     client ??
       (typeof region === "string" && region.trim() !== ""
-        ? new S3Client({ region: region.trim() })
+        ? new S3Client({
+            region: region.trim(),
+            ...(credentials ? { credentials } : {}),
+          })
         : null),
   );
 

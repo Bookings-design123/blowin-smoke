@@ -1,0 +1,2 @@
+export const MAX_UPLOAD_BINARY_BYTES = 3 * 1024 * 1024;
+export const MAX_UPLOAD_REQUEST_BYTES = 4 * 1024 * 1024 + 128 * 1024;

@@ -1,3 +1,5 @@
+import { MAX_UPLOAD_BINARY_BYTES } from "./upload-policy.mjs";
+
 function escapeHtml(value) {
   return String(value ?? "")
     .replaceAll("&", "&amp;")
@@ -255,7 +257,7 @@ export function buildAdminPage(dashboard = {}, actor = {}) {
         <h3>Suppliers</h3><ul class="plain-list">${supplierRows(suppliers)}</ul>
       </section>
 
-      <section class="panel"><h2>Media and evidence</h2><p>Uploads pass server-side type validation. Public images are decoded and re-encoded without EXIF/GPS metadata; masters remain private.</p>
+      <section class="panel"><h2>Media and evidence</h2><p>Uploads pass server-side type validation. Public images are decoded and re-encoded without EXIF/GPS metadata; masters remain private. Maximum source file size: 3 MiB.</p>
         <details open><summary>Upload product image</summary><form class="form-grid" data-api data-file-upload data-endpoint="/admin/products/[productId]/images" data-method="POST"><label>Product<select name="productId" required><option value="">Select</option>${productOptions}</select></label><label>Image<input name="file" type="file" accept="image/jpeg,image/png,image/webp" required></label><button type="submit">Upload image</button></form></details>
         <details><summary>Replace product image</summary><form class="form-grid" data-api data-file-upload data-endpoint="/admin/products/[productId]/images/[previousMediaId]" data-method="PUT"><label>Product<select name="productId" required><option value="">Select</option>${productOptions}</select></label><label>Existing image<select name="previousMediaId" required><option value="">Select</option>${mediaOptions}</select></label><label>Replacement image<input name="file" type="file" accept="image/jpeg,image/png,image/webp" required></label><button type="submit">Replace image</button></form></details>
         <details><summary>Remove product image</summary><form class="form-grid" data-api data-endpoint="/admin/products/[productId]/images/[mediaId]" data-method="DELETE"><label>Product<select name="productId" required><option value="">Select</option>${productOptions}</select></label><label>Image<select name="mediaId" required><option value="">Select</option>${mediaOptions}</select></label><button type="submit">Remove image</button></form></details>
@@ -277,7 +279,8 @@ export function buildAdminPage(dashboard = {}, actor = {}) {
   <script type="module">
     const notice=document.querySelector("#notice");
     const show=(message,error=false)=>{notice.textContent=message;notice.dataset.visible="true";notice.dataset.error=String(error);window.setTimeout(()=>{notice.dataset.visible="false"},5000)};
-    const base64=async(file)=>{const bytes=new Uint8Array(await file.arrayBuffer());let binary="";const size=0x8000;for(let i=0;i<bytes.length;i+=size)binary+=String.fromCharCode(...bytes.subarray(i,i+size));return btoa(binary)};
+    const maximumUploadBytes=${MAX_UPLOAD_BINARY_BYTES};
+    const base64=async(file)=>{if(file.size>maximumUploadBytes)throw new Error("File exceeds the 3 MiB upload limit");const bytes=new Uint8Array(await file.arrayBuffer());let binary="";const size=0x8000;for(let i=0;i<bytes.length;i+=size)binary+=String.fromCharCode(...bytes.subarray(i,i+size));return btoa(binary)};
     document.addEventListener("submit",async(event)=>{
       const form=event.target.closest("form[data-api]");if(!form)return;event.preventDefault();
       const button=form.querySelector("button[type=submit]");if(button)button.disabled=true;

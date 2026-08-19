@@ -3,6 +3,49 @@ import { readFile } from "node:fs/promises";
 
 const MIGRATION_URL = new URL("../migrations/001_day1_admin_mvp.sql", import.meta.url);
 
+export const DAY1_ADMIN_MIGRATION = Object.freeze({
+  version: 1,
+  name: "001_day1_admin_mvp",
+  revision: "2026-08-18.1",
+});
+
+export const DAY1_ADMIN_SCHEMA_TABLES = Object.freeze([
+  "admin_schema_migrations",
+  "admin_actors",
+  "admin_commands",
+  "admin_device_enrollment_grants",
+  "admin_devices",
+  "admin_security_events",
+  "admin_sessions",
+  "audit_records",
+  "evidence_records",
+  "inventory_consumptions",
+  "inventory_ledger",
+  "inventory_lots",
+  "inventory_reservation_items",
+  "inventory_reservations",
+  "media_assets",
+  "product_media",
+  "product_variants",
+  "products",
+  "retail_prices",
+  "skus",
+  "suppliers",
+]);
+
+export const DAY1_ADMIN_IMMUTABLE_TRIGGERS = Object.freeze([
+  Object.freeze({ name: "inventory_ledger_immutable", table: "inventory_ledger" }),
+  Object.freeze({
+    name: "inventory_consumptions_immutable",
+    table: "inventory_consumptions",
+  }),
+  Object.freeze({ name: "audit_records_immutable", table: "audit_records" }),
+  Object.freeze({
+    name: "admin_security_events_immutable",
+    table: "admin_security_events",
+  }),
+]);
+
 const OWNER_CAPABILITIES = Object.freeze([
   "catalog.read",
   "catalog.edit",
@@ -1544,10 +1587,116 @@ async function requireDatabaseActor(client, actor, capability) {
   return actorProjection(result.rows[0]);
 }
 
+function schemaStateError(code, details = {}) {
+  const error = new Error(code);
+  error.code = code;
+  Object.assign(error, details);
+  return error;
+}
+
+export async function verifyDay1AdminSchema({ queryable, pool } = {}) {
+  const database = queryable ?? pool;
+  if (!database || typeof database.query !== "function") {
+    throw new Error("POSTGRES_POOL_REQUIRED");
+  }
+
+  const markerTable = await database.query(
+    `SELECT to_regclass('public.admin_schema_migrations') AS relation`,
+  );
+  if (!markerTable.rows?.[0]?.relation) {
+    throw schemaStateError("POSTGRES_MIGRATION_STATE_MISSING");
+  }
+
+  const marker = await database.query(
+    `SELECT version, name, revision
+       FROM public.admin_schema_migrations
+      WHERE version = $1`,
+    [DAY1_ADMIN_MIGRATION.version],
+  );
+  if (marker.rowCount !== 1) {
+    throw schemaStateError("POSTGRES_MIGRATION_STATE_MISSING");
+  }
+  const applied = marker.rows[0];
+  if (
+    Number(applied.version) !== DAY1_ADMIN_MIGRATION.version ||
+    applied.name !== DAY1_ADMIN_MIGRATION.name ||
+    applied.revision !== DAY1_ADMIN_MIGRATION.revision
+  ) {
+    throw schemaStateError("POSTGRES_MIGRATION_STATE_CONFLICT");
+  }
+
+  const missingTablesResult = await database.query(
+    `SELECT required.name
+       FROM unnest($1::text[]) AS required(name)
+      WHERE NOT EXISTS (
+        SELECT 1
+          FROM pg_class
+          JOIN pg_namespace ON pg_namespace.oid = pg_class.relnamespace
+         WHERE pg_class.relname = required.name
+           AND pg_class.relkind IN ('r', 'p')
+           AND pg_namespace.nspname = 'public'
+      )
+      ORDER BY required.name`,
+    [DAY1_ADMIN_SCHEMA_TABLES],
+  );
+  const missingTables = (missingTablesResult.rows ?? []).map((row) => row.name);
+
+  const missingTriggersResult = await database.query(
+    `SELECT required.name
+       FROM unnest($1::text[], $2::text[]) AS required(name, relation_name)
+      WHERE NOT EXISTS (
+        SELECT 1
+          FROM pg_trigger
+          JOIN pg_class ON pg_class.oid = pg_trigger.tgrelid
+          JOIN pg_namespace ON pg_namespace.oid = pg_class.relnamespace
+          JOIN pg_proc ON pg_proc.oid = pg_trigger.tgfoid
+          JOIN pg_namespace AS function_namespace
+            ON function_namespace.oid = pg_proc.pronamespace
+         WHERE tgname = required.name
+           AND pg_class.relname = required.relation_name
+           AND pg_namespace.nspname = 'public'
+           AND NOT tgisinternal
+           AND tgenabled IN ('O', 'A')
+           AND tgtype = 27
+           AND pg_proc.proname = 'reject_immutable_commerce_row_mutation'
+           AND function_namespace.nspname = 'public'
+      )
+      ORDER BY required.name`,
+    [
+      DAY1_ADMIN_IMMUTABLE_TRIGGERS.map((trigger) => trigger.name),
+      DAY1_ADMIN_IMMUTABLE_TRIGGERS.map((trigger) => trigger.table),
+    ],
+  );
+  const missingTriggers = (missingTriggersResult.rows ?? []).map((row) => row.name);
+
+  if (missingTables.length > 0 || missingTriggers.length > 0) {
+    throw schemaStateError("POSTGRES_SCHEMA_DRIFT", {
+      missingTables: Object.freeze(missingTables),
+      missingTriggers: Object.freeze(missingTriggers),
+    });
+  }
+
+  return Object.freeze({
+    migration: DAY1_ADMIN_MIGRATION,
+    missingTables: Object.freeze([]),
+    missingTriggers: Object.freeze([]),
+  });
+}
+
 export async function runDay1AdminMigrations({ pool } = {}) {
   if (!pool || typeof pool.query !== "function") throw new Error("POSTGRES_POOL_REQUIRED");
+
+  try {
+    const state = await verifyDay1AdminSchema({ pool });
+    return Object.freeze({ applied: false, ...state });
+  } catch (error) {
+    if (error?.code !== "POSTGRES_MIGRATION_STATE_MISSING") throw error;
+  }
+
   const sql = await readFile(MIGRATION_URL, "utf8");
-  await pool.query(sql);
+  await pool.query({ text: sql, query_timeout: 75_000 });
+  const state = await verifyDay1AdminSchema({ pool });
+  return Object.freeze({ applied: true, ...state });
 }
 
 export function createPostgresCommerceStore({
@@ -2232,28 +2381,105 @@ export function createPostgresCommerceStore({
   });
 }
 
+function boundedPoolInteger(value, fallback, { minimum, maximum }) {
+  if (value === undefined || value === null || value === "") return fallback;
+  const normalized = String(value).trim();
+  if (!/^\d+$/.test(normalized)) {
+    throw new Error("POSTGRES_POOL_CONFIGURATION_INVALID");
+  }
+  const parsed = Number.parseInt(normalized, 10);
+  if (!Number.isSafeInteger(parsed) || parsed < minimum || parsed > maximum) {
+    throw new Error("POSTGRES_POOL_CONFIGURATION_INVALID");
+  }
+  return parsed;
+}
+
+export function productionPostgresPoolOptions({ databaseUrl, env = process.env } = {}) {
+  const connectionString = databaseUrl ?? env.DATABASE_URL;
+  if (typeof connectionString !== "string" || connectionString.trim() === "") {
+    throw new Error("DATABASE_BOUNDARY_UNBOUND");
+  }
+
+  let url;
+  try {
+    url = new URL(connectionString.trim());
+  } catch {
+    throw new Error("DATABASE_URL_INVALID");
+  }
+  if (!new Set(["postgres:", "postgresql:"]).has(url.protocol)) {
+    throw new Error("DATABASE_URL_INVALID");
+  }
+
+  const sslModes = url.searchParams.getAll("sslmode").map((value) => value.toLowerCase());
+  const sslValues = url.searchParams.getAll("ssl").map((value) => value.toLowerCase());
+  const libpqCompatibility = url.searchParams
+    .getAll("uselibpqcompat")
+    .map((value) => value.toLowerCase());
+  const strongSslMode =
+    sslModes.length === 1 &&
+    new Set(["require", "verify-ca", "verify-full"]).has(sslModes[0]) &&
+    sslValues.length === 0;
+  const unambiguousSslFlag =
+    sslValues.length === 1 && sslValues[0] === "true" && sslModes.length === 0;
+  if (
+    (!strongSslMode && !unambiguousSslFlag) ||
+    libpqCompatibility.includes("true")
+  ) {
+    throw new Error("DATABASE_TLS_REQUIRED");
+  }
+
+  return Object.freeze({
+    connectionString: connectionString.trim(),
+    max: boundedPoolInteger(env.POSTGRES_POOL_MAX, 2, { minimum: 1, maximum: 5 }),
+    connectionTimeoutMillis: boundedPoolInteger(
+      env.POSTGRES_CONNECTION_TIMEOUT_MS,
+      5_000,
+      { minimum: 1_000, maximum: 30_000 },
+    ),
+    idleTimeoutMillis: boundedPoolInteger(env.POSTGRES_IDLE_TIMEOUT_MS, 10_000, {
+      minimum: 1_000,
+      maximum: 60_000,
+    }),
+    query_timeout: boundedPoolInteger(env.POSTGRES_QUERY_TIMEOUT_MS, 10_000, {
+      minimum: 1_000,
+      maximum: 60_000,
+    }),
+    allowExitOnIdle: true,
+    application_name: "blowin-smoke-admin",
+  });
+}
+
+export async function createProductionPostgresPool({
+  databaseUrl,
+  env = process.env,
+  pgModule,
+} = {}) {
+  const pg = pgModule ?? (await import("pg"));
+  const Pool = pg.Pool ?? pg.default?.Pool;
+  if (typeof Pool !== "function") throw new Error("POSTGRES_DRIVER_UNAVAILABLE");
+  return new Pool(productionPostgresPoolOptions({ databaseUrl, env }));
+}
+
 export async function createProductionPostgresStore({
   pool,
   databaseUrl,
   env = process.env,
   pgModule,
   migrate = false,
+  verifySchema = false,
 } = {}) {
   let resolvedPool = pool;
   let ownsPool = false;
   if (!resolvedPool) {
-    const connectionString = databaseUrl ?? env.DATABASE_URL;
-    if (typeof connectionString !== "string" || connectionString.trim() === "") {
-      throw new Error("DATABASE_BOUNDARY_UNBOUND");
-    }
-    const pg = pgModule ?? (await import("pg"));
-    const Pool = pg.Pool ?? pg.default?.Pool;
-    if (typeof Pool !== "function") throw new Error("POSTGRES_DRIVER_UNAVAILABLE");
-    resolvedPool = new Pool({ connectionString: connectionString.trim() });
+    resolvedPool = await createProductionPostgresPool({ databaseUrl, env, pgModule });
     ownsPool = true;
   }
   try {
-    if (migrate) await runDay1AdminMigrations({ pool: resolvedPool });
+    if (migrate) {
+      await runDay1AdminMigrations({ pool: resolvedPool });
+    } else if (verifySchema) {
+      await verifyDay1AdminSchema({ pool: resolvedPool });
+    }
     return createPostgresCommerceStore({ pool: resolvedPool, ownsPool });
   } catch (error) {
     if (ownsPool && typeof resolvedPool?.end === "function") {

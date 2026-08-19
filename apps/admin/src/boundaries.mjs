@@ -17,6 +17,12 @@ export const PRIVATE_MEDIA_ENV_KEYS = Object.freeze([
   "S3_MEDIA_BUCKET",
 ]);
 
+export const PRODUCTION_ENV_KEYS = Object.freeze([
+  ...DATABASE_ENV_KEYS,
+  ...AUTH0_ENV_KEYS,
+  ...PRIVATE_MEDIA_ENV_KEYS,
+]);
+
 function missingKeys(env, keys) {
   return Object.freeze(
     keys.filter((key) => typeof env[key] !== "string" || env[key].trim() === ""),
@@ -43,6 +49,17 @@ export function inspectRuntimeBoundaries(env = {}) {
       missing: missingPrivateMedia,
     }),
   });
+}
+
+export function requireProductionRuntimeConfiguration(env = {}) {
+  const missing = missingKeys(env, PRODUCTION_ENV_KEYS);
+  if (missing.length > 0) {
+    const error = new Error("PRODUCTION_CONFIGURATION_MISSING");
+    error.code = "PRODUCTION_CONFIGURATION_MISSING";
+    error.missing = missing;
+    throw error;
+  }
+  return inspectRuntimeBoundaries(env);
 }
 
 export async function authorizeAdmin(request, authenticateAdmin) {

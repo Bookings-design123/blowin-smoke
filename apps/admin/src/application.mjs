@@ -12,10 +12,11 @@ import {
   sanitizeEvidenceUpload,
   sanitizeImageUpload,
 } from "./image-sanitizer.mjs";
+import { MAX_UPLOAD_BINARY_BYTES } from "./upload-policy.mjs";
 
 const NO_STORE = Object.freeze({});
 const NO_MEDIA_STORE = Object.freeze({});
-const MAX_UPLOAD_BYTES = 12 * 1024 * 1024;
+const MAX_UPLOAD_BYTES = MAX_UPLOAD_BINARY_BYTES;
 const DIVISIONS = new Set(["THCA", "VAPE_NICOTINE", "GLASS_ACCESSORIES"]);
 const FRESH_AUTH_CAPABILITIES = new Set([
   "catalog.edit",
