@@ -10,6 +10,9 @@ const configuredEnv = Object.freeze({
   AUTH0_CLIENT_ID: "configured-for-boundary-test",
   AUTH0_CLIENT_SECRET: "must-not-appear-in-results",
   AUTH0_AUDIENCE: "configured-for-boundary-test",
+  AUTH0_OWNER_SUB: "auth0|configured-owner",
+  ADMIN_BASE_URL: "https://admin.example.test",
+  ADMIN_SESSION_SECRET: "test-only-session-secret-is-at-least-32-bytes",
 });
 
 test("missing Auth0 and database configuration fails closed without exposing values", async () => {
@@ -23,6 +26,9 @@ test("missing Auth0 and database configuration fails closed without exposing val
     "AUTH0_DOMAIN",
     "AUTH0_CLIENT_ID",
     "AUTH0_AUDIENCE",
+    "AUTH0_OWNER_SUB",
+    "ADMIN_BASE_URL",
+    "ADMIN_SESSION_SECRET",
   ]);
   assert.equal(JSON.stringify(runtime).includes("must-not-appear-in-results"), false);
 
@@ -101,4 +107,50 @@ test("customer product read fails closed without the database boundary", async (
 
   assert.equal(result.status, 503);
   assert.deepEqual(JSON.parse(result.body).missing, ["DATABASE_URL"]);
+});
+
+test("trusted device listing and revocation require the owner device capability and fresh auth", async () => {
+  let revokedBy = null;
+  const commerceStore = {
+    async listAdminDevices({ actorId }) {
+      return [{ id: "device-test-001", actorId, status: "ACTIVE" }];
+    },
+    async revokeAdminDevice({ deviceId, actorId }) {
+      revokedBy = { deviceId, actorId };
+      return true;
+    },
+  };
+  const actor = {
+    id: "owner-test-001",
+    freshAuthentication: true,
+    capabilities: ["catalog.read", "device.manage"],
+  };
+  const app = createAdminApplication({
+    env: configuredEnv,
+    authenticateAdmin: async () => actor,
+    commerceStore,
+  });
+
+  const listed = await app({ method: "GET", url: "/admin/devices" });
+  assert.equal(listed.status, 200);
+  assert.equal(JSON.parse(listed.body).devices[0].id, "device-test-001");
+
+  const revoked = await app({
+    method: "DELETE",
+    url: "/admin/devices/device-test-001",
+    headers: { "idempotency-key": "device-revoke-test-001" },
+  });
+  assert.equal(revoked.status, 200);
+  assert.deepEqual(revokedBy, {
+    deviceId: "device-test-001",
+    actorId: "owner-test-001",
+  });
+
+  actor.freshAuthentication = false;
+  const stale = await app({
+    method: "DELETE",
+    url: "/admin/devices/device-test-001",
+  });
+  assert.equal(stale.status, 403);
+  assert.equal(JSON.parse(stale.body).code, "FRESH_AUTHENTICATION_REQUIRED");
 });

@@ -18,6 +18,9 @@ const testEnv = Object.freeze({
   AUTH0_CLIENT_ID: "test-only-client",
   AUTH0_CLIENT_SECRET: "test-only-secret",
   AUTH0_AUDIENCE: "test-only-audience",
+  AUTH0_OWNER_SUB: "auth0|owner-test-001",
+  ADMIN_BASE_URL: "https://admin.example.test",
+  ADMIN_SESSION_SECRET: "test-only-session-secret-is-at-least-32-bytes",
 });
 
 const authorizedHeaders = Object.freeze({
@@ -35,7 +38,7 @@ function request(
   idempotencyKey,
 ) {
   const headers = authorized ? { ...authorizedHeaders } : {};
-  if (method === "POST" || method === "PUT") {
+  if (["POST", "PUT", "DELETE"].includes(method)) {
     commandSequence += 1;
     headers["idempotency-key"] =
       idempotencyKey ?? `admin-slice-test-command-${commandSequence}`;
@@ -143,6 +146,7 @@ test("fixture-backed Admin slice executes product, price, immutable receipt, pub
   assert.equal(created.status, 201);
   assert.equal(JSON.parse(created.body).result.product.name, SYNTHETIC_PRODUCT.name);
   assert.equal(JSON.parse(created.body).result.product.sku, SYNTHETIC_PRODUCT.sku);
+  const createdProductId = JSON.parse(created.body).result.product.id;
 
   const decimalPrice = await request(
     app,
@@ -216,9 +220,9 @@ test("fixture-backed Admin slice executes product, price, immutable receipt, pub
 
   const adminPage = await request(app, "GET", "/admin");
   assert.equal(adminPage.status, 200);
-  assert.equal(adminPage.body.includes("Current quantity</dt><dd>10"), true);
-  assert.equal(adminPage.body.includes("RECEIPT +10 — SELLABLE"), true);
-  assert.equal(adminPage.body.includes("Create synthetic product"), true);
+  assert.equal(adminPage.body.includes(SYNTHETIC_PRODUCT.name), true);
+  assert.equal(adminPage.body.includes("10 available"), true);
+  assert.equal(adminPage.body.includes("Receive inventory + cost"), true);
 
   const draftProducts = await request(app, "GET", "/api/products");
   assert.equal(draftProducts.status, 200);
@@ -235,9 +239,11 @@ test("fixture-backed Admin slice executes product, price, immutable receipt, pub
   assert.equal(visible.status, 200);
   const visibleProducts = JSON.parse(visible.body).products;
   assert.equal(visibleProducts.length, 1);
-  assert.deepEqual(visibleProducts[0], {
-    id: "product-test-001",
-    name: SYNTHETIC_PRODUCT.name,
+  assert.equal(visibleProducts[0].id, createdProductId);
+  assert.equal(visibleProducts[0].name, SYNTHETIC_PRODUCT.name);
+  assert.equal(visibleProducts[0].publicationState, "PUBLISHED");
+  assert.deepEqual(visibleProducts[0].variants[0].skus[0], {
+    id: "sku-1",
     sku: SYNTHETIC_PRODUCT.sku,
     retailPrice: { amountCents: 1999, currency: "USD" },
     availableQuantity: 10,
@@ -286,7 +292,7 @@ test("fixture-backed Admin slice executes product, price, immutable receipt, pub
     records.every(
       (record) =>
         typeof record.occurredAt === "string" &&
-        record.reason === "ADMIN_SLICE_01" &&
+        record.reason === "DAY1_ADMIN_MVP" &&
         typeof record.idempotencyKey === "string" &&
         record.priorVersion + 1 === record.resultVersion &&
         record.result === "COMMITTED",

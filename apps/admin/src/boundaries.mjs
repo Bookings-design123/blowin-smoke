@@ -5,6 +5,16 @@ export const AUTH0_ENV_KEYS = Object.freeze([
   "AUTH0_CLIENT_ID",
   "AUTH0_CLIENT_SECRET",
   "AUTH0_AUDIENCE",
+  "AUTH0_OWNER_SUB",
+  "ADMIN_BASE_URL",
+  "ADMIN_SESSION_SECRET",
+]);
+
+export const PRIVATE_MEDIA_ENV_KEYS = Object.freeze([
+  "AWS_REGION",
+  "AWS_ACCESS_KEY_ID",
+  "AWS_SECRET_ACCESS_KEY",
+  "S3_MEDIA_BUCKET",
 ]);
 
 function missingKeys(env, keys) {
@@ -16,6 +26,7 @@ function missingKeys(env, keys) {
 export function inspectRuntimeBoundaries(env = {}) {
   const missingDatabase = missingKeys(env, DATABASE_ENV_KEYS);
   const missingAuth0 = missingKeys(env, AUTH0_ENV_KEYS);
+  const missingPrivateMedia = missingKeys(env, PRIVATE_MEDIA_ENV_KEYS);
   const missingAdmin = Object.freeze([...missingDatabase, ...missingAuth0]);
 
   return Object.freeze({
@@ -26,6 +37,10 @@ export function inspectRuntimeBoundaries(env = {}) {
     customerRead: Object.freeze({
       ready: missingDatabase.length === 0,
       missing: missingDatabase,
+    }),
+    privateMedia: Object.freeze({
+      ready: missingPrivateMedia.length === 0,
+      missing: missingPrivateMedia,
     }),
   });
 }
@@ -82,4 +97,20 @@ export function bindCommerceStore(commerceStore, requiredMethod) {
   }
 
   return Object.freeze({ ok: true, store: commerceStore });
+}
+
+export function bindPrivateMediaStore(mediaStore, requiredMethod) {
+  if (
+    !mediaStore ||
+    typeof requiredMethod !== "string" ||
+    typeof mediaStore[requiredMethod] !== "function"
+  ) {
+    return Object.freeze({
+      ok: false,
+      status: 503,
+      code: "PRIVATE_MEDIA_BOUNDARY_UNBOUND",
+    });
+  }
+
+  return Object.freeze({ ok: true, store: mediaStore });
 }
