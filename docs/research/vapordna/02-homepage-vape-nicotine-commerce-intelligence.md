@@ -12,7 +12,7 @@
 4. *Bay Smokes Homepage — THCA Commerce Intelligence Report* supplies the adjacent regulated-category comparison and separates THCA-specific requirements from shared commerce requirements.
 5. The VaporDNA homepage Firecrawl supplies raw structural evidence for this report.
 
-All repository sources were read from `Bookings-design123/blowin-smoke` at latest `main` commit `cd24a9f85bafa8f572f36d2cf891fb1b3ce7b761`.
+All repository sources were read from the Blowin' Smoke repository at `main` commit `cd24a9f85bafa8f572f36d2cf891fb1b3ce7b761`.
 
 ## Source-integrity boundary
 

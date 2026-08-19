@@ -12,7 +12,7 @@
 4. The Bay Smokes homepage capture provides limited homepage context.
 5. The Bay Smokes THCa Smalls PDP capture is the primary structural evidence for this report.
 
-The five sources were read from `Bookings-design123/blowin-smoke` at latest `main` commit `e22cdb3d0c3e4ff38d4f669405d5026746073b77`.
+The five sources were read from the Blowin' Smoke repository at `main` commit `e22cdb3d0c3e4ff38d4f669405d5026746073b77`.
 
 ## Source-integrity note
 

@@ -13,7 +13,7 @@
 
 ## Source-integrity note
 
-The governing documents were read from `Bookings-design123/blowin-smoke` at latest `main` commit `68ef03f310107e763a854f999d6af3771f441412`.
+The governing documents were read from the Blowin' Smoke repository at `main` commit `68ef03f310107e763a854f999d6af3771f441412`.
 
 At that commit, `docs/research/bay-smokes/01-homepage-firecrawl.md` is accidentally truncated at 2,140 bytes, ending in the middle of the third “Explore Our Favorites” link. The complete pre-move file was recovered from commit `23c84babf16bed1f95da559f047d74db1b5353ad` at `docs/research/glossier/bay-smokes/01-homepage-firecrawl.md`. The current truncated file is byte-for-byte identical to the first 2,140 bytes of that complete 18,543-byte blob. This report uses the complete historical blob and makes no claims from the unrelated live-site capture used in an earlier provisional draft.
 
