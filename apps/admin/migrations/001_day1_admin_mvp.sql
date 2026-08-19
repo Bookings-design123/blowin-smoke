@@ -308,11 +308,11 @@ CREATE TABLE IF NOT EXISTS admin_security_events (
 CREATE OR REPLACE FUNCTION reject_immutable_commerce_row_mutation()
 RETURNS trigger
 LANGUAGE plpgsql
-AS $$
+AS '
 BEGIN
-  RAISE EXCEPTION '% is immutable', TG_TABLE_NAME USING ERRCODE = '55000';
+  RAISE EXCEPTION ''% is immutable'', TG_TABLE_NAME USING ERRCODE = ''55000'';
 END;
-$$;
+';
 
 DROP TRIGGER IF EXISTS inventory_ledger_immutable ON inventory_ledger;
 CREATE TRIGGER inventory_ledger_immutable
