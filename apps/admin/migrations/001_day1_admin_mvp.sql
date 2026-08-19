@@ -13,30 +13,27 @@ CREATE TABLE IF NOT EXISTS admin_schema_migrations (
   applied_at timestamptz NOT NULL DEFAULT now()
 );
 
-DO LANGUAGE plpgsql '
-BEGIN
-  IF NOT EXISTS (
+-- Fail closed: unversioned admin schema requires explicit review before migration.
+SELECT 1 / CASE
+  WHEN NOT EXISTS (
     SELECT 1 FROM admin_schema_migrations WHERE version = 1
   ) AND EXISTS (
     SELECT 1
       FROM pg_class
       JOIN pg_namespace ON pg_namespace.oid = pg_class.relnamespace
-     WHERE pg_namespace.nspname = ''public''
-       AND pg_class.relkind IN (''r'', ''p'')
+     WHERE pg_namespace.nspname = 'public'
+       AND pg_class.relkind IN ('r', 'p')
        AND pg_class.relname IN (
-         ''admin_actors'', ''admin_commands'', ''admin_device_enrollment_grants'',
-         ''admin_devices'', ''admin_security_events'', ''admin_sessions'',
-         ''audit_records'', ''evidence_records'', ''inventory_consumptions'',
-         ''inventory_ledger'', ''inventory_lots'', ''inventory_reservation_items'',
-         ''inventory_reservations'', ''media_assets'', ''product_media'',
-         ''product_variants'', ''products'', ''retail_prices'', ''skus'', ''suppliers''
+         'admin_actors', 'admin_commands', 'admin_device_enrollment_grants',
+         'admin_devices', 'admin_security_events', 'admin_sessions',
+         'audit_records', 'evidence_records', 'inventory_consumptions',
+         'inventory_ledger', 'inventory_lots', 'inventory_reservation_items',
+         'inventory_reservations', 'media_assets', 'product_media',
+         'product_variants', 'products', 'retail_prices', 'skus', 'suppliers'
        )
-  ) THEN
-    RAISE EXCEPTION ''unversioned admin schema requires explicit review before migration''
-      USING ERRCODE = ''55000'';
-  END IF;
-END;
-';
+  ) THEN 0
+  ELSE 1
+END AS unversioned_admin_schema_guard;
 
 CREATE TABLE IF NOT EXISTS admin_actors (
   id text PRIMARY KEY,
@@ -341,19 +338,16 @@ INSERT INTO admin_schema_migrations (version, name, revision)
 VALUES (1, '001_day1_admin_mvp', '2026-08-18.1')
 ON CONFLICT (version) DO NOTHING;
 
-DO LANGUAGE plpgsql '
-BEGIN
-  IF NOT EXISTS (
+-- Fail closed: admin migration version 1 conflicts with the expected revision.
+SELECT 1 / CASE
+  WHEN EXISTS (
     SELECT 1
       FROM admin_schema_migrations
      WHERE version = 1
-       AND name = ''001_day1_admin_mvp''
-       AND revision = ''2026-08-18.1''
-  ) THEN
-    RAISE EXCEPTION ''admin migration version 1 conflicts with the expected revision''
-      USING ERRCODE = ''55000'';
-  END IF;
-END;
-';
+       AND name = '001_day1_admin_mvp'
+       AND revision = '2026-08-18.1'
+  ) THEN 1
+  ELSE 0
+END AS migration_revision_guard;
 
 COMMIT;
