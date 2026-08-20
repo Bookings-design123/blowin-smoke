@@ -1,30 +1,7 @@
-import {
-  createProductionAdminApplication,
-  dispatchAdminHttpRequest,
-  failedRequest,
-  writeAdminHttpResponse,
-} from "../src/server.mjs";
+import { createVercelAdminHandler } from "../src/admin-http-runtime.mjs";
 
-export function createVercelAdminHandler({
-  runtimeFactory = createProductionAdminApplication,
-} = {}) {
-  let runtimePromise;
+const handler = createVercelAdminHandler();
 
-  return async function vercelAdminHandler(request, response) {
-    try {
-      runtimePromise ??= Promise.resolve()
-        .then(() => runtimeFactory())
-        .catch((error) => {
-          runtimePromise = undefined;
-          throw error;
-        });
-      const runtime = await runtimePromise;
-      const result = await dispatchAdminHttpRequest(runtime.handle, request);
-      writeAdminHttpResponse(response, result);
-    } catch {
-      writeAdminHttpResponse(response, failedRequest());
-    }
-  };
+export default function vercelAdminFunction(request, response) {
+  return handler(request, response);
 }
-
-export default createVercelAdminHandler();

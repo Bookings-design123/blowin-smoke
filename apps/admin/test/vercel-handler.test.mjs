@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { createVercelAdminHandler } from "../api/index.mjs";
+import * as vercelEntrypoint from "../api/index.mjs";
+import { createVercelAdminHandler } from "../src/admin-http-runtime.mjs";
 import {
   MAX_UPLOAD_BINARY_BYTES,
   MAX_UPLOAD_REQUEST_BYTES,
@@ -21,6 +22,11 @@ function responseRecorder() {
     },
   };
 }
+
+test("Vercel entrypoint exports only one default request handler", () => {
+  assert.deepEqual(Object.keys(vercelEntrypoint), ["default"]);
+  assert.equal(typeof vercelEntrypoint.default, "function");
+});
 
 test("Vercel upload policy leaves room for base64 JSON framing", () => {
   const encodedBytes = Math.ceil((MAX_UPLOAD_BINARY_BYTES * 4) / 3);
