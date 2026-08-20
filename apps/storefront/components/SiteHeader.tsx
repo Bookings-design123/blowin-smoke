@@ -7,14 +7,31 @@ import { useEffect, useRef, useState } from "react";
 import { CartStatus } from "@/components/CartStatus";
 
 const primaryRoutes = [
-  { href: "/thca", label: "THCA" },
-  { href: "/vape-nicotine", label: "Vape / Nicotine" },
+  {
+    href: "/thca",
+    label: "THCA",
+    number: "01",
+    detail: "Choose by format",
+  },
+  {
+    href: "/vape-nicotine",
+    label: "Vape / Nicotine",
+    number: "02",
+    detail: "Start, replenish, replace",
+  },
   {
     href: "/glass-accessories",
     label: "Glass / Accessories / Merch",
+    number: "03",
+    detail: "Pieces, parts, care + merch",
   },
-  { href: "/learn", label: "Learn" },
-  { href: "/support", label: "Support" },
+  { href: "/learn", label: "Learn", number: "04", detail: "Decision guides" },
+  {
+    href: "/support",
+    label: "Support",
+    number: "05",
+    detail: "Channel status",
+  },
 ] as const;
 
 const contextRoutes = [
@@ -181,7 +198,13 @@ export function SiteHeader() {
                 }
                 onClick={closeMenu}
               >
-                <span>{route.label}</span>
+                <span className="site-menu__route-number" aria-hidden="true">
+                  {route.number}
+                </span>
+                <span className="site-menu__route-copy">
+                  <strong>{route.label}</strong>
+                  <small>{route.detail}</small>
+                </span>
                 {routeIsCurrent(pathname, route.href) ? (
                   <span className="site-menu__current">Current</span>
                 ) : null}
