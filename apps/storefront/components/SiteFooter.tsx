@@ -32,7 +32,6 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="site-footer__inner">
         <section className="site-footer__house" aria-labelledby="footer-house-title">
-          <p className="site-footer__eyebrow">One independent house</p>
           <h2 id="footer-house-title">
             <Link href="/">Blowin&apos; Smoke</Link>
           </h2>
