@@ -1,5 +1,8 @@
 import { createAdminApplication } from "./application.mjs";
-import { createAuth0Authenticator } from "./auth0-authenticator.mjs";
+import {
+  createAuth0Authenticator,
+  createAuth0IdTokenVerifier,
+} from "./auth0-authenticator.mjs";
 import { createAuth0WebFlow } from "./auth0-web-flow.mjs";
 import { requireProductionRuntimeConfiguration } from "./boundaries.mjs";
 import { createProductionPostgresStore } from "./postgres-commerce-store.mjs";
@@ -46,6 +49,9 @@ const SAFE_RUNTIME_ERROR_DETAILS = new Map([
   ["ADMIN_SESSION_SECRET_REQUIRED", "Authentication configuration is invalid."],
   ["ADMIN_SESSION_SECRET_TOO_SHORT", "Authentication configuration is invalid."],
   ["AUTH0_TOKEN_AUTHENTICATOR_UNBOUND", "Authentication runtime is unavailable."],
+  ["AUTH0_ID_TOKEN_VERIFIER_UNBOUND", "Authentication runtime is unavailable."],
+  ["ADMIN_ACTOR_RESOLVER_UNBOUND", "Authentication runtime is unavailable."],
+  ["AUTH0_OWNER_SUB_REQUIRED", "Authentication configuration is invalid."],
   ["AUTH0_FETCH_UNBOUND", "Authentication runtime is unavailable."],
   ["ADMIN_SESSION_STORE_UNBOUND", "Authentication runtime is unavailable."],
   ["ERR_INVALID_URL", "A required runtime URL is invalid."],
@@ -225,11 +231,30 @@ export function writeAdminHttpResponse(response, result) {
   response.end(result.body);
 }
 
+export function createConfiguredOwnerResolver({ commerceStore, ownerSubject } = {}) {
+  if (!commerceStore || typeof commerceStore.resolveAdminActor !== "function") {
+    throw new Error("ADMIN_ACTOR_RESOLVER_UNBOUND");
+  }
+  if (typeof ownerSubject !== "string" || ownerSubject.trim() === "") {
+    throw new Error("AUTH0_OWNER_SUB_REQUIRED");
+  }
+  const configuredSubject = ownerSubject.trim();
+  return async function resolveConfiguredOwner({ subject } = {}) {
+    if (typeof subject !== "string" || subject !== configuredSubject) return null;
+    return commerceStore.resolveAdminActor({
+      subject,
+      bootstrapSubject: configuredSubject,
+    });
+  };
+}
+
 export async function createProductionAdminApplication({
   env = process.env,
   pgModule,
   s3Client,
+  auth0Jwks,
   fetchImpl = fetch,
+  logger = console,
 } = {}) {
   const runtime = requireProductionRuntimeConfiguration(env);
   let commerceStore;
@@ -256,15 +281,20 @@ export async function createProductionAdminApplication({
           ...(s3Client ? { client: s3Client } : {}),
         })
       : undefined;
+    const resolveOwner = createConfiguredOwnerResolver({
+      commerceStore,
+      ownerSubject: env.AUTH0_OWNER_SUB,
+    });
     const tokenAuthenticator = createAuth0Authenticator({
       domain: env.AUTH0_DOMAIN,
       audience: env.AUTH0_AUDIENCE,
-      requiredAuthenticationMethods: ["webauthn"],
-      resolveActor: ({ subject }) =>
-        commerceStore.resolveAdminActor({
-          subject,
-          bootstrapSubject: env.AUTH0_OWNER_SUB,
-        }),
+      ...(auth0Jwks ? { jwks: auth0Jwks } : {}),
+      resolveActor: resolveOwner,
+    });
+    const idTokenVerifier = createAuth0IdTokenVerifier({
+      domain: env.AUTH0_DOMAIN,
+      clientId: env.AUTH0_CLIENT_ID,
+      ...(auth0Jwks ? { jwks: auth0Jwks } : {}),
     });
     const authFlow = createAuth0WebFlow({
       domain: env.AUTH0_DOMAIN,
@@ -274,8 +304,10 @@ export async function createProductionAdminApplication({
       baseUrl: env.ADMIN_BASE_URL,
       sessionSecret: env.ADMIN_SESSION_SECRET,
       authenticateToken: tokenAuthenticator,
+      verifyIdToken: idTokenVerifier,
       sessionStore: commerceStore,
       fetchImpl,
+      logger,
     });
 
     return Object.freeze({

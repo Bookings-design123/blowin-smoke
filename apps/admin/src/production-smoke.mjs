@@ -74,7 +74,7 @@ export function inspectAuth0SmokeConfiguration(env = {}) {
 
   return ready("auth0", {
     validation: "CONFIGURATION_PRESENT",
-    requiredAuthenticationMethod: "webauthn",
+    freshAuthenticationEvidence: "OIDC_ID_TOKEN_AUTH_TIME",
   });
 }
 

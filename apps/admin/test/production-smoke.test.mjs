@@ -99,6 +99,10 @@ test("production smoke verifies providers without mutating business data", async
   assert.equal(result.status, "READY");
   assert.equal(result.checks.database.schema, "COMPLETE");
   assert.equal(result.checks.auth0.validation, "CONFIGURATION_PRESENT");
+  assert.equal(
+    result.checks.auth0.freshAuthenticationEvidence,
+    "OIDC_ID_TOKEN_AUTH_TIME",
+  );
   assert.equal(result.checks.privateMedia.configured, true);
   assert.equal(result.checks.privateMedia.access, "HEAD_BUCKET_VERIFIED");
   assert.deepEqual(result.missingExternalInputs, []);

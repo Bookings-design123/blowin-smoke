@@ -9,7 +9,10 @@ import {
   productionPostgresPoolOptions,
   runDay1AdminMigrations,
 } from "../src/postgres-commerce-store.mjs";
-import { createProductionAdminApplication } from "../src/admin-http-runtime.mjs";
+import {
+  createConfiguredOwnerResolver,
+  createProductionAdminApplication,
+} from "../src/admin-http-runtime.mjs";
 
 const MIGRATION_URL = new URL("../migrations/001_day1_admin_mvp.sql", import.meta.url);
 
@@ -401,6 +404,31 @@ test("production runtime rejects incomplete configuration instead of starting pa
     createProductionAdminApplication({ env: configured }),
     /PRODUCTION_CONFIGURATION_MISSING/,
   );
+});
+
+test("production owner resolution permits only the exact configured Auth0 subject", async () => {
+  const resolutions = [];
+  const resolveOwner = createConfiguredOwnerResolver({
+    ownerSubject: " auth0|configured-owner ",
+    commerceStore: {
+      async resolveAdminActor(input) {
+        resolutions.push(input);
+        return { id: "owner-001", active: true };
+      },
+    },
+  });
+
+  assert.equal(await resolveOwner({ subject: "auth0|different-owner" }), null);
+  assert.deepEqual(
+    await resolveOwner({ subject: "auth0|configured-owner" }),
+    { id: "owner-001", active: true },
+  );
+  assert.deepEqual(resolutions, [
+    {
+      subject: "auth0|configured-owner",
+      bootstrapSubject: "auth0|configured-owner",
+    },
+  ]);
 });
 
 test("production runtime starts without private media configuration", async () => {

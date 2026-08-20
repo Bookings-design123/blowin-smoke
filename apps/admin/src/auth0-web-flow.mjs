@@ -12,6 +12,54 @@ const DEVICE_COOKIE = "bs_admin_device";
 const STATE_TTL_SECONDS = 10 * 60;
 const DEVICE_TTL_SECONDS = 365 * 24 * 60 * 60;
 const DEVICE_ENROLLMENT_TTL_SECONDS = 10 * 60;
+const FRESH_LOGIN_MAX_AGE_SECONDS = 5 * 60;
+const CLOCK_TOLERANCE_SECONDS = 5;
+
+const CALLBACK_FAILURE_DETAILS = new Map([
+  ["AUTH0_CALLBACK_STATE_INVALID", "Auth0 callback state validation failed."],
+  ["AUTH0_TOKEN_EXCHANGE_FAILED", "Auth0 token exchange failed."],
+  ["AUTH0_TOKEN_RESPONSE_INVALID", "Auth0 token response validation failed."],
+  ["AUTH0_ID_TOKEN_INVALID", "Auth0 ID token validation failed."],
+  ["AUTH0_ACCESS_TOKEN_INVALID", "Auth0 access token validation failed."],
+  ["AUTH0_TOKEN_SUBJECT_MISMATCH", "Auth0 token subject binding failed."],
+  ["AUTH0_OWNER_NOT_AUTHORIZED", "Auth0 owner authorization failed."],
+  ["ADMIN_DEVICE_REGISTRATION_FAILED", "Admin device registration failed."],
+  ["ADMIN_SESSION_CREATION_FAILED", "Admin session creation failed."],
+  ["ADMIN_SESSION_COOKIE_FAILED", "Admin session cookie creation failed."],
+  ["AUTH0_CALLBACK_FAILED", "Auth0 callback processing failed."],
+]);
+
+function callbackFailure(code) {
+  const error = new Error(code);
+  error.name = "Auth0CallbackError";
+  error.code = code;
+  return error;
+}
+
+function safeCallbackFailure(error) {
+  return CALLBACK_FAILURE_DETAILS.has(error?.code)
+    ? error
+    : callbackFailure("AUTH0_CALLBACK_FAILED");
+}
+
+function logCallbackFailure(error, logger) {
+  const failure = safeCallbackFailure(error);
+  try {
+    if (logger && typeof logger.error === "function") {
+      logger.error(
+        Object.freeze({
+          event: "ADMIN_AUTH0_CALLBACK_FAILED",
+          name: "Auth0CallbackError",
+          code: failure.code,
+          message: CALLBACK_FAILURE_DETAILS.get(failure.code),
+        }),
+      );
+    }
+  } catch {
+    // Diagnostics must never weaken the fail-closed callback response.
+  }
+  return failure;
+}
 
 function requiredText(value, code) {
   if (typeof value !== "string" || value.trim() === "") throw new Error(code);
@@ -89,6 +137,45 @@ function constantEqual(left, right) {
   return a.length === b.length && timingSafeEqual(a, b);
 }
 
+function normalizedAuthenticationMethods(value) {
+  return Object.freeze(
+    Array.isArray(value)
+      ? value
+          .filter(
+            (method) =>
+              typeof method === "string" &&
+              /^[A-Za-z0-9._:-]{1,64}$/.test(method),
+          )
+          .slice(0, 16)
+      : [],
+  );
+}
+
+function actorWithLoginEvidence(actor, evidence, currentEpochSeconds) {
+  const authenticatedAt = evidence?.authenticatedAtEpochSeconds;
+  if (!Number.isSafeInteger(authenticatedAt) || authenticatedAt < 1) return null;
+  const ageSeconds = currentEpochSeconds - authenticatedAt;
+  const freshAuthentication =
+    ageSeconds >= -CLOCK_TOLERANCE_SECONDS &&
+    ageSeconds <= FRESH_LOGIN_MAX_AGE_SECONDS;
+  const methods = normalizedAuthenticationMethods(evidence?.methods);
+  const authentication = Object.freeze({
+    ...(actor?.authentication ?? {}),
+    authenticatedAtEpochSeconds: authenticatedAt,
+    methods,
+    freshAuthentication,
+  });
+  const authenticatedAtIso = new Date(authenticatedAt * 1_000).toISOString();
+  return Object.freeze({
+    ...actor,
+    authenticatedAt: authenticatedAtIso,
+    freshAuthenticationAt: freshAuthentication ? authenticatedAtIso : null,
+    authenticationMethods: methods,
+    freshAuthentication,
+    authentication,
+  });
+}
+
 function cookie(name, value, { maxAge, secure }) {
   const attributes = [
     `${name}=${encodeURIComponent(value)}`,
@@ -131,9 +218,11 @@ export function createAuth0WebFlow({
   baseUrl,
   sessionSecret,
   authenticateToken,
+  verifyIdToken,
   sessionStore,
   fetchImpl = fetch,
   now = () => Date.now(),
+  logger = console,
 } = {}) {
   const issuer = issuerUrl(domain);
   const resolvedClientId = requiredText(clientId, "AUTH0_CLIENT_ID_REQUIRED");
@@ -154,6 +243,9 @@ export function createAuth0WebFlow({
   const secure = adminBaseUrl.protocol === "https:";
   if (typeof authenticateToken !== "function") {
     throw new Error("AUTH0_TOKEN_AUTHENTICATOR_UNBOUND");
+  }
+  if (typeof verifyIdToken !== "function") {
+    throw new Error("AUTH0_ID_TOKEN_VERIFIER_UNBOUND");
   }
   if (typeof fetchImpl !== "function") throw new Error("AUTH0_FETCH_UNBOUND");
   if (
@@ -209,53 +301,105 @@ export function createAuth0WebFlow({
     });
   }
 
-  async function completeLogin(request) {
-    const url = new URL(String(request?.url ?? "/admin/callback"), adminBaseUrl);
+  async function completeLoginInternal(request) {
+    let url;
+    let stateValue;
+    try {
+      url = new URL(String(request?.url ?? "/admin/callback"), adminBaseUrl);
+      stateValue = unseal(cookies(request)[STATE_COOKIE], key);
+    } catch {
+      throw callbackFailure("AUTH0_CALLBACK_STATE_INVALID");
+    }
     const code = url.searchParams.get("code");
     const returnedState = url.searchParams.get("state");
-    const stateValue = unseal(cookies(request)[STATE_COOKIE], key);
+    const currentEpochSeconds = Math.floor(now() / 1_000);
     if (
       typeof code !== "string" ||
       code === "" ||
+      !stateValue ||
+      typeof stateValue !== "object" ||
       !constantEqual(returnedState, stateValue.state) ||
+      typeof stateValue.nonce !== "string" ||
+      stateValue.nonce === "" ||
+      typeof stateValue.verifier !== "string" ||
+      stateValue.verifier === "" ||
       !Number.isSafeInteger(stateValue.expiresAt) ||
-      stateValue.expiresAt < Math.floor(now() / 1_000)
+      stateValue.expiresAt < currentEpochSeconds
     ) {
-      throw new Error("AUTH0_CALLBACK_INVALID");
+      throw callbackFailure("AUTH0_CALLBACK_STATE_INVALID");
     }
-    const tokenResponse = await fetchImpl(new URL("oauth/token", issuer), {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        grant_type: "authorization_code",
-        client_id: resolvedClientId,
-        client_secret: resolvedClientSecret,
-        code,
-        code_verifier: stateValue.verifier,
-        redirect_uri: callbackUrl,
-      }),
+
+    let tokenResponse;
+    try {
+      tokenResponse = await fetchImpl(new URL("oauth/token", issuer), {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          grant_type: "authorization_code",
+          client_id: resolvedClientId,
+          client_secret: resolvedClientSecret,
+          code,
+          code_verifier: stateValue.verifier,
+          redirect_uri: callbackUrl,
+        }),
+      });
+    } catch {
+      throw callbackFailure("AUTH0_TOKEN_EXCHANGE_FAILED");
+    }
+    if (!tokenResponse?.ok) {
+      throw callbackFailure("AUTH0_TOKEN_EXCHANGE_FAILED");
+    }
+
+    let token;
+    try {
+      token = await tokenResponse.json();
+    } catch {
+      throw callbackFailure("AUTH0_TOKEN_RESPONSE_INVALID");
+    }
+    if (
+      !token ||
+      typeof token !== "object" ||
+      typeof token.access_token !== "string" ||
+      token.access_token === "" ||
+      typeof token.id_token !== "string" ||
+      token.id_token === "" ||
+      typeof token.token_type !== "string" ||
+      token.token_type.toLowerCase() !== "bearer"
+    ) {
+      throw callbackFailure("AUTH0_TOKEN_RESPONSE_INVALID");
+    }
+
+    const loginEvidence = await verifyIdToken(token.id_token, {
+      nonce: stateValue.nonce,
     });
-    if (!tokenResponse.ok) throw new Error("AUTH0_TOKEN_EXCHANGE_FAILED");
-    const token = await tokenResponse.json();
-    if (typeof token.access_token !== "string") {
-      throw new Error("AUTH0_ACCESS_TOKEN_MISSING");
-    }
+    if (!loginEvidence) throw callbackFailure("AUTH0_ID_TOKEN_INVALID");
     const actor = await authenticateToken({
       headers: { authorization: `Bearer ${token.access_token}` },
-    }, { requireFresh: true });
+    });
+    if (!actor) throw callbackFailure("AUTH0_ACCESS_TOKEN_INVALID");
+    if (!constantEqual(actor.subject, loginEvidence.subject)) {
+      throw callbackFailure("AUTH0_TOKEN_SUBJECT_MISMATCH");
+    }
     if (
-      !actor ||
-      actor.freshAuthentication !== true ||
       !Array.isArray(actor.capabilities) ||
       !actor.capabilities.includes("device.manage")
     ) {
-      throw new Error("AUTH0_FRESH_PASSKEY_REQUIRED");
+      throw callbackFailure("AUTH0_OWNER_NOT_AUTHORIZED");
     }
+    const authenticatedActor = actorWithLoginEvidence(
+      actor,
+      loginEvidence,
+      currentEpochSeconds,
+    );
+    if (!authenticatedActor?.freshAuthentication) {
+      throw callbackFailure("AUTH0_ID_TOKEN_INVALID");
+    }
+
     let deviceId;
     try {
       const existingDevice = unseal(cookies(request)[DEVICE_COOKIE], key);
       if (
-        existingDevice.actorId === actor.id &&
+        existingDevice.actorId === authenticatedActor.id &&
         typeof existingDevice.deviceId === "string" &&
         existingDevice.deviceId !== ""
       ) {
@@ -268,42 +412,70 @@ export function createAuth0WebFlow({
     const enrollmentCodeHash = stateValue.enrollmentCode
       ? createHash("sha256").update(stateValue.enrollmentCode).digest("hex")
       : null;
-    await sessionStore.registerAdminDevice({
-      deviceId,
-      actorId: actor.id,
-      enrollmentCodeHash,
-    });
+    try {
+      await sessionStore.registerAdminDevice({
+        deviceId,
+        actorId: authenticatedActor.id,
+        enrollmentCodeHash,
+      });
+    } catch {
+      throw callbackFailure("ADMIN_DEVICE_REGISTRATION_FAILED");
+    }
+
     const sessionId = randomBytes(24).toString("base64url");
-    const tokenExpiry = actor.authentication?.expiresAt;
-    const expiresAt = Number.isSafeInteger(tokenExpiry)
-      ? tokenExpiry
-      : Math.floor(now() / 1_000) + 60 * 60;
-    await sessionStore.createAdminSession({
-      sessionId,
-      actorId: actor.id,
-      deviceId,
-      subject: actor.subject ?? actor.authentication?.subject,
-      expiresAt: new Date(expiresAt * 1_000).toISOString(),
-    });
-    const sessionValue = seal(
-      { sessionId, accessToken: token.access_token, expiresAt },
-      key,
-    );
-    return adapterResponse(302, "", {
-      location: "/admin",
-      "set-cookie": [
-        cookie(STATE_COOKIE, "", { maxAge: 0, secure }),
-        cookie(SESSION_COOKIE, sessionValue, {
-          maxAge: Math.max(1, expiresAt - Math.floor(now() / 1_000)),
-          secure,
-        }),
-        cookie(
-          DEVICE_COOKIE,
-          seal({ deviceId, actorId: actor.id }, key),
-          { maxAge: DEVICE_TTL_SECONDS, secure },
-        ),
-      ],
-    });
+    const expiresAt = authenticatedActor.authentication?.expiresAt;
+    if (!Number.isSafeInteger(expiresAt) || expiresAt <= currentEpochSeconds) {
+      throw callbackFailure("AUTH0_ACCESS_TOKEN_INVALID");
+    }
+    try {
+      await sessionStore.createAdminSession({
+        sessionId,
+        actorId: authenticatedActor.id,
+        deviceId,
+        expiresAt: new Date(expiresAt * 1_000).toISOString(),
+      });
+    } catch {
+      throw callbackFailure("ADMIN_SESSION_CREATION_FAILED");
+    }
+
+    try {
+      const sessionValue = seal(
+        {
+          sessionId,
+          accessToken: token.access_token,
+          expiresAt,
+          authenticatedAtEpochSeconds:
+            loginEvidence.authenticatedAtEpochSeconds,
+          authenticationMethods: loginEvidence.methods,
+        },
+        key,
+      );
+      return adapterResponse(302, "", {
+        location: "/admin",
+        "set-cookie": [
+          cookie(STATE_COOKIE, "", { maxAge: 0, secure }),
+          cookie(SESSION_COOKIE, sessionValue, {
+            maxAge: Math.max(1, expiresAt - currentEpochSeconds),
+            secure,
+          }),
+          cookie(
+            DEVICE_COOKIE,
+            seal({ deviceId, actorId: authenticatedActor.id }, key),
+            { maxAge: DEVICE_TTL_SECONDS, secure },
+          ),
+        ],
+      });
+    } catch {
+      throw callbackFailure("ADMIN_SESSION_COOKIE_FAILED");
+    }
+  }
+
+  async function completeLogin(request) {
+    try {
+      return await completeLoginInternal(request);
+    } catch (error) {
+      throw logCallbackFailure(error, logger);
+    }
   }
 
   async function authenticateAdmin(request, requirements) {
@@ -341,9 +513,24 @@ export function createAuth0WebFlow({
             authorization: `Bearer ${session.accessToken}`,
           },
         },
-        requirements,
       );
-      return actor?.id === registered.actorId ? actor : null;
+      if (actor?.id !== registered.actorId) return null;
+      const authenticatedActor = actorWithLoginEvidence(
+        actor,
+        {
+          authenticatedAtEpochSeconds: session.authenticatedAtEpochSeconds,
+          methods: session.authenticationMethods,
+        },
+        Math.floor(now() / 1_000),
+      );
+      if (
+        !authenticatedActor ||
+        (requirements?.requireFresh === true &&
+          authenticatedActor.freshAuthentication !== true)
+      ) {
+        return null;
+      }
+      return authenticatedActor;
     } catch {
       return null;
     }

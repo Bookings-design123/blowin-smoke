@@ -1,3 +1,5 @@
+import { timingSafeEqual } from "node:crypto";
+
 import { createRemoteJWKSet, jwtVerify } from "jose";
 
 const AUTHORIZATION_PATTERN = /^Bearer ([A-Za-z0-9._~-]+)$/;
@@ -71,6 +73,23 @@ function numericDate(value, code) {
   return value;
 }
 
+function constantEqual(left, right) {
+  if (typeof left !== "string" || typeof right !== "string") return false;
+  const a = Buffer.from(left);
+  const b = Buffer.from(right);
+  return a.length === b.length && timingSafeEqual(a, b);
+}
+
+function authenticationMethods(payload) {
+  return Object.freeze(
+    Array.isArray(payload.amr)
+      ? payload.amr.filter(
+          (method) => typeof method === "string" && method.trim() !== "",
+        )
+      : [],
+  );
+}
+
 function freezeActor(actor, authentication) {
   if (!actor || typeof actor.id !== "string" || actor.id.trim() === "") {
     throw new AdminAuthenticationError("ADMIN_ACTOR_NOT_AUTHORIZED");
@@ -138,7 +157,7 @@ export function createAuth0Authenticator({
   now = () => Date.now(),
   clockToleranceSeconds = 5,
   freshAuthenticationMaxAgeSeconds = 300,
-  requiredAuthenticationMethods = ["webauthn"],
+  requiredAuthenticationMethods = [],
 } = {}) {
   const issuer = normalizedIssuer(issuerInput ?? domain);
   const resolvedAudience = requiredText(audience, "AUTH0_AUDIENCE_REQUIRED");
@@ -164,7 +183,6 @@ export function createAuth0Authenticator({
 
   if (
     !Array.isArray(requiredAuthenticationMethods) ||
-    requiredAuthenticationMethods.length < 1 ||
     requiredAuthenticationMethods.some(
       (method) => typeof method !== "string" || method.trim() === "",
     )
@@ -198,17 +216,12 @@ export function createAuth0Authenticator({
       const subject = requiredText(payload.sub, "AUTH_TOKEN_SUBJECT_INVALID");
       const issuedAt = numericDate(payload.iat, "AUTH_TOKEN_ISSUED_AT_INVALID");
       const expiresAt = numericDate(payload.exp, "AUTH_TOKEN_EXPIRY_INVALID");
-      const authenticationMethods = Array.isArray(payload.amr)
-        ? Object.freeze(
-            payload.amr.filter(
-              (method) => typeof method === "string" && method.trim() !== "",
-            ),
-          )
-        : Object.freeze([]);
+      const tokenAuthenticationMethods = authenticationMethods(payload);
 
       if (
+        acceptedAuthenticationMethods.length > 0 &&
         !acceptedAuthenticationMethods.some((requiredMethod) =>
-          authenticationMethods.includes(requiredMethod),
+          tokenAuthenticationMethods.includes(requiredMethod),
         )
       ) {
         throw new AdminAuthenticationError("PHISHING_RESISTANT_AUTH_REQUIRED");
@@ -234,7 +247,7 @@ export function createAuth0Authenticator({
         issuedAt,
         expiresAt,
         authenticatedAtEpochSeconds: authenticatedAt,
-        methods: authenticationMethods,
+        methods: tokenAuthenticationMethods,
         freshAuthentication:
           Number.isSafeInteger(authenticatedAt) &&
           currentEpochSeconds - authenticatedAt >= 0 &&
@@ -254,6 +267,91 @@ export function createAuth0Authenticator({
       }
 
       return resolvedActor;
+    } catch {
+      return null;
+    }
+  };
+}
+
+export function createAuth0IdTokenVerifier({
+  issuer: issuerInput,
+  domain,
+  clientId,
+  jwks,
+  now = () => Date.now(),
+  clockToleranceSeconds = 5,
+  freshAuthenticationMaxAgeSeconds = 300,
+} = {}) {
+  const issuer = normalizedIssuer(issuerInput ?? domain);
+  const resolvedClientId = requiredText(clientId, "AUTH0_CLIENT_ID_REQUIRED");
+
+  if (typeof now !== "function") {
+    throw new AdminAuthenticationError("AUTH_CLOCK_INVALID");
+  }
+  if (!Number.isSafeInteger(clockToleranceSeconds) || clockToleranceSeconds < 0) {
+    throw new AdminAuthenticationError("AUTH_CLOCK_TOLERANCE_INVALID");
+  }
+  if (
+    !Number.isSafeInteger(freshAuthenticationMaxAgeSeconds) ||
+    freshAuthenticationMaxAgeSeconds < 0
+  ) {
+    throw new AdminAuthenticationError("FRESH_AUTH_MAX_AGE_INVALID");
+  }
+
+  const keySet =
+    jwks ?? createRemoteJWKSet(new URL(".well-known/jwks.json", issuer));
+
+  return async function verifyAuth0IdToken(token, { nonce } = {}) {
+    try {
+      const encodedToken = requiredText(token, "AUTH0_ID_TOKEN_REQUIRED");
+      const expectedNonce = requiredText(nonce, "AUTH0_NONCE_REQUIRED");
+      const currentEpochSeconds = Math.floor(now() / 1_000);
+      const { payload, protectedHeader } = await jwtVerify(encodedToken, keySet, {
+        issuer,
+        audience: resolvedClientId,
+        algorithms: ["RS256"],
+        clockTolerance: clockToleranceSeconds,
+        currentDate: new Date(currentEpochSeconds * 1_000),
+        requiredClaims: ["sub", "iat", "exp", "nonce", "auth_time"],
+      });
+
+      if (protectedHeader.alg !== "RS256") {
+        throw new AdminAuthenticationError("AUTH_TOKEN_ALGORITHM_INVALID");
+      }
+
+      const subject = requiredText(payload.sub, "AUTH_TOKEN_SUBJECT_INVALID");
+      const issuedAt = numericDate(payload.iat, "AUTH_TOKEN_ISSUED_AT_INVALID");
+      const expiresAt = numericDate(payload.exp, "AUTH_TOKEN_EXPIRY_INVALID");
+      const authenticatedAt = numericDate(
+        payload.auth_time,
+        "AUTH_TOKEN_AUTHENTICATED_AT_INVALID",
+      );
+      const tokenNonce = requiredText(payload.nonce, "AUTH0_NONCE_INVALID");
+      if (!constantEqual(tokenNonce, expectedNonce)) {
+        throw new AdminAuthenticationError("AUTH0_NONCE_INVALID");
+      }
+      if (issuedAt > currentEpochSeconds + clockToleranceSeconds) {
+        throw new AdminAuthenticationError("AUTH_TOKEN_ISSUED_AT_INVALID");
+      }
+      if (expiresAt <= currentEpochSeconds - clockToleranceSeconds) {
+        throw new AdminAuthenticationError("AUTH_TOKEN_EXPIRED");
+      }
+      const authenticationAgeSeconds = currentEpochSeconds - authenticatedAt;
+      if (
+        authenticationAgeSeconds < -clockToleranceSeconds ||
+        authenticationAgeSeconds > freshAuthenticationMaxAgeSeconds
+      ) {
+        throw new AdminAuthenticationError("FRESH_AUTHENTICATION_REQUIRED");
+      }
+
+      return Object.freeze({
+        provider: "auth0",
+        subject,
+        issuedAt,
+        expiresAt,
+        authenticatedAtEpochSeconds: authenticatedAt,
+        methods: authenticationMethods(payload),
+      });
     } catch {
       return null;
     }
