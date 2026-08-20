@@ -1749,7 +1749,7 @@ Component names describe responsibilities, not mandatory implementation names.
 | CustomerJobTag | Named use/priority context | standard |
 | ExpectationMap | Preference spectrum and tradeoff | sufficient evidence, limited |
 | EvidenceMaturity | Coverage and confidence | mature, emerging, insufficient |
-| LitmusStatusRecord | Contextual evaluation record | evaluated, conditional, needs evidence, not evaluated |
+| LitmusStatusRecord | Contextual evaluation record | stock candidate, test-buy candidate, watch, failed/do not stock, insufficient evidence |
 | SupportabilityRecord | Replacements, upkeep, help | supported, limited, unknown |
 | CustomerReviewContext | Testimony with scope | sufficient, sparse, mismatched |
 | ResearchCorrection | Changed conclusion/history | corrected, superseded |
