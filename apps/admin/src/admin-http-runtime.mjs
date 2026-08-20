@@ -9,6 +9,134 @@ import { MAX_UPLOAD_REQUEST_BYTES } from "./upload-policy.mjs";
 export const maximumCommandBodyBytes = 128 * 1024;
 export const maximumUploadBodyBytes = MAX_UPLOAD_REQUEST_BYTES;
 
+const SAFE_RUNTIME_ERROR_NAMES = new Set([
+  "AdminAuthenticationError",
+  "AggregateError",
+  "Error",
+  "RangeError",
+  "ReferenceError",
+  "SyntaxError",
+  "TypeError",
+  "URIError",
+]);
+
+const SAFE_RUNTIME_ERROR_DETAILS = new Map([
+  [
+    "PRODUCTION_CONFIGURATION_MISSING",
+    "Required runtime configuration is missing.",
+  ],
+  ["DATABASE_BOUNDARY_UNBOUND", "Database configuration is invalid."],
+  ["DATABASE_URL_INVALID", "Database configuration is invalid."],
+  ["DATABASE_TLS_REQUIRED", "Database TLS configuration is invalid."],
+  ["POSTGRES_POOL_CONFIGURATION_INVALID", "Database pool configuration is invalid."],
+  ["POSTGRES_DRIVER_UNAVAILABLE", "Database driver is unavailable."],
+  ["POSTGRES_POOL_REQUIRED", "Database pool is unavailable."],
+  ["POSTGRES_MIGRATION_STATE_MISSING", "Database schema verification failed."],
+  ["POSTGRES_MIGRATION_STATE_CONFLICT", "Database schema verification failed."],
+  ["POSTGRES_SCHEMA_DRIFT", "Database schema verification failed."],
+  ["AUTH0_ISSUER_REQUIRED", "Authentication configuration is invalid."],
+  ["AUTH0_ISSUER_INVALID", "Authentication configuration is invalid."],
+  ["AUTH0_DOMAIN_REQUIRED", "Authentication configuration is invalid."],
+  ["AUTH0_DOMAIN_INVALID", "Authentication configuration is invalid."],
+  ["AUTH0_CLIENT_ID_REQUIRED", "Authentication configuration is invalid."],
+  ["AUTH0_CLIENT_SECRET_REQUIRED", "Authentication configuration is invalid."],
+  ["AUTH0_AUDIENCE_REQUIRED", "Authentication configuration is invalid."],
+  ["ADMIN_BASE_URL_REQUIRED", "Authentication configuration is invalid."],
+  ["ADMIN_BASE_URL_INVALID", "Authentication configuration is invalid."],
+  ["ADMIN_SESSION_SECRET_REQUIRED", "Authentication configuration is invalid."],
+  ["ADMIN_SESSION_SECRET_TOO_SHORT", "Authentication configuration is invalid."],
+  ["AUTH0_TOKEN_AUTHENTICATOR_UNBOUND", "Authentication runtime is unavailable."],
+  ["AUTH0_FETCH_UNBOUND", "Authentication runtime is unavailable."],
+  ["ADMIN_SESSION_STORE_UNBOUND", "Authentication runtime is unavailable."],
+  ["ERR_INVALID_URL", "A required runtime URL is invalid."],
+  ["ENOTFOUND", "A required service could not be resolved."],
+  ["EAI_AGAIN", "A required service could not be resolved."],
+  ["ECONNREFUSED", "A required service refused the connection."],
+  ["ECONNRESET", "A required service connection was reset."],
+  ["ETIMEDOUT", "A required service connection timed out."],
+  ["ENETUNREACH", "A required service is unreachable."],
+  ["EHOSTUNREACH", "A required service is unreachable."],
+  ["28P01", "Database authentication failed."],
+  ["3D000", "The configured database is unavailable."],
+  ["42501", "Database permission was denied."],
+  ["08000", "Database connection failed."],
+  ["08001", "Database connection failed."],
+  ["08003", "Database connection failed."],
+  ["08004", "Database connection failed."],
+  ["08006", "Database connection failed."],
+  ["08007", "Database connection failed."],
+  ["08P01", "Database connection failed."],
+]);
+
+const SAFE_RUNTIME_STACK_FILES = new Set([
+  "admin-http-runtime.mjs",
+  "application.mjs",
+  "auth0-authenticator.mjs",
+  "auth0-web-flow.mjs",
+  "boundaries.mjs",
+  "postgres-commerce-store.mjs",
+  "s3-private-media-store.mjs",
+]);
+
+function errorText(error, property) {
+  if (!error || (typeof error !== "object" && typeof error !== "function")) {
+    return undefined;
+  }
+  try {
+    return typeof error[property] === "string" ? error[property] : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+function safeRuntimeStack(error) {
+  const rawStack = errorText(error, "stack");
+  if (!rawStack) return Object.freeze([]);
+
+  const frames = [];
+  for (const rawLine of rawStack.split(/\r?\n/).slice(1)) {
+    const match = /\(?((?:file:\/\/)?(?:\/|[A-Za-z]:[\\/])[^()\s]+):(\d+):(\d+)\)?$/.exec(
+      rawLine.trim(),
+    );
+    if (!match) continue;
+    const filename = match[1].split(/[\\/]/).at(-1);
+    if (!SAFE_RUNTIME_STACK_FILES.has(filename)) continue;
+    frames.push(`${filename}:${match[2]}:${match[3]}`);
+    if (frames.length === 8) break;
+  }
+  return Object.freeze(frames);
+}
+
+function safeRuntimeDiagnostic(error) {
+  const rawName = errorText(error, "name");
+  const name = SAFE_RUNTIME_ERROR_NAMES.has(rawName) ? rawName : "Error";
+  const rawCode = errorText(error, "code");
+  const rawMessage = errorText(error, "message");
+  const code = SAFE_RUNTIME_ERROR_DETAILS.has(rawCode)
+    ? rawCode
+    : SAFE_RUNTIME_ERROR_DETAILS.has(rawMessage)
+      ? rawMessage
+      : "UNCLASSIFIED_RUNTIME_ERROR";
+
+  return Object.freeze({
+    name,
+    code,
+    message:
+      SAFE_RUNTIME_ERROR_DETAILS.get(code) ?? "Runtime initialization failed.",
+    stack: safeRuntimeStack(error),
+  });
+}
+
+function logRuntimeStartupError(error, logger) {
+  try {
+    if (logger && typeof logger.error === "function") {
+      logger.error(safeRuntimeDiagnostic(error));
+    }
+  } catch {
+    // Logging must never weaken the fail-closed response or retry behavior.
+  }
+}
+
 export function requestBodyLimit(request) {
   const pathname = new URL(request.url ?? "/", "http://localhost").pathname;
   return pathname === "/admin/evidence" ||
@@ -176,6 +304,7 @@ export async function createProductionAdminApplication({
 
 export function createVercelAdminHandler({
   runtimeFactory = createProductionAdminApplication,
+  logger = console,
 } = {}) {
   let runtimePromise;
 
@@ -185,6 +314,7 @@ export function createVercelAdminHandler({
         .then(() => runtimeFactory())
         .catch((error) => {
           runtimePromise = undefined;
+          logRuntimeStartupError(error, logger);
           throw error;
         });
       const runtime = await runtimePromise;

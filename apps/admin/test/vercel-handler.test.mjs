@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
+import { format } from "node:util";
 
 import * as vercelEntrypoint from "../api/index.mjs";
 import { createVercelAdminHandler } from "../src/admin-http-runtime.mjs";
@@ -111,6 +112,7 @@ test("Vercel handler fails closed for initialization errors and oversized comman
         },
       };
     },
+    logger: { error() {} },
   });
   const failed = responseRecorder();
   await initializationFailure({ method: "GET", url: "/admin", headers: {} }, failed);
@@ -142,4 +144,65 @@ test("Vercel handler fails closed for initialization errors and oversized comman
   );
   assert.equal(oversized.status, 413);
   assert.equal(invoked, false);
+});
+
+test("Vercel startup diagnostics cannot expose secrets", async () => {
+  const sensitiveValues = [
+    "postgresql://db-owner:DB_PASSWORD_MARKER@db.example.test/admin?sslmode=require",
+    "DB_PASSWORD_MARKER",
+    "AUTH0_CLIENT_SECRET_MARKER",
+    "ADMIN_SESSION_SECRET_MARKER",
+    "BEARER_TOKEN_MARKER",
+    "AWS_ACCESS_KEY_ID_MARKER",
+    "AWS_SECRET_ACCESS_KEY_MARKER",
+    "owner.personal+marker@example.test",
+  ];
+  const failure = new Error(sensitiveValues.join(" | "));
+  failure.name = sensitiveValues[7];
+  failure.code = "ECONNREFUSED";
+  failure.cause = new Error(sensitiveValues[3]);
+  failure.stack = [
+    `Error: ${sensitiveValues.join(" | ")}`,
+    `    at ${sensitiveValues[4]} (file:///var/task/apps/admin/src/admin-http-runtime.mjs:241:11)`,
+    `    at ${sensitiveValues[5]} (file:///var/task/apps/admin/src/${sensitiveValues[6]}.mjs:1:1)`,
+    `    at ${sensitiveValues[7]} (https://example.test/module.mjs?token=${sensitiveValues[4]}:2:3)`,
+  ].join("\n");
+  const logged = [];
+  const handler = createVercelAdminHandler({
+    runtimeFactory: async () => {
+      throw failure;
+    },
+    logger: {
+      error(...args) {
+        logged.push(args);
+      },
+    },
+  });
+  const response = responseRecorder();
+
+  await handler(
+    {
+      method: "GET",
+      url: "/admin",
+      headers: { authorization: `Bearer ${sensitiveValues[4]}` },
+    },
+    response,
+  );
+
+  assert.equal(response.status, 503);
+  assert.equal(response.body, '{"status":"BLOCKED","code":"REQUEST_FAILED"}');
+  assert.equal(logged.length, 1);
+  assert.equal(logged[0].length, 1);
+  assert.deepEqual(logged[0][0], {
+    name: "Error",
+    code: "ECONNREFUSED",
+    message: "A required service refused the connection.",
+    stack: ["admin-http-runtime.mjs:241:11"],
+  });
+
+  const renderedLog = format(...logged[0]);
+  for (const sensitiveValue of sensitiveValues) {
+    assert.equal(renderedLog.includes(sensitiveValue), false);
+  }
+  assert.equal(response.body.includes("ECONNREFUSED"), false);
 });
