@@ -279,7 +279,10 @@ export function createAdminApplication({
     if (!runtime.privateMedia.ready) {
       return Object.freeze({
         ok: false,
-        response: blocked("PRIVATE_MEDIA_STORAGE", runtime.privateMedia.missing),
+        response: json(503, {
+          status: "BLOCKED",
+          code: "MEDIA_STORAGE_NOT_CONFIGURED",
+        }),
       });
     }
     const media = bindPrivateMediaStore(mediaStore, "putObject");

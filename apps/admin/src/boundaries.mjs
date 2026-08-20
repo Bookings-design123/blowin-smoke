@@ -20,7 +20,6 @@ export const PRIVATE_MEDIA_ENV_KEYS = Object.freeze([
 export const PRODUCTION_ENV_KEYS = Object.freeze([
   ...DATABASE_ENV_KEYS,
   ...AUTH0_ENV_KEYS,
-  ...PRIVATE_MEDIA_ENV_KEYS,
 ]);
 
 function missingKeys(env, keys) {

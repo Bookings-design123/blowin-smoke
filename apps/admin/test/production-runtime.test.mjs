@@ -387,13 +387,12 @@ test("production store consumes DATABASE_URL, verifies schema, and closes its po
 test("production runtime rejects incomplete configuration instead of starting partially", async () => {
   const configured = productionEnvironment();
   delete configured.AUTH0_CLIENT_SECRET;
-  delete configured.S3_MEDIA_BUCKET;
 
   assert.throws(
     () => requireProductionRuntimeConfiguration(configured),
     (error) => {
       assert.equal(error.code, "PRODUCTION_CONFIGURATION_MISSING");
-      assert.deepEqual(error.missing, ["AUTH0_CLIENT_SECRET", "S3_MEDIA_BUCKET"]);
+      assert.deepEqual(error.missing, ["AUTH0_CLIENT_SECRET"]);
       assert.equal(error.message.includes("client-secret"), false);
       return true;
     },
@@ -402,6 +401,42 @@ test("production runtime rejects incomplete configuration instead of starting pa
     createProductionAdminApplication({ env: configured }),
     /PRODUCTION_CONFIGURATION_MISSING/,
   );
+});
+
+test("production runtime starts without private media configuration", async () => {
+  const configured = productionEnvironment();
+  for (const key of [
+    "AWS_REGION",
+    "AWS_ACCESS_KEY_ID",
+    "AWS_SECRET_ACCESS_KEY",
+    "S3_MEDIA_BUCKET",
+  ]) {
+    delete configured[key];
+  }
+  const boundaries = requireProductionRuntimeConfiguration(configured);
+  assert.equal(boundaries.admin.ready, true);
+  assert.equal(boundaries.privateMedia.ready, false);
+
+  let ended = false;
+  class TestPool {
+    async query(sql) {
+      return schemaResponse(sql, true);
+    }
+    async connect() {
+      throw new Error("not used by production initialization");
+    }
+    async end() {
+      ended = true;
+    }
+  }
+
+  const runtime = await createProductionAdminApplication({
+    env: configured,
+    pgModule: { Pool: TestPool },
+  });
+  assert.equal(typeof runtime.handle, "function");
+  await runtime.close();
+  assert.equal(ended, true);
 });
 
 test("production runtime binds verified PostgreSQL, Auth0, and private S3 adapters", async () => {

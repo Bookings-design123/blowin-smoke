@@ -109,6 +109,68 @@ test("customer product read fails closed without the database boundary", async (
   assert.deepEqual(JSON.parse(result.body).missing, ["DATABASE_URL"]);
 });
 
+test("non-media Admin and catalog work while media actions fail explicitly", async () => {
+  let commandCalls = 0;
+  const product = {
+    id: "product-without-media",
+    name: "Product without media",
+    images: [],
+  };
+  const app = createAdminApplication({
+    env: configuredEnv,
+    authenticateAdmin: async () => ({
+      id: "owner-test-001",
+      freshAuthentication: true,
+      capabilities: ["catalog.edit", "media.manage", "evidence.manage"],
+    }),
+    commerceStore: {
+      async executeAdminCommand() {
+        commandCalls += 1;
+        return { product };
+      },
+      async readPublishedProducts() {
+        return [product];
+      },
+    },
+  });
+
+  const created = await app({
+    method: "POST",
+    url: "/admin/products",
+    headers: { "idempotency-key": "media-optional-product-create" },
+    body: {
+      name: "Product without media",
+      description: "Catalog remains usable before media activation.",
+      division: "THCA",
+    },
+  });
+  assert.equal(created.status, 201);
+  assert.equal(commandCalls, 1);
+
+  const catalog = await app({ method: "GET", url: "/api/products" });
+  assert.equal(catalog.status, 200);
+  assert.deepEqual(JSON.parse(catalog.body).products[0].images, []);
+
+  const image = await app({
+    method: "POST",
+    url: "/admin/products/product-without-media/images",
+    headers: { "idempotency-key": "media-optional-image-upload" },
+    body: {},
+  });
+  assert.equal(image.status, 503);
+  assert.equal(JSON.parse(image.body).code, "MEDIA_STORAGE_NOT_CONFIGURED");
+
+  const evidence = await app({
+    method: "POST",
+    url: "/admin/evidence",
+    headers: { "idempotency-key": "media-optional-evidence-upload" },
+    body: {},
+  });
+  assert.equal(evidence.status, 503);
+  assert.equal(JSON.parse(evidence.body).code, "MEDIA_STORAGE_NOT_CONFIGURED");
+  assert.equal(commandCalls, 1);
+});
+
 test("trusted device listing and revocation require the owner device capability and fresh auth", async () => {
   let revokedBy = null;
   const commerceStore = {

@@ -107,7 +107,7 @@ export async function createProductionAdminApplication({
   s3Client,
   fetchImpl = fetch,
 } = {}) {
-  requireProductionRuntimeConfiguration(env);
+  const runtime = requireProductionRuntimeConfiguration(env);
   let commerceStore;
   try {
     commerceStore = await createProductionPostgresStore({
@@ -117,18 +117,21 @@ export async function createProductionAdminApplication({
       migrate: false,
       verifySchema: true,
     });
-    const mediaStore = createS3PrivateMediaStore({
-      bucket: env.S3_MEDIA_BUCKET,
-      region: env.AWS_REGION,
-      credentials: {
-        accessKeyId: env.AWS_ACCESS_KEY_ID.trim(),
-        secretAccessKey: env.AWS_SECRET_ACCESS_KEY.trim(),
-        ...(typeof env.AWS_SESSION_TOKEN === "string" && env.AWS_SESSION_TOKEN.trim() !== ""
-          ? { sessionToken: env.AWS_SESSION_TOKEN.trim() }
-          : {}),
-      },
-      ...(s3Client ? { client: s3Client } : {}),
-    });
+    const mediaStore = runtime.privateMedia.ready
+      ? createS3PrivateMediaStore({
+          bucket: env.S3_MEDIA_BUCKET,
+          region: env.AWS_REGION,
+          credentials: {
+            accessKeyId: env.AWS_ACCESS_KEY_ID.trim(),
+            secretAccessKey: env.AWS_SECRET_ACCESS_KEY.trim(),
+            ...(typeof env.AWS_SESSION_TOKEN === "string" &&
+            env.AWS_SESSION_TOKEN.trim() !== ""
+              ? { sessionToken: env.AWS_SESSION_TOKEN.trim() }
+              : {}),
+          },
+          ...(s3Client ? { client: s3Client } : {}),
+        })
+      : undefined;
     const tokenAuthenticator = createAuth0Authenticator({
       domain: env.AUTH0_DOMAIN,
       audience: env.AUTH0_AUDIENCE,

@@ -163,8 +163,16 @@ async function inspectDatabase({ env, pool, pgModule }) {
 
 async function inspectPrivateMedia({ env, s3Client, s3Module }) {
   const missing = missingKeys(env, PRIVATE_MEDIA_ENV_KEYS);
+  if (missing.length === PRIVATE_MEDIA_ENV_KEYS.length) {
+    return ready("privateMedia", {
+      configured: false,
+      code: "MEDIA_STORAGE_NOT_CONFIGURED",
+      access: "DEFERRED",
+      mutationPerformed: false,
+    });
+  }
   if (missing.length > 0) {
-    return blocked("privateMedia", "S3_CONFIGURATION_MISSING", {
+    return blocked("privateMedia", "S3_CONFIGURATION_INCOMPLETE", {
       missing: Object.freeze(missing),
     });
   }
@@ -211,6 +219,7 @@ async function inspectPrivateMedia({ env, s3Client, s3Module }) {
     );
 
     return ready("privateMedia", {
+      configured: true,
       access: "HEAD_BUCKET_VERIFIED",
       mutationPerformed: false,
     });

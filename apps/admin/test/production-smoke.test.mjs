@@ -99,6 +99,7 @@ test("production smoke verifies providers without mutating business data", async
   assert.equal(result.status, "READY");
   assert.equal(result.checks.database.schema, "COMPLETE");
   assert.equal(result.checks.auth0.validation, "CONFIGURATION_PRESENT");
+  assert.equal(result.checks.privateMedia.configured, true);
   assert.equal(result.checks.privateMedia.access, "HEAD_BUCKET_VERIFIED");
   assert.deepEqual(result.missingExternalInputs, []);
   assert.equal(database.wasReleased(), true);
@@ -115,6 +116,30 @@ test("production smoke verifies providers without mutating business data", async
   );
 });
 
+test("production smoke treats unconfigured media as deferred", async () => {
+  const env = configuredEnvironment();
+  for (const key of [
+    "AWS_REGION",
+    "AWS_ACCESS_KEY_ID",
+    "AWS_SECRET_ACCESS_KEY",
+    "S3_MEDIA_BUCKET",
+  ]) {
+    delete env[key];
+  }
+  const result = await runProductionSmokeTest({
+    env,
+    pool: completePool().pool,
+  });
+
+  assert.equal(result.ok, true);
+  assert.equal(result.status, "READY");
+  assert.equal(result.checks.privateMedia.ready, true);
+  assert.equal(result.checks.privateMedia.configured, false);
+  assert.equal(result.checks.privateMedia.code, "MEDIA_STORAGE_NOT_CONFIGURED");
+  assert.equal(result.checks.privateMedia.access, "DEFERRED");
+  assert.deepEqual(result.missingExternalInputs, []);
+});
+
 test("production smoke fails closed for missing configuration without exposing values", async () => {
   const result = await runProductionSmokeTest({ env: {} });
   const serialized = JSON.stringify(result);
@@ -123,10 +148,11 @@ test("production smoke fails closed for missing configuration without exposing v
   assert.equal(result.status, "BLOCKED");
   assert.equal(result.checks.database.code, "DATABASE_CONFIGURATION_MISSING");
   assert.equal(result.checks.auth0.code, "AUTH0_CONFIGURATION_MISSING");
-  assert.equal(result.checks.privateMedia.code, "S3_CONFIGURATION_MISSING");
+  assert.equal(result.checks.privateMedia.code, "MEDIA_STORAGE_NOT_CONFIGURED");
+  assert.equal(result.checks.privateMedia.ready, true);
   assert.ok(result.missingExternalInputs.includes("DATABASE_URL"));
   assert.ok(result.missingExternalInputs.includes("AUTH0_CLIENT_SECRET"));
-  assert.ok(result.missingExternalInputs.includes("AWS_SECRET_ACCESS_KEY"));
+  assert.equal(result.missingExternalInputs.includes("AWS_SECRET_ACCESS_KEY"), false);
   assert.equal(serialized.includes("test-client-secret"), false);
 });
 
