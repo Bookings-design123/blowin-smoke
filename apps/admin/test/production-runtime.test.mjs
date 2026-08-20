@@ -9,7 +9,7 @@ import {
   productionPostgresPoolOptions,
   runDay1AdminMigrations,
 } from "../src/postgres-commerce-store.mjs";
-import { createProductionAdminApplication } from "../src/server.mjs";
+import { createProductionAdminApplication } from "../src/admin-http-runtime.mjs";
 
 const MIGRATION_URL = new URL("../migrations/001_day1_admin_mvp.sql", import.meta.url);
 

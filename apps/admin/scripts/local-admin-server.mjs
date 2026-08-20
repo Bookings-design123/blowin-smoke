@@ -1,26 +1,12 @@
 import { createServer } from "node:http";
 import { pathToFileURL } from "node:url";
 
-import { createAdminApplication } from "./application.mjs";
+import { createAdminApplication } from "../src/application.mjs";
 import {
   createProductionAdminApplication,
   dispatchAdminHttpRequest,
-  failedRequest,
-  maximumCommandBodyBytes,
-  maximumUploadBodyBytes,
-  requestBodyLimit,
   writeAdminHttpResponse,
-} from "./admin-http-runtime.mjs";
-
-export {
-  createProductionAdminApplication,
-  dispatchAdminHttpRequest,
-  failedRequest,
-  maximumCommandBodyBytes,
-  maximumUploadBodyBytes,
-  requestBodyLimit,
-  writeAdminHttpResponse,
-};
+} from "../src/admin-http-runtime.mjs";
 
 const port = Number.parseInt(process.env.PORT ?? "3000", 10);
 

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
 
 import * as vercelEntrypoint from "../api/index.mjs";
@@ -26,6 +27,28 @@ function responseRecorder() {
 test("Vercel entrypoint exports only one default request handler", () => {
   assert.deepEqual(Object.keys(vercelEntrypoint), ["default"]);
   assert.equal(typeof vercelEntrypoint.default, "function");
+});
+
+test("Vercel deployment boundary cannot auto-select the local Node server", () => {
+  const packageJson = JSON.parse(
+    readFileSync(new URL("../package.json", import.meta.url), "utf8"),
+  );
+  const vercelConfig = JSON.parse(
+    readFileSync(new URL("../vercel.json", import.meta.url), "utf8"),
+  );
+
+  assert.equal(packageJson.main, "api/index.mjs");
+  assert.equal(packageJson.scripts.start, undefined);
+  assert.equal(
+    packageJson.scripts["start:local"],
+    "node scripts/local-admin-server.mjs",
+  );
+  assert.equal(existsSync(new URL("../src/server.mjs", import.meta.url)), false);
+  assert.deepEqual(Object.keys(vercelConfig.functions), ["api/index.mjs"]);
+  assert.equal(
+    vercelConfig.functions["api/index.mjs"].excludeFiles,
+    "scripts/local-admin-server.mjs",
+  );
 });
 
 test("Vercel upload policy leaves room for base64 JSON framing", () => {

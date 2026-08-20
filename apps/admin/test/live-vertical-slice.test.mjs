@@ -5,7 +5,7 @@ import {
   createAdminApplication,
   SYNTHETIC_PRODUCT,
 } from "../src/application.mjs";
-import { createAdminHttpServer } from "../src/server.mjs";
+import { createAdminHttpServer } from "../scripts/local-admin-server.mjs";
 import {
   authenticateTestActor,
   TEST_AUTHORIZATION_HEADER,

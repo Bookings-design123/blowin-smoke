@@ -2,11 +2,12 @@
   "name": "@blowin-smoke/admin",
   "version": "0.0.0",
   "private": true,
+  "main": "api/index.mjs",
   "type": "module",
   "scripts": {
     "migrate:production": "node src/migrate-production.mjs",
     "smoke:production": "node src/production-smoke.mjs",
-    "start": "node src/server.mjs",
+    "start:local": "node scripts/local-admin-server.mjs",
     "test": "NODE_ENV=test node --test test/*.test.mjs"
   },
   "engines": {
