@@ -8,11 +8,40 @@ import { ThcaProductMedia } from "./ThcaProductMedia";
 import {
   availableThcaFormats,
   filterThcaProducts,
-  THCA_PROOF_KEY,
   thcaCardModel,
   thcaEmptyShelfCopy,
   type ThcaFormatSlug,
 } from "./thca-domain";
+
+function ProductAction({
+  model,
+}: Readonly<{
+  model: ReturnType<typeof thcaCardModel>;
+}>) {
+  if (model.exactDetailHref) {
+    return (
+      <Link className={styles.productAction} href={model.exactDetailHref}>
+        View product
+      </Link>
+    );
+  }
+
+  return (
+    <details className={styles.optionDisclosure}>
+      <summary>Choose an option</summary>
+      <ul>
+        {model.options.map((option) => (
+          <li key={option.sku.id}>
+            <Link href={option.href}>
+              <span>{option.variant.name}</span>
+              <small>{option.sku.sku} · {option.availability}</small>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </details>
+  );
+}
 
 function ThcaProductCard({ product }: Readonly<{ product: StorefrontProduct }>) {
   const model = thcaCardModel(product);
@@ -21,61 +50,51 @@ function ThcaProductCard({ product }: Readonly<{ product: StorefrontProduct }>) 
 
   return (
     <article className={styles.productCard}>
-      <ThcaProductMedia
-        key={`${primaryMediaId ?? "missing"}:${alternateMediaId ?? "missing"}`}
-        productName={product.name}
-        primaryMediaId={primaryMediaId}
-        alternateMediaId={alternateMediaId}
-        detailHref={model.exactDetailHref}
-      />
-      <div className={styles.productMeta}>
-        <span>{model.formatLabel}</span>
-        <span>{model.availability}</span>
+      <div className={styles.productStage}>
+        <ThcaProductMedia
+          key={`${primaryMediaId ?? "missing"}:${alternateMediaId ?? "missing"}`}
+          productName={product.name}
+          primaryMediaId={primaryMediaId}
+          alternateMediaId={alternateMediaId}
+          detailHref={model.exactDetailHref}
+        />
+
+        <div className={styles.productIdentity}>
+          <h3 className={styles.productName}>
+            {model.exactDetailHref ? (
+              <Link href={model.exactDetailHref}>{product.name}</Link>
+            ) : (
+              product.name
+            )}
+          </h3>
+          <div className={styles.productIdentityLine}>
+            <p className={styles.productPrice}>{model.price}</p>
+            <span>{model.availability}</span>
+          </div>
+        </div>
+
+        <div className={styles.productReveal}>
+          <div className={styles.productMeta}>
+            <span>{model.formatLabel}</span>
+            <span>{model.availability}</span>
+          </div>
+          <strong className={styles.revealName}>{product.name}</strong>
+
+          {model.facts.length > 0 ? (
+            <dl className={styles.productFacts}>
+              {model.facts.map((fact) => (
+                <div key={fact.label}>
+                  <dt>{fact.label}</dt>
+                  <dd>{fact.value}</dd>
+                </div>
+              ))}
+            </dl>
+          ) : null}
+
+          <p className={styles.revealPrice}>{model.price}</p>
+          <ProductAction model={model} />
+        </div>
       </div>
-      <h3 className={styles.productName}>
-        {model.exactDetailHref ? (
-          <Link href={model.exactDetailHref}>{product.name}</Link>
-        ) : (
-          product.name
-        )}
-      </h3>
-
-      {model.facts.length > 0 ? (
-        <dl className={styles.productFacts}>
-          {model.facts.map((fact) => (
-            <div key={fact.label}>
-              <dt>{fact.label}</dt>
-              <dd>{fact.value}</dd>
-            </div>
-          ))}
-        </dl>
-      ) : null}
-
-      <p className={styles.productPrice}>{model.price}</p>
-      <div className={styles.productState} data-state="unresolved">
-        <strong>Proof unresolved</strong>
-        <span>Exact batch proof and eligibility are not included in this public record.</span>
-      </div>
-
-      {model.exactDetailHref ? (
-        <Link className={styles.productAction} href={model.exactDetailHref}>
-          View details
-        </Link>
-      ) : (
-        <details className={styles.optionDisclosure}>
-          <summary>Choose an option</summary>
-          <ul>
-            {model.options.map((option) => (
-              <li key={option.sku.id}>
-                <Link href={option.href}>
-                  <span>{option.variant.name}</span>
-                  <small>{option.sku.sku} · {option.availability}</small>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </details>
-      )}
     </article>
   );
 }
@@ -86,21 +105,15 @@ function ShelfState({
   clearFormat = false,
 }: Readonly<{ title: string; message: string; clearFormat?: boolean }>) {
   return (
-    <section className={styles.shelfState} role="status">
-      <p className={styles.dataLabel}>Published THCA</p>
+    <div className={styles.shelfState} role="status">
       <h3>{title}</h3>
       <p>{message}</p>
-      <div className={styles.actionRow}>
-        {clearFormat ? (
-          <Link className={styles.primaryAction} href="/thca#thca-shelf">
-            View all THCA
-          </Link>
-        ) : null}
-        <Link className={clearFormat ? styles.secondaryAction : styles.primaryAction} href="/learn/thca-proof">
-          How proof works
+      {clearFormat ? (
+        <Link className={styles.textAction} href="/thca#thca-shelf">
+          View all THCA
         </Link>
-      </div>
-    </section>
+      ) : null}
+    </div>
   );
 }
 
@@ -120,35 +133,11 @@ export function ThcaDivisionLanding({
 
   return (
     <>
-      <section className={styles.opening}>
+      <section className={styles.opening} aria-labelledby="thca-title">
         <div className={`shell ${styles.openingInner}`}>
           <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "THCA" }]} />
-          <div className={styles.openingGrid}>
-            <div className={styles.openingCopy}>
-              <p className="eyebrow">THCA</p>
-              <h1>Choose the format. Check the record.</h1>
-              <p className={styles.openingLede}>
-                Start with form and amount. Price, availability, proof, and eligibility stay tied to the exact published option.
-              </p>
-              <div className={styles.actionRow}>
-                {catalog.status === "ready" && publishedProducts.length > 0 ? (
-                  <a className={styles.primaryAction} href="#thca-shelf">Shop published THCA</a>
-                ) : (
-                  <Link className={styles.primaryAction} href="/learn/thca-proof">How proof works</Link>
-                )}
-                <Link className={styles.secondaryAction} href="/support">Ask Support</Link>
-              </div>
-            </div>
-
-            <figure className={styles.openingSignal} aria-hidden="true">
-              <div className={styles.signalHead}><span>THCA</span><span>01—03</span></div>
-              <strong>FORM</strong>
-              <ol>
-                <li><span>01</span> Form</li>
-                <li><span>02</span> Amount</li>
-                <li><span>03</span> Record</li>
-              </ol>
-            </figure>
+          <div className={styles.categoryStage} data-media-role="category-art-direction-safe">
+            <h1 id="thca-title">THCA</h1>
           </div>
         </div>
       </section>
@@ -157,27 +146,21 @@ export function ThcaDivisionLanding({
         <section className={styles.formatSection} aria-labelledby="thca-formats-title">
           <div className="shell">
             <header className={styles.sectionHeading}>
-              <div>
-                <p className="eyebrow">Shop by format</p>
-                <h2 id="thca-formats-title">Choose a published format.</h2>
-              </div>
-              <p>Only formats named by live canonical product records appear here.</p>
+              <h2 id="thca-formats-title">Shop by format</h2>
             </header>
-            <nav className={styles.formatGrid} aria-label="Published THCA formats">
+            <nav className={styles.formatGrid} aria-label="THCA formats">
               <Link href="/thca#thca-shelf" aria-current={activeFormat === null ? "page" : undefined}>
-                <span className={styles.formatIndex}>All</span>
                 <strong>All THCA</strong>
-                <small>{publishedProducts.length} published {publishedProducts.length === 1 ? "product" : "products"}</small>
+                <span>{publishedProducts.length}</span>
               </Link>
-              {formats.map((format, index) => (
+              {formats.map((format) => (
                 <Link
                   key={format.slug}
                   href={`/thca?format=${format.slug}#thca-shelf`}
                   aria-current={activeFormat === format.slug ? "page" : undefined}
                 >
-                  <span className={styles.formatIndex}>{String(index + 1).padStart(2, "0")}</span>
                   <strong>{format.label}</strong>
-                  <small>{format.description} · {format.count} published</small>
+                  <span>{format.count}</span>
                 </Link>
               ))}
             </nav>
@@ -189,20 +172,20 @@ export function ThcaDivisionLanding({
         <div className="shell">
           <header className={styles.shelfHeading}>
             <div>
-              <p className="eyebrow">Published THCA</p>
-              <h2 id="thca-shelf-title">{activeDefinition?.label ?? "What’s live now."}</h2>
+              <p className="eyebrow">THCA</p>
+              <h2 id="thca-shelf-title">{activeDefinition?.label ?? "Shop THCA"}</h2>
             </div>
             {catalog.status === "ready" ? (
               <p aria-live="polite">
-                {products.length} published {products.length === 1 ? "record" : "records"} shown
+                {products.length} {products.length === 1 ? "product" : "products"}
               </p>
             ) : null}
           </header>
 
           {catalog.status !== "ready" ? (
             <ShelfState
-              title="The published THCA shelf is unavailable right now."
-              message="Products, prices, and availability cannot be confirmed on this visit, so no substitute listings are shown."
+              title="The THCA shelf is unavailable right now."
+              message="Products and prices can’t be confirmed for this visit."
             />
           ) : products.length === 0 ? (
             <ShelfState
@@ -211,60 +194,26 @@ export function ThcaDivisionLanding({
               clearFormat={Boolean(activeDefinition)}
             />
           ) : (
-            <div className={styles.productRail} role="region" aria-label="Published THCA products" tabIndex={0}>
+            <div className={styles.productRail} role="region" aria-label="THCA products" tabIndex={0}>
               {products.map((product) => <ThcaProductCard key={product.id} product={product} />)}
             </div>
           )}
 
           {partialProjection && products.length > 0 ? (
             <p className={styles.projectionNotice} role="status">
-              Some catalog records could not be confirmed and are excluded from storefront results.
+              Some THCA products could not be confirmed and are not shown.
             </p>
           ) : null}
         </div>
       </section>
 
-      <section className={styles.compareSection} aria-labelledby="thca-compare-title">
-        <div className={`shell ${styles.compareGrid}`}>
-          <header>
-            <p className="eyebrow">Compare</p>
-            <h2 id="thca-compare-title">Start with the facts that change.</h2>
-          </header>
-          <dl className={styles.compareList}>
-            <div><dt>Form</dt><dd>Flower, pre-roll, vape, concentrate, or edible only when the product record names it.</dd></div>
-            <div><dt>Amount</dt><dd>Weight, count, and price basis belong to the exact option.</dd></div>
-            <div><dt>Profile</dt><dd>Strain or profile language appears only when it is supplied for that option.</dd></div>
-          </dl>
-        </div>
-      </section>
-
-      <section className={styles.proofSection} aria-labelledby="thca-proof-title">
-        <div className={`shell ${styles.proofGrid}`}>
-          <div className={styles.proofRoute} aria-hidden="true">
-            <span>Product</span><i>→</i><span>Option</span><i>→</i><span>Batch</span><i>→</i><span>Document</span>
-          </div>
-          <div className={styles.proofCopy}>
-            <p className="eyebrow">Proof and eligibility</p>
-            <h2 id="thca-proof-title">Proof follows the exact batch.</h2>
-            <p>
-              Availability is a stock state. It does not show whether a document matches or whether a customer and destination are eligible.
-            </p>
-            <details className={styles.proofDisclosure}>
-              <summary>Read the proof-status key</summary>
-              <dl>
-                {THCA_PROOF_KEY.map((item) => (
-                  <div key={item.state}>
-                    <dt>{item.label}</dt>
-                    <dd>{item.description}</dd>
-                  </div>
-                ))}
-              </dl>
-            </details>
-            <div className={styles.actionRow}>
-              <Link className={styles.primaryAction} href="/learn/thca-proof">Open the proof guide</Link>
-              <Link className={styles.secondaryAction} href="/support">Ask about a record</Link>
-            </div>
-          </div>
+      <section className={styles.supportSection} aria-labelledby="thca-support-title">
+        <div className={`shell ${styles.supportInner}`}>
+          <h2 id="thca-support-title">THCA support</h2>
+          <nav aria-label="THCA support links">
+            <Link href="/learn/thca-proof">Proof guide</Link>
+            <Link href="/support">Support</Link>
+          </nav>
         </div>
       </section>
     </>

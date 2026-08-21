@@ -121,16 +121,16 @@ export function thcaEmptyShelfCopy(
 ): Readonly<{ title: string; message: string }> {
   if (partialProjection) {
     return {
-      title: "No confirmed THCA product records are shown right now.",
-      message: "Some catalog records could not be confirmed and are excluded. No substitute listings are shown.",
+      title: "The THCA shelf is incomplete right now.",
+      message: "Some products could not be confirmed, so they are not shown.",
     };
   }
 
   return {
     title: formatLabel
-      ? `No ${formatLabel.toLocaleLowerCase()} products are published right now.`
-      : "No THCA products are published right now.",
-    message: "Formats and products appear only when their published records are ready.",
+      ? `No ${formatLabel.toLocaleLowerCase()} products are on the shelf right now.`
+      : "No THCA products are on the shelf right now.",
+    message: "Check again later.",
   };
 }
 

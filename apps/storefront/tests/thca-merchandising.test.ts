@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import test from "node:test";
 
 import {
@@ -151,11 +152,47 @@ test("the customer-facing proof key keeps required failure states separate", () 
 
 test("a partial canonical projection never becomes a definitive empty-shelf claim", () => {
   assert.deepEqual(thcaEmptyShelfCopy(null, true), {
-    title: "No confirmed THCA product records are shown right now.",
-    message: "Some catalog records could not be confirmed and are excluded. No substitute listings are shown.",
+    title: "The THCA shelf is incomplete right now.",
+    message: "Some products could not be confirmed, so they are not shown.",
   });
   assert.equal(
     thcaEmptyShelfCopy("Flower", false).title,
-    "No flower products are published right now.",
+    "No flower products are on the shelf right now.",
   );
+});
+
+test("the THCA collection surface stays retail-first", () => {
+  const landing = readFileSync(
+    new URL("../app/thca/ThcaDivisionLanding.tsx", import.meta.url),
+    "utf8",
+  );
+
+  for (const manualCopy of [
+    "Choose the format. Check the record.",
+    "Start with form and amount",
+    "Start with the facts that change.",
+    "Proof follows the exact batch.",
+  ]) {
+    assert.doesNotMatch(landing, new RegExp(manualCopy.replaceAll(".", "\\.")));
+  }
+
+  assert.match(landing, /data-media-role="category-art-direction-safe"/);
+  assert.match(landing, /Shop by format/);
+  assert.doesNotMatch(landing, /THCA_PROOF_KEY|compareSection|proofRoute/);
+});
+
+test("THCA product detail reveal has hover, focus, and touch-complete states", () => {
+  const styles = readFileSync(
+    new URL("../app/thca/thca.module.css", import.meta.url),
+    "utf8",
+  );
+  const shopRoute = readFileSync(
+    new URL("../app/thca/shop/page.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(styles, /\.productReveal\s*\{[\s\S]*?position: absolute;/);
+  assert.match(styles, /\.productCard:hover \.productReveal,[\s\S]*?\.productCard:focus-within \.productReveal/);
+  assert.match(styles, /@media \(min-width: 901px\) and \(hover: hover\) and \(pointer: fine\)/);
+  assert.match(shopRoute, /redirect\("\/thca"\)/);
 });

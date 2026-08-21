@@ -50,12 +50,16 @@ export function ThcaProductMedia({
     >
       <span>THCA</span>
       <strong>Image unavailable</strong>
-      <small>Product identity remains in the record below.</small>
     </div>
   );
 
   return detailHref ? (
-    <Link className={styles.productMedia} href={detailHref} aria-label={`View ${productName}`}>
+    <Link
+      className={styles.productMedia}
+      href={detailHref}
+      aria-label={`View ${productName}`}
+      tabIndex={-1}
+    >
       {media}
     </Link>
   ) : (
