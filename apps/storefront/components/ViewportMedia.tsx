@@ -9,14 +9,17 @@ export type AuthoredMediaSource = Readonly<{
 
 export type AuthoredMediaSet = Readonly<{
   wide: AuthoredMediaSource;
+  tablet?: AuthoredMediaSource;
   narrow: AuthoredMediaSource;
   alt: string;
   widePosition?: string;
+  tabletPosition?: string;
   narrowPosition?: string;
 }>;
 
 type MediaStyle = CSSProperties & {
   "--media-position-wide"?: string;
+  "--media-position-tablet"?: string;
   "--media-position-narrow"?: string;
 };
 
@@ -43,8 +46,17 @@ export function ViewportMedia({
     sizes,
     priority,
   }).props;
+  const tablet = media.tablet
+    ? getImageProps({
+        ...media.tablet,
+        alt: media.alt,
+        sizes,
+        priority,
+      }).props
+    : null;
   const style: MediaStyle = {
     "--media-position-wide": media.widePosition,
+    "--media-position-tablet": media.tabletPosition,
     "--media-position-narrow": media.narrowPosition,
   };
 
@@ -55,6 +67,13 @@ export function ViewportMedia({
         sizes={narrow.sizes}
         srcSet={narrow.srcSet}
       />
+      {tablet ? (
+        <source
+          media="(max-width: 1024px)"
+          sizes={tablet.sizes}
+          srcSet={tablet.srcSet}
+        />
+      ) : null}
       <img {...wide} alt={media.alt} />
     </picture>
   );

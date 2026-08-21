@@ -6,8 +6,11 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 import { CartStatus } from "@/components/CartStatus";
+import { SearchOverlay } from "@/components/SearchOverlay";
+import { DIVISIONS } from "@/lib/divisions";
 
 type RetailAnnouncement = Readonly<{
+  id: string;
   message: string;
   action?: Readonly<{
     href: string;
@@ -15,32 +18,47 @@ type RetailAnnouncement = Readonly<{
   }>;
 }>;
 
-// Deliberately dormant until approved customer-facing retail content exists.
-const approvedHomeAnnouncement: RetailAnnouncement | null = null;
+type RetailAnnouncementProgram = Readonly<{
+  items: readonly RetailAnnouncement[];
+  autoAdvanceMs: number | null;
+}>;
 
-const primaryRoutes = [
+// Deliberately dormant until approved customer-facing retail content exists.
+const approvedAnnouncementProgram: RetailAnnouncementProgram = {
+  items: [],
+  autoAdvanceMs: null,
+};
+
+const divisionRoutes = [
   {
     href: "/thca",
+    shopHref: "/thca/shop",
     label: "THCA",
     detail: "Choose by format",
+    division: DIVISIONS.thca,
   },
   {
     href: "/vape-nicotine",
+    shopHref: "/vape-nicotine/shop",
     label: "Vape / Nicotine",
     detail: "Start, replenish, replace",
+    division: DIVISIONS["vape-nicotine"],
   },
   {
     href: "/glass-accessories",
+    shopHref: "/glass-accessories/shop",
     label: "Glass / Accessories / Merch",
     detail: "Pieces, parts, care + merch",
-  },
-  { href: "/learn", label: "Learn", detail: "Decision guides" },
-  {
-    href: "/support",
-    label: "Support",
-    detail: "Channel status",
+    division: DIVISIONS["glass-accessories"],
   },
 ] as const;
+
+const informationRoutes = [
+  { href: "/learn", label: "Learn", detail: "Decision guides" },
+  { href: "/support", label: "Support", detail: "Get help" },
+] as const;
+
+const compactRoutes = [...divisionRoutes, ...informationRoutes] as const;
 
 const contextRoutes = [
   { match: "/products", label: "Product" },
@@ -71,11 +89,86 @@ function currentContext(pathname: string) {
 }
 
 function AnnouncementBar({
-  announcement,
-}: Readonly<{ announcement: RetailAnnouncement }>) {
+  program,
+}: Readonly<{ program: RetailAnnouncementProgram }>) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [manualStatus, setManualStatus] = useState<
+    Readonly<{ serial: number; message: string }> | undefined
+  >();
+  const itemCount = program.items.length;
+  const isSequence = itemCount > 1;
+
+  useEffect(() => {
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePreference = () => setPrefersReducedMotion(preference.matches);
+
+    updatePreference();
+    preference.addEventListener("change", updatePreference);
+    return () => preference.removeEventListener("change", updatePreference);
+  }, []);
+
+  useEffect(() => {
+    if (
+      !isSequence ||
+      paused ||
+      prefersReducedMotion ||
+      program.autoAdvanceMs === null ||
+      program.autoAdvanceMs <= 0
+    ) {
+      return;
+    }
+
+    const timer = window.setInterval(() => {
+      setActiveIndex((index) => (index + 1) % itemCount);
+    }, program.autoAdvanceMs);
+
+    return () => window.clearInterval(timer);
+  }, [
+    isSequence,
+    itemCount,
+    paused,
+    prefersReducedMotion,
+    program.autoAdvanceMs,
+  ]);
+
+  if (itemCount === 0) return null;
+
+  const announcement = program.items[activeIndex] ?? program.items[0];
+
+  function move(direction: -1 | 1) {
+    const nextIndex = (activeIndex + direction + itemCount) % itemCount;
+    const nextAnnouncement = program.items[nextIndex] ?? program.items[0];
+
+    setActiveIndex(nextIndex);
+    setManualStatus((status) => ({
+      serial: (status?.serial ?? 0) + 1,
+      message: nextAnnouncement.message,
+    }));
+  }
+
   return (
-    <div className="site-announcement" aria-label="Store announcement">
-      <p>
+    <section
+      className="site-announcement"
+      aria-label="Store announcements"
+      aria-roledescription={isSequence ? "carousel" : undefined}
+    >
+      {isSequence ? (
+        <button
+          className="site-announcement__control"
+          type="button"
+          aria-label="Previous announcement"
+          onClick={() => move(-1)}
+        >
+          <span aria-hidden="true">←</span>
+        </button>
+      ) : null}
+
+      <p
+        className="site-announcement__message"
+        key={announcement.id}
+      >
         {announcement.message}
         {announcement.action ? (
           <Link href={announcement.action.href}>
@@ -83,18 +176,55 @@ function AnnouncementBar({
           </Link>
         ) : null}
       </p>
-    </div>
+
+      <span
+        className="visually-hidden"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        key={manualStatus?.serial}
+      >
+        {manualStatus?.message ?? ""}
+      </span>
+
+      {isSequence ? (
+        <div className="site-announcement__controls">
+          <button
+            className="site-announcement__control"
+            type="button"
+            aria-label="Next announcement"
+            onClick={() => move(1)}
+          >
+            <span aria-hidden="true">→</span>
+          </button>
+          {program.autoAdvanceMs !== null && !prefersReducedMotion ? (
+            <button
+              className="site-announcement__control"
+              type="button"
+              aria-label={paused ? "Play announcements" : "Pause announcements"}
+              aria-pressed={paused}
+              onClick={() => setPaused((value) => !value)}
+            >
+              <span aria-hidden="true">{paused ? "Play" : "Pause"}</span>
+            </button>
+          ) : null}
+        </div>
+      ) : null}
+    </section>
   );
 }
 
 export function SiteHeader() {
   const pathname = usePathname();
   const onHome = pathname === "/";
-  const homeAnnouncement = onHome ? approvedHomeAnnouncement : null;
+  const hasAnnouncement = approvedAnnouncementProgram.items.length > 0;
   const dialogRef = useRef<HTMLDialogElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const megaTriggerRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
+  const suppressMegaFocusOpenRef = useRef(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -109,6 +239,7 @@ export function SiteHeader() {
     const dialog = dialogRef.current;
     if (!dialog || dialog.open) return;
 
+    setActiveMegaMenu(null);
     dialog.showModal();
     document.documentElement.classList.add("menu-open");
     setMenuOpen(true);
@@ -126,14 +257,34 @@ export function SiteHeader() {
     window.requestAnimationFrame(() => menuButtonRef.current?.focus());
   }
 
+  function closeMegaMenu(href?: string) {
+    const previousMenu = activeMegaMenu;
+    setActiveMegaMenu(null);
+    if (href ?? previousMenu) {
+      suppressMegaFocusOpenRef.current = true;
+      window.requestAnimationFrame(() => {
+        megaTriggerRefs.current[href ?? previousMenu ?? ""]?.focus();
+        window.requestAnimationFrame(() => {
+          suppressMegaFocusOpenRef.current = false;
+        });
+      });
+    }
+  }
+
   return (
     <header
       className={`site-header${
-        homeAnnouncement ? " site-header--with-announcement" : ""
+        hasAnnouncement ? " site-header--with-announcement" : ""
       }`}
+      onKeyDown={(event) => {
+        if (event.key === "Escape" && activeMegaMenu) {
+          event.preventDefault();
+          closeMegaMenu();
+        }
+      }}
     >
-      {homeAnnouncement ? (
-        <AnnouncementBar announcement={homeAnnouncement} />
+      {hasAnnouncement ? (
+        <AnnouncementBar program={approvedAnnouncementProgram} />
       ) : null}
 
       <div className="site-header__inner">
@@ -159,12 +310,107 @@ export function SiteHeader() {
           </span>
         ) : null}
 
-        <nav className="site-header__desktop" aria-label="Primary navigation">
-          {primaryRoutes.map((route) => (
+        <nav className="site-header__desktop" aria-label="Shop by division">
+          {divisionRoutes.map((route) => {
+            const expanded = activeMegaMenu === route.href;
+            const menuId = `mega-${route.division.slug}`;
+
+            return (
+              <div
+                className="site-header__nav-item"
+                key={route.href}
+                onMouseEnter={() => setActiveMegaMenu(route.href)}
+                onMouseLeave={(event) => {
+                  if (!event.currentTarget.contains(document.activeElement)) {
+                    setActiveMegaMenu(null);
+                  }
+                }}
+                onFocusCapture={() => {
+                  if (!suppressMegaFocusOpenRef.current) {
+                    setActiveMegaMenu(route.href);
+                  }
+                }}
+                onBlurCapture={(event) => {
+                  if (!event.currentTarget.contains(event.relatedTarget)) {
+                    setActiveMegaMenu(null);
+                  }
+                }}
+              >
+                <Link
+                  ref={(node) => {
+                    megaTriggerRefs.current[route.href] = node;
+                  }}
+                  className="site-header__nav-link"
+                  href={route.href}
+                  aria-current={
+                    routeIsCurrent(pathname, route.href) ? "page" : undefined
+                  }
+                  aria-haspopup="true"
+                  aria-controls={menuId}
+                  aria-expanded={expanded}
+                  onClick={() => setActiveMegaMenu(null)}
+                >
+                  {route.label}
+                </Link>
+
+                {expanded ? (
+                  <section
+                    className="site-header__mega"
+                    id={menuId}
+                    aria-label={`${route.label} menu`}
+                  >
+                    <div className="site-header__mega-inner shell">
+                      <div className="site-header__mega-column">
+                        <p className="data-label">Shop</p>
+                        <Link href={route.href} onClick={() => setActiveMegaMenu(null)}>
+                          {route.label} home
+                        </Link>
+                        <Link
+                          href={route.shopHref}
+                          onClick={() => setActiveMegaMenu(null)}
+                        >
+                          Shop all
+                        </Link>
+                      </div>
+
+                      <div className="site-header__mega-column site-header__mega-column--routes">
+                        <p className="data-label">Start with</p>
+                        {route.division.jobs.map((job) => (
+                          <Link
+                            href={job.href}
+                            key={`${route.href}-${job.code}`}
+                            onClick={() => setActiveMegaMenu(null)}
+                          >
+                            {job.title}
+                          </Link>
+                        ))}
+                      </div>
+
+                      <Link
+                        className="site-header__mega-feature"
+                        href={route.href}
+                        onClick={() => setActiveMegaMenu(null)}
+                      >
+                        <span className="data-label">{route.detail}</span>
+                        <strong>{route.division.title}</strong>
+                        <span>Explore the division</span>
+                      </Link>
+                    </div>
+                  </section>
+                ) : null}
+              </div>
+            );
+          })}
+        </nav>
+
+        <nav className="site-header__utilities" aria-label="Store utilities">
+          <SearchOverlay onBeforeOpen={() => setActiveMegaMenu(null)} />
+          <CartStatus onBeforeOpen={() => setActiveMegaMenu(null)} />
+          {informationRoutes.map((route) => (
             <Link
-              key={route.href}
-              className="site-header__nav-link"
+              className="site-header__utility-link site-header__info-link"
               href={route.href}
+              key={route.href}
               aria-current={
                 routeIsCurrent(pathname, route.href) ? "page" : undefined
               }
@@ -172,17 +418,6 @@ export function SiteHeader() {
               {route.label}
             </Link>
           ))}
-        </nav>
-
-        <nav className="site-header__utilities" aria-label="Shopping utilities">
-          <Link
-            className="site-header__utility-link"
-            href="/search"
-            aria-current={pathname === "/search" ? "page" : undefined}
-          >
-            Search
-          </Link>
-          <CartStatus />
           <button
             ref={menuButtonRef}
             className="site-header__menu-button"
@@ -236,7 +471,7 @@ export function SiteHeader() {
           </div>
 
           <nav className="site-menu__nav" aria-label="Compact primary navigation">
-            {primaryRoutes.map((route) => (
+            {compactRoutes.map((route) => (
               <Link
                 key={route.href}
                 href={route.href}
@@ -256,12 +491,12 @@ export function SiteHeader() {
             ))}
           </nav>
 
-          <nav className="site-menu__utilities" aria-label="Compact shopping utilities">
+          <nav className="site-menu__utilities" aria-label="Compact store utilities">
             <Link href="/search" onClick={closeMenu}>
-              Search the whole house
+              Search
             </Link>
             <Link href="/cart" onClick={closeMenu}>
-              Cart status · unavailable
+              Cart
             </Link>
           </nav>
         </div>

@@ -3,7 +3,9 @@ import Link from "next/link";
 
 import {
   HomeMerchandising,
+  HomeRetailSequence,
   type HomeMerchandisingContract,
+  type HomeRetailModule,
 } from "@/components/HomeMerchandising";
 import {
   ViewportMedia,
@@ -23,6 +25,7 @@ type DivisionRoute = Readonly<{
 
 const approvedHeroMedia: AuthoredMediaSet | null = null;
 const approvedHomeMerchandising: HomeMerchandisingContract | null = null;
+const approvedHomeRetailSequence: readonly HomeRetailModule[] = [];
 
 const divisionRoutes: readonly DivisionRoute[] = [
   {
@@ -123,6 +126,8 @@ export default function HomePage() {
         </div>
       </section>
 
+      <HomeMerchandising section={approvedHomeMerchandising} />
+
       <section
         className="home-division-section"
         id="shop-by-division"
@@ -171,7 +176,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <HomeMerchandising section={approvedHomeMerchandising} />
+      <HomeRetailSequence modules={approvedHomeRetailSequence} />
 
       <section className="home-utility-section" aria-labelledby="utility-title">
         <h2 className="visually-hidden" id="utility-title">

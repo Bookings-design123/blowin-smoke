@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-export function CartStatus() {
+export function CartStatus({
+  onBeforeOpen,
+}: Readonly<{ onBeforeOpen?: () => void }>) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -17,6 +19,7 @@ export function CartStatus() {
     const dialog = dialogRef.current;
     if (!dialog || dialog.open) return;
 
+    onBeforeOpen?.();
     dialog.showModal();
     document.documentElement.classList.add("cart-open");
     setOpen(true);
@@ -43,10 +46,10 @@ export function CartStatus() {
         aria-haspopup="dialog"
         aria-controls="quick-cart-dialog"
         aria-expanded={open}
-        aria-label="Open cart status; cart service unavailable"
+        aria-label="Open cart"
         onClick={openCartStatus}
       >
-        Cart <span aria-hidden="true">[—]</span>
+        Cart
       </button>
 
       <dialog
@@ -72,8 +75,8 @@ export function CartStatus() {
         <div className="quick-cart__panel">
           <div className="quick-cart__head">
             <div>
-              <p className="data-label">Quick Cart · unavailable</p>
-              <h2 id="quick-cart-title">No cart service is connected.</h2>
+              <p className="data-label">Cart</p>
+              <h2 id="quick-cart-title">The cart is not connected yet.</h2>
             </div>
             <button
               ref={closeRef}
