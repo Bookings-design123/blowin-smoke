@@ -1,16 +1,23 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo } from "next/font/google";
+import { Cabin, DM_Sans } from "next/font/google";
 
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 
 import "./globals.css";
 
-const archivo = Archivo({
+const bodyFont = DM_Sans({
   subsets: ["latin"],
   weight: ["400", "600", "700", "800"],
   display: "swap",
-  variable: "--font-archivo",
+  variable: "--font-dm-sans",
+});
+
+const headingFallback = Cabin({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  display: "swap",
+  variable: "--font-cabin",
 });
 
 export const metadata: Metadata = {
@@ -25,12 +32,12 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#f3efe7",
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={archivo.variable}>
+    <html lang="en" className={`${bodyFont.variable} ${headingFallback.variable}`}>
       <body>
         <a className="skip-link" href="#main">
           Skip to main content

@@ -2,6 +2,14 @@
 
 This is the independently deployable, customer-facing Blowin' Smoke application. The existing Admin commerce system remains the sole catalog and inventory authority; this application does not create a second database or inventory truth.
 
+## Permanent global retail token source
+
+Every customer-facing route inherits the Glossier-derived retail baseline captured in `docs/research/glossier/firecrawl/glossier-branding-scrape-2026-08-21.json`. The shared token layer in `app/globals.css` is the required source for storefront typography, the 4px spacing rhythm, white/black/light-gray surfaces, square geometry, shadow-free elevation, controls, inputs, borders, media wells, and standard UI type scale. Division-specific commerce facts may change; division-specific visual systems may not be introduced without explicit owner authorization.
+
+Shared shell, component, card, overlay, and THCA spacing consumes that named ladder directly. Deliberate non-token measurements are limited to functional constraints such as the accessible 44px minimum target, media aspect ratios, one-pixel rules, font metrics, viewport formulas, and coupled horizontal-rail track math; they are not a second spacing language.
+
+The extracted body family, Apercu, is not bundled because no redistributable project license or font file is present. The storefront uses OFL-licensed **DM Sans** as the closest delivered substitute: it has a comparable neutral retail character, high x-height, normal width, and useful small-text weight behavior. Headings request locally installed **Gill Sans** or **Gill Sans MT** first; the proprietary system font is never copied into the application. OFL-licensed **Cabin** is delivered as the deterministic Gill-inspired humanist fallback, followed by the body stack. Archivo is intentionally excluded. Standard UI starts at a 14px body with restrained 16–20px naming and section hierarchy; larger typography is reserved for bounded, evidence-supported campaign and editorial moments.
+
 ## Local validation
 
 Use Node.js 20.9 or newer and run commands from this directory:

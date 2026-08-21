@@ -44,7 +44,7 @@ export function Breadcrumbs({
 export function MediaPlaceholder({
   productName,
   title = "Product media unavailable",
-  message = "Exact identity and decision facts remain available without an image.",
+  message,
   aspect = "portrait",
   compact = false,
 }: Readonly<{
@@ -58,14 +58,12 @@ export function MediaPlaceholder({
     <figure
       className={`media-placeholder${compact ? " media-placeholder--compact" : ""}`}
       data-aspect={aspect}
+      role="img"
+      aria-label={`${productName ? `${productName} — ${title}` : title}${
+        message ? `. ${message}` : ""
+      }`}
     >
-      <div className="media-placeholder__field" aria-hidden="true">
-        <span>Media pending</span>
-      </div>
-      <figcaption>
-        <strong>{productName ? `${productName} — ${title}` : title}</strong>
-        <span>{message}</span>
-      </figcaption>
+      <div className="media-placeholder__field" aria-hidden="true" />
     </figure>
   );
 }

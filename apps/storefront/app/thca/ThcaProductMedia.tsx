@@ -62,10 +62,7 @@ export function ThcaProductMedia({
       className={styles.mediaMissing}
       role="img"
       aria-label={`Product image unavailable for ${productName}`}
-    >
-      <span>THCA</span>
-      <strong>Image unavailable</strong>
-    </div>
+    />
   );
 
   return detailHref ? (

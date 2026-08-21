@@ -108,7 +108,7 @@ export default function HomePage() {
 
           <div className="home-opening-copy">
             <h1 id="home-title">Who wants that smoke?</h1>
-            <Link className="button" href="#shop-by-division">
+            <Link className="button button--contrast" href="#shop-by-division">
               Shop by division
             </Link>
           </div>
