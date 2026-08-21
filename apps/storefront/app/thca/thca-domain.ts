@@ -1,4 +1,4 @@
-import { allSkus, productPriceLabel } from "@/lib/catalog/domain";
+import { formatMoney } from "@/lib/catalog/domain";
 import type {
   StorefrontProduct,
   StorefrontSku,
@@ -62,47 +62,11 @@ export const THCA_FORMATS = [
 
 export type ThcaFormatSlug = (typeof THCA_FORMATS)[number]["slug"];
 
-export type ThcaProofState =
-  | "available"
-  | "stale"
-  | "missing"
-  | "unmatched"
-  | "unresolved";
-
-export const THCA_PROOF_KEY: ReadonlyArray<
-  Readonly<{ state: ThcaProofState; label: string; description: string }>
-> = [
-  {
-    state: "available",
-    label: "Proof available",
-    description: "A current document is tied to the exact product, option, and batch.",
-  },
-  {
-    state: "stale",
-    label: "Proof stale",
-    description: "The matching document is outside its currentness rule.",
-  },
-  {
-    state: "missing",
-    label: "Proof missing",
-    description: "An expected accessible record is not present.",
-  },
-  {
-    state: "unmatched",
-    label: "Batch mismatch",
-    description: "A document exists, but it is not tied to this exact batch.",
-  },
-  {
-    state: "unresolved",
-    label: "Proof unresolved",
-    description: "The published record does not support a proof conclusion yet.",
-  },
-];
-
 export type ThcaProductOption = Readonly<{
   variant: StorefrontVariant;
   sku: StorefrontSku;
   href: string;
+  price: string;
   availability: "Available" | "Out of stock" | "Availability unresolved";
 }>;
 
@@ -113,23 +77,16 @@ export type ThcaCardModel = Readonly<{
   price: string;
   availability: "Available" | "Out of stock" | "Options vary" | "Availability unresolved";
   exactDetailHref: string | null;
+  merchandisable: boolean;
 }>;
 
 export function thcaEmptyShelfCopy(
   formatLabel: string | null,
-  partialProjection: boolean,
 ): Readonly<{ title: string; message: string }> {
-  if (partialProjection) {
-    return {
-      title: "The THCA shelf is incomplete right now.",
-      message: "Some products could not be confirmed, so they are not shown.",
-    };
-  }
-
   return {
     title: formatLabel
-      ? `No ${formatLabel.toLocaleLowerCase()} products are on the shelf right now.`
-      : "No THCA products are on the shelf right now.",
+      ? `No confirmed ${formatLabel.toLocaleLowerCase()} products are on the shelf right now.`
+      : "No confirmed THCA products are on the shelf right now.",
     message: "Check again later.",
   };
 }
@@ -162,7 +119,6 @@ function normalizeValue(value: string): string {
 
 function scalarText(value: unknown): string | null {
   if (typeof value === "string") return value.trim() || null;
-  if (typeof value === "number" && Number.isFinite(value)) return String(value);
   return null;
 }
 
@@ -182,6 +138,14 @@ function uniqueValues(values: readonly (string | null)[]): readonly string[] {
   return [...new Set(values.filter((value): value is string => value !== null))];
 }
 
+const QUANTITY_BASIS =
+  /(?:\d\s*(?:mg|g|kg|ml|oz)\b|\b(?:gram|grams|ounce|ounces|count|ct|piece|pieces|pack|packs|unit|units)\b)/i;
+
+function quantityValue(variant: StorefrontVariant): string | null {
+  const value = attributeValue(variant, QUANTITY_ATTRIBUTE_KEYS);
+  return value && QUANTITY_BASIS.test(value) ? value : null;
+}
+
 function optionAvailability(quantity: number): ThcaProductOption["availability"] {
   if (quantity < 0) return "Availability unresolved";
   if (quantity === 0) return "Out of stock";
@@ -193,6 +157,25 @@ function productAvailability(options: readonly ThcaProductOption[]): ThcaCardMod
   if (states.has("Availability unresolved")) return "Availability unresolved";
   if (states.size > 1) return "Options vary";
   return options[0]?.availability ?? "Availability unresolved";
+}
+
+function optionPrice(sku: StorefrontSku): string {
+  return formatMoney(sku.retailPrice.amountCents, sku.retailPrice.currency);
+}
+
+function cardPrice(options: readonly ThcaProductOption[]): string {
+  const available = options.filter((option) => option.availability === "Available");
+  const candidates = available.length > 0 ? available : options;
+  if (candidates.length === 0) return "Price unavailable";
+
+  const currency = candidates[0].sku.retailPrice.currency;
+  if (!candidates.every((option) => option.sku.retailPrice.currency === currency)) {
+    return "Price varies by currency";
+  }
+
+  const minimum = Math.min(...candidates.map((option) => option.sku.retailPrice.amountCents));
+  const exact = candidates.every((option) => option.sku.retailPrice.amountCents === minimum);
+  return `${exact ? "" : "From "}${formatMoney(minimum, currency)}`;
 }
 
 export function thcaFormatsForProduct(
@@ -240,27 +223,32 @@ export function filterThcaProducts(
 }
 
 export function thcaCardModel(product: StorefrontProduct): ThcaCardModel {
-  const options = product.variants.flatMap((variant) =>
-    variant.skus.map((sku) => ({
-      variant,
-      sku,
-      href: `/products/${encodeURIComponent(sku.sku)}`,
-      availability: optionAvailability(sku.availableQuantity),
-    })),
-  );
+  const variantNames = product.variants.map((variant) => normalizeValue(variant.name));
+  const merchandisable =
+    product.variants.every((variant) => variant.skus.length === 1) &&
+    new Set(variantNames).size === variantNames.length;
+  const options = merchandisable
+    ? product.variants.map((variant) => {
+        const sku = variant.skus[0]!;
+        return {
+          variant,
+          sku,
+          href: `/products/${encodeURIComponent(sku.sku)}`,
+          price: optionPrice(sku),
+          availability: optionAvailability(sku.availableQuantity),
+        } as const;
+      })
+    : [];
   const formats = thcaFormatsForProduct(product);
   const quantities = uniqueValues(
-    product.variants.map((variant) => attributeValue(variant, QUANTITY_ATTRIBUTE_KEYS)),
+    product.variants.map(quantityValue),
   );
   const profiles = uniqueValues(
     product.variants.map((variant) => attributeValue(variant, PROFILE_ATTRIBUTE_KEYS)),
   );
   const facts: Array<{ label: string; value: string }> = [];
 
-  if (options.length > 1) {
-    facts.push({ label: "Options", value: String(options.length) });
-  }
-  if (quantities.length === 1 && product.variants.every((variant) => attributeValue(variant, QUANTITY_ATTRIBUTE_KEYS))) {
+  if (quantities.length === 1 && product.variants.every((variant) => quantityValue(variant))) {
     facts.push({ label: "Amount", value: quantities[0] });
   } else if (quantities.length > 1) {
     facts.push({ label: "Amount", value: "Varies by option" });
@@ -269,6 +257,9 @@ export function thcaCardModel(product: StorefrontProduct): ThcaCardModel {
     facts.push({ label: "Profile", value: profiles[0] });
   } else if (profiles.length > 1) {
     facts.push({ label: "Profile", value: "Varies by option" });
+  }
+  if (options.length > 1 && facts.length < 2) {
+    facts.push({ label: "Options", value: String(options.length) });
   }
 
   return {
@@ -280,8 +271,9 @@ export function thcaCardModel(product: StorefrontProduct): ThcaCardModel {
           : "Multiple formats",
     options,
     facts: facts.slice(0, 2),
-    price: productPriceLabel(product),
+    price: cardPrice(options),
     availability: productAvailability(options),
-    exactDetailHref: allSkus(product).length === 1 ? options[0]?.href ?? null : null,
+    exactDetailHref: merchandisable && options.length === 1 ? options[0]?.href ?? null : null,
+    merchandisable,
   };
 }

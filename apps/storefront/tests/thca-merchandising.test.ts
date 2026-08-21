@@ -6,7 +6,6 @@ import {
   availableThcaFormats,
   filterThcaProducts,
   parseThcaFormat,
-  THCA_PROOF_KEY,
   thcaCardModel,
   thcaEmptyShelfCopy,
   thcaFormatsForProduct,
@@ -114,10 +113,54 @@ test("multi-option cards do not silently select the first SKU", () => {
   assert.equal(model.exactDetailHref, null);
   assert.equal(model.options.length, 2);
   assert.deepEqual(model.facts, [
-    { label: "Options", value: "2" },
     { label: "Amount", value: "Varies by option" },
+    { label: "Profile", value: "Varies by option" },
   ]);
+  assert.equal(model.options[0]?.price, "$24.00");
+  assert.equal(model.price, "From $24.00");
+  assert.equal(model.merchandisable, true);
   assert.equal(model.facts.some((fact) => fact.label === "Potency"), false);
+});
+
+test("THCA cards fail closed when customer variants cannot resolve to one exact SKU", () => {
+  const record = product({ id: "ambiguous", attributes: { format: "Flower" } });
+  const variant = record.variants[0];
+  assert.ok(variant);
+  const ambiguous: StorefrontProduct = {
+    ...record,
+    variants: [{
+      ...variant,
+      skus: [
+        ...variant.skus,
+        {
+          id: "ambiguous-second-id",
+          sku: "ambiguous-SECOND",
+          retailPrice: { amountCents: 2_900, currency: "USD" },
+          availableQuantity: 2,
+        },
+      ],
+    }],
+  };
+
+  const model = thcaCardModel(ambiguous);
+  assert.equal(model.merchandisable, false);
+  assert.equal(model.exactDetailHref, null);
+  assert.deepEqual(model.options, []);
+  assert.equal(model.price, "Price unavailable");
+});
+
+test("quantity facts require an explicit customer-facing unit or count basis", () => {
+  const bareNumber = thcaCardModel(product({
+    id: "bare-quantity",
+    attributes: { format: "Flower", weight: 3.5, strain: "Profile one" },
+  }));
+  const unitQuantity = thcaCardModel(product({
+    id: "unit-quantity",
+    attributes: { format: "Flower", weight: "3.5 g", strain: "Profile one" },
+  }));
+
+  assert.equal(bareNumber.facts.some((fact) => fact.label === "Amount"), false);
+  assert.deepEqual(unitQuantity.facts[0], { label: "Amount", value: "3.5 g" });
 });
 
 test("single-option and mixed availability states remain distinct", () => {
@@ -139,25 +182,14 @@ test("single-option and mixed availability states remain distinct", () => {
   assert.equal(mixed.availability, "Options vary");
 });
 
-test("the customer-facing proof key keeps required failure states separate", () => {
-  assert.deepEqual(THCA_PROOF_KEY.map((item) => item.state), [
-    "available",
-    "stale",
-    "missing",
-    "unmatched",
-    "unresolved",
-  ]);
-  assert.equal(THCA_PROOF_KEY.find((item) => item.state === "unmatched")?.label, "Batch mismatch");
-});
-
-test("a partial canonical projection never becomes a definitive empty-shelf claim", () => {
-  assert.deepEqual(thcaEmptyShelfCopy(null, true), {
-    title: "The THCA shelf is incomplete right now.",
-    message: "Some products could not be confirmed, so they are not shown.",
+test("an empty canonical projection never becomes a claim that no records exist", () => {
+  assert.deepEqual(thcaEmptyShelfCopy(null), {
+    title: "No confirmed THCA products are on the shelf right now.",
+    message: "Check again later.",
   });
   assert.equal(
-    thcaEmptyShelfCopy("Flower", false).title,
-    "No flower products are on the shelf right now.",
+    thcaEmptyShelfCopy("Flower").title,
+    "No confirmed flower products are on the shelf right now.",
   );
 });
 
@@ -178,12 +210,22 @@ test("the THCA collection surface stays retail-first", () => {
 
   assert.match(landing, /data-media-role="category-art-direction-safe"/);
   assert.match(landing, /Shop by format/);
+  assert.match(landing, /const activeFormat = requestedFormat/);
+  assert.doesNotMatch(landing, /option\.sku\.sku/);
   assert.doesNotMatch(landing, /THCA_PROOF_KEY|compareSection|proofRoute/);
 });
 
 test("THCA product detail reveal has hover, focus, and touch-complete states", () => {
   const styles = readFileSync(
     new URL("../app/thca/thca.module.css", import.meta.url),
+    "utf8",
+  );
+  const media = readFileSync(
+    new URL("../app/thca/ThcaProductMedia.tsx", import.meta.url),
+    "utf8",
+  );
+  const rail = readFileSync(
+    new URL("../app/thca/ThcaProductRail.tsx", import.meta.url),
     "utf8",
   );
   const shopRoute = readFileSync(
@@ -193,6 +235,14 @@ test("THCA product detail reveal has hover, focus, and touch-complete states", (
 
   assert.match(styles, /\.productReveal\s*\{[\s\S]*?position: absolute;/);
   assert.match(styles, /\.productCard:hover \.productReveal,[\s\S]*?\.productCard:focus-within \.productReveal/);
+  assert.match(styles, /\.productCard:hover \.productImageSwapSource/);
+  assert.doesNotMatch(styles, /\.productCard:hover \.productImage:not/);
   assert.match(styles, /@media \(min-width: 901px\) and \(hover: hover\) and \(pointer: fine\)/);
+  assert.doesNotMatch(styles, /rgba\(17, 17, 15, 0\.94\)/);
+  assert.match(media, /const hasAlternate = Boolean/);
+  assert.match(media, /hasAlternate \? styles\.productImageSwapSource/);
+  assert.match(rail, /scopeKey/);
+  assert.match(rail, /aria-disabled=/);
+  assert.doesNotMatch(rail, /\sdisabled=/);
   assert.match(shopRoute, /redirect\("\/thca"\)/);
 });

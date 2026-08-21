@@ -11,6 +11,7 @@ type ThcaProductMediaProps = Readonly<{
   primaryMediaId: string | null;
   alternateMediaId: string | null;
   detailHref: string | null;
+  optionDisclosureId: string | null;
 }>;
 
 export function ThcaProductMedia({
@@ -18,30 +19,44 @@ export function ThcaProductMedia({
   primaryMediaId,
   alternateMediaId,
   detailHref,
+  optionDisclosureId,
 }: ThcaProductMediaProps) {
   const [primaryFailed, setPrimaryFailed] = useState(false);
   const [alternateFailed, setAlternateFailed] = useState(false);
-  const media = primaryMediaId && !primaryFailed ? (
+  const resolvedPrimaryMediaId = primaryMediaId && !primaryFailed ? primaryMediaId : null;
+  const resolvedAlternateMediaId = alternateMediaId && !alternateFailed ? alternateMediaId : null;
+  const hasAlternate = Boolean(resolvedPrimaryMediaId && resolvedAlternateMediaId);
+  const imageSizes = "(max-width: 680px) 78vw, (max-width: 900px) 43vw, (max-width: 1100px) 32vw, 24vw";
+  const media = resolvedPrimaryMediaId ? (
     <>
       <Image
-        className={styles.productImage}
-        src={`/media/${encodeURIComponent(primaryMediaId)}`}
+        className={`${styles.productImage} ${hasAlternate ? styles.productImageSwapSource : ""}`}
+        src={`/media/${encodeURIComponent(resolvedPrimaryMediaId)}`}
         alt={productName}
         fill
-        sizes="(max-width: 680px) 82vw, (max-width: 1024px) 44vw, 24vw"
+        sizes={imageSizes}
         onError={() => setPrimaryFailed(true)}
       />
-      {alternateMediaId && !alternateFailed ? (
+      {resolvedAlternateMediaId ? (
         <Image
           className={`${styles.productImage} ${styles.productImageAlternate}`}
-          src={`/media/${encodeURIComponent(alternateMediaId)}`}
+          src={`/media/${encodeURIComponent(resolvedAlternateMediaId)}`}
           alt=""
           fill
-          sizes="(max-width: 680px) 82vw, (max-width: 1024px) 44vw, 24vw"
+          sizes={imageSizes}
           onError={() => setAlternateFailed(true)}
         />
       ) : null}
     </>
+  ) : resolvedAlternateMediaId ? (
+    <Image
+      className={styles.productImage}
+      src={`/media/${encodeURIComponent(resolvedAlternateMediaId)}`}
+      alt={productName}
+      fill
+      sizes={imageSizes}
+      onError={() => setAlternateFailed(true)}
+    />
   ) : (
     <div
       className={styles.mediaMissing}
@@ -62,6 +77,21 @@ export function ThcaProductMedia({
     >
       {media}
     </Link>
+  ) : optionDisclosureId ? (
+    <button
+      className={styles.productMedia}
+      type="button"
+      aria-label={`View options for ${productName}`}
+      aria-controls={optionDisclosureId}
+      onClick={() => {
+        const disclosure = document.getElementById(optionDisclosureId);
+        if (!(disclosure instanceof HTMLDetailsElement)) return;
+        disclosure.open = true;
+        disclosure.querySelector("summary")?.focus();
+      }}
+    >
+      {media}
+    </button>
   ) : (
     <div className={styles.productMedia}>{media}</div>
   );

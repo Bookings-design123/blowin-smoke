@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
+  getPublishedProductBySku,
   normalizeCatalogPayload,
   normalizePublicProduct,
 } from "../lib/catalog/api";
@@ -133,6 +134,79 @@ test("normalizeCatalogPayload suppresses legacy, unpublished, and malformed reco
     message:
       "Published catalog data is temporarily unavailable. House routes and guides remain available.",
   });
+});
+
+test("normalization suppresses a whole product instead of publishing a partial option set", () => {
+  const base = testProductRecord({ id: "TEST-NESTED-PARTIAL" });
+  const validVariant = base.variants[0];
+  assert.ok(validVariant);
+
+  const malformedSkuProduct = {
+    ...base,
+    variants: [{
+      ...validVariant,
+      skus: [...validVariant.skus, { id: "BROKEN-SKU" }],
+    }],
+  };
+  const malformedVariantProduct = {
+    ...base,
+    id: "TEST-NESTED-VARIANT",
+    variants: [...base.variants, { id: "BROKEN-VARIANT", name: "Broken", skus: [] }],
+  };
+
+  assert.equal(normalizePublicProduct(malformedSkuProduct), null);
+  assert.equal(normalizePublicProduct(malformedVariantProduct), null);
+  const snapshot = normalizeCatalogPayload({
+    products: [base, malformedSkuProduct, malformedVariantProduct],
+  });
+  assert.equal(snapshot.status, "ready");
+  assert.deepEqual(snapshot.products.map((product) => product.id), ["TEST-NESTED-PARTIAL"]);
+  assert.equal(snapshot.suppressedRecords, 2);
+});
+
+test("a 2xx product lookup fails unavailable rather than inventing a 404", async () => {
+  const previousOrigin = process.env.STOREFRONT_COMMERCE_API_ORIGIN;
+  const previousFetch = globalThis.fetch;
+  process.env.STOREFRONT_COMMERCE_API_ORIGIN = "https://canonical.test";
+
+  try {
+    let response = new Response(JSON.stringify({
+      product: {
+        ...testProductRecord({ id: "TEST-LOOKUP-MALFORMED" }),
+        variants: [{ id: "BROKEN", name: "Broken", skus: [] }],
+      },
+    }), { status: 200, headers: { "content-type": "application/json" } });
+    globalThis.fetch = (async () => response.clone()) as typeof fetch;
+
+    assert.deepEqual(await getPublishedProductBySku("TEST-LOOKUP-MALFORMED-SKU"), {
+      status: "error",
+      message: "Published catalog data is temporarily unavailable. House routes and guides remain available.",
+    });
+
+    response = new Response(JSON.stringify({
+      product: testProductRecord({
+        id: "TEST-LOOKUP-MISMATCH",
+        sku: "TEST-CANONICAL-OTHER-SKU",
+      }),
+    }), { status: 200, headers: { "content-type": "application/json" } });
+
+    assert.deepEqual(await getPublishedProductBySku("TEST-LOOKUP-MISSING-SKU"), {
+      status: "error",
+      message: "Published catalog data is temporarily unavailable. House routes and guides remain available.",
+    });
+
+    response = new Response(null, { status: 404 });
+    assert.deepEqual(await getPublishedProductBySku("TEST-LOOKUP-CANONICAL-404"), {
+      status: "not-found",
+    });
+  } finally {
+    globalThis.fetch = previousFetch;
+    if (previousOrigin === undefined) {
+      delete process.env.STOREFRONT_COMMERCE_API_ORIGIN;
+    } else {
+      process.env.STOREFRONT_COMMERCE_API_ORIGIN = previousOrigin;
+    }
+  }
 });
 
 test("productPriceLabel derives exact, range, and mixed-currency labels from SKUs", () => {

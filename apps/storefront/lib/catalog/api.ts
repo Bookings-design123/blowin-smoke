@@ -58,10 +58,10 @@ function normalizeVariant(value: unknown): StorefrontVariant | null {
   const id = text(value.id);
   const name = text(value.name);
   const attributes = isRecord(value.attributes) ? value.attributes : {};
-  const skus = Array.isArray(value.skus)
-    ? value.skus.map(normalizeSku).filter((sku): sku is StorefrontSku => sku !== null)
-    : [];
-  if (!id || !name || skus.length === 0) return null;
+  if (!Array.isArray(value.skus) || value.skus.length === 0) return null;
+  const normalizedSkus = value.skus.map(normalizeSku);
+  if (!id || !name || normalizedSkus.some((sku) => sku === null)) return null;
+  const skus = normalizedSkus as StorefrontSku[];
   return { id, name, attributes, skus };
 }
 
@@ -90,12 +90,10 @@ export function normalizePublicProduct(value: unknown): StorefrontProduct | null
   if (!id || !name || !isDivision(value.division) || publicationState !== "PUBLISHED") {
     return null;
   }
-  const variants = Array.isArray(value.variants)
-    ? value.variants
-        .map(normalizeVariant)
-        .filter((variant): variant is StorefrontVariant => variant !== null)
-    : [];
-  if (variants.length === 0) return null;
+  if (!Array.isArray(value.variants) || value.variants.length === 0) return null;
+  const normalizedVariants = value.variants.map(normalizeVariant);
+  if (normalizedVariants.some((variant) => variant === null)) return null;
+  const variants = normalizedVariants as StorefrontVariant[];
   const images = Array.isArray(value.images)
     ? value.images.map(normalizeImage).filter((image): image is StorefrontImage => image !== null)
     : [];
@@ -175,7 +173,13 @@ export const getPublishedProductBySku = cache(async (sku: string): Promise<Produ
     const payload: unknown = await response.json();
     if (!isRecord(payload)) return { status: "error", message: ERROR_MESSAGE };
     const product = normalizePublicProduct(payload.product);
-    return product ? { status: "found", product } : { status: "not-found" };
+    if (!product) return { status: "error", message: ERROR_MESSAGE };
+    const includesRequestedSku = product.variants.some((variant) =>
+      variant.skus.some((candidate) => candidate.sku === sku),
+    );
+    return includesRequestedSku
+      ? { status: "found", product }
+      : { status: "error", message: ERROR_MESSAGE };
   } catch {
     return { status: "error", message: ERROR_MESSAGE };
   }
