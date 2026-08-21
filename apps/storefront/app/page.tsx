@@ -78,17 +78,6 @@ export default function HomePage() {
               approvedHeroMedia ? "approved-editorial" : "brand-fallback"
             }
           >
-            <span className="home-hero-media__composition" aria-hidden="true">
-              <span className="home-hero-media__plane home-hero-media__plane--ink" />
-              <span className="home-hero-media__plane home-hero-media__plane--quiet" />
-              <span className="home-hero-media__signal" />
-              <span className="home-hero-media__index">01—03</span>
-              <span className="home-hero-media__ticks">
-                <span />
-                <span />
-                <span />
-              </span>
-            </span>
             <span
               className={`home-hero-media__asset${
                 approvedHeroMedia ? "" : " home-hero-media__asset--brand"
@@ -115,10 +104,9 @@ export default function HomePage() {
           </figure>
 
           <div className="home-opening-copy">
-            <span className="witness-rule" aria-hidden="true" />
             <h1 id="home-title">Who wants that smoke?</h1>
-            <Link className="button button--light" href="#shop-by-division">
-              Shop the house
+            <Link className="button" href="#shop-by-division">
+              Shop by division
             </Link>
           </div>
 
@@ -152,7 +140,12 @@ export default function HomePage() {
               href={division.href}
               key={division.href}
             >
-              <span className="division-portal__media" aria-hidden="true">
+              <span
+                className={`division-portal__media${
+                  division.media ? "" : " division-portal__media--fallback"
+                }`}
+                aria-hidden="true"
+              >
                 {division.media ? (
                   <ViewportMedia
                     className="authored-media division-portal__picture"
@@ -160,7 +153,9 @@ export default function HomePage() {
                     sizes="(max-width: 680px) 100vw, 33vw"
                   />
                 ) : (
-                  <span>{division.mediaWord}</span>
+                  <span className="division-portal__fallback-label">
+                    {division.mediaWord}
+                  </span>
                 )}
               </span>
               <span className="division-portal__caption">

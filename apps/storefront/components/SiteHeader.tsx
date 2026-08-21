@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -10,26 +11,22 @@ const primaryRoutes = [
   {
     href: "/thca",
     label: "THCA",
-    number: "01",
     detail: "Choose by format",
   },
   {
     href: "/vape-nicotine",
     label: "Vape / Nicotine",
-    number: "02",
     detail: "Start, replenish, replace",
   },
   {
     href: "/glass-accessories",
     label: "Glass / Accessories / Merch",
-    number: "03",
     detail: "Pieces, parts, care + merch",
   },
-  { href: "/learn", label: "Learn", number: "04", detail: "Decision guides" },
+  { href: "/learn", label: "Learn", detail: "Decision guides" },
   {
     href: "/support",
     label: "Support",
-    number: "05",
     detail: "Channel status",
   },
 ] as const;
@@ -58,12 +55,13 @@ function currentContext(pathname: string) {
   return (
     contextRoutes.find(
       ({ match }) => pathname === match || pathname.startsWith(`${match}/`),
-    )?.label ?? "Blowin' Smoke"
+    )?.label ?? "Storefront"
   );
 }
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const onHome = pathname === "/";
   const dialogRef = useRef<HTMLDialogElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -100,19 +98,40 @@ export function SiteHeader() {
   }
 
   return (
-    <header className="site-header">
+    <header
+      className={`site-header${onHome ? " site-header--with-announcement" : ""}`}
+    >
+      {onHome ? (
+        <div className="site-announcement" aria-label="Storefront status">
+          <p>
+            Cart unavailable.
+            <Link href="/cart">View status</Link>
+          </p>
+        </div>
+      ) : null}
+
       <div className="site-header__inner">
         <Link
           className="site-header__identity"
           href="/"
+          aria-label="Blowin’ Smoke home"
           aria-current={pathname === "/" ? "page" : undefined}
         >
-          Blowin&apos; Smoke
+          <Image
+            src="/blowin-smoke-logo.png"
+            alt=""
+            width={8000}
+            height={4500}
+            priority
+            sizes="(max-width: 350px) 80px, (max-width: 680px) 96px, 126px"
+          />
         </Link>
 
-        <span className="site-header__context" title={currentContext(pathname)}>
-          {currentContext(pathname)}
-        </span>
+        {!onHome ? (
+          <span className="site-header__context" title={currentContext(pathname)}>
+            {currentContext(pathname)}
+          </span>
+        ) : null}
 
         <nav className="site-header__desktop" aria-label="Primary navigation">
           {primaryRoutes.map((route) => (
@@ -175,8 +194,10 @@ export function SiteHeader() {
         <div className="site-menu__panel">
           <div className="site-menu__head">
             <div>
-              <p className="data-label">Current page</p>
-              <h2 id="site-menu-title">{currentContext(pathname)}</h2>
+              <p className="data-label">
+                Current page · {currentContext(pathname)}
+              </p>
+              <h2 id="site-menu-title">Menu</h2>
             </div>
             <button
               ref={closeButtonRef}
@@ -198,9 +219,6 @@ export function SiteHeader() {
                 }
                 onClick={closeMenu}
               >
-                <span className="site-menu__route-number" aria-hidden="true">
-                  {route.number}
-                </span>
                 <span className="site-menu__route-copy">
                   <strong>{route.label}</strong>
                   <small>{route.detail}</small>

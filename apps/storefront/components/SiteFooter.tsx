@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const shopLinks = [
@@ -32,9 +33,18 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="site-footer__inner">
         <section className="site-footer__house" aria-labelledby="footer-house-title">
-          <h2 id="footer-house-title">
-            <Link href="/">Blowin&apos; Smoke</Link>
+          <h2 className="visually-hidden" id="footer-house-title">
+            Blowin’ Smoke
           </h2>
+          <Link className="site-footer__identity" href="/" aria-label="Blowin’ Smoke home">
+            <Image
+              src="/blowin-smoke-logo.png"
+              alt=""
+              width={8000}
+              height={4500}
+              sizes="180px"
+            />
+          </Link>
         </section>
 
         <nav className="site-footer__nav" aria-label="Footer shop navigation">
