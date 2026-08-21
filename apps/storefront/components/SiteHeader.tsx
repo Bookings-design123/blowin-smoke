@@ -7,6 +7,17 @@ import { useEffect, useRef, useState } from "react";
 
 import { CartStatus } from "@/components/CartStatus";
 
+type RetailAnnouncement = Readonly<{
+  message: string;
+  action?: Readonly<{
+    href: string;
+    label: string;
+  }>;
+}>;
+
+// Deliberately dormant until approved customer-facing retail content exists.
+const approvedHomeAnnouncement: RetailAnnouncement | null = null;
+
 const primaryRoutes = [
   {
     href: "/thca",
@@ -59,9 +70,27 @@ function currentContext(pathname: string) {
   );
 }
 
+function AnnouncementBar({
+  announcement,
+}: Readonly<{ announcement: RetailAnnouncement }>) {
+  return (
+    <div className="site-announcement" aria-label="Store announcement">
+      <p>
+        {announcement.message}
+        {announcement.action ? (
+          <Link href={announcement.action.href}>
+            {announcement.action.label}
+          </Link>
+        ) : null}
+      </p>
+    </div>
+  );
+}
+
 export function SiteHeader() {
   const pathname = usePathname();
   const onHome = pathname === "/";
+  const homeAnnouncement = onHome ? approvedHomeAnnouncement : null;
   const dialogRef = useRef<HTMLDialogElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -99,15 +128,12 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`site-header${onHome ? " site-header--with-announcement" : ""}`}
+      className={`site-header${
+        homeAnnouncement ? " site-header--with-announcement" : ""
+      }`}
     >
-      {onHome ? (
-        <div className="site-announcement" aria-label="Storefront status">
-          <p>
-            Cart unavailable.
-            <Link href="/cart">View status</Link>
-          </p>
-        </div>
+      {homeAnnouncement ? (
+        <AnnouncementBar announcement={homeAnnouncement} />
       ) : null}
 
       <div className="site-header__inner">
