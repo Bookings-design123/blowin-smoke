@@ -1,11 +1,24 @@
 import type { Metadata } from "next";
 
-import { DivisionLanding } from "@/components/DivisionLanding";
-import { DIVISIONS } from "@/lib/divisions";
+import { getPublishedCatalog } from "@/lib/catalog/api";
 
-export const metadata: Metadata = { title: "Vape & Nicotine" };
+import { VapeDivisionLanding } from "./VapeDivisionLanding";
+import { parseVapeAisle } from "./vape-domain";
+
+export const metadata: Metadata = { title: "Vape / Nicotine" };
 export const dynamic = "force-dynamic";
 
-export default function VapeNicotinePage() {
-  return <DivisionLanding content={DIVISIONS["vape-nicotine"]} />;
+type SearchParams = Readonly<{ aisle?: string | string[] }>;
+
+export default async function VapeNicotinePage({
+  searchParams,
+}: Readonly<{ searchParams: Promise<SearchParams> }>) {
+  const [catalog, params] = await Promise.all([getPublishedCatalog(), searchParams]);
+
+  return (
+    <VapeDivisionLanding
+      catalog={catalog}
+      requestedAisle={parseVapeAisle(params.aisle)}
+    />
+  );
 }
