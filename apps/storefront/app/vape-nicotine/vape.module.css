@@ -300,8 +300,11 @@ button.productMedia {
 
 .productReveal {
   padding: var(--space-16) var(--space-4) var(--space-4);
+}
+
+.productRevealPanel {
   display: grid;
-  gap: var(--space-12);
+  gap: var(--space-8);
 }
 
 .productMeta {
@@ -314,17 +317,15 @@ button.productMedia {
 
 .productFacts {
   margin: 0;
-  border-top: var(--rule);
+  display: grid;
+  gap: var(--space-4);
 }
 
 .productFacts > div {
-  min-height: 40px;
-  padding-block: var(--space-8);
   display: grid;
-  grid-template-columns: 88px minmax(0, 1fr);
-  gap: var(--space-12);
-  border-bottom: var(--rule);
-  font-size: 14px;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: var(--space-8);
+  font-size: 13px;
   line-height: 1.35;
 }
 
@@ -462,22 +463,20 @@ button.productMedia {
 }
 
 .projectionNotice {
-  width: fit-content;
+  max-width: 56ch;
   margin: var(--space-24) 0 0;
-  padding: var(--space-12);
-  border-left: 3px solid var(--caution);
-  background: var(--paper);
-  color: var(--ink-soft);
+  color: var(--muted);
   font-size: 13px;
   line-height: 1.45;
 }
 
 .supportSection {
-  padding-block: clamp(var(--space-28), 4vw, var(--space-56));
+  padding-block: var(--space-20);
   background: var(--paper);
 }
 
 .supportInner {
+  min-height: 44px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -486,13 +485,14 @@ button.productMedia {
 
 .supportInner h2 {
   margin: 0;
-  font-size: clamp(20px, 2.2vw, 28px);
+  font-size: 14px;
+  line-height: 1.35;
 }
 
 .supportInner nav {
   display: flex;
   align-items: center;
-  gap: clamp(var(--space-24), 4vw, var(--space-56));
+  gap: var(--space-24);
 }
 
 .supportInner a {
@@ -539,25 +539,32 @@ button.productMedia {
   }
 }
 
+@media (max-width: 1199px) {
+  .aisleGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
 @media (min-width: 901px) and (hover: hover) and (pointer: fine) {
   .productReveal {
     position: absolute;
     z-index: 3;
     inset: 0 0 auto;
     aspect-ratio: 4 / 5;
-    padding: clamp(var(--space-20), 1.8vw, var(--space-28));
+    padding: 0;
+    display: grid;
     align-content: end;
-    gap: var(--space-12);
-    background: linear-gradient(
-      to bottom,
-      transparent 0 30%,
-      color-mix(in srgb, var(--paper-bright) 82%, transparent) 58%,
-      var(--paper-bright) 100%
-    );
+    background: transparent;
     color: var(--ink);
     opacity: 0;
     pointer-events: none;
     transition: opacity var(--motion-layer) var(--ease-layer);
+  }
+
+  .productRevealPanel {
+    padding: var(--space-12);
+    border-top: var(--rule);
+    background: var(--paper-bright);
   }
 
   .productCard:hover .productReveal,

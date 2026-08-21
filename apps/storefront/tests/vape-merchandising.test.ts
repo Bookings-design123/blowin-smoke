@@ -215,9 +215,16 @@ test("nicotine format is an e-liquid fact, not a manufactured standalone aisle",
   assert.equal(vapeCardModel(saltLiquid).typeLabel, "Nic salt e-liquid");
   assert.deepEqual(vapeCardModel(saltLiquid).facts, [
     { label: "Flavor", value: "Mint" },
-    { label: "Nicotine", value: "Nic salt" },
+    { label: "Capacity", value: "30mL" },
     { label: "Strength", value: "20mg/mL" },
   ]);
+});
+
+test("cards suppress technical type fallbacks when the canonical aisle is unknown", () => {
+  const model = vapeCardModel(product({ id: "unknown-type" }));
+
+  assert.equal(model.typeLabel, null);
+  assert.equal(JSON.stringify(model).includes("Product type not supplied"), false);
 });
 
 test("aisle filtering never infers membership from product prose", () => {
@@ -499,12 +506,12 @@ test("availability and actions preserve exact operational states", () => {
 
 test("empty states report only what the canonical projection supports", () => {
   assert.deepEqual(vapeEmptyShelfCopy(null), {
-    title: "No confirmed Vape / Nicotine products are on the shelf right now.",
+    title: "No Vape / Nicotine products are on the shelf right now.",
     message: "Check again later.",
   });
   assert.equal(
     vapeEmptyShelfCopy("Pods").title,
-    "No confirmed pods are on the shelf right now.",
+    "No pods are on the shelf right now.",
   );
 });
 
@@ -542,10 +549,18 @@ test("the Vape / Nicotine collection remains retail-first and touch-complete", (
   assert.match(landing, /data-media-role="category-art-direction-safe"/);
   assert.match(landing, /Shop by aisle/);
   assert.match(landing, /availableVapeAisles/);
+  assert.match(landing, /model\.availability === "Available" \? null/);
+  assert.match(landing, /model\.compatibilityCue\?\.value === "Unverified"/);
+  assert.match(landing, /model\.typeLabel !== activeAisleLabel/);
+  assert.match(landing, /const factLimit = showTypeLabel \? 2 : 3/);
   assert.doesNotMatch(landing, /Add to cart|Notify me|Shop now/);
   assert.doesNotMatch(landing, /option\.sku\.sku/);
   assert.match(styles, /@media \(min-width: 901px\) and \(hover: hover\) and \(pointer: fine\)/);
   assert.match(styles, /\.productCard:hover \.productReveal,[\s\S]*?\.productCard:focus-within \.productReveal/);
+  assert.doesNotMatch(styles, /linear-gradient|color-mix/);
+  assert.doesNotMatch(styles, /\.productFacts[\s\S]{0,80}border-top/);
+  assert.match(styles, /\.supportInner h2 \{[\s\S]*?font-size: 14px/);
+  assert.match(styles, /@media \(max-width: 1199px\)[\s\S]*?repeat\(4, minmax\(0, 1fr\)\)/);
   assert.match(styles, /@media \(max-width: 680px\)[\s\S]*?flex-basis: max\(244px, 78vw\)/);
   assert.match(media, /aria-label={`Product image unavailable for \$\{productName\}`}/);
   assert.match(rail, /scopeKey/);

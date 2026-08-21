@@ -52,14 +52,31 @@ function VapeProductCard({
   product,
   model,
   position,
+  activeAisle,
 }: Readonly<{
   product: StorefrontProduct;
   model: ReturnType<typeof vapeCardModel>;
   position: number;
+  activeAisle: VapeAisleSlug | null;
 }>) {
   const primaryMediaId = product.images[0]?.id ?? null;
   const alternateMediaId = product.images[1]?.id ?? null;
   const disclosureId = `vape-product-options-${position}`;
+  const activeAisleLabel =
+    model.aisles.find((aisle) => aisle.slug === activeAisle)?.label ?? null;
+  const showTypeLabel =
+    model.typeLabel !== null && model.typeLabel !== activeAisleLabel;
+  const usefulCompatibilityCue =
+    model.compatibilityCue?.value === "Unverified"
+      ? null
+      : model.compatibilityCue;
+  const factLimit = showTypeLabel ? 2 : 3;
+  const visibleFacts = usefulCompatibilityCue
+    ? [
+        ...model.facts.slice(0, Math.max(0, factLimit - 1)),
+        usefulCompatibilityCue,
+      ]
+    : model.facts.slice(0, factLimit);
 
   return (
     <article className={styles.productCard}>
@@ -84,31 +101,38 @@ function VapeProductCard({
         </h3>
         <div className={styles.productIdentityLine}>
           <p className={styles.productPrice}>{model.price}</p>
-          <span>{model.availability}</span>
+          {model.availability === "Available" ? null : (
+            <span>{model.availability}</span>
+          )}
         </div>
       </div>
 
       <div className={styles.productReveal}>
-        <p className={styles.productMeta}>{model.typeLabel}</p>
+        <div className={styles.productRevealPanel}>
+          {showTypeLabel ? (
+            <p className={styles.productMeta}>{model.typeLabel}</p>
+          ) : null}
 
-        {model.facts.length > 0 || model.compatibilityCue ? (
-          <dl className={styles.productFacts}>
-            {model.facts.map((fact) => (
-              <div key={fact.label}>
-                <dt>{fact.label}</dt>
-                <dd>{fact.value}</dd>
-              </div>
-            ))}
-            {model.compatibilityCue ? (
-              <div className={styles.compatibilityFact}>
-                <dt>{model.compatibilityCue.label}</dt>
-                <dd>{model.compatibilityCue.value}</dd>
-              </div>
-            ) : null}
-          </dl>
-        ) : null}
+          {visibleFacts.length > 0 ? (
+            <dl className={styles.productFacts}>
+              {visibleFacts.map((fact) => (
+                <div
+                  className={
+                    fact === usefulCompatibilityCue
+                      ? styles.compatibilityFact
+                      : undefined
+                  }
+                  key={fact.label}
+                >
+                  <dt>{fact.label}</dt>
+                  <dd>{fact.value}</dd>
+                </div>
+              ))}
+            </dl>
+          ) : null}
 
-        <ProductAction model={model} disclosureId={disclosureId} />
+          <ProductAction model={model} disclosureId={disclosureId} />
+        </div>
       </div>
     </article>
   );
@@ -262,6 +286,7 @@ export function VapeDivisionLanding({
                   product={entry.product}
                   model={entry.model}
                   position={index}
+                  activeAisle={activeAisle}
                 />
               ))}
             </VapeProductRail>

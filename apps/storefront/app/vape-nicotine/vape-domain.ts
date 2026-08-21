@@ -88,7 +88,7 @@ export type VapeProductOption = Readonly<{
 }>;
 
 export type VapeCardModel = Readonly<{
-  typeLabel: string;
+  typeLabel: string | null;
   aisles: readonly (typeof VAPE_AISLES)[number][];
   options: readonly VapeProductOption[];
   facts: readonly Readonly<{ label: string; value: string }>[];
@@ -482,17 +482,17 @@ function factOrder(aisles: readonly (typeof VAPE_AISLES)[number][]): readonly Fa
     return [FACT_RULES.battery, FACT_RULES.capacity, FACT_RULES.power];
   }
   if (slugs.has("pods")) {
-    return [FACT_RULES.capacity, FACT_RULES.resistance, FACT_RULES.count];
+    return [FACT_RULES.count, FACT_RULES.resistance, FACT_RULES.capacity];
   }
   if (slugs.has("coils")) {
-    return [FACT_RULES.resistance, FACT_RULES.power, FACT_RULES.count];
+    return [FACT_RULES.count, FACT_RULES.resistance, FACT_RULES.power];
   }
   if (slugs.has("e-liquid")) {
     return [
       FACT_RULES.flavor,
-      FACT_RULES.nicotineFormat,
-      FACT_RULES.nicotineStrength,
       FACT_RULES.capacity,
+      FACT_RULES.nicotineStrength,
+      FACT_RULES.nicotineFormat,
       FACT_RULES.composition,
     ];
   }
@@ -542,13 +542,13 @@ function cardPrice(options: readonly VapeProductOption[]): string {
 function typeLabel(
   product: StorefrontProduct,
   aisles: readonly (typeof VAPE_AISLES)[number][],
-): string {
+): string | null {
   const eLiquid = aisles.some((aisle) => aisle.slug === "e-liquid");
   if (eLiquid) {
     const format = productFact(product, FACT_RULES.nicotineFormat)?.value;
     if (format && format !== "Varies by option") return `${format} e-liquid`;
   }
-  return aisles[0]?.label ?? "Product type not supplied";
+  return aisles[0]?.label ?? null;
 }
 
 export function vapeCardModel(product: StorefrontProduct): VapeCardModel {
@@ -599,8 +599,8 @@ export function vapeEmptyShelfCopy(
 ): Readonly<{ title: string; message: string }> {
   return {
     title: aisleLabel
-      ? `No confirmed ${aisleLabel.toLocaleLowerCase()} are on the shelf right now.`
-      : "No confirmed Vape / Nicotine products are on the shelf right now.",
+      ? `No ${aisleLabel.toLocaleLowerCase()} are on the shelf right now.`
+      : "No Vape / Nicotine products are on the shelf right now.",
     message: "Check again later.",
   };
 }
