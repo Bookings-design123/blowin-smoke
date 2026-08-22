@@ -721,6 +721,19 @@ function cardPrice(options: readonly GlassProductOption[]): string {
   return `${exact ? "" : "From "}${formatMoney(minimum, currency)}`;
 }
 
+export function glassProductFacts(
+  product: StorefrontProduct,
+): readonly Readonly<{ label: string; value: string }>[] {
+  const aisles = glassAislesForProduct(product);
+  return factOrder(aisles)
+    .map((candidate) =>
+      candidate === "connection"
+        ? connectionFact(product)
+        : productFact(product, candidate),
+    )
+    .filter((fact): fact is { label: string; value: string } => fact !== null);
+}
+
 export function glassCardModel(product: StorefrontProduct): GlassCardModel {
   const variantNames = product.variants.map((variant) =>
     normalizeValue(variant.name),
@@ -748,14 +761,7 @@ export function glassCardModel(product: StorefrontProduct): GlassCardModel {
         } as const;
       })
     : [];
-  const facts = factOrder(aisles)
-    .map((candidate) =>
-      candidate === "connection"
-        ? connectionFact(product)
-        : productFact(product, candidate),
-    )
-    .filter((fact): fact is { label: string; value: string } => fact !== null)
-    .slice(0, 3);
+  const facts = glassProductFacts(product).slice(0, 3);
   const primaryAisle = primaryProductAisle(aisles);
   const fitCue = primaryAisle && FITTED_AISLES.has(primaryAisle.slug)
     ? ({ label: "Fit", value: "Fit not specified" } as const)

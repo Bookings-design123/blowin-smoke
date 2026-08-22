@@ -34,6 +34,22 @@ const vapeMedia = readFileSync(
   new URL("../app/vape-nicotine/VapeProductMedia.tsx", import.meta.url),
   "utf8",
 );
+const pdpStyles = readFileSync(
+  new URL("../app/products/[sku]/pdp.module.css", import.meta.url),
+  "utf8",
+);
+const galleryStyles = readFileSync(
+  new URL("../app/products/[sku]/ProductGallery.module.css", import.meta.url),
+  "utf8",
+);
+const pdpPage = readFileSync(
+  new URL("../app/products/[sku]/page.tsx", import.meta.url),
+  "utf8",
+);
+const productGallery = readFileSync(
+  new URL("../app/products/[sku]/ProductGallery.tsx", import.meta.url),
+  "utf8",
+);
 
 test("the storefront installs the documented Apercu and Gill Sans fallback model", () => {
   assert.match(layout, /import \{ Cabin, DM_Sans \} from "next\/font\/google"/);
@@ -65,7 +81,7 @@ test("the branding scrape is encoded as the permanent global retail token baseli
     );
   }
 
-  const spacingUses = `${globals}\n${thcaStyles}\n${vapeStyles}`.match(
+  const spacingUses = `${globals}\n${thcaStyles}\n${vapeStyles}\n${pdpStyles}\n${galleryStyles}`.match(
     /var\(--space-(?:4|8|12|16|20|24|28|32|40|48|56|64|80|96)\)/g,
   );
   assert.ok(
@@ -119,7 +135,13 @@ test("shared controls, inputs, geometry, and elevation cannot drift by route", (
     );
   }
 
-  for (const source of [globals, thcaStyles, vapeStyles]) {
+  for (const source of [
+    globals,
+    thcaStyles,
+    vapeStyles,
+    pdpStyles,
+    galleryStyles,
+  ]) {
     for (const match of source.matchAll(/border-radius:\s*([^;]+);/g)) {
       assert.ok(
         match[1] === "0" || match[1] === "var(--retail-radius)",
@@ -133,7 +155,7 @@ test("shared controls, inputs, geometry, and elevation cannot drift by route", (
 });
 
 test("cream legacy tokens and explanatory missing-media fills are removed", () => {
-  const visualSources = `${globals}\n${thcaStyles}\n${vapeStyles}`;
+  const visualSources = `${globals}\n${thcaStyles}\n${vapeStyles}\n${pdpStyles}\n${galleryStyles}`;
   for (const legacy of [
     "#f3efe7",
     "#fffdf8",
@@ -156,4 +178,25 @@ test("cream legacy tokens and explanatory missing-media fills are removed", () =
   assert.doesNotMatch(thcaMedia, />THCA<|>Image unavailable</);
   assert.doesNotMatch(vapeMedia, />Vape<|>Image unavailable/);
   assert.match(home, /className="button button--contrast"/);
+});
+
+test("the shared PDP stays media-first, ID-free, and inside the retail token lock", () => {
+  assert.match(
+    pdpPage,
+    /<ProductGallery[\s\S]*?<article className=\{styles\.decision\}>/,
+  );
+  assert.doesNotMatch(pdpPage, />\s*SKU\b|SKU\s*\{/);
+  assert.match(pdpStyles, /font-size: clamp\(28px, 3\.6vw, 44px\);/);
+  assert.match(pdpStyles, /font-size: clamp\(20px, 2\.2vw, 28px\);/);
+  assert.doesNotMatch(pdpStyles, /font-size:\s*(?:4[5-9]|[5-9]\d)px/);
+  assert.match(productGallery, /case "ArrowLeft"/);
+  assert.match(productGallery, /case "ArrowRight"/);
+  assert.match(productGallery, /aria-live="polite"/);
+  assert.doesNotMatch(productGallery, />\s*First\s*</);
+  assert.match(
+    pdpStyles,
+    /@media \(max-width: 680px\)[\s\S]*?\.loadingMedia\s*\{[\s\S]*?aspect-ratio: 1 \/ 1;/,
+  );
+  assert.doesNotMatch(pdpPage, /CatalogState|Catalog service error|Catalog unavailable/);
+  assert.match(pdpPage, /className="catalog-state__label">Product unavailable/);
 });

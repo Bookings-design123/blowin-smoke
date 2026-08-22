@@ -222,6 +222,39 @@ export function filterThcaProducts(
   );
 }
 
+export function thcaProductFacts(
+  product: StorefrontProduct,
+): readonly Readonly<{ label: string; value: string }>[] {
+  const quantities = uniqueValues(product.variants.map(quantityValue));
+  const profiles = uniqueValues(
+    product.variants.map((variant) =>
+      attributeValue(variant, PROFILE_ATTRIBUTE_KEYS),
+    ),
+  );
+  const facts: Array<{ label: string; value: string }> = [];
+
+  if (
+    quantities.length === 1 &&
+    product.variants.every((variant) => quantityValue(variant))
+  ) {
+    facts.push({ label: "Amount", value: quantities[0] });
+  } else if (quantities.length > 1) {
+    facts.push({ label: "Amount", value: "Varies by option" });
+  }
+  if (
+    profiles.length === 1 &&
+    product.variants.every((variant) =>
+      attributeValue(variant, PROFILE_ATTRIBUTE_KEYS),
+    )
+  ) {
+    facts.push({ label: "Profile", value: profiles[0] });
+  } else if (profiles.length > 1) {
+    facts.push({ label: "Profile", value: "Varies by option" });
+  }
+
+  return facts;
+}
+
 export function thcaCardModel(product: StorefrontProduct): ThcaCardModel {
   const variantNames = product.variants.map((variant) => normalizeValue(variant.name));
   const merchandisable =
@@ -240,24 +273,7 @@ export function thcaCardModel(product: StorefrontProduct): ThcaCardModel {
       })
     : [];
   const formats = thcaFormatsForProduct(product);
-  const quantities = uniqueValues(
-    product.variants.map(quantityValue),
-  );
-  const profiles = uniqueValues(
-    product.variants.map((variant) => attributeValue(variant, PROFILE_ATTRIBUTE_KEYS)),
-  );
-  const facts: Array<{ label: string; value: string }> = [];
-
-  if (quantities.length === 1 && product.variants.every((variant) => quantityValue(variant))) {
-    facts.push({ label: "Amount", value: quantities[0] });
-  } else if (quantities.length > 1) {
-    facts.push({ label: "Amount", value: "Varies by option" });
-  }
-  if (profiles.length === 1 && product.variants.every((variant) => attributeValue(variant, PROFILE_ATTRIBUTE_KEYS))) {
-    facts.push({ label: "Profile", value: profiles[0] });
-  } else if (profiles.length > 1) {
-    facts.push({ label: "Profile", value: "Varies by option" });
-  }
+  const facts = [...thcaProductFacts(product)];
   if (options.length > 1 && facts.length < 2) {
     facts.push({ label: "Options", value: String(options.length) });
   }

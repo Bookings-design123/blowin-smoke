@@ -551,6 +551,15 @@ function typeLabel(
   return aisles[0]?.label ?? null;
 }
 
+export function vapeProductFacts(
+  product: StorefrontProduct,
+): readonly Readonly<{ label: string; value: string }>[] {
+  const aisles = vapeAislesForProduct(product);
+  return factOrder(aisles)
+    .map((rule) => productFact(product, rule))
+    .filter((fact): fact is { label: string; value: string } => fact !== null);
+}
+
 export function vapeCardModel(product: StorefrontProduct): VapeCardModel {
   const variantNames = product.variants.map((variant) => normalizeValue(variant.name));
   const merchandisable =
@@ -572,10 +581,7 @@ export function vapeCardModel(product: StorefrontProduct): VapeCardModel {
       })
     : [];
   const aisles = vapeAislesForProduct(product);
-  const facts = factOrder(aisles)
-    .map((rule) => productFact(product, rule))
-    .filter((fact): fact is { label: string; value: string } => fact !== null)
-    .slice(0, 3);
+  const facts = vapeProductFacts(product).slice(0, 3);
   const availability = productAvailability(options);
   const exactDetailHref = merchandisable && options.length === 1 ? options[0]?.href ?? null : null;
 
