@@ -17,7 +17,9 @@ function mediaKey(id: string, index: number) {
 export function ProductGallery({ productName, images }: ProductGalleryProps) {
   const statusId = useId();
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
-  const [failedKeys, setFailedKeys] = useState<ReadonlySet<string>>(() => new Set());
+  const [failedKeys, setFailedKeys] = useState<ReadonlySet<string>>(
+    () => new Set(),
+  );
   const mediaKeys = images.map((image, index) => mediaKey(image.id, index));
   const selectedIndex = selectedKey === null ? -1 : mediaKeys.indexOf(selectedKey);
   const activeIndex = selectedIndex >= 0 ? selectedIndex : 0;
@@ -25,7 +27,9 @@ export function ProductGallery({ productName, images }: ProductGalleryProps) {
   const activeKey = mediaKeys[activeIndex];
   const imageCount = images.length;
   const hasMultipleImages = imageCount > 1;
-  const activeImageAvailable = Boolean(activeImage?.id && activeKey && !failedKeys.has(activeKey));
+  const activeImageAvailable = Boolean(
+    activeImage?.id && activeKey && !failedKeys.has(activeKey),
+  );
 
   function showImage(index: number) {
     const nextKey = mediaKeys[index];
@@ -109,13 +113,20 @@ export function ProductGallery({ productName, images }: ProductGalleryProps) {
           <button
             className={styles.control}
             type="button"
+            aria-label="Previous image"
             disabled={activeIndex === 0}
             onClick={() => showImage(activeIndex - 1)}
           >
-            Previous
+            <span className={styles.chevron} aria-hidden="true">
+              ‹
+            </span>
           </button>
 
-          <div className={styles.numberControls} role="group" aria-label="Choose product image">
+          <div
+            className={styles.numberControls}
+            role="group"
+            aria-label="Choose product image"
+          >
             {images.map((image, index) => (
               <button
                 className={styles.numberControl}
@@ -125,18 +136,21 @@ export function ProductGallery({ productName, images }: ProductGalleryProps) {
                 aria-pressed={index === activeIndex}
                 onClick={() => showImage(index)}
               >
-                {index + 1}
+                <span className={styles.indicator} aria-hidden="true" />
               </button>
             ))}
           </div>
 
           <button
-            className={`${styles.control} ${styles.nextControl}`}
+            className={styles.control}
             type="button"
+            aria-label="Next image"
             disabled={activeIndex === imageCount - 1}
             onClick={() => showImage(activeIndex + 1)}
           >
-            Next
+            <span className={styles.chevron} aria-hidden="true">
+              ›
+            </span>
           </button>
         </div>
       ) : null}

@@ -187,16 +187,30 @@ test("the shared PDP stays media-first, ID-free, and inside the retail token loc
   );
   assert.doesNotMatch(pdpPage, />\s*SKU\b|SKU\s*\{/);
   assert.match(pdpStyles, /font-size: clamp\(28px, 3\.6vw, 44px\);/);
-  assert.match(pdpStyles, /font-size: clamp\(20px, 2\.2vw, 28px\);/);
   assert.doesNotMatch(pdpStyles, /font-size:\s*(?:4[5-9]|[5-9]\d)px/);
   assert.match(productGallery, /case "ArrowLeft"/);
   assert.match(productGallery, /case "ArrowRight"/);
   assert.match(productGallery, /aria-live="polite"/);
+  assert.match(productGallery, /aria-label="Previous image"/);
+  assert.match(productGallery, /aria-label="Next image"/);
   assert.doesNotMatch(productGallery, />\s*First\s*</);
+  assert.doesNotMatch(productGallery, />\s*Previous\s*</);
+  assert.doesNotMatch(productGallery, />\s*Next\s*</);
   assert.match(
     pdpStyles,
     /@media \(max-width: 680px\)[\s\S]*?\.loadingMedia\s*\{[\s\S]*?aspect-ratio: 1 \/ 1;/,
   );
   assert.doesNotMatch(pdpPage, /CatalogState|Catalog service error|Catalog unavailable/);
   assert.match(pdpPage, /className="catalog-state__label">Product unavailable/);
+  assert.doesNotMatch(
+    pdpPage,
+    /Product information|blockerLabel|blockerReason|purchaseState|purchaseReason|Selected option/,
+  );
+  assert.match(pdpPage, /aria-label="Purchase status"/);
+  assert.match(pdpPage, /aria-label="Product details"/);
+  assert.match(
+    pdpStyles,
+    /\.purchaseRecovery\s*\{[\s\S]*?min-height: calc\(var\(--space-40\) \+ var\(--space-4\)\);/,
+  );
+  assert.match(pdpPage, /requiresConfigurationSummary[\s\S]*?<span>Option<\/span>/);
 });

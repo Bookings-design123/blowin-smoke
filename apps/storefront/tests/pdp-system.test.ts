@@ -52,7 +52,7 @@ function product(
   return {
     id: options.id ?? "PRODUCT-INTERNAL-001",
     name: options.name ?? "House product",
-    description: options.description ?? "A concise published description.",
+    description: options.description ?? "",
     division,
     publicationState: "PUBLISHED",
     variants,
@@ -100,7 +100,16 @@ test("THCA uses exact selected facts, exact commerce state, and safe options", (
       variant(
         "Quarter ounce",
         "THCA-FLOWER-7G",
-        { format: "flower", amount: "7 g", strain: "Pine" },
+        {
+          format: "flower",
+          amount: "7 g",
+          strain: "Pine",
+          batchCode: "INVENTED-BATCH-42",
+          potency: "31%",
+          thcaPercent: "29%",
+          coaUrl: "https://example.invalid/coa.pdf",
+          eligibility: "Eligible everywhere",
+        },
         { amountCents: 4_200, availableQuantity: 5 },
       ),
     ],
@@ -118,14 +127,24 @@ test("THCA uses exact selected facts, exact commerce state, and safe options", (
   });
   assert.equal(model.availability, "Available");
   assert.deepEqual(model.immediateFacts, [
-    { label: "Format", value: "Flower" },
+    { label: "Profile", value: "Pine" },
     { label: "Amount", value: "7 g" },
   ]);
   assert.deepEqual(model.disclosures, [
     {
-      key: "specifications",
-      label: "Specifications",
-      facts: [{ label: "Profile", value: "Pine" }],
+      key: "details",
+      label: "Details",
+      facts: [{ label: "Format", value: "Flower" }],
+    },
+    {
+      key: "proof",
+      label: "Proof / COA",
+      facts: [
+        { label: "Batch", value: "Not available online" },
+        { label: "Potency", value: "Not available online" },
+        { label: "COA", value: "Not available online" },
+        { label: "Eligibility", value: "Not specified" },
+      ],
     },
   ]);
   assert.deepEqual(model.mediaIds, ["MEDIA-PRIMARY", "MEDIA-DETAIL"]);
@@ -134,11 +153,17 @@ test("THCA uses exact selected facts, exact commerce state, and safe options", (
   assert.equal(model.optionGroup?.choices[1]?.selected, true);
   assert.equal(model.optionGroup?.choices[1]?.price, "$42.00");
   assert.equal(model.purchase.disabled, true);
-  assert.equal(
-    model.purchase.blockerLabel,
-    "Proof and eligibility can’t be confirmed",
-  );
+  assert.equal(model.purchase.actionLabel, "Proof unavailable");
   assert.equal(model.purchase.recovery.href, "/learn/thca-proof");
+  assert.deepEqual(Object.keys(model.purchase).sort(), [
+    "actionLabel",
+    "disabled",
+    "recovery",
+  ]);
+  assert.doesNotMatch(
+    JSON.stringify(model),
+    /INVENTED-BATCH-42|31%|29%|example\.invalid|Eligible everywhere/i,
+  );
   assert.deepEqual(JSON.parse(JSON.stringify(model)), model);
 });
 
@@ -151,6 +176,8 @@ test("Vape adaptation uses governed type facts and an aisle-specific blocker", (
       nicotineStrength: "3 mg/mL",
       nicotineType: "freebase",
       vgPgRatio: "70/30",
+      compatibleWith: "Every device",
+      fits: "X Series",
       arbitraryInternalField: "must never render",
     }),
   ]);
@@ -160,19 +187,63 @@ test("Vape adaptation uses governed type facts and an aisle-specific blocker", (
   assert.equal(model.categoryLabel, "E-liquid");
   assert.deepEqual(model.immediateFacts, [
     { label: "Flavor", value: "Orchard" },
-    { label: "Capacity", value: "30 mL" },
-  ]);
-  assert.deepEqual(model.disclosures[0]?.facts, [
     { label: "Strength", value: "3 mg/mL" },
-    { label: "Nicotine", value: "Freebase" },
-    { label: "VG / PG", value: "70/30" },
   ]);
-  assert.equal(
-    model.purchase.blockerLabel,
-    "Hardware suitability can’t be confirmed",
-  );
+  assert.deepEqual(model.disclosures, [
+    {
+      key: "details",
+      label: "Details",
+      facts: [
+        { label: "Capacity", value: "30 mL" },
+        { label: "Nicotine", value: "Freebase" },
+        { label: "VG / PG", value: "70/30" },
+      ],
+    },
+    {
+      key: "compatibility",
+      label: "Compatibility",
+      facts: [{ label: "Hardware", value: "Not specified" }],
+    },
+  ]);
+  assert.equal(model.purchase.actionLabel, "Compatibility not specified");
   assert.equal(model.purchase.recovery.href, "/learn/device-identification");
-  assert.doesNotMatch(JSON.stringify(model), /must never render/i);
+  assert.doesNotMatch(
+    JSON.stringify(model),
+    /must never render|Every device|X Series/i,
+  );
+});
+
+test("Vape replacement relationships stay unknown without canonical endpoints", () => {
+  const fixture = product("VAPE_NICOTINE", [
+    variant("Two pack", "VAPE-POD-TWO", {
+      customerFacingProductType: "pod",
+      packageCount: "2 ct",
+      resistance: "0.8 Ω",
+      capacity: "2 mL",
+      compatibility: "Compatible with Relay M1",
+      uses: "Relay coil",
+    }),
+  ]);
+
+  const model = requireModel(buildPdpViewModel(fixture, "VAPE-POD-TWO"));
+  assert.deepEqual(model.immediateFacts, [
+    { label: "Count", value: "2 ct" },
+    { label: "Resistance", value: "0.8 Ω" },
+  ]);
+  assert.deepEqual(model.disclosures, [
+    {
+      key: "details",
+      label: "Details",
+      facts: [{ label: "Capacity", value: "2 mL" }],
+    },
+    {
+      key: "compatibility",
+      label: "Compatibility",
+      facts: [{ label: "Status", value: "Not specified" }],
+    },
+  ]);
+  assert.equal(model.purchase.actionLabel, "Compatibility not specified");
+  assert.doesNotMatch(JSON.stringify(model), /Relay M1|Relay coil/i);
 });
 
 test("Glass exposes selected measurements but never asserts physical fit", () => {
@@ -193,9 +264,45 @@ test("Glass exposes selected measurements but never asserts physical fit", () =>
     { label: "Connection", value: "14 mm · Male" },
     { label: "Material", value: "Borosilicate glass" },
   ]);
-  assert.equal(model.purchase.blockerLabel, "Fit can’t be confirmed");
+  assert.deepEqual(model.disclosures, [
+    {
+      key: "fit-dimensions",
+      label: "Fit / Dimensions",
+      facts: [
+        { label: "Fit", value: "Not specified" },
+        { label: "Connection", value: "14 mm · Male" },
+      ],
+    },
+  ]);
+  assert.equal(model.purchase.actionLabel, "Fit not specified");
   assert.equal(model.purchase.recovery.href, "/learn/measure-a-connection");
   assert.doesNotMatch(JSON.stringify(model), /Fits every piece/i);
+});
+
+test("non-fitted Glass keeps supporting geometry in a Dimensions disclosure", () => {
+  const fixture = product("GLASS_ACCESSORIES", [
+    variant("Clear", "GLASS-WATER-PIPE", {
+      customerFacingProductType: "water pipe",
+      material: "Borosilicate glass",
+      height: "10 in",
+      jointSize: "14 mm",
+      jointGender: "female",
+    }),
+  ]);
+
+  const model = requireModel(buildPdpViewModel(fixture, "GLASS-WATER-PIPE"));
+  assert.deepEqual(model.immediateFacts, [
+    { label: "Material", value: "Borosilicate glass" },
+    { label: "Height", value: "10 in" },
+  ]);
+  assert.deepEqual(model.disclosures, [
+    {
+      key: "dimensions",
+      label: "Dimensions",
+      facts: [{ label: "Connection", value: "14 mm · Female" }],
+    },
+  ]);
+  assert.equal(model.purchase.actionLabel, "Unavailable");
 });
 
 test("Merch is adapted only through the governed Glass division classification", () => {
@@ -205,6 +312,10 @@ test("Merch is adapted only through the governed Glass division classification",
       apparelSize: "M",
       color: "Black",
       material: "Cotton",
+      jointSize: "14 mm",
+      compatibility: "Compatible with every device",
+      fitRelationship: "Fits every piece",
+      coaUrl: "https://example.invalid/merch-coa.pdf",
     }),
   ]);
   const merelyNamedMerch = product(
@@ -220,20 +331,83 @@ test("Merch is adapted only through the governed Glass division classification",
     { label: "Size", value: "M" },
     { label: "Color", value: "Black" },
   ]);
-  assert.deepEqual(model.disclosures[0]?.facts, [
-    { label: "Material", value: "Cotton" },
+  assert.deepEqual(model.disclosures, [
+    {
+      key: "materials",
+      label: "Materials",
+      facts: [{ label: "Material", value: "Cotton" }],
+    },
   ]);
-  assert.equal(
-    model.purchase.blockerLabel,
-    "Online purchase unavailable",
+  assert.equal(model.purchase.actionLabel, "Unavailable");
+  assert.doesNotMatch(
+    JSON.stringify(model),
+    /Proof \/ COA|Compatibility|Fit \/ Dimensions|14 mm|every device|every piece|merch-coa/i,
   );
-  assert.doesNotMatch(model.purchase.blockerLabel, /fit/i);
 
   assert.equal(
     requireModel(buildPdpViewModel(merelyNamedMerch, "UNCLASSIFIED-MERCH"))
       .adaptation,
     "glass",
   );
+});
+
+test("every division limits the primary panel to two prioritized facts", () => {
+  const fixtures = [
+    {
+      product: product("THCA", [
+        variant("Eighth", "FACT-LIMIT-THCA", {
+          format: "flower",
+          amount: "3.5 g",
+          strain: "Citrus",
+        }),
+      ]),
+      sku: "FACT-LIMIT-THCA",
+    },
+    {
+      product: product("VAPE_NICOTINE", [
+        variant("Bottle", "FACT-LIMIT-VAPE", {
+          customerFacingProductType: "e-liquid",
+          flavor: "Orchard",
+          capacity: "30 mL",
+          nicotineStrength: "3 mg/mL",
+          nicotineType: "freebase",
+          vgPgRatio: "70/30",
+        }),
+      ]),
+      sku: "FACT-LIMIT-VAPE",
+    },
+    {
+      product: product("GLASS_ACCESSORIES", [
+        variant("Clear", "FACT-LIMIT-GLASS", {
+          customerFacingProductType: "banger",
+          jointSize: "14 mm",
+          jointGender: "male",
+          angle: "90°",
+          material: "Quartz",
+        }),
+      ]),
+      sku: "FACT-LIMIT-GLASS",
+    },
+    {
+      product: product("GLASS_ACCESSORIES", [
+        variant("Medium", "FACT-LIMIT-MERCH", {
+          customerFacingProductType: "apparel",
+          apparelSize: "M",
+          color: "Black",
+          material: "Cotton",
+        }),
+      ]),
+      sku: "FACT-LIMIT-MERCH",
+    },
+  ];
+
+  for (const fixture of fixtures) {
+    const model = requireModel(
+      buildPdpViewModel(fixture.product, fixture.sku),
+    );
+    assert.ok(model.immediateFacts.length <= 2);
+    assert.equal(model.purchase.disabled, true);
+  }
 });
 
 test("sold-out and unknown availability override division readiness without a notify claim", () => {
@@ -263,10 +437,7 @@ test("sold-out and unknown availability override division readiness without a no
   assert.equal(soldModel.purchase.recovery.href, "/search");
   assert.doesNotMatch(JSON.stringify(soldModel.purchase), /notify|restock alert/i);
   assert.equal(unknownModel.availability, "Availability unknown");
-  assert.equal(
-    unknownModel.purchase.blockerLabel,
-    "Availability can’t be confirmed",
-  );
+  assert.equal(unknownModel.purchase.actionLabel, "Unavailable");
   assert.equal(unknownModel.purchase.recovery.href, "/support");
   assert.equal(unknownModel.purchase.disabled, true);
 });
@@ -421,10 +592,21 @@ test("unsafe copy, raw identifiers, and research states never become PDP content
   assert.equal(model.selectedOptionLabel, "Selected configuration");
   assert.equal(model.optionGroup, null);
   assert.deepEqual(model.immediateFacts, [
-    { label: "Format", value: "Flower" },
     { label: "Amount", value: "3.5 g" },
+    { label: "Format", value: "Flower" },
   ]);
-  assert.deepEqual(model.disclosures, []);
+  assert.deepEqual(model.disclosures, [
+    {
+      key: "proof",
+      label: "Proof / COA",
+      facts: [
+        { label: "Batch", value: "Not available online" },
+        { label: "Potency", value: "Not available online" },
+        { label: "COA", value: "Not available online" },
+        { label: "Eligibility", value: "Not specified" },
+      ],
+    },
+  ]);
   const serialized = JSON.stringify(model);
   assert.doesNotMatch(
     serialized,
@@ -471,16 +653,15 @@ test("empty canonical detail stays empty and no relationships are invented", () 
   );
 });
 
-test("long safe description moves intact into a nonempty Details disclosure", () => {
-  const longDescription = "A carefully published product description. ".repeat(7).trim();
-  assert.ok(longDescription.length > 240);
+test("every safe generic description moves intact into Details", () => {
+  const description = "A concise published description.";
   const fixture = product(
     "GLASS_ACCESSORIES",
-    [variant("Default", "LONG-DESCRIPTION-ROUTE", {})],
-    { description: longDescription },
+    [variant("Default", "DESCRIPTION-ROUTE", {})],
+    { description },
   );
   const model = requireModel(
-    buildPdpViewModel(fixture, "LONG-DESCRIPTION-ROUTE"),
+    buildPdpViewModel(fixture, "DESCRIPTION-ROUTE"),
   );
 
   assert.equal(model.description, null);
@@ -489,7 +670,7 @@ test("long safe description moves intact into a nonempty Details disclosure", ()
       key: "details",
       label: "Details",
       facts: [],
-      body: longDescription,
+      body: description,
     },
   ]);
 });

@@ -16,7 +16,6 @@ export default function ProductLoading() {
         <span className={styles.loadingLine} aria-hidden="true" />
         <span className={styles.loadingLine} aria-hidden="true" />
         <span className={styles.loadingLine} aria-hidden="true" />
-        <span className={styles.loadingLine} aria-hidden="true" />
         <p className="visually-hidden" role="status" aria-live="polite">
           Loading product details.
         </p>

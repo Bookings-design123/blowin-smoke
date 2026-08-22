@@ -25,7 +25,9 @@ export async function generateMetadata({
   return model
     ? {
         title: model.name,
-        description: model.description || undefined,
+        description:
+          model.disclosures.find((disclosure) => disclosure.key === "details")
+            ?.body || undefined,
       }
     : { title: "Product unavailable" };
 }
@@ -71,6 +73,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
   if (!model) notFound();
 
   const division = DIVISION_META[lookup.product.division];
+  const requiresConfigurationSummary =
+    !model.optionGroup &&
+    (lookup.product.variants.length > 1 ||
+      lookup.product.variants.some((variant) => variant.skus.length > 1));
 
   return (
     <div className={styles.page} data-pdp-adaptation={model.adaptation}>
@@ -81,30 +87,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
         />
 
         <article className={styles.decision}>
-          <div className={styles.breadcrumbs}>
-            <Breadcrumbs
-              items={[
-                { label: "Home", href: "/" },
-                { label: division.label, href: division.route },
-                { label: model.name },
-              ]}
-            />
-          </div>
-
-          <p className={styles.context}>
-            {model.divisionLabel}
-            {model.categoryLabel ? ` · ${model.categoryLabel}` : ""}
-          </p>
           <h1 className={styles.title} id="product-title">
             {model.name}
           </h1>
-          {model.description ? (
-            <p className={styles.descriptor}>{model.description}</p>
-          ) : null}
 
           <div className={styles.commercial}>
             <p className={styles.price}>{model.price.formatted}</p>
-            <p className={styles.availability}>{model.availability}</p>
           </div>
 
           {model.optionGroup ? (
@@ -117,11 +105,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
               </h2>
               <nav className={styles.optionGrid} aria-label="Product options">
                 {model.optionGroup.choices.map((choice) => {
-                  const optionState = choice.selected
-                    ? choice.availability === "Available"
-                      ? "Selected"
-                      : `Selected · ${choice.availability}`
-                    : choice.availability === "Available"
+                  const optionState =
+                    choice.availability === "Available"
                       ? null
                       : choice.availability;
 
@@ -145,40 +130,27 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 })}
               </nav>
             </section>
-          ) : (
-            <p className={styles.exactOption}>
-              <span className={styles.exactOptionLabel}>Selected option</span>
+          ) : requiresConfigurationSummary ? (
+            <p className={styles.configuration}>
+              <span>Option</span>
               <strong>{model.selectedOptionLabel}</strong>
             </p>
-          )}
+          ) : null}
 
-          <section
-            className={styles.purchase}
-            aria-labelledby="purchase-state-title"
-          >
-            <p className={styles.purchaseState}>{model.purchase.blockerLabel}</p>
-            <h2 className={styles.purchaseTitle} id="purchase-state-title">
+          <section className={styles.purchase} aria-label="Purchase status">
+            <button
+              className={`button ${styles.purchaseAction}`}
+              type="button"
+              disabled={model.purchase.disabled}
+            >
               {model.purchase.actionLabel}
-            </h2>
-            <p className={styles.purchaseReason} id="purchase-state-reason">
-              {model.purchase.blockerReason}
-            </p>
-            <div className={styles.purchaseActions}>
-              <button
-                className="button"
-                type="button"
-                disabled={model.purchase.disabled}
-                aria-describedby="purchase-state-reason"
-              >
-                {model.purchase.actionLabel}
-              </button>
-              <Link
-                className="button button--secondary"
-                href={model.purchase.recovery.href}
-              >
-                {model.purchase.recovery.label}
-              </Link>
-            </div>
+            </button>
+            <Link
+              className={styles.purchaseRecovery}
+              href={model.purchase.recovery.href}
+            >
+              {model.purchase.recovery.label}
+            </Link>
           </section>
 
           {model.immediateFacts.length > 0 ? (
@@ -191,19 +163,22 @@ export default async function ProductPage({ params }: ProductPageProps) {
               ))}
             </dl>
           ) : null}
+
+          <div className={styles.breadcrumbs}>
+            <Breadcrumbs
+              items={[
+                { label: "Home", href: "/" },
+                { label: division.label, href: division.route },
+                { label: model.name },
+              ]}
+            />
+          </div>
         </article>
       </section>
 
       {model.disclosures.length > 0 ? (
-        <section
-          className={styles.detailsSection}
-          aria-labelledby="product-information-title"
-        >
+        <section className={styles.detailsSection} aria-label="Product details">
           <div className={styles.detailsInner}>
-            <header className={styles.detailsIntro}>
-              <h2 id="product-information-title">Product information</h2>
-            </header>
-
             <div className={styles.disclosures}>
               {model.disclosures.map((disclosure) => (
                 <details className={styles.disclosure} key={disclosure.key}>

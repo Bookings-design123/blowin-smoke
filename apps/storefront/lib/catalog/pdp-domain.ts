@@ -29,6 +29,25 @@ export type PdpAvailability =
   | "Sold out"
   | "Availability unknown";
 
+export type PdpDisclosure = Readonly<{
+  key:
+    | "details"
+    | "proof"
+    | "compatibility"
+    | "materials"
+    | "dimensions"
+    | "fit-dimensions";
+  label:
+    | "Details"
+    | "Proof / COA"
+    | "Compatibility"
+    | "Materials"
+    | "Dimensions"
+    | "Fit / Dimensions";
+  facts: readonly PdpFact[];
+  body?: string;
+}>;
+
 export type PdpOptionGroupLabel =
   | "Variation"
   | "Amount"
@@ -71,17 +90,15 @@ export type PdpViewModel = Readonly<{
     }>[];
   }> | null;
   immediateFacts: readonly PdpFact[];
-  disclosures: readonly Readonly<{
-    key: "details" | "specifications";
-    label: "Details" | "Specifications";
-    facts: readonly PdpFact[];
-    body?: string;
-  }>[];
+  disclosures: readonly PdpDisclosure[];
   purchase: Readonly<{
     disabled: true;
-    actionLabel: "Sold out" | "Purchase unavailable";
-    blockerLabel: string;
-    blockerReason: string;
+    actionLabel:
+      | "Sold out"
+      | "Unavailable"
+      | "Proof unavailable"
+      | "Compatibility not specified"
+      | "Fit not specified";
     recovery: Readonly<{
       label: string;
       href: string;
@@ -101,7 +118,32 @@ const INTERNAL_RESEARCH_LANGUAGE =
 const EXACT_INTERNAL_STATE =
   /^(?:watch|failed|do not stock|unknown|unverified|not supplied|not specified|n\/?a|varies by option)$/i;
 const UNSUPPORTED_POSITIVE_CLAIM =
-  /\b(?:coa|certificate of analysis|lab[- ]tested|proof(?: verified| available)?|eligible|eligibility|approved for|compatib(?:le|ility)|incompatible|fits?|requires?|replacement for|works only with|comes with|includes?|contents?|care instructions?|recommended|recommendation)\b/i;
+  /\b(?:batch(?: code| id| number)?|certificate of analysis|coa|lab[- ]tested|lot(?: code| id| number)?|potency|proof(?: verified| available)?|eligible|eligibility|approved for|compatib(?:le|ility)|incompatible|fits?|requires?|replacement for|works only with|comes with|includes?|contents?|care instructions?|recommended|recommendation)\b|\bthca\s*:?[\s-]*\d+(?:\.\d+)?\s*%/i;
+
+const VAPE_RELATIONSHIP_AISLES = new Set([
+  "pods",
+  "coils",
+  "parts-accessories",
+  "e-liquid",
+]);
+
+const FITTED_GLASS_AISLES = new Set([
+  "bowls",
+  "bangers",
+  "downstems",
+  "ash-catchers",
+  "adapters",
+  "replacement-parts",
+]);
+
+const DIMENSION_FACT_LABELS = new Set([
+  "Connection",
+  "Height",
+  "Length",
+  "Diameter",
+  "Dimensions",
+  "Angle",
+]);
 
 type OptionAxis = Readonly<{
   label: PdpOptionGroupLabel;
@@ -448,6 +490,185 @@ function exactFacts(
   });
 }
 
+function factKey(fact: PdpFact): string {
+  return `${fact.label.toLocaleLowerCase()}:${fact.value.toLocaleLowerCase()}`;
+}
+
+function prioritizedFacts(
+  facts: readonly PdpFact[],
+  adaptation: PdpAdaptation,
+): readonly PdpFact[] {
+  const priority =
+    adaptation === "thca"
+      ? new Map([
+          ["Profile", 0],
+          ["Amount", 1],
+          ["Format", 2],
+        ])
+      : adaptation === "vape" &&
+          facts.some((fact) => fact.label === "Strength")
+        ? new Map([
+            ["Flavor", 0],
+            ["Strength", 1],
+            ["Capacity", 2],
+          ])
+        : null;
+  if (!priority) return facts;
+
+  return facts
+    .map((fact, index) => ({ fact, index }))
+    .sort(
+      (left, right) =>
+        (priority.get(left.fact.label) ?? Number.MAX_SAFE_INTEGER) -
+          (priority.get(right.fact.label) ?? Number.MAX_SAFE_INTEGER) ||
+        left.index - right.index,
+    )
+    .map(({ fact }) => fact);
+}
+
+function detailsDisclosure(
+  body: string | null,
+  facts: readonly PdpFact[],
+): PdpDisclosure | null {
+  return body || facts.length > 0
+    ? {
+        key: "details",
+        label: "Details",
+        facts,
+        ...(body ? { body } : {}),
+      }
+    : null;
+}
+
+function domainDisclosures(
+  product: StorefrontProduct,
+  adaptation: PdpAdaptation,
+  safeDescription: string | null,
+  facts: readonly PdpFact[],
+  supportingFacts: readonly PdpFact[],
+): readonly PdpDisclosure[] {
+  if (adaptation === "thca") {
+    const details = detailsDisclosure(safeDescription, supportingFacts);
+    return [
+      ...(details ? [details] : []),
+      {
+        key: "proof",
+        label: "Proof / COA",
+        facts: [
+          { label: "Batch", value: "Not available online" },
+          { label: "Potency", value: "Not available online" },
+          { label: "COA", value: "Not available online" },
+          { label: "Eligibility", value: "Not specified" },
+        ],
+      },
+    ];
+  }
+
+  if (adaptation === "vape") {
+    const aisles = new Set(
+      vapeAislesForProduct(product).map((aisle) => aisle.slug),
+    );
+    const details = detailsDisclosure(safeDescription, supportingFacts);
+    const relationshipAisle = [...aisles].find((aisle) =>
+      VAPE_RELATIONSHIP_AISLES.has(aisle),
+    );
+    const compatibility = relationshipAisle
+      ? {
+          key: "compatibility" as const,
+          label: "Compatibility" as const,
+          facts: [
+            {
+              label: relationshipAisle === "e-liquid" ? "Hardware" : "Status",
+              value: "Not specified",
+            },
+          ],
+        }
+      : null;
+    return [
+      ...(details ? [details] : []),
+      ...(compatibility ? [compatibility] : []),
+    ];
+  }
+
+  const materialFacts = supportingFacts.filter(
+    (fact) => fact.label === "Material",
+  );
+  const materialKeys = new Set(materialFacts.map(factKey));
+
+  if (adaptation === "merch") {
+    const details = detailsDisclosure(
+      safeDescription,
+      supportingFacts.filter((fact) => !materialKeys.has(factKey(fact))),
+    );
+    return [
+      ...(details ? [details] : []),
+      ...(materialFacts.length > 0
+        ? [
+            {
+              key: "materials" as const,
+              label: "Materials" as const,
+              facts: materialFacts,
+            },
+          ]
+        : []),
+    ];
+  }
+
+  const aisles = new Set(
+    glassAislesForProduct(product).map((aisle) => aisle.slug),
+  );
+  const fitted = [...aisles].some((aisle) =>
+    FITTED_GLASS_AISLES.has(aisle),
+  );
+  const exactDimensionFacts = facts.filter((fact) =>
+    DIMENSION_FACT_LABELS.has(fact.label),
+  );
+  const disclosedDimensionFacts = fitted
+    ? exactDimensionFacts
+    : supportingFacts.filter((fact) =>
+        DIMENSION_FACT_LABELS.has(fact.label),
+      );
+  const dimensionKeys = new Set(disclosedDimensionFacts.map(factKey));
+  const details = detailsDisclosure(
+    safeDescription,
+    supportingFacts.filter(
+      (fact) =>
+        !materialKeys.has(factKey(fact)) &&
+        !dimensionKeys.has(factKey(fact)),
+    ),
+  );
+  const dimensions: PdpDisclosure | null = fitted
+    ? {
+        key: "fit-dimensions",
+        label: "Fit / Dimensions",
+        facts: [
+          { label: "Fit", value: "Not specified" },
+          ...disclosedDimensionFacts,
+        ],
+      }
+    : disclosedDimensionFacts.length > 0
+      ? {
+          key: "dimensions",
+          label: "Dimensions",
+          facts: disclosedDimensionFacts,
+        }
+      : null;
+
+  return [
+    ...(details ? [details] : []),
+    ...(materialFacts.length > 0
+      ? [
+          {
+            key: "materials" as const,
+            label: "Materials" as const,
+            facts: materialFacts,
+          },
+        ]
+      : []),
+    ...(dimensions ? [dimensions] : []),
+  ];
+}
+
 function optionGroup(
   product: StorefrontProduct,
   selectedSku: StorefrontSku,
@@ -501,17 +722,13 @@ function purchaseState(
     return {
       disabled: true,
       actionLabel: "Sold out",
-      blockerLabel: "Sold out",
-      blockerReason: "This exact selection is sold out.",
       recovery: { label: "Search the house", href: "/search" },
     };
   }
   if (selectedAvailability === "Availability unknown") {
     return {
       disabled: true,
-      actionLabel: "Purchase unavailable",
-      blockerLabel: "Availability can’t be confirmed",
-      blockerReason: "We can’t confirm availability for this selection.",
+      actionLabel: "Unavailable",
       recovery: { label: "Get product help", href: "/support" },
     };
   }
@@ -519,10 +736,7 @@ function purchaseState(
   if (adaptation === "thca") {
     return {
       disabled: true,
-      actionLabel: "Purchase unavailable",
-      blockerLabel: "Proof and eligibility can’t be confirmed",
-      blockerReason:
-        "We can’t confirm the required proof and eligibility checks for this selection.",
+      actionLabel: "Proof unavailable",
       recovery: {
         label: "Understand THCA proof",
         href: "/learn/thca-proof",
@@ -537,27 +751,12 @@ function purchaseState(
     if (
       slugs.has("pods") ||
       slugs.has("coils") ||
-      slugs.has("parts-accessories")
+      slugs.has("parts-accessories") ||
+      slugs.has("e-liquid")
     ) {
       return {
         disabled: true,
-        actionLabel: "Purchase unavailable",
-        blockerLabel: "Compatibility can’t be confirmed",
-        blockerReason:
-          "We can’t confirm device or platform compatibility for this selection.",
-        recovery: {
-          label: "Identify what you own",
-          href: "/learn/device-identification",
-        },
-      };
-    }
-    if (slugs.has("e-liquid")) {
-      return {
-        disabled: true,
-        actionLabel: "Purchase unavailable",
-        blockerLabel: "Hardware suitability can’t be confirmed",
-        blockerReason:
-          "We can’t confirm hardware suitability for this selection.",
+        actionLabel: "Compatibility not specified",
         recovery: {
           label: "Identify what you own",
           href: "/learn/device-identification",
@@ -566,9 +765,7 @@ function purchaseState(
     }
     return {
       disabled: true,
-      actionLabel: "Purchase unavailable",
-      blockerLabel: "Online purchase unavailable",
-      blockerReason: "Online purchase is unavailable for this item.",
+      actionLabel: "Unavailable",
       recovery: { label: "Get product help", href: "/support" },
     };
   }
@@ -576,9 +773,7 @@ function purchaseState(
   if (adaptation === "merch") {
     return {
       disabled: true,
-      actionLabel: "Purchase unavailable",
-      blockerLabel: "Online purchase unavailable",
-      blockerReason: "Online purchase is unavailable for this item.",
+      actionLabel: "Unavailable",
       recovery: { label: "Get product help", href: "/support" },
     };
   }
@@ -586,20 +781,10 @@ function purchaseState(
   const slugs = new Set(
     glassAislesForProduct(product).map((aisle) => aisle.slug),
   );
-  const fitted = [
-    "bowls",
-    "bangers",
-    "downstems",
-    "ash-catchers",
-    "adapters",
-    "replacement-parts",
-  ] as const;
-  if (fitted.some((slug) => slugs.has(slug))) {
+  if ([...slugs].some((slug) => FITTED_GLASS_AISLES.has(slug))) {
     return {
       disabled: true,
-      actionLabel: "Purchase unavailable",
-      blockerLabel: "Fit can’t be confirmed",
-      blockerReason: "We can’t confirm physical fit for this selection.",
+      actionLabel: "Fit not specified",
       recovery: {
         label: "Measure a connection",
         href: "/learn/measure-a-connection",
@@ -608,9 +793,7 @@ function purchaseState(
   }
   return {
     disabled: true,
-    actionLabel: "Purchase unavailable",
-    blockerLabel: "Online purchase unavailable",
-    blockerReason: "Online purchase is unavailable for this item.",
+    actionLabel: "Unavailable",
     recovery: { label: "Get product help", href: "/support" },
   };
 }
@@ -630,44 +813,29 @@ export function buildPdpViewModel(
   const selectedOptionLabel =
     safeOptionLabel(selection.variant.name, identifiers) ??
     "Selected configuration";
-  const facts = exactFacts(
-    product,
-    selection.variant,
+  const facts = prioritizedFacts(
+    exactFacts(product, selection.variant, adaptation, identifiers),
     adaptation,
-    identifiers,
   );
   const immediateFacts = facts.slice(0, 2);
-  const supportingFacts = facts.slice(2);
+  const immediateFactKeys = new Set(immediateFacts.map(factKey));
+  const supportingFacts = facts.filter(
+    (fact) => !immediateFactKeys.has(factKey(fact)),
+  );
   const safeDescription = safePublicCopy(product.description, identifiers, {
     rejectUnsupportedClaims: true,
   });
-  const description =
-    safeDescription && safeDescription.length <= 240 ? safeDescription : null;
-  const disclosures: PdpViewModel["disclosures"] = [
-    ...(safeDescription && safeDescription.length > 240
-      ? [
-          {
-            key: "details" as const,
-            label: "Details" as const,
-            facts: [],
-            body: safeDescription,
-          },
-        ]
-      : []),
-    ...(supportingFacts.length > 0
-      ? [
-          {
-            key: "specifications" as const,
-            label: "Specifications" as const,
-            facts: supportingFacts,
-          },
-        ]
-      : []),
-  ];
+  const disclosures = domainDisclosures(
+    product,
+    adaptation,
+    safeDescription,
+    facts,
+    supportingFacts,
+  );
 
   return {
     name,
-    description,
+    description: null,
     divisionLabel: DIVISION_META[product.division].label,
     categoryLabel,
     adaptation,
